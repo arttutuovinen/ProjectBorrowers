@@ -6,6 +6,7 @@ public class SmallPlayerMovement : MonoBehaviour
 {
 
     public float moveSpeed = 5f; // Speed of movement
+    public float climbSpeed = 3f; // Speed for climbing ladders
     public float gravity = -9.81f; // Gravity applied to the player
     public float jumpHeight = 1.5f; // How high the player can jump
     public float turnSmoothTime = 0.1f; // Smoothing for rotation
@@ -27,6 +28,11 @@ public class SmallPlayerMovement : MonoBehaviour
     private float yaw; // Horizontal rotation
     private float pitch; // Vertical rotation
 
+    // Ladder climbing variables
+    private bool isClimbing = false; // Is the player currently climbing a ladder?
+    private bool nearLadder = false; // Is the player near a ladder?
+    private Collider ladder; // Reference to the ladder the player is interacting with
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -35,8 +41,15 @@ public class SmallPlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Move();
-        ApplyGravity();
+        if (isClimbing)
+        {
+            ClimbLadder();
+        }
+        else
+        {
+            Move();
+            ApplyGravity();
+        }
         ControlCamera();
     }
 
@@ -78,6 +91,14 @@ public class SmallPlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+
+        // Ladder interaction: press E to start climbing if near a ladder
+        if (nearLadder && Input.GetKeyDown(KeyCode.E))
+        {
+            isClimbing = true;
+            velocity.y = 0f; // Reset vertical velocity
+        }
+
     }
 
     private void ApplyGravity()
@@ -85,6 +106,25 @@ public class SmallPlayerMovement : MonoBehaviour
         // Apply gravity over time
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void ClimbLadder()
+    {
+        // Disable gravity while climbing
+        velocity.y = 0f;
+
+        // Get vertical input for climbing (W and S keys or PS5 D-Pad Up/Down)
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        // Move the player up or down the ladder
+        Vector3 climbDirection = new Vector3(0, vertical, 0).normalized;
+        controller.Move(climbDirection * climbSpeed * Time.deltaTime);
+
+        // Exit climbing mode when the player presses E again
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isClimbing = false;
+        }
     }
 
     private void ControlCamera()
@@ -115,5 +155,25 @@ public class SmallPlayerMovement : MonoBehaviour
 
         // Look at the player
         cameraTransform.LookAt(cameraFollowTarget.position);
+    }
+
+    // Detect when the player is near a ladder (use triggers or raycast)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            nearLadder = true;
+            ladder = other;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other == ladder)
+        {
+            nearLadder = false;
+            ladder = null;
+            isClimbing = false; // Stop climbing when leaving the ladder
+        }
     }
 }
