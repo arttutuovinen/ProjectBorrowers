@@ -28,13 +28,12 @@ public class BigPlayerMovement : MonoBehaviour
     private float pitch; // Vertical rotation
 
 
-
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
     }
-
+    
     private void Update()
     {
        
