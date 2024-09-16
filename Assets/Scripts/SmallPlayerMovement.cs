@@ -122,7 +122,7 @@ public class SmallPlayerMovement : MonoBehaviour
         controller.Move(climbDirection * climbSpeed * Time.deltaTime);
 
         // Exit climbing mode when the player presses E again
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("P1Interact"))
         {
             isClimbing = false;
         }
