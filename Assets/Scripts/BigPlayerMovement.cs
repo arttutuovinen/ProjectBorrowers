@@ -54,8 +54,8 @@ public class BigPlayerMovement : MonoBehaviour
         }
 
         // Get input for movement (WASD/arrow keys or PS5 left stick)
-        float horizontal = Input.GetAxis("Horizontal"); // WASD or PS5 Left Stick X
-        float vertical = Input.GetAxis("Vertical"); // WASD or PS5 Left Stick Y
+        float horizontal = Input.GetAxisRaw("P2Horizontal"); // WASD or PS5 Left Stick X
+        float vertical = Input.GetAxisRaw("P2Vertical"); // WASD or PS5 Left Stick Y
 
         // Calculate the movement direction relative to the camera's orientation
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
@@ -89,11 +89,11 @@ public class BigPlayerMovement : MonoBehaviour
         // Camera control with mouse or PS5 controller's right stick
         float mouseX, mouseY;
 
-        if (Mathf.Abs(Input.GetAxis("RightStickHorizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("RightStickVertical")) > 0.1f)
+        if (Mathf.Abs(Input.GetAxis("P2RightStickHorizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("P2RightStickVertical")) > 0.1f)
         {
             // PS5 right stick
-            mouseX = Input.GetAxis("RightStickHorizontal") * controllerSensitivity;
-            mouseY = Input.GetAxis("RightStickVertical") * controllerSensitivity;
+            mouseX = Input.GetAxis("P2RightStickHorizontal") * controllerSensitivity;
+            mouseY = Input.GetAxis("P2RightStickVertical") * controllerSensitivity;
         }
         else
         {
