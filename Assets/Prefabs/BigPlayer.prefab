@@ -142,6 +142,12 @@ MonoBehaviour:
   distanceFromPlayer: 0.1
   minVerticalAngle: -30
   maxVerticalAngle: 60
+  pickupRange: 3
+  playerCamera: {fileID: 0}
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  holdPosition: {fileID: 0}
 --- !u!1 &4256986036373327801
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +190,6 @@ GameObject:
   - component: {fileID: 5215743853051964158}
   - component: {fileID: 4689953259098997537}
   - component: {fileID: 6748927464806797716}
-  - component: {fileID: 7725228388991979782}
   m_Layer: 0
   m_Name: moveDirection
   m_TagString: Untagged
@@ -257,24 +262,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7725228388991979782
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4603182473313736249}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

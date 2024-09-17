@@ -20,8 +20,6 @@ public class BigPlayerMovement : MonoBehaviour
     public float crouchCenterY = 0.5f; // Collider center when crouching
     public float standCenterY = 1.0f; // Collider center when standing
 
-    
-
     public float mouseSensitivity = 100f; // Mouse sensitivity for camera movement
     public float controllerSensitivity = 2f; // Controller sensitivity for camera movement
     public float distanceFromPlayer = 5f; // Distance of the camera from the player
@@ -37,24 +35,47 @@ public class BigPlayerMovement : MonoBehaviour
 
     private float yaw; // Horizontal rotation
     private float pitch; // Vertical rotation
-    
-   
+
+    public float rayDistance = 10f;  // Maximum distance the ray should check.
+    public Camera playerCamera;      // Reference to the player's camera.
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
-        
-
     }
     
     private void Update()
     {
-       
         Move();
         ApplyGravity();
         ControlCamera();
         HandleCrouch();
+        
+        // Cast a ray from the camera's position and forward direction.
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        RaycastHit hit;
+
+        // Check if the ray hits any object within the specified distance.
+        if (Physics.Raycast(ray, out hit, rayDistance))
+        {
+            // Check if the hit object has the tag "SmallPlayer".
+            if (hit.collider.CompareTag("SmallPlayer"))
+            {
+                // Log if the object has the "SmallPlayer" tag.
+                Debug.Log("Raycast hit an object with the tag 'SmallPlayer': " + hit.collider.gameObject.name);
+
+                // Check if the player presses the "E" key.
+                if (Input.GetButtonDown("P2PickUp"))
+                {
+                    // Destroy the object that was hit.
+                    Debug.Log("Destroyed object: " + hit.collider.gameObject.name);
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+        }
+
+
     }
 
     private void Move()
@@ -72,7 +93,7 @@ public class BigPlayerMovement : MonoBehaviour
         // Get input for movement (WASD/arrow keys or PS5 left stick)
         float horizontal = Input.GetAxisRaw("P2Horizontal"); // WASD or PS5 Left Stick X
         float vertical = Input.GetAxisRaw("P2Vertical"); // WASD or PS5 Left Stick Y
-        Debug.Log(horizontal +" "+vertical);
+        
         // Calculate the movement direction relative to the camera's orientation
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
@@ -89,9 +110,7 @@ public class BigPlayerMovement : MonoBehaviour
             
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
-        }
-
-        
+        }   
     }
 
     private void ApplyGravity()
@@ -163,5 +182,25 @@ public class BigPlayerMovement : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the object the player collided with has the tag "SmallPlayer".
+        if (other.CompareTag("SmallPlayer"))
+        {
+            // Log when the player enters the collider of an object with the "SmallPlayer" tag.
+            Debug.Log("Player has entered the collider of an object with the tag 'SmallPlayer': " + other.gameObject.name);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if the object the player exited has the tag "SmallPlayer".
+        if (other.CompareTag("SmallPlayer"))
+        {
+            // Log when the player exits the collider of an object with the "SmallPlayer" tag.
+            Debug.Log("Player has exited the collider of an object with the tag 'SmallPlayer': " + other.gameObject.name);
+        }
+    }
+
 
 }
