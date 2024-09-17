@@ -126,16 +126,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 20
-  crouchSpeed: 5
+  crouchSpeed: 7
   gravity: -9.81
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 0}
   cameraFollowTarget: {fileID: 1735088581532782266}
-  standCameraHeight: 2
-  crouchCameraHeight: 0.3
+  standCameraHeight: 1.8
+  crouchCameraHeight: 0.2
   standColliderHeight: 2
-  crouchColliderHeight: 1
-  crouchCenterY: 0.2
+  crouchColliderHeight: 0.2
+  crouchCenterY: 0
   standCenterY: 1
   mouseSensitivity: 200
   controllerSensitivity: 2
