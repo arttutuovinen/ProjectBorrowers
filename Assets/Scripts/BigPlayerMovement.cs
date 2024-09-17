@@ -9,18 +9,18 @@ public class BigPlayerMovement : MonoBehaviour
     public float gravity = -9.81f; // Gravity applied to the player
     public float turnSmoothTime = 0.1f; // Smoothing for rotation
 
-   
-
     public Transform cameraTransform; // Reference to the main camera for directional movement
     public Transform cameraFollowTarget; // Target for the camera to follow (usually the player)
 
     public float standCameraHeight = 1.8f; // Camera height when standing
     public float crouchCameraHeight = 1.0f; // Camera height when crouched
 
-    public float standHeight = 2.0f; // Character height when standing
-    public float crouchHeight = 1.0f; // Character height when crouching
+    public float standColliderHeight = 2.0f; // Collider height when standing
+    public float crouchColliderHeight = 1.0f; // Collider height when crouching
     public float crouchCenterY = 0.5f; // Collider center when crouching
     public float standCenterY = 1.0f; // Collider center when standing
+
+    
 
     public float mouseSensitivity = 100f; // Mouse sensitivity for camera movement
     public float controllerSensitivity = 2f; // Controller sensitivity for camera movement
@@ -29,6 +29,7 @@ public class BigPlayerMovement : MonoBehaviour
     public float maxVerticalAngle = 60f; // Maximum vertical angle for camera
 
     private CharacterController controller;
+    
     private Vector3 velocity;
     private bool isGrounded;
     private bool isCrouching = false; // Is the player crouching?
@@ -36,14 +37,15 @@ public class BigPlayerMovement : MonoBehaviour
 
     private float yaw; // Horizontal rotation
     private float pitch; // Vertical rotation
-
+    
+   
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
+        
 
-    
     }
     
     private void Update()
@@ -57,6 +59,7 @@ public class BigPlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        
         // Check if the player is on the ground
         isGrounded = controller.isGrounded;
 
@@ -136,18 +139,26 @@ public class BigPlayerMovement : MonoBehaviour
 
             if (isCrouching)
             {
-                // Crouch: Change collider height and camera follow target height
-                controller.height = crouchHeight;
+                // Crouch: adjust CharacterController height, camera follow target height, and player scale
+                controller.height = crouchColliderHeight;
                 controller.center = new Vector3(0, crouchCenterY, 0);
+
                 cameraFollowTarget.localPosition = new Vector3(cameraFollowTarget.localPosition.x, crouchCameraHeight, cameraFollowTarget.localPosition.z);
+
+               
+
                 moveSpeed = crouchSpeed; // Slow down movement while crouching
             }
             else
             {
-                // Stand: Reset collider height and camera follow target height
-                controller.height = standHeight;
+                // Stand: reset CharacterController height, camera follow target height, and player scale
+                controller.height = standColliderHeight;
                 controller.center = new Vector3(0, standCenterY, 0);
+
                 cameraFollowTarget.localPosition = new Vector3(cameraFollowTarget.localPosition.x, standCameraHeight, cameraFollowTarget.localPosition.z);
+
+               
+
                 moveSpeed = 20f; // Reset movement speed to normal
             }
         }
