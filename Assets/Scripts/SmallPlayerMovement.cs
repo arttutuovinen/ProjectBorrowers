@@ -67,7 +67,7 @@ public class SmallPlayerMovement : MonoBehaviour
         // Get input for movement (WASD/arrow keys or PS5 left stick)
         float horizontal = Input.GetAxisRaw("P1Horizontal"); // WASD or PS5 Left Stick X
         float vertical = Input.GetAxisRaw("P1Vertical"); // WASD or PS5 Left Stick Y
-        Debug.Log(horizontal +" "+vertical);
+        //Debug.Log(horizontal +" "+vertical);
 
         // Calculate the movement direction relative to the camera's orientation
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
@@ -88,13 +88,13 @@ public class SmallPlayerMovement : MonoBehaviour
 
         // Jumping mechanic
         // PS5 Cross button (Button 0) or Space key for jump
-        if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("PS5_Jump")) && isGrounded)
+        if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         // Ladder interaction: press E to start climbing if near a ladder
-        if (nearLadder && Input.GetKeyDown(KeyCode.E))
+        if (nearLadder && Input.GetKeyDown(KeyCode.E) || nearLadder && Input.GetButtonDown("P1Interact"))
         {
             isClimbing = true;
             velocity.y = 0f; // Reset vertical velocity
