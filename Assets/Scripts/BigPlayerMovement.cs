@@ -5,13 +5,22 @@ using UnityEngine;
 public class BigPlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f; // Speed of movement
-    
+    public float crouchSpeed = 2.5f; // Speed while crouching
     public float gravity = -9.81f; // Gravity applied to the player
-    
     public float turnSmoothTime = 0.1f; // Smoothing for rotation
+
+   
 
     public Transform cameraTransform; // Reference to the main camera for directional movement
     public Transform cameraFollowTarget; // Target for the camera to follow (usually the player)
+
+    public float standCameraHeight = 1.8f; // Camera height when standing
+    public float crouchCameraHeight = 1.0f; // Camera height when crouched
+
+    public float standHeight = 2.0f; // Character height when standing
+    public float crouchHeight = 1.0f; // Character height when crouching
+    public float crouchCenterY = 0.5f; // Collider center when crouching
+    public float standCenterY = 1.0f; // Collider center when standing
 
     public float mouseSensitivity = 100f; // Mouse sensitivity for camera movement
     public float controllerSensitivity = 2f; // Controller sensitivity for camera movement
@@ -22,6 +31,7 @@ public class BigPlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
+    private bool isCrouching = false; // Is the player crouching?
     private float turnSmoothVelocity;
 
     private float yaw; // Horizontal rotation
@@ -32,6 +42,8 @@ public class BigPlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
+
+    
     }
     
     private void Update()
@@ -40,6 +52,7 @@ public class BigPlayerMovement : MonoBehaviour
         Move();
         ApplyGravity();
         ControlCamera();
+        HandleCrouch();
     }
 
     private void Move()
@@ -69,7 +82,8 @@ public class BigPlayerMovement : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            // Move in the direction the player is facing
+            /// Move in the direction the player is facing
+            
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
         }
@@ -111,8 +125,32 @@ public class BigPlayerMovement : MonoBehaviour
         cameraTransform.position = cameraFollowTarget.position - (Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward * distanceFromPlayer);
 
         // Look at the player
-        cameraTransform.LookAt(cameraFollowTarget.position);
+        cameraTransform.LookAt(cameraFollowTarget.position); 
+    }
+    private void HandleCrouch()
+    {
+        // Toggle crouch state when LeftShift is pressed
+        if (Input.GetButtonDown("P2Crouch"))
+        {
+            isCrouching = !isCrouching;
+
+            if (isCrouching)
+            {
+                // Crouch: Change collider height and camera follow target height
+                controller.height = crouchHeight;
+                controller.center = new Vector3(0, crouchCenterY, 0);
+                cameraFollowTarget.localPosition = new Vector3(cameraFollowTarget.localPosition.x, crouchCameraHeight, cameraFollowTarget.localPosition.z);
+                moveSpeed = crouchSpeed; // Slow down movement while crouching
+            }
+            else
+            {
+                // Stand: Reset collider height and camera follow target height
+                controller.height = standHeight;
+                controller.center = new Vector3(0, standCenterY, 0);
+                cameraFollowTarget.localPosition = new Vector3(cameraFollowTarget.localPosition.x, standCameraHeight, cameraFollowTarget.localPosition.z);
+                moveSpeed = 20f; // Reset movement speed to normal
+            }
+        }
     }
 
-    
 }

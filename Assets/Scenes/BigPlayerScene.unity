@@ -480,12 +480,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2136832823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &91901489 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1735088581532782266, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5584686570675883846}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &201594557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3412,7 +3406,7 @@ PrefabInstance:
     - target: {fileID: 1735088581532782266, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.876
+      value: 0.418
       objectReference: {fileID: 0}
     - target: {fileID: 1817188319145980602, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
@@ -3466,8 +3460,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
-      propertyPath: moveSpeed
-      value: 20
+      propertyPath: crouchSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
+        type: 3}
+      propertyPath: standHeight
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
@@ -3476,23 +3475,23 @@ PrefabInstance:
       objectReference: {fileID: 31879987}
     - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
-      propertyPath: mouseSensitivity
-      value: 200
+      propertyPath: standCameraHeight
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
-      propertyPath: cameraFollowTarget
-      value: 
-      objectReference: {fileID: 91901489}
-    - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
-        type: 3}
-      propertyPath: distanceFromPlayer
-      value: 12
+      propertyPath: crouchCameraHeight
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4603182473313736249, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
       propertyPath: m_Name
       value: facingDirection
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748927464806797716, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

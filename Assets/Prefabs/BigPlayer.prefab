@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.16, y: 7.22, z: -17.36}
-  m_LocalScale: {x: 6, y: 8, z: 6}
+  m_LocalScale: {x: 3.7539, y: 8, z: 3.9205198}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5215743853051964158}
@@ -149,14 +149,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfb227eb1499954c9d87733658f3be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 20
+  crouchSpeed: 5
   gravity: -9.81
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 0}
-  cameraFollowTarget: {fileID: 0}
-  mouseSensitivity: 100
+  cameraFollowTarget: {fileID: 1735088581532782266}
+  standCameraHeight: 2
+  crouchCameraHeight: 0.3
+  standHeight: 1.4
+  crouchHeight: 0.3
+  crouchCenterY: 0.2
+  standCenterY: 1
+  mouseSensitivity: 200
   controllerSensitivity: 2
-  distanceFromPlayer: 5
+  distanceFromPlayer: 0.1
   minVerticalAngle: -30
   maxVerticalAngle: 60
 --- !u!1 &4256986036373327801
@@ -184,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 4256986036373327801}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.605, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
