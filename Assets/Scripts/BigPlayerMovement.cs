@@ -196,7 +196,7 @@ public class BigPlayerMovement : MonoBehaviour
 
                
 
-                moveSpeed = 20f; // Reset movement speed to normal
+                moveSpeed = 10f; // Reset movement speed to normal
             }
         }
     }
