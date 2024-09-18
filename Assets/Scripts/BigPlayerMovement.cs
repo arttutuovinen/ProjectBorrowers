@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BigPlayerMovement : MonoBehaviour
 {
@@ -39,6 +40,16 @@ public class BigPlayerMovement : MonoBehaviour
     public float rayDistance = 10f;  // Maximum distance the ray should check.
     public Camera playerCamera;      // Reference to the player's camera.
 
+    //Calculating rayPosition
+    private Vector3 rayPosition;
+    public float offsetX = 1f;
+    public float offsetY = 1f;
+    public float offsetZ = 0f;
+
+    public TextMeshProUGUI crossHair;
+
+    public LayerMask BigPlayerMask;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -51,28 +62,35 @@ public class BigPlayerMovement : MonoBehaviour
         ApplyGravity();
         ControlCamera();
         HandleCrouch();
-        
+
+        //Camera Offset manager
+        rayPosition = playerCamera.transform.position + new Vector3(offsetX, offsetY, offsetZ);
+
         // Cast a ray from the camera's position and forward direction.
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        Ray ray = new Ray(rayPosition, playerCamera.transform.forward);
         RaycastHit hit;
 
-        // Check if the ray hits any object within the specified distance.
-        if (Physics.Raycast(ray, out hit, rayDistance))
-        {
-            // Check if the hit object has the tag "SmallPlayer".
-            if (hit.collider.CompareTag("SmallPlayer"))
-            {
-                // Log if the object has the "SmallPlayer" tag.
-                Debug.Log("Raycast hit an object with the tag 'SmallPlayer': " + hit.collider.gameObject.name);
+        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.blue);
 
-                // Check if the player presses the "E" key.
-                if (Input.GetButtonDown("P2PickUp"))
-                {
-                    // Destroy the object that was hit.
-                    Debug.Log("Destroyed object: " + hit.collider.gameObject.name);
-                    Destroy(hit.collider.gameObject);
-                }
+        // Check if the ray hits any object within the specified distance.
+        if (Physics.Raycast(ray, out hit, rayDistance, BigPlayerMask) && hit.collider.CompareTag("SmallPlayer"))
+        {
+            crossHair.color = Color.red;
+            // Log if the object has the "SmallPlayer" tag.
+            Debug.Log("Raycast hit an object with the tag 'SmallPlayer': " + hit.collider.gameObject.name);
+
+            // Check if the player presses the "E" key.
+            if (Input.GetButtonDown("P2PickUp"))
+            {
+                // Destroy the object that was hit.
+                Debug.Log("Destroyed object: " + hit.collider.gameObject.name);
+                Destroy(hit.collider.gameObject);
             }
+
+        }
+        else
+        {
+            crossHair.color = Color.white;
         }
 
 

@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfb227eb1499954c9d87733658f3be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 15
   crouchSpeed: 7
   gravity: -9.81
   turnSmoothTime: 0.1
@@ -140,14 +140,16 @@ MonoBehaviour:
   mouseSensitivity: 200
   controllerSensitivity: 2
   distanceFromPlayer: 0.1
-  minVerticalAngle: -30
-  maxVerticalAngle: 60
-  pickupRange: 3
+  minVerticalAngle: -50
+  maxVerticalAngle: 80
+  rayDistance: 4.5
   playerCamera: {fileID: 0}
-  pickupLayer:
+  offsetX: 0
+  offsetY: 0.03
+  offsetZ: 0
+  BigPlayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  holdPosition: {fileID: 0}
+    m_Bits: 128
 --- !u!1 &4256986036373327801
 GameObject:
   m_ObjectHideFlags: 0
