@@ -70,7 +70,7 @@ public class BigPlayerMovement : MonoBehaviour
         Ray ray = new Ray(rayPosition, playerCamera.transform.forward);
         RaycastHit hit;
 
-        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.blue);
+        //Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.blue);
 
         // Check if the ray hits any object within the specified distance.
         if (Physics.Raycast(ray, out hit, rayDistance, BigPlayerMask) && hit.collider.CompareTag("SmallPlayer"))

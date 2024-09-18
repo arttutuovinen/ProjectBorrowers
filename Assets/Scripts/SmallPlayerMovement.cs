@@ -136,11 +136,11 @@ public class SmallPlayerMovement : MonoBehaviour
         // Camera control with mouse or PS5 controller's right stick
         float mouseX, mouseY;
 
-        if (Mathf.Abs(Input.GetAxis("RightStickHorizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("RightStickVertical")) > 0.1f)
+        if (Mathf.Abs(Input.GetAxis("P1RightStickHorizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("P1RightStickVertical")) > 0.1f)
         {
             // PS5 right stick
-            mouseX = Input.GetAxis("RightStickHorizontal") * controllerSensitivity;
-            mouseY = Input.GetAxis("RightStickVertical") * controllerSensitivity;
+            mouseX = Input.GetAxis("P1RightStickHorizontal") * controllerSensitivity;
+            mouseY = Input.GetAxis("P1RightStickVertical") * controllerSensitivity;
         }
         else
         {

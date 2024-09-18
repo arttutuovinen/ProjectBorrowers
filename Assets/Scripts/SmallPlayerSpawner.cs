@@ -13,6 +13,8 @@ public class SmallPlayerSpawner : MonoBehaviour
     // Reference to the "Finish" object in the scene
     public GameObject finish;
 
+    
+
     void Start()
     {
         // Find all spawn points in the scene tagged as "SpawnPoint"

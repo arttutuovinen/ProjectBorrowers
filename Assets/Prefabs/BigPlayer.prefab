@@ -138,15 +138,16 @@ MonoBehaviour:
   crouchCenterY: 0
   standCenterY: 1
   mouseSensitivity: 200
-  controllerSensitivity: 2
+  controllerSensitivity: 1
   distanceFromPlayer: 0.1
   minVerticalAngle: -50
   maxVerticalAngle: 80
-  rayDistance: 4.5
+  rayDistance: 6
   playerCamera: {fileID: 0}
   offsetX: 0
   offsetY: 0.03
   offsetZ: 0
+  crossHair: {fileID: 0}
   BigPlayerMask:
     serializedVersion: 2
     m_Bits: 128
