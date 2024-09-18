@@ -10,6 +10,9 @@ public class SmallPlayerSpawner : MonoBehaviour
     // Reference to the player object in the scene
     public GameObject player;
 
+    // Reference to the "Finish" object in the scene
+    public GameObject finish;
+
     void Start()
     {
         // Find all spawn points in the scene tagged as "SpawnPoint"
@@ -34,6 +37,12 @@ public class SmallPlayerSpawner : MonoBehaviour
             Debug.LogError("Player object not set!");
             return;
         }
+        if (finish == null)
+        {
+            Debug.LogError("Finish object not set!");
+            return;
+        }
+
 
         // Choose a random spawn point from the array
         int randomIndex = Random.Range(0, spawnPoints.Length);
@@ -42,5 +51,9 @@ public class SmallPlayerSpawner : MonoBehaviour
         // Move the player to the chosen spawn point's position and rotation
         player.transform.position = randomSpawnPoint.transform.position;
         player.transform.rotation = randomSpawnPoint.transform.rotation;
+
+        // Move the "Finish" object to the same position and rotation as the player
+        finish.transform.position = player.transform.position;
+        finish.transform.rotation = player.transform.rotation;
     }
 }

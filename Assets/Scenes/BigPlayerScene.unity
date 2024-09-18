@@ -2832,6 +2832,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &834309392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8536394408400741620, guid: 5e25529eb427f574b98cb9f6d4671193,
+    type: 3}
+  m_PrefabInstance: {fileID: 168054080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &837857804
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,7 +3479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1081503430}
   m_Layer: 0
-  m_Name: Treasure
+  m_Name: TreasureSpawning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5215,7 +5221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1550773085}
   m_Layer: 0
-  m_Name: SmallPlayerSpawn
+  m_Name: SmallPlayerAndFinishSpawning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6836,6 +6842,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallPlayerSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 4141925952373224471, guid: 506eb04d9664f1a489a1b7575ba55d0f,
+        type: 3}
+      propertyPath: finish
+      value: 
+      objectReference: {fileID: 834309392}
     - target: {fileID: 4141925952373224471, guid: 506eb04d9664f1a489a1b7575ba55d0f,
         type: 3}
       propertyPath: player
