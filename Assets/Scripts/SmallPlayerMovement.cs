@@ -33,6 +33,9 @@ public class SmallPlayerMovement : MonoBehaviour
     private bool nearLadder = false; // Is the player near a ladder?
     private Collider ladder; // Reference to the ladder the player is interacting with
 
+    //Treasure Collection
+    public bool isTreasureCollected = false;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
