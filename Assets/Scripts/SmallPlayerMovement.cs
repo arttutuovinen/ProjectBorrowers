@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SmallPlayerMovement : MonoBehaviour
 {
@@ -36,10 +37,19 @@ public class SmallPlayerMovement : MonoBehaviour
     //Treasure Collection
     public bool isTreasureCollected = false;
 
+    //Ladder text
+    public TextMeshProUGUI ladderInteractText;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
+
+        // Hide the interact text at the start
+        if (ladderInteractText != null)
+        {
+            ladderInteractText.gameObject.SetActive(false); // Disable the text object initially
+        }
     }
 
     private void Update()
@@ -168,6 +178,12 @@ public class SmallPlayerMovement : MonoBehaviour
         {
             nearLadder = true;
             ladder = other;
+
+            // Enable the interact text when the player enters the trigger
+            if (ladderInteractText != null)
+            {
+                ladderInteractText.gameObject.SetActive(true); // Activate text when the player enters the trigger
+            }
         }
     }
 
@@ -178,6 +194,11 @@ public class SmallPlayerMovement : MonoBehaviour
             nearLadder = false;
             ladder = null;
             isClimbing = false; // Stop climbing when leaving the ladder
+
+            if (ladderInteractText != null)
+            {
+                ladderInteractText.gameObject.SetActive(false); // Deactivate text when the player exits the trigger
+            }
         }
     }
 }

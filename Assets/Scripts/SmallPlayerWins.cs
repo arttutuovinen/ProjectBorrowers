@@ -22,7 +22,7 @@ public class SmallPlayerWins : MonoBehaviour
         if (hit.gameObject.CompareTag(playerTag) && hit.gameObject.GetComponent<SmallPlayerMovement>().isTreasureCollected == true)
         {
             Destroy(smallPlayer);  // Destroy the player GameObject
-            Debug.Log("Player destroyed!");
+            Debug.Log("Small Player Wins!");
         }
     }
 

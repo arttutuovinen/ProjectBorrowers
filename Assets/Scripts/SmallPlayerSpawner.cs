@@ -34,18 +34,6 @@ public class SmallPlayerSpawner : MonoBehaviour
     // Method to teleport the player to a random spawn point
     void TeleportPlayerToRandomPoint()
     {
-        if (player == null)
-        {
-            Debug.LogError("Player object not set!");
-            return;
-        }
-        if (finish == null)
-        {
-            Debug.LogError("Finish object not set!");
-            return;
-        }
-
-
         // Choose a random spawn point from the array
         int randomIndex = Random.Range(0, spawnPoints.Length);
         GameObject randomSpawnPoint = spawnPoints[randomIndex];

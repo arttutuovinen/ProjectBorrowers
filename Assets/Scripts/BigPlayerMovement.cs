@@ -46,9 +46,11 @@ public class BigPlayerMovement : MonoBehaviour
     public float offsetY = 1f;
     public float offsetZ = 0f;
 
-    public TextMeshProUGUI crossHair;
+    public TextMeshProUGUI crossHair; // crossHair text object
 
-    public LayerMask BigPlayerMask;
+    public LayerMask BigPlayerMask; // mask for catching the small player
+
+    public LayerMask BlockingMask; // New layer mask for blocking objects
 
     private void Start()
     {
@@ -70,21 +72,36 @@ public class BigPlayerMovement : MonoBehaviour
         Ray ray = new Ray(rayPosition, playerCamera.transform.forward);
         RaycastHit hit;
 
-        //Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.blue);
+        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.blue);
 
         // Check if the ray hits any object within the specified distance.
-        if (Physics.Raycast(ray, out hit, rayDistance, BigPlayerMask) && hit.collider.CompareTag("SmallPlayer"))
+        if (Physics.Raycast(ray, out hit, rayDistance, BigPlayerMask))
         {
-            crossHair.color = Color.red;
-            // Log if the object has the "SmallPlayer" tag.
-            Debug.Log("Raycast hit an object with the tag 'SmallPlayer': " + hit.collider.gameObject.name);
-
-            // Check if the player presses the "E" key.
-            if (Input.GetButtonDown("P2PickUp"))
+            if (hit.collider.CompareTag("SmallPlayer"))
             {
-                // Destroy the object that was hit.
-                Debug.Log("Destroyed object: " + hit.collider.gameObject.name);
-                Destroy(hit.collider.gameObject);
+                // Check if there is any blocking object between the BigPlayer and SmallPlayer
+                RaycastHit blockHit;
+                if (Physics.Raycast(rayPosition, playerCamera.transform.forward, out blockHit, rayDistance, BlockingMask))
+                {
+                    // If the blocking object is between the ray and the SmallPlayer
+                    if (blockHit.collider != null && blockHit.collider.gameObject != hit.collider.gameObject)
+                    {
+                        
+                        Debug.Log("Raycast hit a blocking object before reaching SmallPlayer");
+                        return; // Exit update early to prevent capturing
+                    }
+                }
+
+                // If no blocking object is in the way
+                crossHair.color = Color.red; // Change color to indicate successful capture
+
+                // Check if the player presses the "E" key.
+                if (Input.GetButtonDown("P2PickUp"))
+                {
+                    // Destroy the object that was hit.
+                    Debug.Log("Destroyed object: " + hit.collider.gameObject.name);
+                    Destroy(hit.collider.gameObject);
+                }
             }
 
         }
@@ -92,8 +109,6 @@ public class BigPlayerMovement : MonoBehaviour
         {
             crossHair.color = Color.white;
         }
-
-
     }
 
     private void Move()
@@ -179,11 +194,7 @@ public class BigPlayerMovement : MonoBehaviour
                 // Crouch: adjust CharacterController height, camera follow target height, and player scale
                 controller.height = crouchColliderHeight;
                 controller.center = new Vector3(0, crouchCenterY, 0);
-
                 cameraFollowTarget.localPosition = new Vector3(cameraFollowTarget.localPosition.x, crouchCameraHeight, cameraFollowTarget.localPosition.z);
-
-               
-
                 moveSpeed = crouchSpeed; // Slow down movement while crouching
             }
             else
@@ -191,11 +202,7 @@ public class BigPlayerMovement : MonoBehaviour
                 // Stand: reset CharacterController height, camera follow target height, and player scale
                 controller.height = standColliderHeight;
                 controller.center = new Vector3(0, standCenterY, 0);
-
                 cameraFollowTarget.localPosition = new Vector3(cameraFollowTarget.localPosition.x, standCameraHeight, cameraFollowTarget.localPosition.z);
-
-               
-
                 moveSpeed = 10f; // Reset movement speed to normal
             }
         }
