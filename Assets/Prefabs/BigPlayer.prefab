@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfb227eb1499954c9d87733658f3be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 10
   crouchSpeed: 7
   gravity: -9.81
   turnSmoothTime: 0.1
@@ -142,7 +142,7 @@ MonoBehaviour:
   distanceFromPlayer: 0.1
   minVerticalAngle: -50
   maxVerticalAngle: 80
-  rayDistance: 6
+  rayDistance: 9
   playerCamera: {fileID: 0}
   offsetX: 0
   offsetY: 0.03
@@ -151,6 +151,9 @@ MonoBehaviour:
   BigPlayerMask:
     serializedVersion: 2
     m_Bits: 128
+  BlockingMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &4256986036373327801
 GameObject:
   m_ObjectHideFlags: 0

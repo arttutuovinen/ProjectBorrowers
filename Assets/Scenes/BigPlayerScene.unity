@@ -1389,7 +1389,7 @@ GameObject:
   - component: {fileID: 319268458}
   - component: {fileID: 319268457}
   - component: {fileID: 319268456}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: floor
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -8330,11 +8330,6 @@ PrefabInstance:
       objectReference: {fileID: 1204033909}
     - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
-      propertyPath: moveSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
-        type: 3}
       propertyPath: pickupRange
       value: 100
       objectReference: {fileID: 0}
@@ -8358,11 +8353,6 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 31879987}
-    - target: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
-        type: 3}
-      propertyPath: BlockingMask.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
     - target: {fileID: 4256986036373327801, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
       propertyPath: m_Layer
