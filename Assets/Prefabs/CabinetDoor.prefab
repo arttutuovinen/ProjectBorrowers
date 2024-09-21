@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1275654983768478600}
   - component: {fileID: 5434726362496406451}
   - component: {fileID: 2432778710391670458}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: CabinetDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.67, y: 11.77, z: 4.6}
+  m_Size: {x: 1.67, y: 4.91, z: 4.6}
   m_Center: {x: 4.31, y: 4.73, z: -1.79}
 --- !u!114 &2432778710391670458
 MonoBehaviour:
@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1b492f0d0e5264f905e1035decafb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationAmount: 55
-  interactText: {fileID: 0}
+  rotationAmount: 70
+  rotationSpeed: 5
 --- !u!1 &2987771671497354519
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,13 +49,23 @@ public class BigPlayerMovement : MonoBehaviour
     public TextMeshProUGUI crossHair; // crossHair text object
 
     public LayerMask BigPlayerMask; // mask for catching the small player
-
     public LayerMask BlockingMask; // New layer mask for blocking objects
+
+    // ** door interaction **
+    public LayerMask doorLayerMask;
+    public TextMeshProUGUI doorInteractText;
+    private Door currentDoor;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
+
+        // Hide the interact text at the start
+        if (doorInteractText != null)
+        {
+            doorInteractText.gameObject.SetActive(false); // Disable the text object initially
+        }
     }
     
     private void Update()
@@ -73,8 +83,41 @@ public class BigPlayerMovement : MonoBehaviour
         RaycastHit hit;
 
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.blue);
+        // ** Door interaction detection **
+        // Check if the ray hits any object within the specified distance and on the door layer
+        if (Physics.Raycast(ray, out hit, rayDistance, doorLayerMask))
+        {
+            // Check if the object hit has a DoorInteraction component
+            Door door = hit.collider.GetComponent<Door>();
+            if (door != null)
+            {
+                // If the player presses the interact key, toggle the door
+                if (Input.GetButtonDown("P2PickUp"))
+                {
+                    door.ToggleDoor();
+                }
+                // Display interaction text
+                if (doorInteractText != null)
+                {
+                    doorInteractText.gameObject.SetActive(true); // Activate the text when the door is in range
+                }
+                // Set the current door reference
+                currentDoor = door;
+            }  
+        }
+        else
+        {
+            // If the ray doesn't hit a door or is too far, deactivate the text
+            if (doorInteractText != null)
+            {
+                doorInteractText.gameObject.SetActive(false); // Deactivate the text when no door is in range
+            }
 
-        // Check if the ray hits any object within the specified distance.
+            // Clear the current door reference
+            currentDoor = null;
+        }
+
+        // ** Cast ray for capturing Small Player ** Check if the ray hits any object within the specified distance.
         if (Physics.Raycast(ray, out hit, rayDistance, BigPlayerMask))
         {
             if (hit.collider.CompareTag("SmallPlayer"))
@@ -207,25 +250,7 @@ public class BigPlayerMovement : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if the object the player collided with has the tag "SmallPlayer".
-        if (other.CompareTag("SmallPlayer"))
-        {
-            // Log when the player enters the collider of an object with the "SmallPlayer" tag.
-            Debug.Log("Player has entered the collider of an object with the tag 'SmallPlayer': " + other.gameObject.name);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // Check if the object the player exited has the tag "SmallPlayer".
-        if (other.CompareTag("SmallPlayer"))
-        {
-            // Log when the player exits the collider of an object with the "SmallPlayer" tag.
-            Debug.Log("Player has exited the collider of an object with the tag 'SmallPlayer': " + other.gameObject.name);
-        }
-    }
+    
 
 
 }
