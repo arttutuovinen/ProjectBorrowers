@@ -39,6 +39,7 @@ public class SmallPlayerMovement : MonoBehaviour
 
     //Ladder text
     public TextMeshProUGUI ladderInteractText;
+    public TextMeshProUGUI itemInteractText;
 
     private void Start()
     {
@@ -50,6 +51,7 @@ public class SmallPlayerMovement : MonoBehaviour
         {
             ladderInteractText.gameObject.SetActive(false); // Disable the text object initially
         }
+
     }
 
     private void Update()
@@ -185,6 +187,7 @@ public class SmallPlayerMovement : MonoBehaviour
                 ladderInteractText.gameObject.SetActive(true); // Activate text when the player enters the trigger
             }
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -201,4 +204,5 @@ public class SmallPlayerMovement : MonoBehaviour
             }
         }
     }
+    
 }
