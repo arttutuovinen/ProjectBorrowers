@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 4536997908107218543}
   - component: {fileID: 1810356246628466570}
   - component: {fileID: 3347281167681738091}
-  - component: {fileID: 2852683590794912075}
+  - component: {fileID: 6105819018834951274}
   m_Layer: 0
   m_Name: cylinder (1)
   m_TagString: StunItem
@@ -134,8 +134,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.323, z: 0}
-  m_LocalScale: {x: 0.147264, y: -0.22153473, z: 0.147264}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.147264, y: 0.2215347, z: 0.147264}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6524769899917051824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -189,8 +189,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2852683590794912075
-CapsuleCollider:
+--- !u!65 &6105819018834951274
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -207,10 +207,8 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &8128631848681351141
 GameObject:
@@ -243,8 +241,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5725444360328394791}
   - {fileID: 4536997908107218543}
+  - {fileID: 5725444360328394791}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8674110882993674754

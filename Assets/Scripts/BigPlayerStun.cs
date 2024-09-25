@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BigPlayerStun : MonoBehaviour
 {
     public float stunDuration = 5f;    // Duration for which the player is stunned
     private bool isStunned = false;    // Tracks if the player is stunned
     public BigPlayerMovement bigPlayerMovement; // Reference to the player's movement script (assuming a separate movement script exists)
+    public TextMeshProUGUI bigPlayerIsStunnedText;  // Reference to the TextMeshPro UI element
 
     void Start()
     {
         // Assuming the player has a movement script called "PlayerMovement"
         bigPlayerMovement = GetComponent<BigPlayerMovement>();
+        bigPlayerIsStunnedText.enabled = false;
     }
 
     // Detect when the player touches an item
@@ -23,6 +26,8 @@ public class BigPlayerStun : MonoBehaviour
             // Start the stun process
             StartCoroutine(StunPlayer());
             Debug.Log("Hits boppyPin");
+            // Destroy the StunItem after collision
+            Destroy(other.gameObject);
         }
     }
 
@@ -31,7 +36,8 @@ public class BigPlayerStun : MonoBehaviour
     {
         // Set the player to stunned
         isStunned = true;
-
+        bigPlayerIsStunnedText.enabled = true;
+        
         // Disable the player's movement
         if (bigPlayerMovement != null)
         {
@@ -46,7 +52,7 @@ public class BigPlayerStun : MonoBehaviour
         {
             bigPlayerMovement.enabled = true;
         }
-
+        bigPlayerIsStunnedText.enabled = false;
         // Reset the stun state
         isStunned = false;
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SmallPlayerItemCollector : MonoBehaviour
 {
@@ -8,28 +9,59 @@ public class SmallPlayerItemCollector : MonoBehaviour
     private bool hasItem = false;    // Tracks if the player has collected an item
     private bool itemSpawned = false; // Tracks if the item has been spawned after collection
     private GameObject collectedItem; // The reference to the collected item prefab
+    private bool canPickUp = false;
+    public TextMeshProUGUI pickUpText;  // Reference to the TextMeshPro UI element
 
-    // Detect collisions with the item
+    void Start()
+    {
+        // Disable the pickup text at the start of the game
+        pickUpText.enabled = false;
+    }
+    // Detect when the player enters the collider of a collectible item
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the player touches an item and it's tagged as "Collectible"
+        // Check if the player is near a collectible item
         if (other.gameObject.CompareTag("Collectible") && !hasItem)
         {
-            // Store the collected item prefab (ensure the item prefab is assigned)
+            // Store the reference to the collectible item the player can pick up
             collectedItem = other.gameObject;
-            // Destroy the item from the scene after collecting it
-            Destroy(other.gameObject);
-            // Mark that the player has collected the item
-            hasItem = true;
-            itemSpawned = false; // Reset the spawned status
-            
+            canPickUp = true;  // Player can now pick up the item
+
+            // Enable the TextMeshPro text to show the pickup message
+            pickUpText.enabled = true;
+        }
+    }
+    // Detect when the player leaves the collider of the collectible item
+    private void OnTriggerExit(Collider other)
+    {
+        // If the player moves away from the collectible item, they can no longer pick it up
+        if (other.gameObject.CompareTag("Collectible"))
+        {
+            canPickUp = false;
+            collectedItem = null; // Reset the collectible reference
+            pickUpText.enabled = false;
         }
     }
 
+
     void Update()
     {
+        // Check if the player is in range to pick up the item and presses "P1Interact"
+        if (canPickUp && !hasItem && Input.GetButtonDown("P1Interact"))
+        {
+            // Collect the item by destroying it and marking it as collected
+            Destroy(collectedItem);
+            hasItem = true;
+            itemSpawned = false; // Reset the spawned status
+            collectedItem = null; // Clear the reference to the collected item
+            canPickUp = false;  // No longer in range since item is collected
+
+            // Disable the TextMeshPro text after picking up the item
+            pickUpText.enabled = false;
+        }
+
         // Check if the player presses "E", has collected an item, and hasn't spawned it yet
-        if (hasItem && !itemSpawned && Input.GetButtonDown("P1Interact"))
+        if (hasItem && !itemSpawned && Input.GetButtonDown("P1UseItem"))
         {
             // Spawn the collected item at the player's position
             Instantiate(itemPrefab, transform.position + transform.forward, Quaternion.identity);
