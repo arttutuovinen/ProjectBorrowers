@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunDuration: 5
+  bigPlayerMovement: {fileID: 0}
+  bigPlayerIsStunnedText: {fileID: 0}
 --- !u!114 &1837153285206449404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,19 +142,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  crouchSpeed: 7
   gravity: -9.81
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 0}
   cameraFollowTarget: {fileID: 1735088581532782266}
-  standCameraHeight: 1.8
-  crouchCameraHeight: 0.2
-  standColliderHeight: 2
-  crouchColliderHeight: 0.2
-  crouchCenterY: 0
-  standCenterY: 1
+  crouchSpeed: 5
+  crouchTransitionSpeed: 3
+  normalHeight: 2
+  crouchHeight: 0.6
+  offset: {x: 0, y: 1, z: 0}
+  bigPlayer: {fileID: 1817188319145980602}
   mouseSensitivity: 200
-  controllerSensitivity: 1
+  controllerSensitivity: 0.5
   distanceFromPlayer: 0.1
   minVerticalAngle: -50
   maxVerticalAngle: 80
@@ -170,7 +171,7 @@ MonoBehaviour:
     m_Bits: 256
   doorLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   doorInteractText: {fileID: 0}
 --- !u!1 &4256986036373327801
 GameObject:

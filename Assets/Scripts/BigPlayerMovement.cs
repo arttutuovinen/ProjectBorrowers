@@ -6,20 +6,20 @@ using TMPro;
 public class BigPlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f; // Speed of movement
-    public float crouchSpeed = 2.5f; // Speed while crouching
+    
     public float gravity = -9.81f; // Gravity applied to the player
     public float turnSmoothTime = 0.1f; // Smoothing for rotation
 
     public Transform cameraTransform; // Reference to the main camera for directional movement
     public Transform cameraFollowTarget; // Target for the camera to follow (usually the player)
 
-    public float standCameraHeight = 1.8f; // Camera height when standing
-    public float crouchCameraHeight = 1.0f; // Camera height when crouched
-
-    public float standColliderHeight = 2.0f; // Collider height when standing
-    public float crouchColliderHeight = 1.0f; // Collider height when crouching
-    public float crouchCenterY = 0.5f; // Collider center when crouching
-    public float standCenterY = 1.0f; // Collider center when standing
+    // ** Crouching variables **
+    public float crouchSpeed = 2.5f; // Speed while crouching
+    public float crouchTransitionSpeed, normalHeight, crouchHeight;
+    public Vector3 offset;
+    public Transform bigPlayer;
+    bool isCrouching;
+    private float currentSpeed;
 
     public float mouseSensitivity = 100f; // Mouse sensitivity for camera movement
     public float controllerSensitivity = 2f; // Controller sensitivity for camera movement
@@ -31,7 +31,7 @@ public class BigPlayerMovement : MonoBehaviour
     
     private Vector3 velocity;
     private bool isGrounded;
-    private bool isCrouching = false; // Is the player crouching?
+   
     private float turnSmoothVelocity;
 
     private float yaw; // Horizontal rotation
@@ -66,6 +66,8 @@ public class BigPlayerMovement : MonoBehaviour
         {
             doorInteractText.gameObject.SetActive(false); // Disable the text object initially
         }
+        // Initially, set the current speed to normal
+        currentSpeed = moveSpeed;
     }
     
     private void Update()
@@ -227,30 +229,40 @@ public class BigPlayerMovement : MonoBehaviour
     }
     private void HandleCrouch()
     {
-        // Toggle crouch state when LeftShift is pressed
+        // Toggle crouch state when P2Crouch is pressed
         if (Input.GetButtonDown("P2Crouch"))
         {
             isCrouching = !isCrouching;
-
-            if (isCrouching)
-            {
-                // Crouch: adjust CharacterController height, camera follow target height, and player scale
-                controller.height = crouchColliderHeight;
-                controller.center = new Vector3(0, crouchCenterY, 0);
-                cameraFollowTarget.localPosition = new Vector3(cameraFollowTarget.localPosition.x, crouchCameraHeight, cameraFollowTarget.localPosition.z);
-                moveSpeed = crouchSpeed; // Slow down movement while crouching
-            }
-            else
-            {
-                // Stand: reset CharacterController height, camera follow target height, and player scale
-                controller.height = standColliderHeight;
-                controller.center = new Vector3(0, standCenterY, 0);
-                cameraFollowTarget.localPosition = new Vector3(cameraFollowTarget.localPosition.x, standCameraHeight, cameraFollowTarget.localPosition.z);
-                moveSpeed = 10f; // Reset movement speed to normal
-            }
+            
         }
+        if (isCrouching)
+        {
+            controller.height = controller.height - crouchSpeed * Time.deltaTime;
+            if (controller.height <= crouchHeight)
+            {
+                controller.height = crouchHeight;
+            }
+            // Set the player's speed to crouch speed
+            moveSpeed = crouchSpeed;
+        }
+        else
+        {
+            controller.height = controller.height + crouchSpeed * Time.deltaTime;
+            if (controller.height < normalHeight)
+            {
+                bigPlayer.gameObject.SetActive(false);
+                bigPlayer.position = bigPlayer.position + offset * Time.deltaTime;
+                bigPlayer.gameObject.SetActive(true);
+            }
+            if (controller.height >= normalHeight)
+            {
+                controller.height = normalHeight;
+            }
+            // Set the player's speed back to normal when not crouching
+            moveSpeed = 10f;
+        }
+        
     }
-    
 
 
 }
