@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class SmallPlayerItemCollector : MonoBehaviour
 {
@@ -11,11 +12,13 @@ public class SmallPlayerItemCollector : MonoBehaviour
     private GameObject collectedItem; // The reference to the collected item prefab
     private bool canPickUp = false;
     public TextMeshProUGUI pickUpText;  // Reference to the TextMeshPro UI element
+    public Image boppyPinItemImage;  // Reference to the TextMeshPro UI element
 
     void Start()
     {
         // Disable the pickup text at the start of the game
         pickUpText.enabled = false;
+        boppyPinItemImage.enabled = false;
     }
     // Detect when the player enters the collider of a collectible item
     private void OnTriggerEnter(Collider other)
@@ -58,6 +61,7 @@ public class SmallPlayerItemCollector : MonoBehaviour
 
             // Disable the TextMeshPro text after picking up the item
             pickUpText.enabled = false;
+            boppyPinItemImage.enabled = true;
         }
 
         // Check if the player presses "E", has collected an item, and hasn't spawned it yet
@@ -71,6 +75,7 @@ public class SmallPlayerItemCollector : MonoBehaviour
 
             // The player no longer has the item, it has been used/spawned
             hasItem = false;
+            boppyPinItemImage.enabled = false;
         }
     }
 }
