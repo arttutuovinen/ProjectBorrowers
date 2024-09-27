@@ -6,11 +6,6 @@ public class BigPlayerAnimation : MonoBehaviour
 {
     public Animator animator;
 
-    void Start()
-    {
-        // Get the Animator component attached to the character
-        animator = GetComponent<Animator>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -19,7 +14,7 @@ public class BigPlayerAnimation : MonoBehaviour
         if (Input.GetButtonDown("P2PickUp"))
         {
             // Trigger the "Grab" animation
-            animator.SetBool("isGrabbing", true);
+            animator.SetTrigger("grabTrigger");
             Debug.Log("Animation works");
         }
     }
