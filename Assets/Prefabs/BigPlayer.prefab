@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2497a512382810e49adefe70bbe32918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stunDuration: 5
-  bigPlayerMovement: {fileID: 0}
+  stunDuration: 3
+  bigPlayerMovement: {fileID: 1837153285206449404}
   bigPlayerIsStunnedText: {fileID: 0}
 --- !u!114 &1837153285206449404
 MonoBehaviour:
@@ -153,10 +153,10 @@ MonoBehaviour:
   offset: {x: 0, y: 1, z: 0}
   bigPlayer: {fileID: 1817188319145980602}
   mouseSensitivity: 200
-  controllerSensitivity: 0.5
+  controllerSensitivity: 2
   distanceFromPlayer: 0.1
-  minVerticalAngle: -50
-  maxVerticalAngle: 80
+  minVerticalAngle: -88
+  maxVerticalAngle: 88
   rayDistance: 9
   playerCamera: {fileID: 0}
   offsetX: 0
