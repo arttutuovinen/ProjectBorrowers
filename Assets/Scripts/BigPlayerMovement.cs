@@ -20,7 +20,7 @@ public class BigPlayerMovement : MonoBehaviour
     public Transform bigPlayer;
     bool isCrouching;
     private float currentSpeed;
-
+    //Looking variables
     public float mouseSensitivity = 100f; // Mouse sensitivity for camera movement
     public float controllerSensitivity = 2f; // Controller sensitivity for camera movement
     public float distanceFromPlayer = 5f; // Distance of the camera from the player
@@ -33,28 +33,26 @@ public class BigPlayerMovement : MonoBehaviour
     private bool isGrounded;
    
     private float turnSmoothVelocity;
-
     private float yaw; // Horizontal rotation
     private float pitch; // Vertical rotation
-
+    
+    //Catching the small player
     public float rayDistance = 10f;  // Maximum distance the ray should check.
+    private Vector3 rayPosition;
     public Camera playerCamera;      // Reference to the player's camera.
 
     //Calculating rayPosition
-    private Vector3 rayPosition;
     public float offsetX = 1f;
     public float offsetY = 1f;
     public float offsetZ = 0f;
-
     public TextMeshProUGUI crossHair; // crossHair text object
-
-    public LayerMask BigPlayerMask; // mask for catching the small player
-    public LayerMask BlockingMask; // New layer mask for blocking objects
 
     // ** door interaction **
     public LayerMask doorLayerMask;
     public TextMeshProUGUI doorInteractText;
     private Door currentDoor;
+
+    
 
     private void Start()
     {
@@ -94,7 +92,7 @@ public class BigPlayerMovement : MonoBehaviour
             if (door != null)
             {
                 // If the player presses the interact key, toggle the door
-                if (Input.GetButtonDown("P2PickUp"))
+                if (Input.GetButtonDown("P2Interact"))
                 {
                     door.ToggleDoor();
                 }
@@ -118,44 +116,11 @@ public class BigPlayerMovement : MonoBehaviour
             // Clear the current door reference
             currentDoor = null;
         }
-
-        // ** Cast ray for capturing Small Player ** Check if the ray hits any object within the specified distance.
-        if (Physics.Raycast(ray, out hit, rayDistance, BigPlayerMask))
-        {
-            if (hit.collider.CompareTag("SmallPlayer"))
-            {
-                // Check if there is any blocking object between the BigPlayer and SmallPlayer
-                RaycastHit blockHit;
-                if (Physics.Raycast(rayPosition, playerCamera.transform.forward, out blockHit, rayDistance, BlockingMask))
-                {
-                    // If the blocking object is between the ray and the SmallPlayer
-                    if (blockHit.collider != null && blockHit.collider.gameObject != hit.collider.gameObject)
-                    {
-                        
-                        Debug.Log("Raycast hit a blocking object before reaching SmallPlayer");
-                        return; // Exit update early to prevent capturing
-                    }
-                }
-
-                // If no blocking object is in the way
-                crossHair.color = Color.red; // Change color to indicate successful capture
-
-                // Check if the player presses the "E" key.
-                if (Input.GetButtonDown("P2PickUp"))
-                {
-                    // Destroy the object that was hit.
-                    Debug.Log("Destroyed object: " + hit.collider.gameObject.name);
-                    Destroy(hit.collider.gameObject);
-                }
-            }
-
-        }
-        else
-        {
-            crossHair.color = Color.white;
-        }
     }
 
+   
+
+    //Player Movement
     private void Move()
     {
         
