@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  climbSpeed: 3
+  climbSpeed: 8
   gravity: -30
   jumpHeight: 3
   turnSmoothTime: 0.1
@@ -322,9 +322,10 @@ MonoBehaviour:
   controllerSensitivity: 2
   distanceFromPlayer: 2.5
   minVerticalAngle: -30
-  maxVerticalAngle: 60
+  maxVerticalAngle: 70
   isTreasureCollected: 0
   ladderInteractText: {fileID: 0}
+  itemInteractText: {fileID: 0}
 --- !u!135 &7365710028398305443
 SphereCollider:
   m_ObjectHideFlags: 0

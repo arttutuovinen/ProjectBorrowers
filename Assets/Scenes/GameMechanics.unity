@@ -9661,11 +9661,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2809535191905125762, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
-      propertyPath: climbSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2809535191905125762, guid: 5ae7330550eb3984590712a49a411561,
-        type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 2068036201}
@@ -9676,19 +9671,9 @@ PrefabInstance:
       objectReference: {fileID: 2122641216}
     - target: {fileID: 2809535191905125762, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
-      propertyPath: maxVerticalAngle
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 2809535191905125762, guid: 5ae7330550eb3984590712a49a411561,
-        type: 3}
       propertyPath: ladderInteractText
       value: 
       objectReference: {fileID: 1994923116}
-    - target: {fileID: 2809535191905125762, guid: 5ae7330550eb3984590712a49a411561,
-        type: 3}
-      propertyPath: controllerSensitivity
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3037933347219471374, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
       propertyPath: m_Layer
@@ -9716,8 +9701,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7365710028398305443, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
+      propertyPath: m_Radius
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7365710028398305443, guid: 5ae7330550eb3984590712a49a411561,
+        type: 3}
       propertyPath: m_Center.y
-      value: 0.77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7560010356617655933, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
@@ -13711,6 +13701,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067216881}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1073218650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073218651}
+  m_Layer: 0
+  m_Name: SmallPlayerTeleportPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1073218651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073218650}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.1, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1080748580
 GameObject:
   m_ObjectHideFlags: 0
@@ -18935,6 +18956,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   rayColor: {r: 1, g: 0, b: 0, a: 1}
+  playerCamera: {fileID: 31879990}
+  smallPlayer: {fileID: 1794228450}
+  teleportLocation: {fileID: 1073218651}
 --- !u!1001 &1508852767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26120,6 +26144,26 @@ PrefabInstance:
       propertyPath: bigPlayerIsStunnedText
       value: 
       objectReference: {fileID: 605154433}
+    - target: {fileID: 8584456811414182869, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.113
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584456811414182869, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.652
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584456811414182869, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605968427563931189, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
+        type: 3}
+      propertyPath: m_Name
+      value: SmallPlayerTeleportPosition
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26361,6 +26405,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 410087041}
+  - {fileID: 1073218651}
   - {fileID: 832575519}
   - {fileID: 2068036201}
   - {fileID: 31879987}

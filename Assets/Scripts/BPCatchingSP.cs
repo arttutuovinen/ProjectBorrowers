@@ -11,6 +11,9 @@ public class BPCatchingSP : MonoBehaviour
     public Color rayColor = Color.red;  // Color of the ray in the Scene view
 
     public Camera playerCamera;  // Reference to the Big Player's camera (assign via Inspector)
+    public GameObject smallPlayer;  // Publicly editable reference to the Small Player
+    public Transform teleportLocation;  // Publicly editable location to teleport the Small Player
+
 
     // This method is called when the Small Player's trigger collider enters the Big Player's collider
     private void OnTriggerEnter(Collider other)
@@ -28,9 +31,9 @@ public class BPCatchingSP : MonoBehaviour
                 // Perform the raycast from the camera's view
                 if (!Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, rayDistance, blockingMask))
                 {
-                    // No blocking object found, destroy the Small Player object
-                    Debug.Log("Small Player's trigger collided with Big Player's tagged collider. Destroying Small Player.");
-                    Destroy(other.gameObject);  // Destroy the Small Player
+                    // No blocking object found, teleport the Small Player to the specified location
+                    Debug.Log("Small Player's trigger collided with Big Player's tagged collider. Teleporting Small Player.");
+                    TeleportSmallPlayer();
                 }
                 else
                 {
@@ -44,6 +47,20 @@ public class BPCatchingSP : MonoBehaviour
             {
                 Debug.Log("Big Player's collider doesn't have the required tag.");
             }
+        }
+    }
+
+    // Method to teleport the Small Player to the assigned teleport location
+    private void TeleportSmallPlayer()
+    {
+        if (smallPlayer != null && teleportLocation != null)
+        {
+            smallPlayer.transform.position = teleportLocation.position;
+            Debug.Log("Small Player has been teleported to: " + teleportLocation.position);
+        }
+        else
+        {
+            Debug.LogWarning("Small Player or Teleport location not set. Please assign them in the Inspector.");
         }
     }
 }
