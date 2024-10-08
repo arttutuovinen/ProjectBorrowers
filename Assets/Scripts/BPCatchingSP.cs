@@ -14,6 +14,10 @@ public class BPCatchingSP : MonoBehaviour
     public GameObject smallPlayer;  // Publicly editable reference to the Small Player
     public Transform teleportLocation;  // Publicly editable location to teleport the Small Player
 
+    private bool isSmallPlayerAttachedToLocation = false;  // Flag to track if Player 2 should follow teleportLocation
+
+    public BigPlayerAnimation bigPlayerAnimation; // Reference to another script.
+
 
     // This method is called when the Small Player's trigger collider enters the Big Player's collider
     private void OnTriggerEnter(Collider other)
@@ -34,6 +38,8 @@ public class BPCatchingSP : MonoBehaviour
                     // No blocking object found, teleport the Small Player to the specified location
                     Debug.Log("Small Player's trigger collided with Big Player's tagged collider. Teleporting Small Player.");
                     TeleportSmallPlayer();
+                    bigPlayerAnimation.CaughtAnimation();
+                    //Destroy(other.gameObject);  // Destroy the Small Player
                 }
                 else
                 {
@@ -50,17 +56,48 @@ public class BPCatchingSP : MonoBehaviour
         }
     }
 
-    // Method to teleport the Small Player to the assigned teleport location
+    // Method to teleport Player 2 to the assigned teleport location
     private void TeleportSmallPlayer()
     {
+        // Check if player2 and teleportLocation are assigned
         if (smallPlayer != null && teleportLocation != null)
         {
-            smallPlayer.transform.position = teleportLocation.position;
-            Debug.Log("Small Player has been teleported to: " + teleportLocation.position);
+            // Get the CharacterController from Player 2
+            CharacterController characterController = smallPlayer.GetComponent<CharacterController>();
+
+            if (characterController != null)
+            {
+                // Temporarily disable the CharacterController before setting the position to avoid physics issues
+                characterController.enabled = false;
+
+                // Set Player 2's position to the teleport location's position
+                characterController.transform.position = teleportLocation.position;
+
+                // Re-enable the CharacterController after teleporting
+                //characterController.enabled = true;
+                // Set the flag to keep Player 2 at the teleport location
+                isSmallPlayerAttachedToLocation = true;
+
+                Debug.Log("Player 2 has been teleported to: " + teleportLocation.position);
+            }
+            else
+            {
+                Debug.LogWarning("Player 2 does not have a CharacterController component.");
+            }
         }
         else
         {
-            Debug.LogWarning("Small Player or Teleport location not set. Please assign them in the Inspector.");
+            Debug.LogWarning("Player 2 or teleport location is not assigned.");
+        }
+    }
+    // Update is called once per frame
+    private void Update()
+    {
+        // If Player 2 should stay attached to the teleport location, keep its position updated
+        if (isSmallPlayerAttachedToLocation && smallPlayer != null && teleportLocation != null)
+        {
+            // Move Player 2 to the teleport location position every frame to ensure they stay together
+            smallPlayer.transform.position = teleportLocation.position;
         }
     }
 }

@@ -30,4 +30,10 @@ public class BigPlayerAnimation : MonoBehaviour
             nextGrabTime = Time.time + cooldownTime;
         }
     }
+
+    public void CaughtAnimation()
+    {
+        Debug.Log("PLAY GRAB ANIMATION");
+        animator.SetTrigger("caughtTrigger");
+    }
 }
