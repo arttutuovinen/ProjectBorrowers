@@ -314,8 +314,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6f535172d90144fab432520545e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 3565722106582068423, guid: 06219c75297d6ff46ab667851b905162,
+  objectToThrow: {fileID: 3565722106582068423, guid: 06219c75297d6ff46ab667851b905162,
     type: 3}
+  throwOrigin: {fileID: 0}
+  throwForce: 50
+  playerCamera: {fileID: 0}
 --- !u!114 &7213267609248557840
 MonoBehaviour:
   m_ObjectHideFlags: 0
