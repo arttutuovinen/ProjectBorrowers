@@ -36,7 +36,6 @@ public class BigPlayerMovement : MonoBehaviour
     private float yaw; // Horizontal rotation
     private float pitch; // Vertical rotation
     
-    //Catching the small player
     public float rayDistance = 10f;  // Maximum distance the ray should check.
     private Vector3 rayPosition;
     public Camera playerCamera;      // Reference to the player's camera.
@@ -51,8 +50,6 @@ public class BigPlayerMovement : MonoBehaviour
     public LayerMask doorLayerMask;
     public TextMeshProUGUI doorInteractText;
     private Door currentDoor;
-
-    
 
     private void Start()
     {
@@ -116,6 +113,8 @@ public class BigPlayerMovement : MonoBehaviour
             // Clear the current door reference
             currentDoor = null;
         }
+
+        
     }
 
    

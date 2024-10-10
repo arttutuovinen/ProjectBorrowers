@@ -36,4 +36,10 @@ public class BigPlayerAnimation : MonoBehaviour
         Debug.Log("PLAY GRAB ANIMATION");
         animator.SetTrigger("caughtTrigger");
     }
+
+    public void ReleaseAnimation()
+    {
+        Debug.Log("RELEASED");
+        animator.SetTrigger("releaseTrigger");
+    }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 813491731471456371}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmallPlayerTeleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6135777658475134902}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.49, z: 0}
+  m_LocalPosition: {x: 0, y: 0.552, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8167698747835413043}
   - component: {fileID: 7979786634708262117}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.194, z: 4.34}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1555011293711506532}
@@ -164,10 +164,30 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6599271472219001609, guid: 5752b8a2cdb951144abcedd7bb2ad047,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d9f853163f0bf84479d3360fb91f2b89, type: 2}
+    - target: {fileID: -650433988561056430, guid: 5752b8a2cdb951144abcedd7bb2ad047,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5752b8a2cdb951144abcedd7bb2ad047,
         type: 3}
       propertyPath: m_Name
       value: Jar
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5752b8a2cdb951144abcedd7bb2ad047,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885231674941793301, guid: 5752b8a2cdb951144abcedd7bb2ad047,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
