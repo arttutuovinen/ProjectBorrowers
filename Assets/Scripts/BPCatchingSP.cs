@@ -19,7 +19,7 @@ public class BPCatchingSP : MonoBehaviour
     private bool isSmallPlayerAttachedToLocation = false;  // Flag to track if Player 2 should follow teleportLocation
     private bool isJailReady = false;  // Flag to check if Player 1's ray hit the "Jail"
     private bool isSmallPlayerCaught = false;  // Flag to track if the small player is caught
-    
+
     public BigPlayerAnimation bigPlayerAnimation; // Reference to another script.
 
     public TextMeshProUGUI prisonInteractText;
@@ -27,6 +27,7 @@ public class BPCatchingSP : MonoBehaviour
     private void Start()
     {
         prisonInteractText.gameObject.SetActive(false); // Disable the text object initially
+        
     }
 
     private void Update()
@@ -77,6 +78,7 @@ public class BPCatchingSP : MonoBehaviour
             TeleportSmallPlayerToJail();
             bigPlayerAnimation.ReleaseAnimation();
         }
+        
     }
 
     // This method is called when the Small Player's trigger collider enters the Big Player's collider
@@ -180,4 +182,5 @@ public class BPCatchingSP : MonoBehaviour
             Debug.LogWarning("Small Player or JailLocation is not assigned.");
         }
     }
+    
 }
