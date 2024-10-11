@@ -82,7 +82,7 @@ public class SmallPlayerItemCollector : MonoBehaviour
                     currentItem = ItemType.Flashbang;
                     flashbangItemImage.enabled = true;
                     Debug.Log("Player picked up a Flashbang.");
-                    //spFlashBang.ResetThrow();
+                    
                 }
             }
 

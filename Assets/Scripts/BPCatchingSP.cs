@@ -39,8 +39,6 @@ public class BPCatchingSP : MonoBehaviour
         // Check if the ray hits an object within the specified distance
         if (Physics.Raycast(ray, out hit, rayDistance, blockingMask))
         {
-            
-            
             // Check if the object hit is named "Prison"
             if (hit.collider.gameObject.name == "Prison")
             {
