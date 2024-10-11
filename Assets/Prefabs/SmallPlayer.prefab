@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 8872808774314510905}
   - component: {fileID: 3196830925416468045}
   - component: {fileID: 414432666989003418}
+  - component: {fileID: 3460755058453020208}
   - component: {fileID: 1453455095307449174}
   - component: {fileID: 7213267609248557840}
   - component: {fileID: 457389529722468420}
@@ -302,6 +303,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3460755058453020208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63932f293bc9b3745ab67b064c8a4ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 20
+  upwardForce: 5
+  knockbackDuration: 0.2
 --- !u!114 &1453455095307449174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,10 +330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6f535172d90144fab432520545e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToThrow: {fileID: 3565722106582068423, guid: 06219c75297d6ff46ab667851b905162,
+  flashbang: {fileID: 3565722106582068423, guid: 06219c75297d6ff46ab667851b905162,
     type: 3}
   throwOrigin: {fileID: 0}
-  throwForce: 50
+  throwForce: 10
   playerCamera: {fileID: 0}
 --- !u!114 &7213267609248557840
 MonoBehaviour:
