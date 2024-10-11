@@ -47,7 +47,7 @@ public class BPItemCollector : MonoBehaviour
         }
 
         // Check if the player presses "P2UseItem", has collected an item, and hasn't used it yet
-        if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("P2UseItem"))
+        if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("P2PickUp"))
         {
             UseItem();
         }
@@ -57,26 +57,39 @@ public class BPItemCollector : MonoBehaviour
     {
         // Cast a ray from the center of the player's camera
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        RaycastHit hit;
+        RaycastHit[] hits = Physics.RaycastAll(ray, rayDistance, collectibleLayer);
 
-        // Perform the raycast and check if it hits a collider on the collectible layer
-        if (Physics.Raycast(ray, out hit, rayDistance, collectibleLayer))
+        float closestDistance = Mathf.Infinity;
+        GameObject closestCollectible = null;
+
+        foreach (RaycastHit hit in hits)
         {
             // Check if the hit object has the correct tag and the player doesn't already have an item
             if (hit.collider.CompareTag("BPCollectible") && currentItem == ItemType.None)
             {
-                // Store the reference to the collectible item
-                collectedItem = hit.collider.gameObject;
-                canPickUp = true; // Allow the player to pick up the item
-                bpPickUpText.enabled = true; // Show the pickup text
-                return;
+                // Update the closest collectible if it's nearer than the previous one
+                if (hit.distance < closestDistance)
+                {
+                    closestDistance = hit.distance;
+                    closestCollectible = hit.collider.gameObject;
+                }
             }
         }
 
-        // If the raycast does not hit any collectible, disable the pickup option
-        canPickUp = false;
-        collectedItem = null; // Reset the reference to the collectible item
-        bpPickUpText.enabled = false; // Hide the pickup text
+        // If a collectible was found, update the pickup state
+        if (closestCollectible != null)
+        {
+            collectedItem = closestCollectible;
+            canPickUp = true; // Allow the player to pick up the item
+            bpPickUpText.enabled = true; // Show the pickup text
+        }
+        else
+        {
+            // If the raycast does not hit any collectible, disable the pickup option
+            canPickUp = false;
+            collectedItem = null; // Reset the reference to the collectible item
+            bpPickUpText.enabled = false; // Hide the pickup text
+        }
     }
 
     void PickUpItem()
@@ -90,7 +103,7 @@ public class BPItemCollector : MonoBehaviour
             {
                 currentItem = ItemType.ThrowingItem;
                 throwingItem.enabled = true;
-                Debug.Log("Player picked up a Boppy Pin.");
+                Debug.Log("Player picked up a ThrowItem.");
             }
 
             // Try to find a child tagged as "BPOtherItem"
@@ -117,7 +130,7 @@ public class BPItemCollector : MonoBehaviour
         if (currentItem == ItemType.ThrowingItem)
         {
             bpThrowItem.SpawnThrowItem();
-            Debug.Log("SpawnBoppyPin() method called.");
+            Debug.Log("THROWING.");
         }
         else if (currentItem == ItemType.OtherItem)
         {

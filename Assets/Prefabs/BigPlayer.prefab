@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 8187277097767252352}
   - component: {fileID: 6058408288489195687}
   - component: {fileID: 6353602483158531754}
+  - component: {fileID: 4548582116372357473}
+  - component: {fileID: 6314714961187952365}
+  - component: {fileID: 2798925808186326819}
   - component: {fileID: 8441493380656028964}
   - component: {fileID: 1837153285206449404}
   m_Layer: 0
@@ -114,6 +117,59 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4548582116372357473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644779056197674402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a85fbf0a3f1ffc4daf725f066c07631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwItem: {fileID: 266587534380639546, guid: c2bc5eccd78d11c468297560b2428355,
+    type: 3}
+  throwOrigin: {fileID: 0}
+  throwForce: 20
+  playerCamera: {fileID: 0}
+--- !u!114 &6314714961187952365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644779056197674402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae62bb4e07c3fc64485af1d197bec173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 10
+  collectibleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  playerCamera: {fileID: 0}
+  bpPickUpText: {fileID: 0}
+  throwingItem: {fileID: 0}
+  bpThrowItem: {fileID: 4548582116372357473}
+  bpOtherItem: {fileID: 0}
+--- !u!114 &2798925808186326819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644779056197674402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730778b6ee8d1b4469d3c062ea16b04f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashbangedImage: {fileID: 0}
+  fadeDuration: 5
+  initialDelay: 3
 --- !u!114 &8441493380656028964
 MonoBehaviour:
   m_ObjectHideFlags: 0
