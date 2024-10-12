@@ -9,6 +9,7 @@ public class SPThrwoItemHit : MonoBehaviour
     public float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
     private SmallPlayerMovement playerMovement;
+    private float destroyTime = 2f;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class SPThrwoItemHit : MonoBehaviour
 
             // After 2 seconds, re-enable movement (for example)
             Invoke("ReEnableMovement", 3f);
+            Destroy(other, destroyTime);
         }
     }
     private System.Collections.IEnumerator KnockbackCoroutine(Vector3 direction)
