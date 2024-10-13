@@ -10,7 +10,7 @@ public class BPItemCollector : MonoBehaviour
     {
         None,
         ThrowingItem,
-        OtherItem
+        FlySwatter
     }
     public float rayDistance = 10f; // The distance of the raycast
     public LayerMask collectibleLayer; // Layer mask to specify which layers should be considered for the raycast
@@ -110,7 +110,7 @@ public class BPItemCollector : MonoBehaviour
             Transform otherItemChild = collectedItem.transform.Find("BPOtherItem");
             if (otherItemChild != null && otherItemChild.CompareTag("BPOtherItem"))
             {
-                currentItem = ItemType.OtherItem;
+                currentItem = ItemType.FlySwatter;
                 //otherItemImage.enabled = true;
                 Debug.Log("Player picked up an Other Item.");
             }
@@ -132,7 +132,7 @@ public class BPItemCollector : MonoBehaviour
             bpThrowItem.SpawnThrowItem();
             Debug.Log("THROWING.");
         }
-        else if (currentItem == ItemType.OtherItem)
+        else if (currentItem == ItemType.FlySwatter)
         {
             //bpOtherItem.SpawnItem();
             Debug.Log("SpawnOtherItem() method called.");
