@@ -22,17 +22,17 @@ public class BPItemCollector : MonoBehaviour
 
     public TextMeshProUGUI bpPickUpText;  // Reference to the TextMeshPro UI element
     public Image throwingItem;  // Reference to the UI Image for Boppy Pin
-    public Image flySwatterItemImage;  // Reference to the UI Image for Other Item
+    //public Image otherItemImage;  // Reference to the UI Image for Other Item
 
     public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
-    //public BPFlySwatter bpOtherItem; // Reference to another script that handles Other Item behavior.
+    public SPBoppyPin bpOtherItem; // Reference to another script that handles Other Item behavior.
 
     void Start()
     {
         // Disable the pickup text and item images at the start of the game
         bpPickUpText.enabled = false;
         throwingItem.enabled = false;
-        flySwatterItemImage.enabled = false;
+        //otherItemImage.enabled = false;
     }
 
     void Update()
@@ -106,13 +106,13 @@ public class BPItemCollector : MonoBehaviour
                 Debug.Log("Player picked up a ThrowItem.");
             }
 
-            // Try to find a child tagged as "BPFlySwatter"
-            Transform flySwatterItemChild = collectedItem.transform.Find("BPFlySwatter");
-            if (flySwatterItemChild != null && flySwatterItemChild.CompareTag("BPFlySwatter"))
+            // Try to find a child tagged as "BPOtherItem"
+            Transform otherItemChild = collectedItem.transform.Find("BPOtherItem");
+            if (otherItemChild != null && otherItemChild.CompareTag("BPOtherItem"))
             {
                 currentItem = ItemType.FlySwatter;
-                flySwatterItemImage.enabled = true;
-                Debug.Log("Player picked up an BPFlySwatter.");
+                //otherItemImage.enabled = true;
+                Debug.Log("Player picked up an Other Item.");
             }
 
             // Destroy the parent collectible item and reset pickup state
@@ -142,6 +142,6 @@ public class BPItemCollector : MonoBehaviour
         itemUsed = true;
         currentItem = ItemType.None;
         throwingItem.enabled = false;
-        flySwatterItemImage.enabled = false;
+        //otherItemImage.enabled = false;
     }
 }
