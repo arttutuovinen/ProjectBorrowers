@@ -65,7 +65,7 @@ public class BigPlayerAnimation : MonoBehaviour
 
     private IEnumerator EndFlySwatterAfterDelay()
     {
-        yield return new WaitForSeconds(1.0f); // Adjust this to match the length of your FlySwatter animation
+        yield return new WaitForSeconds(2.0f); // Adjust this to match the length of your FlySwatter animation
         EndFlySwatter();
     }
 
