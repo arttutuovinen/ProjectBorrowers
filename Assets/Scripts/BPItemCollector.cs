@@ -22,17 +22,17 @@ public class BPItemCollector : MonoBehaviour
 
     public TextMeshProUGUI bpPickUpText;  // Reference to the TextMeshPro UI element
     public Image throwingItem;  // Reference to the UI Image for Boppy Pin
-    //public Image otherItemImage;  // Reference to the UI Image for Other Item
+    public Image flySwatterImage;  // Reference to the UI Image for Other Item
 
     public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
-    public SPBoppyPin bpOtherItem; // Reference to another script that handles Other Item behavior.
+    //public SPBoppyPin bpOtherItem; // Reference to another script that handles Other Item behavior.
 
     void Start()
     {
         // Disable the pickup text and item images at the start of the game
         bpPickUpText.enabled = false;
         throwingItem.enabled = false;
-        //otherItemImage.enabled = false;
+        flySwatterImage.enabled = false;
     }
 
     void Update()
@@ -107,11 +107,11 @@ public class BPItemCollector : MonoBehaviour
             }
 
             // Try to find a child tagged as "BPOtherItem"
-            Transform otherItemChild = collectedItem.transform.Find("BPOtherItem");
-            if (otherItemChild != null && otherItemChild.CompareTag("BPOtherItem"))
+            Transform otherItemChild = collectedItem.transform.Find("BPFlySwatter");
+            if (otherItemChild != null && otherItemChild.CompareTag("BPFlySwatter"))
             {
                 currentItem = ItemType.FlySwatter;
-                //otherItemImage.enabled = true;
+                flySwatterImage.enabled = true;
                 Debug.Log("Player picked up an Other Item.");
             }
 
@@ -142,6 +142,6 @@ public class BPItemCollector : MonoBehaviour
         itemUsed = true;
         currentItem = ItemType.None;
         throwingItem.enabled = false;
-        //otherItemImage.enabled = false;
+        flySwatterImage.enabled = false;
     }
 }

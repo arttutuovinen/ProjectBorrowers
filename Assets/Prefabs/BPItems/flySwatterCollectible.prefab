@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7181552790195690751}
-  - component: {fileID: 644617238049300554}
+  - component: {fileID: 205586158038385794}
   m_Layer: 11
-  m_Name: EffectArea
+  m_Name: BPFlySwatter
   m_TagString: BPFlySwatter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3590415040196687825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &644617238049300554
+--- !u!65 &205586158038385794
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,12 +47,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017450133, y: 0.00029068824, z: 0.06834898}
-  m_Center: {x: 0.00023477661, y: -0.00010615271, z: 0.026897667}
+  m_Size: {x: 1.7450135, y: 6.834901, z: 0.02906883}
+  m_Center: {x: 0.023477644, y: 2.6897678, z: 0.010615272}
 --- !u!1 &6866088957115400608
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +62,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3590415040196687825}
+  - component: {fileID: 7054038424524949921}
   m_Layer: 11
   m_Name: flySwatterCollectible
   m_TagString: BPCollectible
@@ -77,15 +78,36 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6866088957115400608}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5936828533294388937}
   - {fileID: 7181552790195690751}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!65 &7054038424524949921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866088957115400608}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7450135, y: 6.834901, z: 0.02906883}
+  m_Center: {x: 0.023477644, y: 2.6897678, z: 0.010615272}
 --- !u!1001 &6190588451827953954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,7 +198,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b42ac891063e42e4487f148187d55999,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1098449792706739875}
+      addedObject: {fileID: 836662110700931317}
   m_SourcePrefab: {fileID: 100100000, guid: b42ac891063e42e4487f148187d55999, type: 3}
 --- !u!4 &5936828533294388937 stripped
 Transform:
@@ -190,7 +212,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6190588451827953954}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1098449792706739875
+--- !u!65 &836662110700931317
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,5 +231,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017450133, y: 0.00029068824, z: 0.06834898}
-  m_Center: {x: 0.00023477661, y: -0.00010615271, z: 0.026897667}
+  m_Size: {x: 1.7450135, y: 6.834901, z: 0.02906883}
+  m_Center: {x: 0.023477644, y: 2.6897678, z: 0.010615272}
