@@ -25,7 +25,7 @@ public class BPItemCollector : MonoBehaviour
     public Image flySwatterImage;  // Reference to the UI Image for Other Item
 
     public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
-    //public SPBoppyPin bpOtherItem; // Reference to another script that handles Other Item behavior.
+    public BigPlayerAnimation bpAnimation; // Reference to another script that handles Other Item behavior.
 
     void Start()
     {
@@ -134,7 +134,7 @@ public class BPItemCollector : MonoBehaviour
         }
         else if (currentItem == ItemType.FlySwatter)
         {
-            //bpOtherItem.SpawnItem();
+            bpAnimation.FlySwatter();
             Debug.Log("SpawnOtherItem() method called.");
         }
 
