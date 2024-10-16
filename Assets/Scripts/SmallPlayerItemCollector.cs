@@ -10,7 +10,8 @@ public class SmallPlayerItemCollector : MonoBehaviour
     {
         None,
         BoppyPin,
-        Flashbang
+        Flashbang,
+        Spring
     }
 
     private ItemType currentItem = ItemType.None;  // Tracks the type of the currently held item
@@ -19,11 +20,13 @@ public class SmallPlayerItemCollector : MonoBehaviour
     private bool canPickUp = false;
 
     public TextMeshProUGUI pickUpText;  // Reference to the TextMeshPro UI element
-    public Image boppyPinItemImage;  // Reference to the UI Image for Boppy Pin
-    public Image flashbangItemImage;  // Reference to the UI Image for Flashbang
+    public Image boppyPinItemImage;
+    public Image flashbangItemImage;
+    public Image springItemImage;
 
     public SPBoppyPin spBoppyPin; // Reference to another script that handles Boppy Pin behavior.
     public SPFlashbang spFlashBang; // Reference to another script that handles Flashbang behavior.
+    public SmallPlayerMovement spMovement;
 
     void Start()
     {
@@ -31,6 +34,7 @@ public class SmallPlayerItemCollector : MonoBehaviour
         pickUpText.enabled = false;
         boppyPinItemImage.enabled = false;
         flashbangItemImage.enabled = false;
+        springItemImage.enabled = false;
     }
 
     // Detect when the player enters the collider of a collectible item
@@ -84,6 +88,15 @@ public class SmallPlayerItemCollector : MonoBehaviour
                     Debug.Log("Player picked up a Flashbang.");
                     
                 }
+                // Try to find a child tagged as "Flashbang"
+                Transform springChild = collectedItem.transform.Find("SPSpringCollectible");
+                if (springChild != null && springChild.CompareTag("SPSpringCollectible"))
+                {
+                    currentItem = ItemType.Spring;
+                    springItemImage.enabled = true;
+                    Debug.Log("Player picked up a Flashbang.");
+
+                }
             }
 
             // Destroy the parent collectible item and reset pickup state
@@ -108,12 +121,18 @@ public class SmallPlayerItemCollector : MonoBehaviour
                 spFlashBang.SpawnFlashbang();
                 Debug.Log("SpawnFlashbang() method called.");
             }
+            else if (currentItem == ItemType.Spring)
+            {
+                //spMovement.CollectSpring();
+                Debug.Log("UseSpring() method called.");
+            }
 
             // Mark the item as used and reset state
             itemUsed = true;
             currentItem = ItemType.None;
             boppyPinItemImage.enabled = false;
             flashbangItemImage.enabled = false;
+            springItemImage.enabled = false;
         }
     }
 }

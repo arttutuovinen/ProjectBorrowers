@@ -5,11 +5,11 @@ using TMPro;
 
 public class SmallPlayerMovement : MonoBehaviour
 {
-
     public float moveSpeed = 5f; // Speed of movement
     public float climbSpeed = 3f; // Speed for climbing ladders
     public float gravity = -9.81f; // Gravity applied to the player
     public float jumpHeight = 1.5f; // How high the player can jump
+
     public float turnSmoothTime = 0.1f; // Smoothing for rotation
     private bool canMove = true; // A flag to control movement
 
@@ -40,13 +40,14 @@ public class SmallPlayerMovement : MonoBehaviour
 
     //Ladder text
     public TextMeshProUGUI ladderInteractText;
+    
     public TextMeshProUGUI itemInteractText;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
-
+ 
         // Hide the interact text at the start
         if (ladderInteractText != null)
         {
@@ -121,7 +122,7 @@ public class SmallPlayerMovement : MonoBehaviour
             // PS5 Cross button (Button 0) or Space key for jump
             if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
             {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);   
             }
 
             // Ladder interaction: press E to start climbing if near a ladder
@@ -221,4 +222,5 @@ public class SmallPlayerMovement : MonoBehaviour
         }
     }
     
+
 }
