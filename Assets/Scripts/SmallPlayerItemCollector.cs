@@ -6,39 +6,55 @@ using UnityEngine.UI;
 
 public class SmallPlayerItemCollector : MonoBehaviour
 {
-    public GameObject itemPrefab;    // The prefab of the item to spawn
-    private bool hasItem = false;    // Tracks if the player has collected an item
-    private bool itemSpawned = false; // Tracks if the item has been spawned after collection
-    private GameObject collectedItem; // The reference to the collected item prefab
+    public enum ItemType
+    {
+        None,
+        BoppyPin,
+        Flashbang,
+        Spring
+    }
+
+    private ItemType currentItem = ItemType.None;  // Tracks the type of the currently held item
+    private bool itemUsed = false; // Tracks if the item has been used after collection
+    private GameObject collectedItem; // The reference to the collectible item in range
     private bool canPickUp = false;
+
     public TextMeshProUGUI pickUpText;  // Reference to the TextMeshPro UI element
-    public Image boppyPinItemImage;  // Reference to the TextMeshPro UI element
+    public Image boppyPinItemImage;
+    public Image flashbangItemImage;
+    public Image springItemImage;
+
+    public SPBoppyPin spBoppyPin; // Reference to another script that handles Boppy Pin behavior.
+    public SPFlashbang spFlashBang; // Reference to another script that handles Flashbang behavior.
+    public SmallPlayerMovement spMovement;
 
     void Start()
     {
-        // Disable the pickup text at the start of the game
+        // Disable the pickup text and item images at the start of the game
         pickUpText.enabled = false;
         boppyPinItemImage.enabled = false;
+        flashbangItemImage.enabled = false;
+        springItemImage.enabled = false;
     }
+
     // Detect when the player enters the collider of a collectible item
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the player is near a collectible item
-        if (other.gameObject.CompareTag("Collectible") && !hasItem)
+        // Check if the player is near a collectible item and not already holding an item
+        if (other.gameObject.CompareTag("Collectible") && currentItem == ItemType.None)
         {
             // Store the reference to the collectible item the player can pick up
             collectedItem = other.gameObject;
             canPickUp = true;  // Player can now pick up the item
-
-            // Enable the TextMeshPro text to show the pickup message
-            pickUpText.enabled = true;
+            pickUpText.enabled = true;  // Show the pickup text
         }
     }
+
     // Detect when the player leaves the collider of the collectible item
     private void OnTriggerExit(Collider other)
     {
         // If the player moves away from the collectible item, they can no longer pick it up
-        if (other.gameObject.CompareTag("Collectible"))
+        if (other.gameObject.CompareTag("Collectible") && currentItem == ItemType.None)
         {
             canPickUp = false;
             collectedItem = null; // Reset the collectible reference
@@ -46,36 +62,77 @@ public class SmallPlayerItemCollector : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         // Check if the player is in range to pick up the item and presses "P1Interact"
-        if (canPickUp && !hasItem && Input.GetButtonDown("P1Interact"))
+        if (canPickUp && currentItem == ItemType.None && Input.GetButtonDown("P1Interact"))
         {
-            // Collect the item by destroying it and marking it as collected
-            Destroy(collectedItem);
-            hasItem = true;
-            itemSpawned = false; // Reset the spawned status
-            collectedItem = null; // Clear the reference to the collected item
-            canPickUp = false;  // No longer in range since item is collected
+            // Look for a child object with specific tags to determine the type of the item
+            if (collectedItem != null)
+            {
+                // Try to find a child tagged as "BoppyPin"
+                Transform boppyPinChild = collectedItem.transform.Find("BoppyPin");
+                if (boppyPinChild != null && boppyPinChild.CompareTag("BoppyPin"))
+                {
+                    currentItem = ItemType.BoppyPin;
+                    boppyPinItemImage.enabled = true;
+                    Debug.Log("Player picked up a Boppy Pin.");
+                }
 
-            // Disable the TextMeshPro text after picking up the item
+                // Try to find a child tagged as "Flashbang"
+                Transform flashbangChild = collectedItem.transform.Find("Flashbang");
+                if (flashbangChild != null && flashbangChild.CompareTag("Flashbang"))
+                {
+                    currentItem = ItemType.Flashbang;
+                    flashbangItemImage.enabled = true;
+                    Debug.Log("Player picked up a Flashbang.");
+                    
+                }
+                // Try to find a child tagged as "Flashbang"
+                Transform springChild = collectedItem.transform.Find("SPSpringCollectible");
+                if (springChild != null && springChild.CompareTag("SPSpringCollectible"))
+                {
+                    currentItem = ItemType.Spring;
+                    springItemImage.enabled = true;
+                    Debug.Log("Player picked up a Flashbang.");
+
+                }
+            }
+
+            // Destroy the parent collectible item and reset pickup state
+            Destroy(collectedItem);
+            itemUsed = false;
+            collectedItem = null;
+            canPickUp = false;
             pickUpText.enabled = false;
-            boppyPinItemImage.enabled = true;
         }
 
-        // Check if the player presses "E", has collected an item, and hasn't spawned it yet
-        if (hasItem && !itemSpawned && Input.GetButtonDown("P1UseItem"))
+        // Check if the player presses "P1UseItem", has collected an item, and hasn't used it yet
+        if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("P1UseItem"))
         {
-            // Spawn the collected item at the player's position
-            Instantiate(itemPrefab, transform.position + transform.forward, Quaternion.identity);
+            // Call the appropriate method based on the currently held item type
+            if (currentItem == ItemType.BoppyPin)
+            {
+                spBoppyPin.SpawnBoppyPin();
+                Debug.Log("SpawnBoppyPin() method called.");
+            }
+            else if (currentItem == ItemType.Flashbang)
+            {
+                spFlashBang.SpawnFlashbang();
+                Debug.Log("SpawnFlashbang() method called.");
+            }
+            else if (currentItem == ItemType.Spring)
+            {
+                //spMovement.CollectSpring();
+                Debug.Log("UseSpring() method called.");
+            }
 
-            // Mark the item as spawned so it can't be spawned again
-            itemSpawned = true;
-
-            // The player no longer has the item, it has been used/spawned
-            hasItem = false;
+            // Mark the item as used and reset state
+            itemUsed = true;
+            currentItem = ItemType.None;
             boppyPinItemImage.enabled = false;
+            flashbangItemImage.enabled = false;
+            springItemImage.enabled = false;
         }
     }
 }

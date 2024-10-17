@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1328566945213555475}
   m_Layer: 9
   m_Name: cylinder
-  m_TagString: Collectible
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7290997393778079300}
-  - component: {fileID: 2543690935131210271}
+  - component: {fileID: 2638041157455692031}
   m_Layer: 9
   m_Name: BoppyPinCollectible
   m_TagString: Collectible
@@ -115,10 +115,11 @@ Transform:
   m_Children:
   - {fileID: 6044450028959116712}
   - {fileID: 4127462115570851677}
+  - {fileID: 7148040222851625945}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2543690935131210271
-BoxCollider:
+--- !u!135 &2638041157455692031
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -136,8 +137,70 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 0.9, z: 1.5}
-  m_Center: {x: 0, y: 0.45, z: 0}
+  m_Radius: 0.85
+  m_Center: {x: 0, y: 0.38, z: 0}
+--- !u!1 &7846097455092382054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7148040222851625945}
+  - component: {fileID: 639370210659458085}
+  - component: {fileID: 3264366420463974223}
+  m_Layer: 0
+  m_Name: BoppyPin
+  m_TagString: BoppyPin
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7148040222851625945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846097455092382054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7290997393778079300}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &639370210659458085
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846097455092382054}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &3264366420463974223
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846097455092382054}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.85
+  m_Center: {x: 0, y: 0.38, z: 0}
 --- !u!1 &8708904141227021599
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +214,7 @@ GameObject:
   - component: {fileID: 4415399271631505340}
   m_Layer: 9
   m_Name: cylinder (1)
-  m_TagString: Collectible
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

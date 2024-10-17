@@ -195,6 +195,10 @@ GameObject:
   - component: {fileID: 8872808774314510905}
   - component: {fileID: 3196830925416468045}
   - component: {fileID: 414432666989003418}
+  - component: {fileID: 3460755058453020208}
+  - component: {fileID: 1453455095307449174}
+  - component: {fileID: 7213267609248557840}
+  - component: {fileID: 457389529722468420}
   - component: {fileID: 2809535191905125762}
   - component: {fileID: 7365710028398305443}
   m_Layer: 0
@@ -299,6 +303,69 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3460755058453020208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63932f293bc9b3745ab67b064c8a4ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 20
+  upwardForce: 5
+  knockbackDuration: 0.2
+--- !u!114 &1453455095307449174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6f535172d90144fab432520545e3e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashbang: {fileID: 3565722106582068423, guid: 06219c75297d6ff46ab667851b905162,
+    type: 3}
+  throwOrigin: {fileID: 0}
+  throwForce: 10
+  playerCamera: {fileID: 0}
+--- !u!114 &7213267609248557840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b222e7a2d3360b4cbe0f0155b89722f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 8128631848681351141, guid: 59c115d52e3a04a4f8d26bdb379b50bc,
+    type: 3}
+--- !u!114 &457389529722468420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f457d03eff7a16841975b2bc762a0fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpText: {fileID: 0}
+  boppyPinItemImage: {fileID: 0}
+  flashbangItemImage: {fileID: 0}
+  spBoppyPin: {fileID: 7213267609248557840}
+  spFlashBang: {fileID: 1453455095307449174}
 --- !u!114 &2809535191905125762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  climbSpeed: 3
+  climbSpeed: 8
   gravity: -30
   jumpHeight: 3
   turnSmoothTime: 0.1
@@ -322,9 +389,10 @@ MonoBehaviour:
   controllerSensitivity: 2
   distanceFromPlayer: 2.5
   minVerticalAngle: -30
-  maxVerticalAngle: 60
+  maxVerticalAngle: 70
   isTreasureCollected: 0
   ladderInteractText: {fileID: 0}
+  itemInteractText: {fileID: 0}
 --- !u!135 &7365710028398305443
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -5,12 +5,13 @@ using TMPro;
 
 public class SmallPlayerMovement : MonoBehaviour
 {
-
     public float moveSpeed = 5f; // Speed of movement
     public float climbSpeed = 3f; // Speed for climbing ladders
     public float gravity = -9.81f; // Gravity applied to the player
     public float jumpHeight = 1.5f; // How high the player can jump
+
     public float turnSmoothTime = 0.1f; // Smoothing for rotation
+    private bool canMove = true; // A flag to control movement
 
     public Transform cameraTransform; // Reference to the main camera for directional movement
     public Transform cameraFollowTarget; // Target for the camera to follow (usually the player)
@@ -39,13 +40,14 @@ public class SmallPlayerMovement : MonoBehaviour
 
     //Ladder text
     public TextMeshProUGUI ladderInteractText;
+    
     public TextMeshProUGUI itemInteractText;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
-
+ 
         // Hide the interact text at the start
         if (ladderInteractText != null)
         {
@@ -67,54 +69,69 @@ public class SmallPlayerMovement : MonoBehaviour
         }
         ControlCamera();
     }
-
-    private void Move()
+    // Method that allows enabling movement from other scripts
+    public void EnableMovement()
     {
-        // Check if the player is on the ground
-        isGrounded = controller.isGrounded;
+        canMove = true;
+        Debug.Log("Movement enabled.");
+    }
 
-        // Reset velocity if on the ground
-        if (isGrounded && velocity.y < 0)
+    // Method that allows disabling movement from other scripts
+    public void DisableMovement()
+    {
+        canMove = false;
+        Debug.Log("Movement disabled.");
+    }
+
+    public void Move()
+    {
+        if (canMove)
         {
-            velocity.y = -2f;
+            // Check if the player is on the ground
+            isGrounded = controller.isGrounded;
+
+            // Reset velocity if on the ground
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f;
+            }
+
+            // Get input for movement (WASD/arrow keys or PS5 left stick)
+            float horizontal = Input.GetAxisRaw("P1Horizontal"); // WASD or PS5 Left Stick X
+            float vertical = Input.GetAxisRaw("P1Vertical"); // WASD or PS5 Left Stick Y
+                                                             //Debug.Log(horizontal +" "+vertical);
+
+            // Calculate the movement direction relative to the camera's orientation
+            Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+
+            if (direction.magnitude >= 0.1f)
+            {
+                // Calculate the target angle for rotation based on camera orientation
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+                // Smoothly rotate towards the target angle
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                // Move in the direction the player is facing
+                Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
+            }
+
+            // Jumping mechanic
+            // PS5 Cross button (Button 0) or Space key for jump
+            if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);   
+            }
+
+            // Ladder interaction: press E to start climbing if near a ladder
+            if (nearLadder && Input.GetKeyDown(KeyCode.E) || nearLadder && Input.GetButtonDown("P1Interact"))
+            {
+                isClimbing = true;
+                velocity.y = 0f; // Reset vertical velocity
+            }
         }
-
-        // Get input for movement (WASD/arrow keys or PS5 left stick)
-        float horizontal = Input.GetAxisRaw("P1Horizontal"); // WASD or PS5 Left Stick X
-        float vertical = Input.GetAxisRaw("P1Vertical"); // WASD or PS5 Left Stick Y
-        //Debug.Log(horizontal +" "+vertical);
-
-        // Calculate the movement direction relative to the camera's orientation
-        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
-
-        if (direction.magnitude >= 0.1f)
-        {
-            // Calculate the target angle for rotation based on camera orientation
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-            // Smoothly rotate towards the target angle
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            // Move in the direction the player is facing
-            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
-        }
-
-        // Jumping mechanic
-        // PS5 Cross button (Button 0) or Space key for jump
-        if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
-
-        // Ladder interaction: press E to start climbing if near a ladder
-        if (nearLadder && Input.GetKeyDown(KeyCode.E) || nearLadder && Input.GetButtonDown("P1Interact"))
-        {
-            isClimbing = true;
-            velocity.y = 0f; // Reset vertical velocity
-        }
-
     }
 
     private void ApplyGravity()
@@ -205,4 +222,5 @@ public class SmallPlayerMovement : MonoBehaviour
         }
     }
     
+
 }
