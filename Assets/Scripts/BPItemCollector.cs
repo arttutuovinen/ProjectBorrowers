@@ -10,7 +10,8 @@ public class BPItemCollector : MonoBehaviour
     {
         None,
         ThrowingItem,
-        FlySwatter
+        FlySwatter,
+        MouseTrap
     }
     public float rayDistance = 10f; // The distance of the raycast
     public LayerMask collectibleLayer; // Layer mask to specify which layers should be considered for the raycast
@@ -23,6 +24,7 @@ public class BPItemCollector : MonoBehaviour
     public TextMeshProUGUI bpPickUpText;  // Reference to the TextMeshPro UI element
     public Image throwingItem;  // Reference to the UI Image for Boppy Pin
     public Image flySwatterImage;  // Reference to the UI Image for Other Item
+    public Image mouseTrapImage;
 
     public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
     public BigPlayerAnimation bpAnimation; // Reference to another script that handles Other Item behavior.
@@ -33,6 +35,7 @@ public class BPItemCollector : MonoBehaviour
         bpPickUpText.enabled = false;
         throwingItem.enabled = false;
         flySwatterImage.enabled = false;
+        mouseTrapImage.enabled = false;
     }
 
     void Update()
@@ -107,14 +110,21 @@ public class BPItemCollector : MonoBehaviour
             }
 
             // Try to find a child tagged as "BPOtherItem"
-            Transform otherItemChild = collectedItem.transform.Find("BPFlySwatter");
-            if (otherItemChild != null && otherItemChild.CompareTag("BPFlySwatter"))
+            Transform flyswatterChild = collectedItem.transform.Find("BPFlySwatter");
+            if (flyswatterChild != null && flyswatterChild.CompareTag("BPFlySwatter"))
             {
                 currentItem = ItemType.FlySwatter;
                 flySwatterImage.enabled = true;
                 Debug.Log("Player picked up an Other Item.");
             }
-
+            // Try to find a child tagged as "BPOtherItem"
+            Transform mouseTrapChild = collectedItem.transform.Find("BPMouseTrap");
+            if (mouseTrapChild != null && mouseTrapChild.CompareTag("BPMouseTrap"))
+            {
+                currentItem = ItemType.MouseTrap;
+                mouseTrapImage.enabled = true;
+                Debug.Log("Player picked up an Other Item.");
+            }
             // Destroy the parent collectible item and reset pickup state
             Destroy(collectedItem);
             itemUsed = false;
@@ -137,11 +147,17 @@ public class BPItemCollector : MonoBehaviour
             bpAnimation.FlySwatter();
             Debug.Log("SpawnOtherItem() method called.");
         }
+        else if (currentItem == ItemType.MouseTrap)
+        {
+            //bpAnimation.FlySwatter();
+            Debug.Log("MouseTrap method called.");
+        }
 
         // Mark the item as used and reset state
         itemUsed = true;
         currentItem = ItemType.None;
         throwingItem.enabled = false;
         flySwatterImage.enabled = false;
+        mouseTrapImage.enabled = false;
     }
 }
