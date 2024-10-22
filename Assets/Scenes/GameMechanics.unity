@@ -10819,7 +10819,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spSpring
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1794228466}
     - target: {fileID: 457389529722468420, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
       propertyPath: pickUpText
@@ -11032,7 +11032,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2000312098}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3150109236876745808, guid: 5ae7330550eb3984590712a49a411561,
+        type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1794228466}
   m_SourcePrefab: {fileID: 100100000, guid: 5ae7330550eb3984590712a49a411561, type: 3}
 --- !u!114 &760531503 stripped
 MonoBehaviour:
@@ -24687,6 +24691,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32370c0b7a8fcb94f93a1ac34a62aeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1794228466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794228450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ac2b7313bfca34186fafaa8736104c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 250
+  knockbackDuration: 0.2
 --- !u!1 &1794934979
 GameObject:
   m_ObjectHideFlags: 0

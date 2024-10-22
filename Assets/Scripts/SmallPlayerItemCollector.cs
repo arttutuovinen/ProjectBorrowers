@@ -26,7 +26,7 @@ public class SmallPlayerItemCollector : MonoBehaviour
 
     public SPBoppyPin spBoppyPin; // Reference to another script that handles Boppy Pin behavior.
     public SPFlashbang spFlashBang; // Reference to another script that handles Flashbang behavior.
-    public SmallPlayerMovement spMovement;
+    public SPSpring spSpring;
 
     void Start()
     {
@@ -123,7 +123,7 @@ public class SmallPlayerItemCollector : MonoBehaviour
             }
             else if (currentItem == ItemType.Spring)
             {
-                //spMovement.CollectSpring();
+                spSpring.UseSpring();
                 Debug.Log("UseSpring() method called.");
             }
 
