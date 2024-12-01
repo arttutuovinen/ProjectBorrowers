@@ -28,6 +28,7 @@ public class BPItemCollector : MonoBehaviour
 
     public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
     public BigPlayerAnimation bpAnimation; // Reference to another script that handles Other Item behavior.
+    public BPMouseTrap bpMouseTrap;
 
     void Start()
     {
@@ -142,14 +143,14 @@ public class BPItemCollector : MonoBehaviour
             bpThrowItem.SpawnThrowItem();
             Debug.Log("THROWING.");
         }
-        else if (currentItem == ItemType.FlySwatter)
+        if (currentItem == ItemType.FlySwatter)
         {
             bpAnimation.FlySwatter();
             Debug.Log("SpawnOtherItem() method called.");
         }
-        else if (currentItem == ItemType.MouseTrap)
+        if (currentItem == ItemType.MouseTrap)
         {
-            //bpAnimation.FlySwatter();
+            bpMouseTrap.SpawnMouseTrap();
             Debug.Log("MouseTrap method called.");
         }
 
