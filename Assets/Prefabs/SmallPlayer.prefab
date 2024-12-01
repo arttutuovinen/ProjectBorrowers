@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   treasure: {fileID: 0}
+  startFinish: {fileID: 0}
 --- !u!1 &3037933347219471374
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +174,8 @@ GameObject:
   - component: {fileID: 8872808774314510905}
   - component: {fileID: 3196830925416468045}
   - component: {fileID: 414432666989003418}
+  - component: {fileID: 3470725793712673339}
+  - component: {fileID: 2265930764285613028}
   - component: {fileID: 3460755058453020208}
   - component: {fileID: 1453455095307449174}
   - component: {fileID: 7213267609248557840}
@@ -281,6 +284,35 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3470725793712673339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5014a7a5a3037994895d33fd66a3d368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunDuration: 5
+  smallPlayerMovement: {fileID: 2809535191905125762}
+  spIsStunnedText: {fileID: 0}
+--- !u!114 &2265930764285613028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ac2b7313bfca34186fafaa8736104c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 250
+  knockbackDuration: 0.2
 --- !u!114 &3460755058453020208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,9 +325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63932f293bc9b3745ab67b064c8a4ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 20
+  knockbackForce: 10
   upwardForce: 5
   knockbackDuration: 0.2
+  spIsStunnedText: {fileID: 0}
 --- !u!114 &1453455095307449174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +378,7 @@ MonoBehaviour:
   springItemImage: {fileID: 0}
   spBoppyPin: {fileID: 7213267609248557840}
   spFlashBang: {fileID: 1453455095307449174}
-  spMovement: {fileID: 0}
+  spSpring: {fileID: 2265930764285613028}
 --- !u!114 &2809535191905125762
 MonoBehaviour:
   m_ObjectHideFlags: 0
