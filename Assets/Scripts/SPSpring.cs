@@ -7,6 +7,7 @@ public class SPSpring : MonoBehaviour
     public float knockbackForce = 10f;  // Strength of the upward knockback
     public float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
+    public AnimationCurve jumpCurve;
 
     public void UseSpring()
     {
@@ -30,7 +31,7 @@ public class SPSpring : MonoBehaviour
         while (timer < knockbackDuration)
         {
             // Apply upward knockback movement per frame
-            transform.position += direction * (Time.deltaTime);
+            transform.position += direction * jumpCurve.Evaluate(timer/knockbackDuration) * (Time.deltaTime);
 
             // Increment the timer
             timer += Time.deltaTime;

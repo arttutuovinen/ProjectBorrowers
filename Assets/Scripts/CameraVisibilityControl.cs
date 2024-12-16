@@ -16,16 +16,16 @@ public class CameraVisibilityControl : MonoBehaviour
         // Get the SmallPlayer layer
         smallPlayerLayer = LayerMask.NameToLayer("SmallPlayer");
 
-        // Get the Treasure layer or any custom layer where objects will be hidden from BigPlayer
+        // Get the hidden layer or any custom layer where objects will be hidden from BigPlayer
         hiddenLayer = LayerMask.NameToLayer("Hidden");
 
-        // If the Treasure layer doesn't exist, log an error
+        // If the hidden layer doesn't exist, log an error
         if (hiddenLayer == -1)
         {
-            Debug.LogError("TreasureLayer does not exist! Please create a 'Treasure' layer.");
+            Debug.LogError("hiddenLayer does not exist! Please create a 'hidden' layer.");
         }
 
-        // Assign all objects in the array to the TreasureLayer
+        // Assign all objects in the array to the hiddenLayer
         foreach (GameObject obj in objectsToHide)
         {
             obj.layer = hiddenLayer;
@@ -37,10 +37,10 @@ public class CameraVisibilityControl : MonoBehaviour
 
     void SetupCameras()
     {
-        // Ensure SmallPlayer's camera can see both SmallPlayer and Treasure layers
+        // Ensure SmallPlayer's camera can see both SmallPlayer and hidden layers
         smallPlayerCamera.cullingMask |= (1 << smallPlayerLayer) | (1 << hiddenLayer);
 
-        // Ensure BigPlayer's camera keeps its current culling mask, but hides the Treasure layer
+        // Ensure BigPlayer's camera keeps its current culling mask, but hides the hidden layer
         bigPlayerCamera.cullingMask &= ~(1 << hiddenLayer);
     }
 }
