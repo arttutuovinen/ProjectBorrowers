@@ -8,7 +8,12 @@ public class SPSpring : MonoBehaviour
     public float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
     public AnimationCurve jumpCurve;
-
+    private CharacterController controller;
+   
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+    }
     public void UseSpring()
     {
         Debug.Log("SP used SPRING");
@@ -31,7 +36,7 @@ public class SPSpring : MonoBehaviour
         while (timer < knockbackDuration)
         {
             // Apply upward knockback movement per frame
-            transform.position += direction * jumpCurve.Evaluate(timer/knockbackDuration) * (Time.deltaTime);
+            controller.Move(direction * jumpCurve.Evaluate(timer/knockbackDuration) * Time.deltaTime);
 
             // Increment the timer
             timer += Time.deltaTime;
