@@ -31,6 +31,7 @@ public class BPItemCollector : MonoBehaviour
     public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
     public BigPlayerAnimation bpAnimation; // Reference to another script that handles Other Item behavior.
     public BPMouseTrap bpMouseTrap;
+    public BPCompass bpCompass;
 
     void Start()
     {
@@ -151,24 +152,25 @@ public class BPItemCollector : MonoBehaviour
         if (currentItem == ItemType.ThrowingItem)
         {
             bpThrowItem.SpawnThrowItem();
-            Debug.Log("THROWING.");
         }
         if (currentItem == ItemType.FlySwatter)
         {
             bpAnimation.FlySwatter();
-            Debug.Log("SpawnOtherItem() method called.");
         }
         if (currentItem == ItemType.MouseTrap)
         {
             bpMouseTrap.SpawnMouseTrap();
-            Debug.Log("MouseTrap method called.");
         }
-
+        if (currentItem == ItemType.Compass)
+        {
+            bpCompass.UseCompass();       
+        }
         // Mark the item as used and reset state
         itemUsed = true;
         currentItem = ItemType.None;
         throwingItem.enabled = false;
         flySwatterImage.enabled = false;
         mouseTrapImage.enabled = false;
+        compassImage.enabled = false;
     }
 }
