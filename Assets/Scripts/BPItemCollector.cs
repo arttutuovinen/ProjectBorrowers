@@ -11,7 +11,8 @@ public class BPItemCollector : MonoBehaviour
         None,
         ThrowingItem,
         FlySwatter,
-        MouseTrap
+        MouseTrap,
+        Compass
     }
     public float rayDistance = 10f; // The distance of the raycast
     public LayerMask collectibleLayer; // Layer mask to specify which layers should be considered for the raycast
@@ -25,6 +26,7 @@ public class BPItemCollector : MonoBehaviour
     public Image throwingItem;  // Reference to the UI Image for Boppy Pin
     public Image flySwatterImage;  // Reference to the UI Image for Other Item
     public Image mouseTrapImage;
+    public Image compassImage;
 
     public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
     public BigPlayerAnimation bpAnimation; // Reference to another script that handles Other Item behavior.
@@ -37,6 +39,7 @@ public class BPItemCollector : MonoBehaviour
         throwingItem.enabled = false;
         flySwatterImage.enabled = false;
         mouseTrapImage.enabled = false;
+        compassImage.enabled = false;
     }
 
     void Update()
@@ -110,7 +113,7 @@ public class BPItemCollector : MonoBehaviour
                 Debug.Log("Player picked up a ThrowItem.");
             }
 
-            // Try to find a child tagged as "BPOtherItem"
+            // Try to find a child tagged as "BPFlySwatter"
             Transform flyswatterChild = collectedItem.transform.Find("BPFlySwatter");
             if (flyswatterChild != null && flyswatterChild.CompareTag("BPFlySwatter"))
             {
@@ -118,13 +121,20 @@ public class BPItemCollector : MonoBehaviour
                 flySwatterImage.enabled = true;
                 Debug.Log("Player picked up an Other Item.");
             }
-            // Try to find a child tagged as "BPOtherItem"
+            // Try to find a child tagged as "BPMouseTrap"
             Transform mouseTrapChild = collectedItem.transform.Find("BPMouseTrap");
             if (mouseTrapChild != null && mouseTrapChild.CompareTag("BPMouseTrap"))
             {
                 currentItem = ItemType.MouseTrap;
                 mouseTrapImage.enabled = true;
                 Debug.Log("Player picked up an Other Item.");
+            }
+            Transform compassChild = collectedItem.transform.Find("BPCompass");
+            if (compassChild != null && compassChild.CompareTag("BPCompass"))
+            {
+                currentItem = ItemType.Compass;
+                compassImage.enabled = true;
+                Debug.Log("Player picked up an Compass.");
             }
             // Destroy the parent collectible item and reset pickup state
             Destroy(collectedItem);

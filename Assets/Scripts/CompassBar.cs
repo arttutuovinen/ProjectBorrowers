@@ -12,7 +12,7 @@ public class CompassBar : MonoBehaviour
     void Update()
     {
         // Check if the treasure is collected
-        if (!hasCollectedTreasure)
+        if (!hasCollectedTreasure && treasure != null)
         {
             // Get the direction to the treasure
             Vector3 directionToTreasure = treasure.transform.position - transform.position;
