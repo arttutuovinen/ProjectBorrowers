@@ -19,14 +19,6 @@ public class SmallPlayerSpawner : MonoBehaviour
     {
         // Find all spawn points in the scene tagged as "SpawnPoint"
         spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
-
-        // Check if there are any spawn points
-        if (spawnPoints.Length == 0)
-        {
-            Debug.LogError("No spawn points found in the scene!");
-            return;
-        }
-
         // Teleport the player to a random spawn point
         TeleportPlayerToRandomPoint();
     }
