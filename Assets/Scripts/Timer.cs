@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI timerText2;
     public TextMeshProUGUI bpWins;
     public float remainingTime;
     public float resetDelay = 5f;
@@ -33,6 +34,7 @@ public class Timer : MonoBehaviour
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText2.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
     private IEnumerator RestartSceneAfterDelay()
     {
