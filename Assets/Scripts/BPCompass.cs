@@ -22,7 +22,7 @@ public class BPCompass : MonoBehaviour
     }
     private IEnumerator UpdateCompass()
 {
-    float duration = 6f; // Example duration in seconds
+    float duration = 4f; // Example duration in seconds
     float elapsed = 0f;
 
     while (elapsed < duration)
