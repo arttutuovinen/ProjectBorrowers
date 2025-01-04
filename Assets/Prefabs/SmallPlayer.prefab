@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 8872808774314510905}
   - component: {fileID: 3196830925416468045}
   - component: {fileID: 414432666989003418}
+  - component: {fileID: 7599731362518973075}
   - component: {fileID: 3470725793712673339}
   - component: {fileID: 2265930764285613028}
   - component: {fileID: 3460755058453020208}
@@ -285,6 +286,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7599731362518973075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357cb65c0ef495643839a6e038b27ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meterFill: {fileID: 0}
+  fillSpeed: 0.1
+  drainSpeed: 0.05
 --- !u!114 &3470725793712673339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,11 +328,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ac2b7313bfca34186fafaa8736104c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 250
-  knockbackDuration: 0.2
+  knockbackForce: 35
+  knockbackDuration: 1
   jumpCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.99716187
+      inSlope: -0.10655961
+      outSlope: -0.10655961
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.42483237
+    - serializedVersion: 3
+      time: 0.47862017
+      value: 0.81431055
+      inSlope: -0.94570506
+      outSlope: -0.94570506
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0199974
+      value: -0.0028288616
+      inSlope: -1.5093716
+      outSlope: -1.5093716
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -350,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashbang: {fileID: 3565722106582068423, guid: 06219c75297d6ff46ab667851b905162,
     type: 3}
-  throwOrigin: {fileID: 0}
+  throwOrigin: {fileID: 2200344053891395073}
   throwForce: 10
   playerCamera: {fileID: 0}
 --- !u!114 &7213267609248557840
