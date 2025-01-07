@@ -20184,9 +20184,19 @@ PrefabInstance:
       objectReference: {fileID: 984416886}
     - target: {fileID: 7599731362518973075, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
+      propertyPath: smallPlayer
+      value: 
+      objectReference: {fileID: 1794228467}
+    - target: {fileID: 7599731362518973075, guid: 5ae7330550eb3984590712a49a411561,
+        type: 3}
       propertyPath: meterBackgroundImage
       value: 
       objectReference: {fileID: 1393156951}
+    - target: {fileID: 7599731362518973075, guid: 5ae7330550eb3984590712a49a411561,
+        type: 3}
+      propertyPath: smallPlayerTeleportPosition
+      value: 
+      objectReference: {fileID: 1073218651}
     - target: {fileID: 7774656154414418561, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
       propertyPath: m_Layer
@@ -39162,6 +39172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32370c0b7a8fcb94f93a1ac34a62aeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1794228467 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8688724790149147744, guid: 5ae7330550eb3984590712a49a411561,
+    type: 3}
+  m_PrefabInstance: {fileID: 760531502}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1795097339
 GameObject:
   m_ObjectHideFlags: 0

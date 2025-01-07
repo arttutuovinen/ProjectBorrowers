@@ -6,6 +6,8 @@ using TMPro;
 
 public class SPEscapeBar : MonoBehaviour
 {
+    public Transform smallPlayer;
+    public Transform smallPlayerTeleportPosition;
     public Image meterImage;       // The UI Image representing the meter.
     public Image meterBackgroundImage;
     public TextMeshProUGUI escapeText;
@@ -14,7 +16,7 @@ public class SPEscapeBar : MonoBehaviour
     public float maxFill = 1f;     // Maximum fill amount for the meter (normalized between 0 and 1).
 
     private float currentFill = 0f; // Current fill amount of the meter.
-    private bool isTouchingTeleportPosition = false;
+    private bool isAtTargetPosition = false;
 
     void Start()
     {
@@ -24,7 +26,8 @@ public class SPEscapeBar : MonoBehaviour
     }
     void Update()
     {
-        if (isTouchingTeleportPosition)
+        isAtTargetPosition = Vector3.Distance(smallPlayer.position, smallPlayerTeleportPosition.position) < 0.9f;
+        if (isAtTargetPosition)
         {
             meterImage.enabled = true;
             meterBackgroundImage.enabled = true;
@@ -43,36 +46,14 @@ public class SPEscapeBar : MonoBehaviour
                 currentFill -= decayRate * Time.deltaTime;
                 currentFill = Mathf.Clamp(currentFill, 0f, maxFill);
             }
-
-            // Update the UI Image fill amount.
-            if (meterImage != null)
-            {
-                meterImage.fillAmount = currentFill;
-            }
+            
+            meterImage.fillAmount = currentFill;    
         }
         else
         {
             meterImage.enabled = false;
             meterBackgroundImage.enabled = false;
             escapeText.enabled = false;
-        }
-    }
-    private void OnCollisionEnter(Collision other)
-    {
-        // Check if the player has touched the required object.
-        if (other.gameObject.CompareTag("SPTeleportLocation"))
-        {
-            Debug.Log("koskee collideria");
-            isTouchingTeleportPosition = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        // Reset when the player leaves the required object.
-        if (other.gameObject.CompareTag("SPTeleportLocation"))
-        {
-            isTouchingTeleportPosition = false;
         }
     }
 }
