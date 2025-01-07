@@ -24,6 +24,8 @@ public class BPCatchingSP : MonoBehaviour
 
     public TextMeshProUGUI prisonInteractText;
 
+    public SPEscapeBar spEscapeBar;
+
     private void Start()
     {
         prisonInteractText.gameObject.SetActive(false); // Disable the text object initially
@@ -76,6 +78,24 @@ public class BPCatchingSP : MonoBehaviour
             TeleportSmallPlayerToJail();
             bigPlayerAnimation.ReleaseAnimation();
         }
+
+        // Check if meter value reaches 1 in spEscapeBar script.
+        //if (spEscapeBar.GetMeterValue() == 1f && isSmallPlayerCaught)
+        {
+            // Re-enable Small Player's CharacterController
+            CharacterController characterController = smallPlayer.GetComponent<CharacterController>();
+            characterController.enabled = true;
+
+            // Ensure Small Player's position is no longer equal to caughtLocation
+            if (smallPlayer.transform.position == caughtLocation.position)
+            {
+                smallPlayer.transform.position += Vector3.up * 0.1f; // Slightly adjust position
+            }
+
+            isSmallPlayerAttachedToLocation = false;
+            isSmallPlayerCaught = false;
+            Debug.Log("Meter reached 1. Small Player's CharacterController re-enabled and detached from caught location.");
+        }
         
     }
 
@@ -119,9 +139,6 @@ public class BPCatchingSP : MonoBehaviour
     // Method to teleport Player 2 to the assigned caught location
     private void TeleportSmallPlayer()
     {
-        // Check if smallPlayer and caughtLocation are assigned
-        if (smallPlayer != null && caughtLocation != null)
-        {
             // Get the CharacterController from Small Player
             CharacterController characterController = smallPlayer.GetComponent<CharacterController>();
 
@@ -133,15 +150,12 @@ public class BPCatchingSP : MonoBehaviour
                 // Set Player 2's position to the caught location's position
                 characterController.transform.position = caughtLocation.position;
 
-                // Re-enable the CharacterController after teleporting
-                //characterController.enabled = true;
-
                 // Set the flag to keep Player 2 at the caught location
                 isSmallPlayerAttachedToLocation = true;
 
                 Debug.Log("Small Player has been teleported to: " + caughtLocation.position);
             }
-        }
+        
     }
 
     // Method to teleport Player 2 to the "JailLocation"
