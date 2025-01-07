@@ -20165,7 +20165,7 @@ PrefabInstance:
     - target: {fileID: 7599731362518973075, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
       propertyPath: decayRate
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7599731362518973075, guid: 5ae7330550eb3984590712a49a411561,
         type: 3}
@@ -34263,6 +34263,7 @@ MonoBehaviour:
   jailLocation: {fileID: 168719015}
   bigPlayerAnimation: {fileID: 537179784}
   prisonInteractText: {fileID: 1042308098}
+  spEscapeBar: {fileID: 1794228475}
 --- !u!1 &1506236625 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4103221672906745515, guid: aa53211c93195fd4091bdaa6d8b8f7c4,
@@ -39178,6 +39179,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 760531502}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1794228475 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7599731362518973075, guid: 5ae7330550eb3984590712a49a411561,
+    type: 3}
+  m_PrefabInstance: {fileID: 760531502}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794228450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357cb65c0ef495643839a6e038b27ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1795097339
 GameObject:
   m_ObjectHideFlags: 0

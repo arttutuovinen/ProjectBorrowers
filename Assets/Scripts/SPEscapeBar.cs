@@ -15,7 +15,7 @@ public class SPEscapeBar : MonoBehaviour
     public float decayRate = 0.02f; // The rate at which the meter empties over time.
     public float maxFill = 1f;     // Maximum fill amount for the meter (normalized between 0 and 1).
 
-    private float currentFill = 0f; // Current fill amount of the meter.
+    public float currentFill = 0f; // Current fill amount of the meter.
     private bool isAtTargetPosition = false;
 
     void Start()

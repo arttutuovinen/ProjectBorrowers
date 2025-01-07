@@ -25,11 +25,12 @@ public class BPCatchingSP : MonoBehaviour
     public TextMeshProUGUI prisonInteractText;
 
     public SPEscapeBar spEscapeBar;
+    private Collider objectCollider;
 
     private void Start()
     {
         prisonInteractText.gameObject.SetActive(false); // Disable the text object initially
-        
+        objectCollider = GetComponent<Collider>();
     }
 
     private void Update()
@@ -80,8 +81,10 @@ public class BPCatchingSP : MonoBehaviour
         }
 
         // Check if meter value reaches 1 in spEscapeBar script.
-        //if (spEscapeBar.GetMeterValue() == 1f && isSmallPlayerCaught)
+        if (spEscapeBar.currentFill >= 0.98 && isSmallPlayerCaught)
         {
+            bigPlayerAnimation.ReleaseAnimation();
+            spEscapeBar.currentFill = 0f;
             // Re-enable Small Player's CharacterController
             CharacterController characterController = smallPlayer.GetComponent<CharacterController>();
             characterController.enabled = true;
@@ -89,12 +92,12 @@ public class BPCatchingSP : MonoBehaviour
             // Ensure Small Player's position is no longer equal to caughtLocation
             if (smallPlayer.transform.position == caughtLocation.position)
             {
-                smallPlayer.transform.position += Vector3.up * 0.1f; // Slightly adjust position
+                smallPlayer.transform.position += Vector3.down * 0.2f; // Slightly adjust position
             }
 
             isSmallPlayerAttachedToLocation = false;
             isSmallPlayerCaught = false;
-            Debug.Log("Meter reached 1. Small Player's CharacterController re-enabled and detached from caught location.");
+             StartCoroutine(DisableColliderForOneSecond());
         }
         
     }
@@ -193,6 +196,16 @@ public class BPCatchingSP : MonoBehaviour
         {
             Debug.LogWarning("Small Player or JailLocation is not assigned.");
         }
+    }
+    private IEnumerator DisableColliderForOneSecond()
+    {
+        
+        Debug.Log("Disabling collider for 1 second.");
+        objectCollider.enabled = false; // Disable the collider
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second
+
+        objectCollider.enabled = true; // Re-enable the collider
     }
     
 }
