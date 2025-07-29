@@ -9030,7 +9030,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -5190630082793040378, guid: 7010fd79c0b688e47b6963fa09d39284,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5716762403706204824}
+      addedObject: {fileID: 2196230810580664121}
     - targetCorrespondingSourceObject: {fileID: 7100907181833725265, guid: 7010fd79c0b688e47b6963fa09d39284,
         type: 3}
       insertIndex: -1
@@ -9489,15 +9489,13 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8658656071268683945}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &5716762403706204824
-BoxCollider2D:
+--- !u!65 &2196230810580664121
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5755200799925192367}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -9506,34 +9504,12 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0012104511, y: 0.19200444}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 10.556299, y: 2.502089}
-  m_EdgeRadius: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.556299, y: 2.502089, z: 1.5312808}
+  m_Center: {x: -0.0012104511, y: 0.19200444, z: 0.00087180734}
 --- !u!1 &6138473968719834835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3249774151572455034, guid: 7010fd79c0b688e47b6963fa09d39284,
