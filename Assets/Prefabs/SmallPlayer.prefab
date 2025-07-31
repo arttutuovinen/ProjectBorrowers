@@ -298,9 +298,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 357cb65c0ef495643839a6e038b27ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meterFill: {fileID: 0}
-  fillSpeed: 0.1
-  drainSpeed: 0.05
+  smallPlayer: {fileID: 0}
+  smallPlayerTeleportPosition: {fileID: 0}
+  meterImage: {fileID: 0}
+  meterBackgroundImage: {fileID: 0}
+  escapeText: {fileID: 0}
+  fillRate: 0.1
+  decayRate: 0.02
+  maxFill: 1
+  currentFill: 0
 --- !u!114 &3470725793712673339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32370c0b7a8fcb94f93a1ac34a62aeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
+  moveSpeed: 7
   climbSpeed: 8
   gravity: -30
   jumpHeight: 3
