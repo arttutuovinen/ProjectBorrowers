@@ -5,8 +5,8 @@ using TMPro;
 
 public class BigPlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Speed of movement
-    
+    public float moveSpeed = 5.0f; // Speed of movement
+
     public float gravity = -9.81f; // Gravity applied to the player
     public float turnSmoothTime = 0.1f; // Smoothing for rotation
 
@@ -14,12 +14,18 @@ public class BigPlayerMovement : MonoBehaviour
     public Transform cameraFollowTarget; // Target for the camera to follow (usually the player)
 
     // ** Crouching variables **
-    public float crouchSpeed = 2.5f; // Speed while crouching
-    public float crouchTransitionSpeed, normalHeight, crouchHeight;
-    public Vector3 offset;
-    public Transform bigPlayer;
-    bool isCrouching;
+    public float crouchSpeed = 1.0f;     // Speed when crouching
     private float currentSpeed;
+    public float standingHeight = 2.0f;
+    public float crouchingHeight = 1.0f;
+    public Vector3 standingCenter = Vector3.zero;
+    public Vector3 crouchingCenter = new Vector3(0, -0.5f, 0);
+    private bool isCrouching = false;
+
+    public float crouchCameraYOffset = -0.5f;
+    public float cameraTransitionTime = 0.5f;
+    private float originalCameraY;
+
     //Looking variables
     public float mouseSensitivity = 100f; // Mouse sensitivity for camera movement
     public float controllerSensitivity = 2f; // Controller sensitivity for camera movement
@@ -28,14 +34,14 @@ public class BigPlayerMovement : MonoBehaviour
     public float maxVerticalAngle = 60f; // Maximum vertical angle for camera
 
     private CharacterController controller;
-    
+
     private Vector3 velocity;
     private bool isGrounded;
-   
+
     private float turnSmoothVelocity;
     private float yaw; // Horizontal rotation
     private float pitch; // Vertical rotation
-    
+
     public float rayDistance = 10f;  // Maximum distance the ray should check.
     private Vector3 rayPosition;
     public Camera playerCamera;      // Reference to the player's camera.
@@ -63,14 +69,19 @@ public class BigPlayerMovement : MonoBehaviour
         }
         // Initially, set the current speed to normal
         currentSpeed = moveSpeed;
+
+        controller.height = standingHeight;
+        controller.center = standingCenter;
+        originalCameraY = cameraFollowTarget.localPosition.y;
     }
-    
+
     private void Update()
     {
         Move();
         ApplyGravity();
         ControlCamera();
-        HandleCrouch();
+        HandleCrouchInput();
+
 
         //Camera Offset manager
         rayPosition = playerCamera.transform.position + new Vector3(offsetX, offsetY, offsetZ);
@@ -100,7 +111,7 @@ public class BigPlayerMovement : MonoBehaviour
                 }
                 // Set the current door reference
                 currentDoor = door;
-            }  
+            }
         }
         else
         {
@@ -114,15 +125,15 @@ public class BigPlayerMovement : MonoBehaviour
             currentDoor = null;
         }
 
-        
+
     }
 
-   
+
 
     //Player Movement
     private void Move()
     {
-        
+
         // Check if the player is on the ground
         isGrounded = controller.isGrounded;
 
@@ -135,7 +146,7 @@ public class BigPlayerMovement : MonoBehaviour
         // Get input for movement (WASD/arrow keys or PS5 left stick)
         float horizontal = Input.GetAxisRaw("P2Horizontal"); // WASD or PS5 Left Stick X
         float vertical = Input.GetAxisRaw("P2Vertical"); // WASD or PS5 Left Stick Y
-        
+
         // Calculate the movement direction relative to the camera's orientation
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
@@ -149,10 +160,10 @@ public class BigPlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             /// Move in the direction the player is facing
-            
+
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
-        }   
+            controller.Move(moveDirection.normalized * currentSpeed * Time.deltaTime);
+        }
     }
 
     private void ApplyGravity()
@@ -189,43 +200,50 @@ public class BigPlayerMovement : MonoBehaviour
         cameraTransform.position = cameraFollowTarget.position - (Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward * distanceFromPlayer);
 
         // Look at the player
-        cameraTransform.LookAt(cameraFollowTarget.position); 
+        cameraTransform.LookAt(cameraFollowTarget.position);
     }
-    private void HandleCrouch()
+    private void HandleCrouchInput()
     {
-        // Toggle crouch state when P2Crouch is pressed
         if (Input.GetButtonDown("P2Crouch"))
         {
             isCrouching = !isCrouching;
-            
+
+            if (isCrouching)
+            {
+                controller.height = crouchingHeight;
+                controller.center = crouchingCenter;
+                currentSpeed = crouchSpeed;
+
+                if (cameraFollowTarget != null)
+                    StartCoroutine(AdjustCameraTarget(originalCameraY + crouchCameraYOffset));
+            }
+            else
+            {
+                controller.height = standingHeight;
+                controller.center = standingCenter;
+                currentSpeed = moveSpeed;
+
+                if (cameraFollowTarget != null)
+                    StartCoroutine(AdjustCameraTarget(originalCameraY));
+            }
         }
-        if (isCrouching)
+    }
+    
+    private IEnumerator AdjustCameraTarget(float targetY)
+    {
+        Vector3 startPos = cameraFollowTarget.localPosition;
+        Vector3 endPos = new Vector3(startPos.x, targetY, startPos.z);
+        float elapsed = 0f;
+
+        while (elapsed < cameraTransitionTime)
         {
-            controller.height = controller.height - crouchSpeed * Time.deltaTime;
-            if (controller.height <= crouchHeight)
-            {
-                controller.height = crouchHeight;
-            }
-            // Set the player's speed to crouch speed
-            moveSpeed = crouchSpeed;
+            float t = elapsed / cameraTransitionTime;
+            cameraFollowTarget.localPosition = Vector3.Lerp(startPos, endPos, t);
+            elapsed += Time.deltaTime;
+            yield return null;
         }
-        else
-        {
-            controller.height = controller.height + crouchSpeed * Time.deltaTime;
-            if (controller.height < normalHeight)
-            {
-                bigPlayer.gameObject.SetActive(false);
-                bigPlayer.position = bigPlayer.position + offset * Time.deltaTime;
-                bigPlayer.gameObject.SetActive(true);
-            }
-            if (controller.height >= normalHeight)
-            {
-                controller.height = normalHeight;
-            }
-            // Set the player's speed back to normal when not crouching
-            moveSpeed = 10f;
-        }
-        
+
+        cameraFollowTarget.localPosition = endPos; // Snap to final position
     }
 
 

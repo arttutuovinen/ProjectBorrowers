@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8441493380656028964}
   - component: {fileID: 1837153285206449404}
   m_Layer: 0
-  m_Name: BigPlayer
+  m_Name: BigPlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,11 +224,8 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   cameraFollowTarget: {fileID: 1735088581532782266}
   crouchSpeed: 5
-  crouchTransitionSpeed: 3
-  normalHeight: 2
-  crouchHeight: 0.6
-  offset: {x: 0, y: 1, z: 0}
-  bigPlayer: {fileID: 1817188319145980602}
+  crouchOffset: 0.5
+  capsuleModel: {fileID: 0}
   mouseSensitivity: 200
   controllerSensitivity: 2
   distanceFromPlayer: 0.1
@@ -268,8 +265,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4256986036373327801}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.605, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.60499996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
