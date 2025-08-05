@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &621330734490932959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 892230565374043004}
+  - component: {fileID: 2411984762000197122}
+  - component: {fileID: 2087863974895817625}
+  m_Layer: 10
+  m_Name: ClosettDoorRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &892230565374043004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621330734490932959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4634696942806245188}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2411984762000197122
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621330734490932959}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9, y: 5.1, z: 4.6}
+  m_Center: {x: -4.48, y: 4.73, z: -1.79}
+--- !u!114 &2087863974895817625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621330734490932959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1b492f0d0e5264f905e1035decafb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAmount: -70
+  rotationSpeed: 5
+--- !u!1001 &7276778684809908449
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 892230565374043004}
+    m_Modifications:
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451550979445806367, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_Name
+      value: ClosetDoorRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451550979445806367, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203783997538136249, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8203783997538136249, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7142447313472006476}
+  m_SourcePrefab: {fileID: 100100000, guid: 95f62bcd6dd206c4da1e2e79ba260125, type: 3}
+--- !u!1 &1523903034482090072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8203783997538136249, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+    type: 3}
+  m_PrefabInstance: {fileID: 7276778684809908449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7142447313472006476
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523903034482090072}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.304981, y: 7.483926, z: 0.9483302}
+  m_Center: {x: -2.6230502, y: -0.36909676, z: -0.29709324}
+--- !u!4 &4634696942806245188 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2642926854816960421, guid: 95f62bcd6dd206c4da1e2e79ba260125,
+    type: 3}
+  m_PrefabInstance: {fileID: 7276778684809908449}
+  m_PrefabAsset: {fileID: 0}
