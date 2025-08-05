@@ -43,6 +43,7 @@ public class SmallPlayerMovement : MonoBehaviour
     
     public TextMeshProUGUI itemInteractText;
 
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -58,6 +59,7 @@ public class SmallPlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        
         if (isClimbing)
         {
             ClimbLadder();
@@ -68,6 +70,7 @@ public class SmallPlayerMovement : MonoBehaviour
             ApplyGravity();
         }
         ControlCamera();
+        
     }
     // Method that allows enabling movement from other scripts
     public void EnableMovement()
@@ -139,6 +142,7 @@ public class SmallPlayerMovement : MonoBehaviour
         // Apply gravity over time
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+        
     }
 
     private void ClimbLadder()

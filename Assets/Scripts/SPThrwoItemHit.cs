@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SPThrwoItemHit : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class SPThrwoItemHit : MonoBehaviour
     private bool isKnockedBack = false;
     private SmallPlayerMovement playerMovement;
     private float destroyTime = 2f;
+    public TextMeshProUGUI spIsStunnedText;
 
     void Start()
     {
         playerMovement = GetComponent<SmallPlayerMovement>();
+        spIsStunnedText.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +31,7 @@ public class SPThrwoItemHit : MonoBehaviour
                 0,
                 Random.Range(-1f, 1f)
             ).normalized;
-
+            spIsStunnedText.enabled = true;
             Vector3 knockbackDirection = randomDirection * knockbackForce + Vector3.up * upwardForce;
             StartCoroutine(KnockbackCoroutine(knockbackDirection));
             playerMovement.DisableMovement();
@@ -63,6 +66,7 @@ public class SPThrwoItemHit : MonoBehaviour
     private void ReEnableMovement()
     {
         playerMovement.EnableMovement();
+        spIsStunnedText.enabled = false;
     }
 
 }

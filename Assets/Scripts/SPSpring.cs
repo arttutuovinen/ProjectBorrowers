@@ -4,46 +4,46 @@ using UnityEngine;
 
 public class SPSpring : MonoBehaviour
 {
-    public float knockUpForce = 10f; // Force applied when the player is knocked up
-    public float knockUpDuration = 0.5f; // Duration of the knock-up effect
-    private SmallPlayerMovement playerMovement;
-    private bool isKnockedUp = false; // Flag to check if the player is currently knocked up
-    private float knockUpTimer = 0f;
-
-    private void Start()
+    public float knockbackForce = 10f;  // Strength of the upward knockback
+    public float knockbackDuration = 0.2f;
+    private bool isKnockedBack = false;
+    public AnimationCurve jumpCurve;
+    private CharacterController controller;
+   
+    void Start()
     {
-        // Get the reference to the player's SmallPlayerMovement script
-        playerMovement = GetComponent<SmallPlayerMovement>();
+        controller = GetComponent<CharacterController>();
+    }
+    public void UseSpring()
+    {
+        Debug.Log("SP used SPRING");
+        // Knockback direction is straight up (Y-axis only)
+        Vector3 knockbackDirection = Vector3.up * knockbackForce;
+        // Start the knockback coroutine
+        StartCoroutine(KnockbackCoroutine(knockbackDirection));
     }
 
-    private void Update()
+    private System.Collections.IEnumerator KnockbackCoroutine(Vector3 direction)
     {
-        // Handle knock-up effect duration
-        if (isKnockedUp)
-        {
-            knockUpTimer -= Time.deltaTime;
+        if (isKnockedBack)
+            yield break; // If already knocked back, ignore the call
 
-            // Apply the upward force to the player
-            if (knockUpTimer > 0)
-            {
-                Vector3 knockUpVelocity = Vector3.up * knockUpForce * Time.deltaTime;
-            }
-            else
-            {
-                // End the knock-up effect
-                isKnockedUp = false;
-            }
-        }
-    }
+        isKnockedBack = true;
 
-    // Method to initiate the knock-up effect
-    public void KnockUpPlayer()
-    {
-        if (!isKnockedUp)
+        float timer = 0f;
+
+        // Move the player upward over the knockback duration
+        while (timer < knockbackDuration)
         {
-            // Start the knock-up
-            isKnockedUp = true;
-            knockUpTimer = knockUpDuration;
+            // Apply upward knockback movement per frame
+            controller.Move(direction * jumpCurve.Evaluate(timer/knockbackDuration) * Time.deltaTime);
+
+            // Increment the timer
+            timer += Time.deltaTime;
+            yield return null;
         }
+
+        // Reset the knockback state after the duration has ended
+        isKnockedBack = false;
     }
 }

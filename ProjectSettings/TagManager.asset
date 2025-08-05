@@ -23,6 +23,10 @@ TagManager:
   - BPThrowItemWeapon
   - BPFlySwatter
   - SPSpringCollectible
+  - BPMouseTrap
+  - MouseTrapWeapon
+  - BPCompass
+  - SPTeleportLocation
   layers:
   - Default
   - TransparentFX
@@ -36,9 +40,9 @@ TagManager:
   - Hidden
   - Door
   - BPCollectible
-  - 
-  - 
-  - 
+  - BPMouseTrapWeapon
+  - BigPlayer
+  - VisibleToSP
   - 
   - 
   - 

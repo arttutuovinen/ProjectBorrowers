@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8187277097767252352}
   - component: {fileID: 6058408288489195687}
   - component: {fileID: 6353602483158531754}
+  - component: {fileID: 6321864272547114958}
   - component: {fileID: 4548582116372357473}
   - component: {fileID: 6314714961187952365}
   - component: {fileID: 2798925808186326819}
@@ -117,6 +118,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6321864272547114958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644779056197674402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46785975506478a499ace611bb191945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseTrap: {fileID: 5532745800381222871, guid: eff713125c59e444290848df2775220a,
+    type: 3}
+  throwOrigin: {fileID: 0}
 --- !u!114 &4548582116372357473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,10 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a85fbf0a3f1ffc4daf725f066c07631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwItem: {fileID: 266587534380639546, guid: c2bc5eccd78d11c468297560b2428355,
+  throwItemWeapon: {fileID: 266587534380639546, guid: c2bc5eccd78d11c468297560b2428355,
     type: 3}
   throwOrigin: {fileID: 0}
-  throwForce: 20
+  throwForce: 50
   playerCamera: {fileID: 0}
 --- !u!114 &6314714961187952365
 MonoBehaviour:
@@ -146,15 +162,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae62bb4e07c3fc64485af1d197bec173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDistance: 10
+  rayDistance: 8
   collectibleLayer:
     serializedVersion: 2
     m_Bits: 2048
   playerCamera: {fileID: 0}
   bpPickUpText: {fileID: 0}
   throwingItem: {fileID: 0}
+  flySwatterImage: {fileID: 0}
+  mouseTrapImage: {fileID: 0}
+  compassImage: {fileID: 0}
   bpThrowItem: {fileID: 4548582116372357473}
-  bpOtherItem: {fileID: 0}
+  bpAnimation: {fileID: 0}
+  bpMouseTrap: {fileID: 0}
+  bpCompass: {fileID: 0}
 --- !u!114 &2798925808186326819
 MonoBehaviour:
   m_ObjectHideFlags: 0

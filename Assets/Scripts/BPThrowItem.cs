@@ -7,7 +7,7 @@ public class BPThrowItem : MonoBehaviour
     public GameObject throwItemWeapon;
     public Transform throwOrigin;     // The point where the object is thrown from (e.g., player's hand or camera position)
     public float throwForce = 20f;    // The force applied to the thrown object
-    private float destroyTime = 10f;
+    private float destroyTime = 5f;
     public Camera playerCamera;       // Reference to the player's camera
 
 
@@ -20,4 +20,5 @@ public class BPThrowItem : MonoBehaviour
         rb.AddForce(throwDirection * throwForce, ForceMode.Impulse);
         Destroy(thrownObject, destroyTime);
     }
+
 }

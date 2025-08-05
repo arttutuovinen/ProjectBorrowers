@@ -24,10 +24,13 @@ public class BPCatchingSP : MonoBehaviour
 
     public TextMeshProUGUI prisonInteractText;
 
+    public SPEscapeBar spEscapeBar;
+    private Collider objectCollider;
+
     private void Start()
     {
         prisonInteractText.gameObject.SetActive(false); // Disable the text object initially
-        
+        objectCollider = GetComponent<Collider>();
     }
 
     private void Update()
@@ -76,6 +79,26 @@ public class BPCatchingSP : MonoBehaviour
             TeleportSmallPlayerToJail();
             bigPlayerAnimation.ReleaseAnimation();
         }
+
+        // Check if meter value reaches 1 in spEscapeBar script.
+        if (spEscapeBar.currentFill >= 0.98 && isSmallPlayerCaught)
+        {
+            bigPlayerAnimation.ReleaseAnimation();
+            spEscapeBar.currentFill = 0f;
+            // Re-enable Small Player's CharacterController
+            CharacterController characterController = smallPlayer.GetComponent<CharacterController>();
+            characterController.enabled = true;
+
+            // Ensure Small Player's position is no longer equal to caughtLocation
+            if (smallPlayer.transform.position == caughtLocation.position)
+            {
+                smallPlayer.transform.position += Vector3.down * 0.2f; // Slightly adjust position
+            }
+
+            isSmallPlayerAttachedToLocation = false;
+            isSmallPlayerCaught = false;
+             StartCoroutine(DisableColliderForOneSecond());
+        }
         
     }
 
@@ -119,9 +142,6 @@ public class BPCatchingSP : MonoBehaviour
     // Method to teleport Player 2 to the assigned caught location
     private void TeleportSmallPlayer()
     {
-        // Check if smallPlayer and caughtLocation are assigned
-        if (smallPlayer != null && caughtLocation != null)
-        {
             // Get the CharacterController from Small Player
             CharacterController characterController = smallPlayer.GetComponent<CharacterController>();
 
@@ -133,15 +153,12 @@ public class BPCatchingSP : MonoBehaviour
                 // Set Player 2's position to the caught location's position
                 characterController.transform.position = caughtLocation.position;
 
-                // Re-enable the CharacterController after teleporting
-                //characterController.enabled = true;
-
                 // Set the flag to keep Player 2 at the caught location
                 isSmallPlayerAttachedToLocation = true;
 
                 Debug.Log("Small Player has been teleported to: " + caughtLocation.position);
             }
-        }
+        
     }
 
     // Method to teleport Player 2 to the "JailLocation"
@@ -179,6 +196,16 @@ public class BPCatchingSP : MonoBehaviour
         {
             Debug.LogWarning("Small Player or JailLocation is not assigned.");
         }
+    }
+    private IEnumerator DisableColliderForOneSecond()
+    {
+        
+        Debug.Log("Disabling collider for 1 second.");
+        objectCollider.enabled = false; // Disable the collider
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second
+
+        objectCollider.enabled = true; // Re-enable the collider
     }
     
 }

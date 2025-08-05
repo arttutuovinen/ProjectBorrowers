@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SmallPlayerWins : MonoBehaviour
 {
-    // Reference to the player object
     public GameObject smallPlayer;
-
-    
-
-    // Tag for the treasure GameObject
     public string treasureTag = "Treasure";
-
-    // Tag for the player GameObject
     public string playerTag = "SmallPlayer";
+    public TextMeshProUGUI smallPlayerWinsText;
+    public float resetDelay = 5f;
+
+    void Start()
+    {
+        smallPlayerWinsText.enabled = false;
+    }
 
     // Called when the CharacterController collides with another object
     private void OnTriggerEnter(Collider hit)
@@ -23,17 +25,14 @@ public class SmallPlayerWins : MonoBehaviour
         {
             Destroy(smallPlayer);  // Destroy the player GameObject
             Debug.Log("Small Player Wins!");
+            smallPlayerWinsText.enabled = true;
+            StartCoroutine(RestartSceneAfterDelay());
         }
     }
-
-    
-
-    private void Start()
+    private IEnumerator RestartSceneAfterDelay()
     {
-        // Simple debugging to ensure the player object is assigned correctly
-        if (smallPlayer == null)
-        {
-            Debug.LogError("Player object reference is missing!");
-        }
+        yield return new WaitForSeconds(resetDelay); // Wait for the specified delay
+        Scene currentScene = SceneManager.GetActiveScene(); // Get the current active scene
+        SceneManager.LoadScene(currentScene.name); // Reload the scene
     }
 }
