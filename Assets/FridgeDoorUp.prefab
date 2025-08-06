@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &621330734490932959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 892230565374043004}
+  - component: {fileID: 2411984762000197122}
+  - component: {fileID: 2087863974895817625}
+  m_Layer: 10
+  m_Name: FridgeDoorUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &892230565374043004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621330734490932959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2427125014688252750}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2411984762000197122
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621330734490932959}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.42, y: 1.22, z: 3.12}
+  m_Center: {x: -4.4, y: 0.84, z: -2.1}
+--- !u!114 &2087863974895817625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621330734490932959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1b492f0d0e5264f905e1035decafb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAmount: -70
+  rotationSpeed: 5
+--- !u!1001 &6005585552951781667
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 892230565374043004}
+    m_Modifications:
+    - target: {fileID: 1393362924156734989, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -53.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071072
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071065
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772187192105480407, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_Name
+      value: FridgeDoorUpMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772187192105480407, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1393362924156734989, guid: 76c0203bad7bd43478980617b3e91585,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6717520220330242398}
+  m_SourcePrefab: {fileID: 100100000, guid: 76c0203bad7bd43478980617b3e91585, type: 3}
+--- !u!4 &2427125014688252750 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8284021228459387501, guid: 76c0203bad7bd43478980617b3e91585,
+    type: 3}
+  m_PrefabInstance: {fileID: 6005585552951781667}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4615653123865143086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1393362924156734989, guid: 76c0203bad7bd43478980617b3e91585,
+    type: 3}
+  m_PrefabInstance: {fileID: 6005585552951781667}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6717520220330242398
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615653123865143086}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8267382, y: 4.3728313, z: 5.8974276}
+  m_Center: {x: 0.37695664, y: 0.21534288, z: -2.923834}
