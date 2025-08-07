@@ -166,31 +166,46 @@ public class SmallPlayerMovement : MonoBehaviour
 
     private void ControlCamera()
     {
-        // Camera control with mouse or PS5 controller's right stick
         float mouseX, mouseY;
 
+        // Input handling (PS5 controller or mouse)
         if (Mathf.Abs(Input.GetAxis("P1RightStickHorizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("P1RightStickVertical")) > 0.1f)
         {
-            // PS5 right stick
             mouseX = Input.GetAxis("P1RightStickHorizontal") * controllerSensitivity;
             mouseY = Input.GetAxis("P1RightStickVertical") * controllerSensitivity;
         }
         else
         {
-            // Mouse input
             mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         }
 
-        // Update yaw (horizontal rotation) and clamp pitch (vertical rotation)
+        // Update rotation
         yaw += mouseX;
         pitch -= mouseY;
         pitch = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
 
-        // Rotate the camera around the player
-        cameraTransform.position = cameraFollowTarget.position - (Quaternion.Euler(pitch, yaw, 0f) * Vector3.forward * distanceFromPlayer);
+        // Desired direction from player to camera
+        Vector3 desiredDirection = Quaternion.Euler(pitch, yaw, 0f) * Vector3.back;
 
-        // Look at the player
+        // Desired position of the camera (ideal distance)
+        Vector3 desiredCameraPosition = cameraFollowTarget.position + desiredDirection * distanceFromPlayer;
+
+        // Raycast to check for obstacles between target and camera
+        RaycastHit hit;
+        Vector3 rayOrigin = cameraFollowTarget.position;
+        Vector3 rayDirection = desiredCameraPosition - rayOrigin;
+        float maxDistance = distanceFromPlayer;
+
+        if (Physics.Raycast(rayOrigin, rayDirection.normalized, out hit, maxDistance))
+        {
+            // Obstacle hit: adjust camera position to hit point minus small offset
+            float adjustedDistance = hit.distance - 0.3f;
+            desiredCameraPosition = rayOrigin + rayDirection.normalized * Mathf.Max(adjustedDistance, 0.5f);
+        }
+
+        // Set camera position and look at the player
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredCameraPosition, Time.deltaTime * 20f);;
         cameraTransform.LookAt(cameraFollowTarget.position);
     }
 
@@ -210,7 +225,6 @@ public class SmallPlayerMovement : MonoBehaviour
         }
         
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other == ladder)
