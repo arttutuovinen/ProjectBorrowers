@@ -201,11 +201,11 @@ public class SmallPlayerMovement : MonoBehaviour
         {
             // Obstacle hit: adjust camera position to hit point minus small offset
             float adjustedDistance = hit.distance - 0.3f;
-            desiredCameraPosition = rayOrigin + rayDirection.normalized * Mathf.Max(adjustedDistance, 0.5f);
+            desiredCameraPosition = rayOrigin + rayDirection.normalized * Mathf.Max(adjustedDistance, 0.9f);
         }
 
         // Set camera position and look at the player
-        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredCameraPosition, Time.deltaTime * 20f);;
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredCameraPosition, Time.deltaTime * 30f);;
         cameraTransform.LookAt(cameraFollowTarget.position);
     }
 
