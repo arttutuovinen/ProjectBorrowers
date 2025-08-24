@@ -11,6 +11,9 @@
         },
         {
             "m_Id": "29a88ee5a27b49b8bda4b49a6bb93477"
+        },
+        {
+            "m_Id": "c474bde7e2d448039cfe35b6107fb7c6"
         }
     ],
     "m_Keywords": [],
@@ -775,6 +778,9 @@
         },
         {
             "m_Id": "29a88ee5a27b49b8bda4b49a6bb93477"
+        },
+        {
+            "m_Id": "c474bde7e2d448039cfe35b6107fb7c6"
         }
     ]
 }
@@ -1006,7 +1012,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Alpha",
     "m_StageCapability": 2,
-    "m_Value": 0.3799999952316284,
+    "m_Value": -1.7200000286102296,
     "m_DefaultValue": 1.0,
     "m_Labels": []
 }
@@ -1492,6 +1498,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "c474bde7e2d448039cfe35b6107fb7c6",
+    "m_Guid": {
+        "m_GuidSerialized": "2b895a92-d2a5-49a3-89a8-23ebaab1b978"
+    },
+    "m_Name": "alpha",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "alpha",
+    "m_DefaultReferenceName": "_alpha",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 4.099999904632568,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.UVMaterialSlot",
     "m_ObjectId": "c60fd0a04a564a36adb81ceb62b11e35",
@@ -1600,7 +1634,7 @@
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 0,
+    "m_RenderFace": 2,
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
