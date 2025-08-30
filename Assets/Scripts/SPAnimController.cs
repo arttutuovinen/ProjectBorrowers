@@ -4,22 +4,41 @@ using UnityEngine;
 
 public class SPAnimController : MonoBehaviour
 {
-    private Animator animator;
+   private Animator animator;
+    private CharacterController controller;
 
     void Start()
     {
         animator = GetComponent<Animator>(); 
+        controller = GetComponentInParent<CharacterController>(); 
+        // Assuming controller is on parent object
     }
 
     void Update()
+{
+    float horizontal = Input.GetAxisRaw("P1Horizontal");
+    float vertical = Input.GetAxisRaw("P1Vertical");
+
+    // Jump input
+    if (Input.GetButtonDown("P1Jump") && controller.isGrounded)
     {
-        float horizontal = Input.GetAxisRaw("P1Horizontal");
-        float vertical = Input.GetAxisRaw("P1Vertical");
+        animator.SetTrigger("IsJumping");
+    }
 
-        // Check if the player is moving
+    // Falling check
+    if (!controller.isGrounded)
+    {
+        animator.SetBool("IsFalling", true);
+        // Don’t update IsRunning while in air
+        animator.SetBool("IsRunning", false);
+    }
+    else
+    {
+        animator.SetBool("IsFalling", false);
+
+        // Only check running when grounded
         bool isMoving = (horizontal != 0 || vertical != 0);
-
-        // Update animator parameter
         animator.SetBool("IsRunning", isMoving);
     }
+}
 }
