@@ -203,7 +203,7 @@ public class SmallPlayerMovement : MonoBehaviour
         if (Physics.Raycast(rayOrigin, rayDirection.normalized, out hit, maxDistance))
         {
             // Obstacle hit: adjust camera position to hit point minus small offset
-            float adjustedDistance = hit.distance - 0.9f;
+            float adjustedDistance = hit.distance - 0.3f;
             desiredCameraPosition = rayOrigin + rayDirection.normalized * Mathf.Max(adjustedDistance, 0.9f);
         }
 
