@@ -3374,13 +3374,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292134581405100200}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63f01020c7b605b468d1f9b3d2533f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CeilingFanRotation
   rotatingFan: {fileID: 7116021633020619173}
-  rotationSpeed: 50
+  rotationSpeed: 0
 --- !u!64 &430538522
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10006,28 +10006,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204033907}
   m_CullTransparentMesh: 1
---- !u!64 &1207558027
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5014345176836269319}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8112629517560218686, guid: 1976e4409f124034cbc48c07b920f0d3, type: 3}
 --- !u!1 &1207868632
 GameObject:
   m_ObjectHideFlags: 0
@@ -19108,7 +19086,7 @@ GameObject:
   - component: {fileID: 1891852215054063475}
   - component: {fileID: 4255934736890998120}
   - component: {fileID: 3093903104768005495}
-  - component: {fileID: 1207558027}
+  - component: {fileID: 5014345176836269320}
   m_Layer: 0
   m_Name: Torso
   m_TagString: Untagged
@@ -19116,6 +19094,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!136 &5014345176836269320
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5014345176836269319}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.68
+  m_Height: 7.32
+  m_Direction: 1
+  m_Center: {x: 0.001461029, y: -1.9589238, z: 0.0035508275}
 --- !u!1001 &5284076871968839187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19950,7 +19951,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
