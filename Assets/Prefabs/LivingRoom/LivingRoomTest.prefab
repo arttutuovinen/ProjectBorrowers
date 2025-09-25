@@ -1521,11 +1521,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8482140691948734852, guid: 7f3bdcf871419b64f8c196ca69d85140,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7366387869545818055}
-    - targetCorrespondingSourceObject: {fileID: 8883144258736677664, guid: 7f3bdcf871419b64f8c196ca69d85140,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5100974086994531712}
+      addedObject: {fileID: 212185566715632040}
     - targetCorrespondingSourceObject: {fileID: 2617915001337315128, guid: 7f3bdcf871419b64f8c196ca69d85140,
         type: 3}
       insertIndex: -1
@@ -1566,7 +1562,39 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5960151521989090004}
+    - targetCorrespondingSourceObject: {fileID: -6942326158778509056, guid: 7f3bdcf871419b64f8c196ca69d85140,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1342181448037041562}
   m_SourcePrefab: {fileID: 100100000, guid: 7f3bdcf871419b64f8c196ca69d85140, type: 3}
+--- !u!1 &22832706793415299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6942326158778509056, guid: 7f3bdcf871419b64f8c196ca69d85140,
+    type: 3}
+  m_PrefabInstance: {fileID: 2303302150294633347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1342181448037041562
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22832706793415299}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9064675433028541564, guid: 7f3bdcf871419b64f8c196ca69d85140, type: 3}
 --- !u!1 &118001233151229545 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2185864735251826154, guid: 7f3bdcf871419b64f8c196ca69d85140,
@@ -1878,8 +1906,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2303302150294633347}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7366387869545818055
-BoxCollider:
+--- !u!64 &212185566715632040
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1896,9 +1924,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5429719, y: 1.7421703, z: 16.752104}
-  m_Center: {x: 0.25344834, y: 0.85340667, z: -9.171596}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5264407420308464360, guid: 7f3bdcf871419b64f8c196ca69d85140, type: 3}
 --- !u!1 &1657329906627394200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 645982729830940955, guid: 7f3bdcf871419b64f8c196ca69d85140,
@@ -2644,33 +2673,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.752122, y: 3.4189272, z: 0.5983864}
   m_Center: {x: 0.002524376, y: -0.6931886, z: 0.15098701}
---- !u!1 &7255789078014630051 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8883144258736677664, guid: 7f3bdcf871419b64f8c196ca69d85140,
-    type: 3}
-  m_PrefabInstance: {fileID: 2303302150294633347}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &5100974086994531712
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7255789078014630051}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5429719, y: 1.7421703, z: 17.191118}
-  m_Center: {x: 0.25344834, y: 0.85340667, z: -8.952092}
 --- !u!1 &7274343212994153035 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8864581079101485512, guid: 7f3bdcf871419b64f8c196ca69d85140,
