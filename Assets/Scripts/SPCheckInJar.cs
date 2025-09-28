@@ -6,28 +6,33 @@ using TMPro;
 
 public class SPCheckInJar : MonoBehaviour
 {
-    public TextMeshProUGUI revealText;
+    public TextMeshProUGUI scoreText;
     public string playerTag = "SmallPlayer"; 
-    public float resetDelay = 5f;
+    public float resetDelay = 3f;
+    public GameObject smallPlayer;
+    public GameObject finish;
+    private int score = 0;
 
     private void Start()
-    {   
-            revealText.gameObject.SetActive(false);
+    {
+        scoreText.text = score.ToString();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag))
         {
-            revealText.gameObject.SetActive(true);
-            StartCoroutine(RestartSceneAfterDelay());
+            // Add 1 point to the score
+            score++;
+            scoreText.text = score.ToString();
+            // Start teleport coroutine
+            StartCoroutine(TeleportAfterDelay());
         }
     }
 
-    private IEnumerator RestartSceneAfterDelay()
+    private IEnumerator TeleportAfterDelay()
     {
         yield return new WaitForSeconds(resetDelay); // Wait for the specified delay
-        Scene currentScene = SceneManager.GetActiveScene(); // Get the current active scene
-        SceneManager.LoadScene(currentScene.name); // Reload the scene
+        smallPlayer.transform.position = finish.transform.position;
     }
     
 }
