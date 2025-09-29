@@ -42,18 +42,26 @@ public class SmallPlayerMovement : MonoBehaviour
     public TextMeshProUGUI ladderInteractText;
     
     public TextMeshProUGUI itemInteractText;
+    
+    //Particles Stuff
+    public ParticleSystem movementParticles;
+    public float maxEmissionRate = 20f; // Maximum emission rate when running
+    public float emissionChangeSpeed = 10f; // How fast to fade in/out
+    private ParticleSystem.EmissionModule emissionModule;
 
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
- 
+
         // Hide the interact text at the start
         if (ladderInteractText != null)
         {
             ladderInteractText.gameObject.SetActive(false); // Disable the text object initially
         }
+        emissionModule = movementParticles.emission;
+        emissionModule.rateOverTime = 0f; // Start with no emission
 
     }
 
@@ -110,6 +118,11 @@ public class SmallPlayerMovement : MonoBehaviour
             // Calculate the movement direction relative to the camera's orientation
             Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
+            // Handle particle emission when moving and grounded (smooth fade)
+            float targetRate = (isGrounded && direction.magnitude >= 0.1f) ? maxEmissionRate : 0f;
+            float newRate = Mathf.Lerp(emissionModule.rateOverTime.constant, targetRate, Time.deltaTime * emissionChangeSpeed);
+            emissionModule.rateOverTime = newRate;
+
             if (direction.magnitude >= 0.1f)
             {
                 // Calculate the target angle for rotation based on camera orientation
@@ -128,7 +141,7 @@ public class SmallPlayerMovement : MonoBehaviour
             // PS5 Cross button (Button 0) or Space key for jump
             if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
             {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);   
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
 
             // Ladder interaction: press E to start climbing if near a ladder
@@ -138,6 +151,7 @@ public class SmallPlayerMovement : MonoBehaviour
                 velocity.y = 0f; // Reset vertical velocity
             }
         }
+        
     }
 
     private void ApplyGravity()
