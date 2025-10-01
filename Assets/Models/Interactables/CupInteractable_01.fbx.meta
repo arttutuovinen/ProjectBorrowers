@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 91bf7405a0dd1dc44b757ad0bbbad6d7
+guid: 6f23535c9b9acbf439bd2bd7b3bd2dff
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: m_edgeLine
-    second: {fileID: 2100000, guid: 688d5d25dbdd9be45bd257c541c3ec5d, type: 2}
+      name: gradient
+    second: {fileID: 2100000, guid: 1b04a515b65973a4f82cbf1ab8e96e40, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: white
-    second: {fileID: 2100000, guid: 512a2ce2f0d88684aba2c3874f9651bc, type: 2}
+      name: m_edgeLine
+    second: {fileID: 2100000, guid: 688d5d25dbdd9be45bd257c541c3ec5d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -26,8 +26,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -68,6 +66,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8

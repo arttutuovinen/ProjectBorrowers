@@ -1,19 +1,14 @@
 fileFormatVersion: 2
-guid: b53be29403afd1f428f45ee77affc8c3
+guid: 4c82e5850e1071d418cc749a597570b5
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: brown
-    second: {fileID: 2100000, guid: 2e2b96cf2df965848b82185b083f4dfe, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: green
-    second: {fileID: 2100000, guid: ef25ce3f5e8d0a443a91294a3037262d, type: 2}
+      name: gradient
+    second: {fileID: 2100000, guid: 1b04a515b65973a4f82cbf1ab8e96e40, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -31,8 +26,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -73,6 +66,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5427447651434100978}
   m_Layer: 0
-  m_Name: prefab_LightSwitch
+  m_Name: prefab_FanSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,11 +40,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5427447651434100978}
     m_Modifications:
-    - target: {fileID: -9180012828398266957, guid: 14aed0c8fd849d345929ac64f8f5579d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14aed0c8fd849d345929ac64f8f5579d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -100,16 +95,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightSwitch
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 14aed0c8fd849d345929ac64f8f5579d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1698855347544542861, guid: 14aed0c8fd849d345929ac64f8f5579d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -117,15 +102,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14aed0c8fd849d345929ac64f8f5579d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9067892775369411700}
+      addedObject: {fileID: 5115566193095318998}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14aed0c8fd849d345929ac64f8f5579d,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5712471450808511264}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14aed0c8fd849d345929ac64f8f5579d,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7731406436280457336}
   m_SourcePrefab: {fileID: 100100000, guid: 14aed0c8fd849d345929ac64f8f5579d, type: 3}
 --- !u!1 &27871695898647343 stripped
 GameObject:
@@ -133,22 +114,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 910409891407898238}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9067892775369411700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27871695898647343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6adb5dca277a547aff4c6b3e598e6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LightSwitchInteraction
-  targetLight: {fileID: 0}
-  switchHandle: {fileID: 269222381123600340}
-  rotationAngle: 35
---- !u!65 &5712471450808511264
+--- !u!65 &5115566193095318998
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,9 +133,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0562515, y: 2.0490623, z: 0.16138373}
-  m_Center: {x: 0.0038741827, y: 0.00048846006, z: 0.067428194}
---- !u!65 &7731406436280457336
+  m_Size: {x: 1.48, y: 1.66, z: 0.69}
+  m_Center: {x: 0.0038741827, y: 0.00048846006, z: 0.45}
+--- !u!65 &5712471450808511264
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,12 +156,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0562515, y: 2.0490623, z: 0.16138373}
   m_Center: {x: 0.0038741827, y: 0.00048846006, z: 0.067428194}
---- !u!4 &269222381123600340 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8134041142495127126, guid: 14aed0c8fd849d345929ac64f8f5579d,
-    type: 3}
-  m_PrefabInstance: {fileID: 910409891407898238}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &804127298543665557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 14aed0c8fd849d345929ac64f8f5579d,
