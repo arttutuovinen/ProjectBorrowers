@@ -4,41 +4,57 @@ using UnityEngine;
 
 public class SPAnimController : MonoBehaviour
 {
-   private Animator animator;
+    private Animator animator;
     private CharacterController controller;
+    // Small buffer so jump can still trigger right after leaving ground
+    private float coyoteTime = 0.1f;  
+    private float lastGroundedTime;
 
     void Start()
     {
         animator = GetComponent<Animator>(); 
         controller = GetComponentInParent<CharacterController>(); 
-        // Assuming controller is on parent object
     }
 
     void Update()
-{
-    float horizontal = Input.GetAxisRaw("P1Horizontal");
-    float vertical = Input.GetAxisRaw("P1Vertical");
-
-    // Jump input
-    if (Input.GetButtonDown("P1Jump") && controller.isGrounded)
     {
-        animator.SetTrigger("IsJumping");
-    }
+        float horizontal = Input.GetAxisRaw("P1Horizontal");
+        float vertical = Input.GetAxisRaw("P1Vertical");
 
-    // Falling check
-    if (!controller.isGrounded)
-    {
-        animator.SetBool("IsFalling", true);
-        // Don’t update IsRunning while in air
-        animator.SetBool("IsRunning", false);
-    }
-    else
-    {
-        animator.SetBool("IsFalling", false);
+        // Track grounded state with coyote time
+        if (controller.isGrounded)
+        {
+            lastGroundedTime = Time.time;
+        }
 
-        // Only check running when grounded
-        bool isMoving = (horizontal != 0 || vertical != 0);
-        animator.SetBool("IsRunning", isMoving);
+        bool isGroundedOrCoyote = (Time.time - lastGroundedTime) <= coyoteTime;
+
+        // Jump input
+        if (Input.GetButtonDown("P1Jump") && isGroundedOrCoyote)
+        {
+            animator.ResetTrigger("IsJumping"); // ensures clean trigger
+            animator.SetTrigger("IsJumping");
+        }
+
+        // Falling check (don’t override jump immediately)
+        if (!controller.isGrounded)
+        {
+            // Only set falling if not already in jump animation
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            {
+                animator.SetBool("IsFalling", true);
+            }
+
+            // Stop running while in air
+            animator.SetBool("IsRunning", false);
+        }
+        else
+        {
+            animator.SetBool("IsFalling", false);
+
+            // Only check running when grounded
+            bool isMoving = (horizontal != 0 || vertical != 0);
+            animator.SetBool("IsRunning", isMoving);
+        }
     }
-}
 }
