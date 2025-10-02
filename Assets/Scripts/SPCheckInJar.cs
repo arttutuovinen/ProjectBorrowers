@@ -24,7 +24,6 @@ public class SPCheckInJar : MonoBehaviour
             // Add 1 point to the score
             score++;
             scoreText.text = score.ToString();
-            // Start teleport coroutine
             StartCoroutine(TeleportAfterDelay());
         }
     }
@@ -32,7 +31,19 @@ public class SPCheckInJar : MonoBehaviour
     private IEnumerator TeleportAfterDelay()
     {
         yield return new WaitForSeconds(resetDelay); // Wait for the specified delay
-        smallPlayer.transform.position = finish.transform.position;
+
+        CharacterController controller = smallPlayer.GetComponent<CharacterController>();
+        if (controller != null)
+        {
+            controller.enabled = false; // disable before teleporting
+            smallPlayer.transform.position = finish.transform.position;
+            controller.enabled = true;  // re-enable
+        }
+        else
+        {
+            // fallback if no CharacterController found
+            smallPlayer.transform.position = finish.transform.position;
+        }
     }
     
 }
