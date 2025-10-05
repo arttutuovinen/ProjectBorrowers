@@ -106,36 +106,26 @@ public class BPCatchingSP : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object that triggered the event has the Small Player tag
-        if (other.CompareTag(smallPlayerTag))
+        if (other.CompareTag(smallPlayerTag) && this.CompareTag(bigPlayerColliderTag) && isSmallPlayerCaught == false)
         {
-            // Check if this Big Player's collider has the required tag
-            if (this.CompareTag(bigPlayerColliderTag))
+            // Cast a ray from the camera position to the forward direction of the camera
+            Vector3 rayOrigin = playerCamera.transform.position;
+            Vector3 rayDirection = playerCamera.transform.forward;
+            // Perform the raycast from the camera's view
+            if (!Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, rayDistance, blockingMask))
             {
-                // Cast a ray from the camera position to the forward direction of the camera
-                Vector3 rayOrigin = playerCamera.transform.position;
-                Vector3 rayDirection = playerCamera.transform.forward;
-
-                // Perform the raycast from the camera's view
-                if (!Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, rayDistance, blockingMask))
-                {
-                    // No blocking object found, teleport the Small Player to the specified location
-                    Debug.Log("Small Player's trigger collided with Big Player's tagged collider. Teleporting Small Player.");
-                    TeleportSmallPlayer();
-                    bigPlayerAnimation.CaughtAnimation();
-                    isSmallPlayerCaught = true;  // Set the caught flag to true
-                }
-                else
-                {
-                    Debug.Log("A blocking object is between the Big Player (camera view) and Small Player: " + hit.collider.name);
-                }
-
-                // Draw the ray in the Scene view for visualization
-                Debug.DrawRay(rayOrigin, rayDirection * rayDistance, rayColor, 2.0f);
+                // No blocking object found, teleport the Small Player to the specified location
+                Debug.Log("Small Player's trigger collided with Big Player's tagged collider. Teleporting Small Player.");
+                TeleportSmallPlayer();
+                bigPlayerAnimation.CaughtAnimation();
+                isSmallPlayerCaught = true;
             }
             else
             {
-                Debug.Log("Big Player's collider doesn't have the required tag.");
+                Debug.Log("A blocking object is between the Big Player (camera view) and Small Player: " + hit.collider.name);
             }
+            // Draw the ray in the Scene view for visualization
+            Debug.DrawRay(rayOrigin, rayDirection * rayDistance, rayColor, 2.0f);
         }
     }
 

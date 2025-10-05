@@ -43,6 +43,9 @@ public class BigPlayerAnimation : MonoBehaviour
 
     public void CaughtAnimation()
     {
+         // Prevent firing caughtTrigger if already in that state
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Caught"))
+        return;
         Debug.Log("PLAY CAUGHT ANIMATION");
         animator.SetTrigger("caughtTrigger");
     }
@@ -90,11 +93,14 @@ public class BigPlayerAnimation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 🆕 Only register hits during the active catch window
         if (isFlySwapperActive && canCatch && other.CompareTag(smallPlayerTag))
-        {
-            Debug.Log("flySwatter hit a SmallPlayer!");
-            CaughtAnimation();
-        }
+    {
+        // Prevent caught spam mid-animation
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Caught"))
+            return;
+
+        Debug.Log("flySwatter hit a SmallPlayer!");
+        CaughtAnimation();
+    }
     }
 }
