@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class BigPlayerAnimation : MonoBehaviour
 {
-    public Animator animator;
-    private bool canGrab = true;  // A flag to check if the player can grab
-    public float cooldownTime = 3f;  // Cooldown duration in seconds
-    private float nextGrabTime = 0f;  // Time when the player can grab again
-    private bool isFlySwapperActive = false; // A flag to track if FlySwapper is active
-    public GameObject flySwatter;
+   public Animator animator;
+    private bool canGrab = true;          // Check if the player can grab
+    public float cooldownTime = 3f;       // Cooldown duration in seconds
+    private float nextGrabTime = 0f;      // Time when the player can grab again
 
-    public string smallPlayerTag = "SmallPlayer";  // Tag for Small Player
+    private bool isFlySwapperActive = false; // Track if FlySwapper is active
+    private bool canCatch = false;           // 🆕 Window that controls when catching is allowed
+
+    public GameObject flySwatter;
+    public string smallPlayerTag = "SmallPlayer"; // Tag for Small Player
 
     void Start()
     {
         flySwatter.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Check if cooldown is over
@@ -32,7 +33,7 @@ public class BigPlayerAnimation : MonoBehaviour
         {
             // Trigger the "Grab" animation
             animator.SetTrigger("grabTrigger");
-            Debug.Log("Animation works");
+            Debug.Log("Grab animation triggered");
 
             // Start cooldown
             canGrab = false;
@@ -42,7 +43,7 @@ public class BigPlayerAnimation : MonoBehaviour
 
     public void CaughtAnimation()
     {
-        Debug.Log("PLAY GRAB ANIMATION");
+        Debug.Log("PLAY CAUGHT ANIMATION");
         animator.SetTrigger("caughtTrigger");
     }
 
@@ -52,36 +53,45 @@ public class BigPlayerAnimation : MonoBehaviour
         animator.SetTrigger("releaseTrigger");
     }
 
+    // Called (for example) via animation event or another script
     public void FlySwatter()
     {
         flySwatter.SetActive(true);
-        Debug.Log("flySwatter WORKS");
+        Debug.Log("flySwatter activated");
         animator.SetTrigger("flySwatterTrigger");
         isFlySwapperActive = true;
 
-        // Start a coroutine to reset the state after the animation
-        StartCoroutine(EndFlySwatterAfterDelay());
+        // 🆕 Start the coroutine with the catch window logic
+        StartCoroutine(FlySwatterCatchWindow());
     }
 
-    private IEnumerator EndFlySwatterAfterDelay()
+    // 🆕 Coroutine with a short "catch window"
+    private IEnumerator FlySwatterCatchWindow()
     {
-        yield return new WaitForSeconds(2.0f); // Adjust this to match the length of your FlySwatter animation
+        // Wait a short moment before allowing a catch (prevents instant caught)
+        yield return new WaitForSeconds(0.3f);
+        canCatch = true;  // now hits will count
+        Debug.Log("Catch window OPEN");
+
+        // Keep the window open for ~1.7 seconds (adjust as needed)
+        yield return new WaitForSeconds(1.7f);
+        canCatch = false;
+        Debug.Log("Catch window CLOSED");
+
         EndFlySwatter();
     }
 
-    // Method to reset the FlySwapper state, allowing other actions again
     public void EndFlySwatter()
     {
         flySwatter.SetActive(false);
         isFlySwapperActive = false;
-        Debug.Log("FlySwatter action ended, player can now use P2PickUp again.");
+        Debug.Log("FlySwatter ended, player can grab again.");
     }
 
-    // This method detects if the flySwatter hits a SmallPlayer
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the flySwatter is active and collides with a SmallPlayer
-        if (isFlySwapperActive && other.CompareTag(smallPlayerTag))
+        // 🆕 Only register hits during the active catch window
+        if (isFlySwapperActive && canCatch && other.CompareTag(smallPlayerTag))
         {
             Debug.Log("flySwatter hit a SmallPlayer!");
             CaughtAnimation();
