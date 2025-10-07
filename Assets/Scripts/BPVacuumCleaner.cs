@@ -10,20 +10,9 @@ public class BPVacuumCleaner : MonoBehaviour
 
     [Header("Area Offset")]
     public Vector3 areaOffset = new Vector3(0f, 0f, 0.5f);
-
-
     [Header("Layer Mask")]
     public LayerMask smallPlayerLayer;
-
-    void Update()
-    {
-        if (Input.GetButtonDown("P2PickUp"))
-        {
-            TryPullTarget();
-        }
-    }
-
-    private void TryPullTarget()
+    public void TryPullTarget()
     {
         Vector3 center = transform.position + transform.TransformDirection(areaOffset);
         Collider[] hits = Physics.OverlapSphere(center, vacuumRadius, smallPlayerLayer);

@@ -10,9 +10,12 @@ public class BPItemCollector : MonoBehaviour
     {
         None,
         ThrowingItem,
+        ThrowingItem_02,
+        ThrowingItem_03,
         FlySwatter,
         MouseTrap,
-        Compass
+        Compass,
+        VacuumCleaner,
     }
     public float rayDistance = 10f; // The distance of the raycast
     public LayerMask collectibleLayer; // Layer mask to specify which layers should be considered for the raycast
@@ -22,25 +25,27 @@ public class BPItemCollector : MonoBehaviour
     private GameObject collectedItem; // The reference to the collectible item in range
     private bool canPickUp = false;
 
-    public TextMeshProUGUI bpPickUpText;  // Reference to the TextMeshPro UI element
-    public Image throwingItem;  // Reference to the UI Image for Boppy Pin
-    public Image flySwatterImage;  // Reference to the UI Image for Other Item
+    public TextMeshProUGUI bpPickUpText;
+    public Image throwingItem;
+    public Image flySwatterImage;
     public Image mouseTrapImage;
     public Image compassImage;
+    public Image vacuumCleanerImage;
 
-    public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
-    public BigPlayerAnimation bpAnimation; // Reference to another script that handles Other Item behavior.
+    public BPThrowItem bpThrowItem; 
+    public BigPlayerAnimation bpAnimation;
     public BPMouseTrap bpMouseTrap;
     public BPCompass bpCompass;
+    public BPVacuumCleaner bpVacuumCleaner;
 
     void Start()
     {
-        // Disable the pickup text and item images at the start of the game
         bpPickUpText.enabled = false;
         throwingItem.enabled = false;
         flySwatterImage.enabled = false;
         mouseTrapImage.enabled = false;
         compassImage.enabled = false;
+        vacuumCleanerImage.enabled = false;
     }
 
     void Update()
@@ -113,8 +118,23 @@ public class BPItemCollector : MonoBehaviour
                 throwingItem.enabled = true;
                 Debug.Log("Player picked up a ThrowItem.");
             }
-
-            // Try to find a child tagged as "BPFlySwatter"
+            
+            Transform throwItem2Child = collectedItem.transform.Find("BPThrowItem2");
+            if (throwItem2Child != null && throwItem2Child.CompareTag("BPThrowItem2"))
+            {
+                currentItem = ItemType.ThrowingItem_02;
+                throwingItem.enabled = true;
+                Debug.Log("Player picked up a ThrowItem_02.");
+            }
+           
+            Transform throwItem3Child = collectedItem.transform.Find("BPThrowItem3");
+            if (throwItem3Child != null && throwItem3Child.CompareTag("BPThrowItem3"))
+            {
+                currentItem = ItemType.ThrowingItem_03;
+                throwingItem.enabled = true;
+                Debug.Log("Player picked up a ThrowItem_03.");
+            }
+            
             Transform flyswatterChild = collectedItem.transform.Find("BPFlySwatter");
             if (flyswatterChild != null && flyswatterChild.CompareTag("BPFlySwatter"))
             {
@@ -122,7 +142,7 @@ public class BPItemCollector : MonoBehaviour
                 flySwatterImage.enabled = true;
                 Debug.Log("Player picked up an Other Item.");
             }
-            // Try to find a child tagged as "BPMouseTrap"
+          
             Transform mouseTrapChild = collectedItem.transform.Find("BPMouseTrap");
             if (mouseTrapChild != null && mouseTrapChild.CompareTag("BPMouseTrap"))
             {
@@ -136,6 +156,13 @@ public class BPItemCollector : MonoBehaviour
                 currentItem = ItemType.Compass;
                 compassImage.enabled = true;
                 Debug.Log("Player picked up an Compass.");
+            }
+            Transform vacuumCleanerChild = collectedItem.transform.Find("BPVacuumCleaner");
+            if (vacuumCleanerChild != null && vacuumCleanerChild.CompareTag("BPVacuumCleaner"))
+            {
+                currentItem = ItemType.VacuumCleaner;
+                vacuumCleanerImage.enabled = true;
+                Debug.Log("Player picked up a VacuumCleaner.");
             }
             // Destroy the parent collectible item and reset pickup state
             Destroy(collectedItem);
@@ -153,6 +180,14 @@ public class BPItemCollector : MonoBehaviour
         {
             bpThrowItem.SpawnThrowItem();
         }
+        if (currentItem == ItemType.ThrowingItem_02)
+        {
+            bpThrowItem.SpawnThrowItem2();
+        }
+         if (currentItem == ItemType.ThrowingItem_03)
+        {
+            bpThrowItem.SpawnThrowItem3();
+        }
         if (currentItem == ItemType.FlySwatter)
         {
             bpAnimation.FlySwatter();
@@ -163,7 +198,11 @@ public class BPItemCollector : MonoBehaviour
         }
         if (currentItem == ItemType.Compass)
         {
-            bpCompass.UseCompass();       
+            bpCompass.UseCompass();
+        }
+        if (currentItem == ItemType.VacuumCleaner)
+        {
+            bpVacuumCleaner.TryPullTarget();
         }
         // Mark the item as used and reset state
         itemUsed = true;
@@ -172,5 +211,6 @@ public class BPItemCollector : MonoBehaviour
         flySwatterImage.enabled = false;
         mouseTrapImage.enabled = false;
         compassImage.enabled = false;
+        vacuumCleanerImage.enabled = false;
     }
 }
