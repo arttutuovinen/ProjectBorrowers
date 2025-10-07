@@ -130,8 +130,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055707469122361919, guid: b95d00bb77514a34097b143c7d82163d,
         type: 3}
+      propertyPath: RotationModule.curve.scalar
+      value: 1.5707963
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055707469122361919, guid: b95d00bb77514a34097b143c7d82163d,
+        type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055707469122361919, guid: b95d00bb77514a34097b143c7d82163d,
+        type: 3}
+      propertyPath: RotationModule.curve.minScalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6426812522357695169, guid: b95d00bb77514a34097b143c7d82163d,
         type: 3}
@@ -140,8 +150,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6426812522357695169, guid: b95d00bb77514a34097b143c7d82163d,
         type: 3}
+      propertyPath: RotationModule.curve.scalar
+      value: 1.5707963
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426812522357695169, guid: b95d00bb77514a34097b143c7d82163d,
+        type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426812522357695169, guid: b95d00bb77514a34097b143c7d82163d,
+        type: 3}
+      propertyPath: RotationModule.curve.minScalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6426812522357695169, guid: b95d00bb77514a34097b143c7d82163d,
         type: 3}
