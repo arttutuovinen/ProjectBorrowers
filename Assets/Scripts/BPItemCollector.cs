@@ -39,6 +39,7 @@ public class BPItemCollector : MonoBehaviour
     public BPMouseTrap bpMouseTrap;
     public BPCompass bpCompass;
     public BPVacuumCleaner bpVacuumCleaner;
+    public BPTapeManager bpTapeManager;
 
     void Start()
     {
@@ -194,7 +195,7 @@ public class BPItemCollector : MonoBehaviour
         {
             bpThrowItem.SpawnThrowItem2();
         }
-         if (currentItem == ItemType.ThrowingItem_03)
+        if (currentItem == ItemType.ThrowingItem_03)
         {
             bpThrowItem.SpawnThrowItem3();
         }
@@ -214,9 +215,14 @@ public class BPItemCollector : MonoBehaviour
         {
             bpVacuumCleaner.TryPullTarget();
         }
-         if (currentItem == ItemType.Tape)
+        if (currentItem == ItemType.Tape)
         {
-            //bpTape.UseTape();
+            bool tapePlaced = bpTapeManager.TryActivateTape();
+            if (!tapePlaced)
+            {
+                // Do NOT consume the item if placement failed
+                return;
+            }
         }
         // Mark the item as used and reset state
         itemUsed = true;
@@ -226,5 +232,6 @@ public class BPItemCollector : MonoBehaviour
         mouseTrapImage.enabled = false;
         compassImage.enabled = false;
         vacuumCleanerImage.enabled = false;
+        tapeImage.enabled = false;
     }
 }

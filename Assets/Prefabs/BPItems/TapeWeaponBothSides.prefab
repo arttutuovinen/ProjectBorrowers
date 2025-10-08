@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2518285362465203783}
-  m_Layer: 0
+  - component: {fileID: 2602059401761096557}
+  - component: {fileID: 5180426591086999789}
+  m_Layer: 18
   m_Name: TapeWeaponBothSides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,6 +35,40 @@ Transform:
   - {fileID: 640825061859323373}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2602059401761096557
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914221480027089570}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.4, y: 1.75, z: 2.94}
+  m_Center: {x: 0, y: 0.88, z: 0}
+--- !u!114 &5180426591086999789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914221480027089570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a9d7b46c0a3814280f55f55c44dfda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TapeArea
+  IsActivated: 0
 --- !u!1001 &1111847610864863750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,7 +130,17 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7f48a9899a04c324aaac4f5b350615af,
         type: 3}
       propertyPath: m_Name
-      value: TapeWeapon (1)
+      value: TapeMesh_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7f48a9899a04c324aaac4f5b350615af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7f48a9899a04c324aaac4f5b350615af,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -200,7 +246,17 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7f48a9899a04c324aaac4f5b350615af,
         type: 3}
       propertyPath: m_Name
-      value: TapeWeapon
+      value: TapeMesh_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7f48a9899a04c324aaac4f5b350615af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7f48a9899a04c324aaac4f5b350615af,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
