@@ -16,6 +16,7 @@ public class BPItemCollector : MonoBehaviour
         MouseTrap,
         Compass,
         VacuumCleaner,
+        Tape,
     }
     public float rayDistance = 10f; // The distance of the raycast
     public LayerMask collectibleLayer; // Layer mask to specify which layers should be considered for the raycast
@@ -31,6 +32,7 @@ public class BPItemCollector : MonoBehaviour
     public Image mouseTrapImage;
     public Image compassImage;
     public Image vacuumCleanerImage;
+    public Image tapeImage;
 
     public BPThrowItem bpThrowItem; 
     public BigPlayerAnimation bpAnimation;
@@ -46,6 +48,7 @@ public class BPItemCollector : MonoBehaviour
         mouseTrapImage.enabled = false;
         compassImage.enabled = false;
         vacuumCleanerImage.enabled = false;
+        tapeImage.enabled = false;
     }
 
     void Update()
@@ -164,6 +167,13 @@ public class BPItemCollector : MonoBehaviour
                 vacuumCleanerImage.enabled = true;
                 Debug.Log("Player picked up a VacuumCleaner.");
             }
+            Transform tapeChild = collectedItem.transform.Find("BPTape");
+            if (tapeChild != null && tapeChild.CompareTag("BPTape"))
+            {
+                currentItem = ItemType.Tape;
+                tapeImage.enabled = true;
+                Debug.Log("Player picked up a Tape.");
+            }
             // Destroy the parent collectible item and reset pickup state
             Destroy(collectedItem);
             itemUsed = false;
@@ -203,6 +213,10 @@ public class BPItemCollector : MonoBehaviour
         if (currentItem == ItemType.VacuumCleaner)
         {
             bpVacuumCleaner.TryPullTarget();
+        }
+         if (currentItem == ItemType.Tape)
+        {
+            //bpTape.UseTape();
         }
         // Mark the item as used and reset state
         itemUsed = true;
