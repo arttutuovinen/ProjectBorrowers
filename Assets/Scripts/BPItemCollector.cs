@@ -17,6 +17,7 @@ public class BPItemCollector : MonoBehaviour
         Compass,
         VacuumCleaner,
         Tape,
+        Medicine,
     }
     public float rayDistance = 10f; // The distance of the raycast
     public LayerMask collectibleLayer; // Layer mask to specify which layers should be considered for the raycast
@@ -33,6 +34,7 @@ public class BPItemCollector : MonoBehaviour
     public Image compassImage;
     public Image vacuumCleanerImage;
     public Image tapeImage;
+    public Image medicineImage;
 
     public BPThrowItem bpThrowItem; 
     public BigPlayerAnimation bpAnimation;
@@ -40,6 +42,7 @@ public class BPItemCollector : MonoBehaviour
     public BPCompass bpCompass;
     public BPVacuumCleaner bpVacuumCleaner;
     public BPTapeManager bpTapeManager;
+    public BPMedicine bpMedicine;
 
     void Start()
     {
@@ -50,6 +53,7 @@ public class BPItemCollector : MonoBehaviour
         compassImage.enabled = false;
         vacuumCleanerImage.enabled = false;
         tapeImage.enabled = false;
+        medicineImage.enabled = false;
     }
 
     void Update()
@@ -175,6 +179,13 @@ public class BPItemCollector : MonoBehaviour
                 tapeImage.enabled = true;
                 Debug.Log("Player picked up a Tape.");
             }
+            Transform medicineChild = collectedItem.transform.Find("BPMedicine");
+            if (medicineChild != null && medicineChild.CompareTag("BPMedicine"))
+            {
+                currentItem = ItemType.Medicine;
+                medicineImage.enabled = true;
+                Debug.Log("Player picked up a medicine.");
+            }
             // Destroy the parent collectible item and reset pickup state
             Destroy(collectedItem);
             itemUsed = false;
@@ -224,6 +235,10 @@ public class BPItemCollector : MonoBehaviour
                 return;
             }
         }
+        if (currentItem == ItemType.Medicine)
+        {
+            bpMedicine.ActivateSpeedBoost();
+        }
         // Mark the item as used and reset state
         itemUsed = true;
         currentItem = ItemType.None;
@@ -233,5 +248,6 @@ public class BPItemCollector : MonoBehaviour
         compassImage.enabled = false;
         vacuumCleanerImage.enabled = false;
         tapeImage.enabled = false;
+        medicineImage.enabled = false;
     }
 }

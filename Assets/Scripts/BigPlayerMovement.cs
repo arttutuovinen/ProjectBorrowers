@@ -15,7 +15,7 @@ public class BigPlayerMovement : MonoBehaviour
 
     // ** Crouching variables **
     public float crouchSpeed = 1.0f;     // Speed when crouching
-    private float currentSpeed;
+    [HideInInspector] public float currentSpeed;
     public float standingHeight = 2.0f;
     public float crouchingHeight = 1.0f;
     public Vector3 standingCenter = Vector3.zero;
@@ -256,6 +256,4 @@ public class BigPlayerMovement : MonoBehaviour
 
         cameraFollowTarget.localPosition = endPos; // Snap to final position
     }
-
-
 }

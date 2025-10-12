@@ -990,81 +990,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a7006e270f44c94585d9a5d33fc8e46, type: 3}
---- !u!1 &87939882
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 87939883}
-  - component: {fileID: 87939885}
-  - component: {fileID: 87939884}
-  m_Layer: 5
-  m_Name: BPMedicine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &87939883
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87939882}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75814515, y: 0.75814515, z: 0.75814515}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 306720786}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.45, y: 0.5}
-  m_AnchorMax: {x: 0.45, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 98, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &87939884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87939882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e974df2abd326294fae475298da77856, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &87939885
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87939882}
-  m_CullTransparentMesh: 1
 --- !u!1 &92824061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3628,7 +3553,6 @@ RectTransform:
   - {fileID: 194393290}
   - {fileID: 1346099801}
   - {fileID: 449963801}
-  - {fileID: 87939883}
   m_Father: {fileID: 2117181602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.94, y: 0.32}
@@ -12474,7 +12398,6 @@ MonoBehaviour:
   - {fileID: 7900599608242785327, guid: 66456fe5f33ca434591cbc78aedc0628, type: 3}
   - {fileID: 7900599608242785327, guid: 720823928d0eeb94995318f072a63041, type: 3}
   - {fileID: 7900599608242785327, guid: f1c2bacc2beef1842aedae3edc5bee79, type: 3}
-  - {fileID: 7900599608242785327, guid: d6c2cd46088560f4e8d675f4ec69123d, type: 3}
   spawnPoints:
   - {fileID: 1210978575}
   - {fileID: 1537756797}
@@ -12512,7 +12435,7 @@ MonoBehaviour:
   - {fileID: 2022633508}
   - {fileID: 1816739694}
   - {fileID: 1192226265}
-  spawnChances: 16000000190000000a0000000a0000000a000000170000000a000000
+  spawnChances: 16000000190000000a0000000a0000000a00000017000000
 --- !u!1 &984416884
 GameObject:
   m_ObjectHideFlags: 0
@@ -18239,33 +18162,6 @@ MonoBehaviour:
   tapeAreaLayer:
     serializedVersion: 2
     m_Bits: 262144
---- !u!114 &1433242007 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1837153285206449404, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5584686570675883846}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433241971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bfb227eb1499954c9d87733658f3be6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1433242016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433241971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb959919706adae43bcf413d2b4ed6af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BPMedicine
-  playerMovement: {fileID: 1433242007}
-  boostDuration: 5
-  boostedSpeed: 20
 --- !u!1 &1434512060
 GameObject:
   m_ObjectHideFlags: 0
@@ -27944,11 +27840,6 @@ PrefabInstance:
       objectReference: {fileID: 449963802}
     - target: {fileID: 6314714961187952365, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
-      propertyPath: bpMedicine
-      value: 
-      objectReference: {fileID: 1433242016}
-    - target: {fileID: 6314714961187952365, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
-        type: 3}
       propertyPath: bpAnimation
       value: 
       objectReference: {fileID: 537179784}
@@ -27982,11 +27873,6 @@ PrefabInstance:
       propertyPath: bpTapeManager
       value: 
       objectReference: {fileID: 1433242006}
-    - target: {fileID: 6314714961187952365, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
-        type: 3}
-      propertyPath: medicineImage
-      value: 
-      objectReference: {fileID: 87939884}
     - target: {fileID: 6314714961187952365, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
       propertyPath: mouseTrapImage
@@ -28084,10 +27970,6 @@ PrefabInstance:
         type: 3}
       insertIndex: 7
       addedObject: {fileID: 1433242006}
-    - targetCorrespondingSourceObject: {fileID: 1644779056197674402, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
-        type: 3}
-      insertIndex: 11
-      addedObject: {fileID: 1433242016}
     - targetCorrespondingSourceObject: {fileID: 1644779056197674402, guid: dcb9caa83cae42143905ac5fa0fe3b0e,
         type: 3}
       insertIndex: -1
