@@ -52,21 +52,42 @@ public class SPMovementNET : NetworkBehaviour
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
         if (IsOwner)
         {
-            // Enable the camera only for the local player
-            playerCamera.SetActive(true);
-            cameraTransform = playerCamera.transform;
-            cameraFollowTarget = this.transform; // Local player follows themselves
+            // 🔹 Find the scene camera if it’s not assigned
+            if (playerCamera == null)
+            {
+                // Option 1: Find a tagged camera
+                GameObject foundCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
+                if (foundCamera != null)
+                {
+                    playerCamera = foundCamera;
+                }
+                else
+                {
+                    Debug.LogWarning("No MainCamera found in scene for player to attach!");
+                }
+            }
+
+            // 🔹 Activate and link the camera
+            if (playerCamera != null)
+            {
+                playerCamera.SetActive(true);
+                cameraTransform = playerCamera.transform;
+                cameraFollowTarget = this.transform;
+
+                // Unparent the camera for smooth follow movement
+                cameraTransform.SetParent(null);
+            }
         }
         else
         {
-            playerCamera.SetActive(false);
+                // Disable camera for non-local players
+            if (playerCamera != null)
+                playerCamera.SetActive(false);
         }
-
-        controller = GetComponent<CharacterController>();
-        //Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
-
         // Hide the interact text at the start
         if (ladderInteractText != null)
         {
