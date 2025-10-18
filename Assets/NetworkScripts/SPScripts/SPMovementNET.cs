@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using TMPro;
 
-public class SmallPlayerMovement : MonoBehaviour
+public class SPMovementNET : NetworkBehaviour
 {
     public float moveSpeed = 5f; // Speed of movement
     public float climbSpeed = 3f; // Speed for climbing ladders
     public float gravity = -9.81f; // Gravity applied to the player
     public float jumpHeight = 1.5f; // How high the player can jump
+    public GameObject playerCamera; 
 
     public float turnSmoothTime = 0.1f; // Smoothing for rotation
     private bool canMove = true; // A flag to control movement
@@ -52,8 +52,20 @@ public class SmallPlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        if (IsOwner)
+        {
+            // Enable the camera only for the local player
+            playerCamera.SetActive(true);
+            cameraTransform = playerCamera.transform;
+            cameraFollowTarget = this.transform; // Local player follows themselves
+        }
+        else
+        {
+            playerCamera.SetActive(false);
+        }
+
         controller = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
+        //Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
 
         // Hide the interact text at the start
         if (ladderInteractText != null)
@@ -62,12 +74,13 @@ public class SmallPlayerMovement : MonoBehaviour
         }
         emissionModule = movementParticles.emission;
         emissionModule.rateOverTime = 0f; // Start with no emission
-
+        
     }
 
     private void Update()
     {
-        
+        if (!IsOwner) return;
+
         if (isClimbing)
         {
             ClimbLadder();
@@ -80,7 +93,8 @@ public class SmallPlayerMovement : MonoBehaviour
     }
 
     private void LateUpdate()
-    {
+    {   
+        if (!IsOwner) return; // Must only control the camera for the owner
         ControlCamera();
     }   
     // Method that allows enabling movement from other scripts
@@ -221,7 +235,7 @@ public class SmallPlayerMovement : MonoBehaviour
         }
 
         // Set camera position and look at the player
-        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredCameraPosition, Time.deltaTime * 30f);;
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredCameraPosition, Time.deltaTime * 5f);;
         cameraTransform.LookAt(cameraFollowTarget.position);
     }
 
@@ -255,6 +269,5 @@ public class SmallPlayerMovement : MonoBehaviour
             }
         }
     }
-    
-
+     
 }

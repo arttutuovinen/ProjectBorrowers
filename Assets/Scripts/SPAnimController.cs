@@ -18,8 +18,8 @@ public class SPAnimController : MonoBehaviour
 
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("P1Horizontal");
-        float vertical = Input.GetAxisRaw("P1Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
 
         // Track grounded state with coyote time
         if (controller.isGrounded)
@@ -30,7 +30,7 @@ public class SPAnimController : MonoBehaviour
         bool isGroundedOrCoyote = (Time.time - lastGroundedTime) <= coyoteTime;
 
         // Jump input
-        if (Input.GetButtonDown("P1Jump") && isGroundedOrCoyote)
+        if (Input.GetButtonDown("P1Jump") || Input.GetButtonDown("Jump") && isGroundedOrCoyote)
         {
             animator.ResetTrigger("IsJumping"); // ensures clean trigger
             animator.SetTrigger("IsJumping");
