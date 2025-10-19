@@ -5,7 +5,6 @@ public class GameLauncher : MonoBehaviour
 {
     void Update()
     {
-        // If we’re not yet in a network session, show the cursor
         if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -17,6 +16,7 @@ public class GameLauncher : MonoBehaviour
             Cursor.visible = false;
         }
     }
+
     void OnGUI()
     {
         if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
