@@ -4925,7 +4925,6 @@ GameObject:
   - component: {fileID: 8688724790149147744}
   - component: {fileID: 8872808774314510905}
   - component: {fileID: 3196830925416468045}
-  - component: {fileID: 414432666989003418}
   - component: {fileID: 1297298460316706185}
   - component: {fileID: 7599731362518973075}
   - component: {fileID: 3470725793712673339}
@@ -4936,9 +4935,12 @@ GameObject:
   - component: {fileID: 457389529722468420}
   - component: {fileID: 2809535191905125762}
   - component: {fileID: 1537923538486545220}
-  - component: {fileID: 5644917193308100841}
   - component: {fileID: 6199591503181236174}
+  - component: {fileID: 5644917193308100841}
   - component: {fileID: 7365710028398305443}
+  - component: {fileID: 2217136696443275711}
+  - component: {fileID: 8223838733859303511}
+  - component: {fileID: 1001004733733542258}
   m_Layer: 7
   m_Name: SmallPlayer
   m_TagString: SmallPlayer
@@ -4954,7 +4956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150109236876745808}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.94599015, z: -0, w: -0.32419536}
+  m_LocalRotation: {x: 0, y: 0.94598925, z: 0, w: 0.32419816}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -4966,7 +4968,7 @@ Transform:
   - {fileID: 8256599044429523524}
   - {fileID: 8297555670875580252}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 142.166, z: 0}
 --- !u!33 &8872808774314510905
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5023,31 +5025,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!143 &414432666989003418
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3150109236876745808}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.2
-  m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!114 &1297298460316706185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5252,7 +5229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
   GlobalObjectIdHash: 886398015
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 3700363164
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -5264,43 +5241,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &5644917193308100841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3150109236876745808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ead6c271ea0e6e40a3b427a461e919e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SPMovementNET
-  ShowTopMostFoldoutHeaderGroup: 1
-  moveSpeed: 7
-  climbSpeed: 8
-  gravity: -30
-  jumpHeight: 3
-  playerCamera: {fileID: 0}
-  turnSmoothTime: 0.1
-  cameraTransform: {fileID: 0}
-  cameraFollowTarget: {fileID: 9091730586132460224}
-  mouseSensitivity: 300
-  controllerSensitivity: 2
-  distanceFromPlayer: 3
-  minVerticalAngle: -30
-  maxVerticalAngle: 70
-  isTreasureCollected: 0
-  ladderInteractText: {fileID: 0}
-  itemInteractText: {fileID: 0}
-  movementParticles: {fileID: 1257212597661535666}
-  maxEmissionRate: 20
-  emissionChangeSpeed: 10
-  groundCheck: {fileID: 849331249188711111}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  groundDistance: 0.1
 --- !u!114 &6199591503181236174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5328,12 +5268,12 @@ MonoBehaviour:
   AuthorityMode: 0
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
-  SyncPositionX: 0
-  SyncPositionY: 0
-  SyncPositionZ: 0
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 1
   SyncScaleY: 1
   SyncScaleZ: 1
@@ -5347,6 +5287,29 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &5644917193308100841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ead6c271ea0e6e40a3b427a461e919e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SPMovementNET
+  moveSpeed: 8
+  acceleration: 60
+  jumpForce: 20
+  mouseSensitivity: 300
+  groundCheck: {fileID: 849331249188711111}
+  groundDistance: 0.3
+  cameraFollowTarget: {fileID: 9091730586132460224}
+  cameraDistance: 3
+  cameraHeight: 0.5
+  fallMultiplier: 20
+  lowJumpMultiplier: 5
 --- !u!135 &7365710028398305443
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5368,6 +5331,73 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.85
   m_Center: {x: 0, y: 0.57, z: 0}
+--- !u!54 &2217136696443275711
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  serializedVersion: 5
+  m_Mass: 0.5
+  m_LinearDamping: 9
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!136 &8223838733859303511
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 1.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &1001004733733542258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkRigidbody
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkRigidbodyBaseExpanded: 0
+  UseRigidBodyForMotion: 0
+  AutoUpdateKinematicState: 1
+  AutoSetKinematicOnDespawn: 1
 --- !u!1 &4756874142035087774
 GameObject:
   m_ObjectHideFlags: 0
@@ -5424,7 +5454,7 @@ Transform:
   m_GameObject: {fileID: 7774656154414418561}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5681,3 +5711,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64e34ce1f475824eaaddc8538b469fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundCheck: {fileID: 849331249188711111}
+  groundDistance: 0.3

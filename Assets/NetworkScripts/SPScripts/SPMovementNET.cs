@@ -1,217 +1,156 @@
 using UnityEngine;
-using Unity.Netcode;
-using TMPro;
 
-public class SPMovementNET : NetworkBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class ThirdPersonController : MonoBehaviour
 {
-    public float moveSpeed = 7f; 
-    public float climbSpeed = 8f; 
-    public float gravity = -30f; 
-    public float jumpHeight = 3f; 
-    public GameObject playerCamera; 
+    [Header("Movement Settings")]
+    public float moveSpeed = 6f;        // Max running speed
+    public float acceleration = 40f;    // Higher = snappier movement
+    public float jumpForce = 11f;       // Jump ~3x player height
 
-    public float turnSmoothTime = 0.1f; 
-    private bool canMove = true; 
-
-    public Transform cameraTransform; 
-    public Transform cameraFollowTarget; 
-
-    public float mouseSensitivity = 300f; 
-    public float controllerSensitivity = 2f; 
-    public float distanceFromPlayer = 3f; 
-    public float minVerticalAngle = -30f; 
-    public float maxVerticalAngle = 60f; 
-
-    private CharacterController controller;
-    private Vector3 velocity;
-    private bool isGrounded;
-    private float turnSmoothVelocity;
-
-    private float yaw; 
-    private float pitch; 
-
-    private bool isClimbing = false; 
-    private bool nearLadder = false; 
-    private Collider ladder; 
-
-    public bool isTreasureCollected = false;
-
-    public TextMeshProUGUI ladderInteractText;
-    public TextMeshProUGUI itemInteractText;
-
-    public ParticleSystem movementParticles;
-    public float maxEmissionRate = 20f; 
-    public float emissionChangeSpeed = 10f; 
-    private ParticleSystem.EmissionModule emissionModule;
+    [Header("Mouse Settings")]
+    public float mouseSensitivity = 100f;
 
     [Header("Ground Check")]
-    public Transform groundCheck; // 🔹 assign an empty child at feet
-    public LayerMask groundLayer;
-    public float groundDistance = 0.1f;
+    public Transform groundCheck;
+    public float groundDistance = 0.3f;
 
-    public override void OnNetworkSpawn()
+    [Header("Camera Settings")]
+    public Transform cameraFollowTarget;
+    public float cameraDistance = 5f;
+    public float cameraHeight = 2f;
+
+    [Header("Gravity Settings")]
+    public float fallMultiplier = 2.5f;     // Faster falling
+    public float lowJumpMultiplier = 2f;    // Short hops
+
+    private Rigidbody rb;
+    private bool isGrounded;
+
+    private float cameraXRotation = 20f;
+    private float cameraYRotation = 0f;
+
+    private Vector3 moveInput;
+    private Camera playerCamera;
+
+    void Start()
     {
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        rb.useGravity = true;
+        rb.isKinematic = false;
 
-        // 🔹 Ensure CharacterController sits on ground if pivot is at feet
-        controller.center = new Vector3(0, controller.height / 2f, 0);
+        // Make sure damping (drag) values are reasonable
+        rb.linearDamping = 6f;   // replaces "drag" — reduces sliding
+        rb.angularDamping = 0.05f;
 
-        Debug.Log($"Player spawned. IsOwner={IsOwner}, LocalClientId={NetworkManager.Singleton.LocalClientId}");
-
-        if (IsOwner)
-        {
-            // 🔹 Nudge down slightly to ensure grounded on spawn
-            controller.Move(Vector3.down * 0.05f);
-
-            // 🔹 Find and assign the separate camera
-            if (playerCamera == null)
-            {
-                GameObject foundCamera = GameObject.FindGameObjectWithTag("MainCamera");
-                if (foundCamera != null)
-                    playerCamera = foundCamera;
-                else
-                    Debug.LogWarning("No MainCamera found in scene for player to attach!");
-            }
-
-            if (playerCamera != null)
-            {
-                playerCamera.SetActive(true);
-                cameraTransform = playerCamera.transform;
-                cameraFollowTarget = this.transform;
-                cameraTransform.SetParent(null); // detach camera for smooth movement
-            }
-        }
-        else
-        {
-            if (playerCamera != null)
-                playerCamera.SetActive(false);
-        }
-
-        if (ladderInteractText != null)
-            ladderInteractText.gameObject.SetActive(false);
-
-        emissionModule = movementParticles.emission;
-        emissionModule.rateOverTime = 0f; 
+        playerCamera = GameObject.Find("SmallPlayerCamera").GetComponent<Camera>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    void Update()
     {
-        if (!IsOwner) return; // 🔹 Only owner controls movement
-
-        // 🔹 Ground check using small sphere at feet
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
-
-        if (isGrounded && velocity.y < 0)
-            velocity.y = -2f;
-
-        if (isClimbing)
-            ClimbLadder();
-        else
-        {
-            Move();
-            ApplyGravity();
-        }
+        HandleInput();
+        HandleMouseLook();
+        HandleCamera();
+        CheckGrounded();
+        HandleJump();
     }
 
-    private void LateUpdate()
+    void FixedUpdate()
     {
-        if (!IsOwner) return; // 🔹 Only owner controls camera
-        ControlCamera();
+        ApplyMovement();
+        ApplyBetterGravity();
     }
 
-    public void EnableMovement() => canMove = true;
-    public void DisableMovement() => canMove = false;
-
-    public void Move()
+    void HandleInput()
     {
-        if (!canMove) return;
-
         float horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
         float vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
 
-        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+        // Camera-relative movement
+        Vector3 camForward = playerCamera.transform.forward;
+        Vector3 camRight = playerCamera.transform.right;
+        camForward.y = 0f;
+        camRight.y = 0f;
+        camForward.Normalize();
+        camRight.Normalize();
 
-        // 🔹 Particle emission logic
-        float targetRate = (isGrounded && direction.magnitude >= 0.1f) ? maxEmissionRate : 0f;
-        float newRate = Mathf.Lerp(emissionModule.rateOverTime.constant, targetRate, Time.deltaTime * emissionChangeSpeed);
-        emissionModule.rateOverTime = newRate;
-
-        if (direction.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
-        }
-
-        if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-
-        if (nearLadder && (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("P1Interact")))
-        {
-            isClimbing = true;
-            velocity.y = 0f;
-        }
+        moveInput = (camForward * vertical + camRight * horizontal).normalized;
     }
 
-    private void ApplyGravity()
+    void ApplyMovement()
     {
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        if (moveInput.sqrMagnitude > 0.01f)
+        {
+            Vector3 targetVelocity = moveInput * moveSpeed;
+            Vector3 velocityChange = targetVelocity - new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
+            // Apply acceleration-based movement
+            rb.AddForce(velocityChange * acceleration, ForceMode.Acceleration);
+
+            // Rotate toward move direction
+            Quaternion targetRotation = Quaternion.LookRotation(moveInput, Vector3.up);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
+        }
     }
 
-    private void ClimbLadder()
+    void HandleJump()
     {
-        velocity.y = 0f;
-        float vertical = Input.GetAxisRaw("P1Vertical") + Input.GetAxisRaw("Vertical");
-        controller.Move(new Vector3(0, vertical, 0).normalized * climbSpeed * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("P1Interact"))
-            isClimbing = false;
+        if (isGrounded && Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump"))
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 
-    private void ControlCamera()
+    void ApplyBetterGravity()
+    {
+        if (rb.linearVelocity.y < 0)
+        {
+            // Falling — apply stronger gravity
+            rb.AddForce(Physics.gravity * (fallMultiplier - 1f), ForceMode.Acceleration);
+        }
+        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            // Early jump release — smaller hop
+            rb.AddForce(Physics.gravity * (lowJumpMultiplier - 1f), ForceMode.Acceleration);
+        }
+    }
+
+    void CheckGrounded()
+    {
+         // Use a small sphere to detect ground contact
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~0, QueryTriggerInteraction.Ignore);
+    }
+
+    void HandleMouseLook()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        yaw += mouseX;
-        pitch -= mouseY;
-        pitch = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
-
-        Vector3 desiredDir = Quaternion.Euler(pitch, yaw, 0f) * Vector3.back;
-        Vector3 desiredPos = cameraFollowTarget.position + desiredDir * distanceFromPlayer;
-
-        RaycastHit hit;
-        if (Physics.Raycast(cameraFollowTarget.position, desiredPos - cameraFollowTarget.position, out hit, distanceFromPlayer))
-            desiredPos = cameraFollowTarget.position + (desiredPos - cameraFollowTarget.position).normalized * Mathf.Max(hit.distance - 0.3f, 0.1f);
-
-        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPos, Time.deltaTime * 15f);
-        cameraTransform.LookAt(cameraFollowTarget.position);
+        cameraYRotation += mouseX;
+        cameraXRotation -= mouseY;
+        cameraXRotation = Mathf.Clamp(cameraXRotation, -35f, 60f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    void HandleCamera()
     {
-        if (other.CompareTag("Ladder"))
-        {
-            nearLadder = true;
-            ladder = other;
-            if (ladderInteractText != null)
-                ladderInteractText.gameObject.SetActive(true);
-        }
+        if (playerCamera == null || cameraFollowTarget == null) return;
+
+        Quaternion rotation = Quaternion.Euler(cameraXRotation, cameraYRotation, 0);
+        Vector3 offset = rotation * new Vector3(0, 0, -cameraDistance);
+
+        playerCamera.transform.position = cameraFollowTarget.position + offset + Vector3.up * cameraHeight;
+        playerCamera.transform.LookAt(cameraFollowTarget.position + Vector3.up * cameraHeight);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnDrawGizmosSelected()
     {
-        if (other == ladder)
+        if (groundCheck != null)
         {
-            nearLadder = false;
-            ladder = null;
-            isClimbing = false;
-            if (ladderInteractText != null)
-                ladderInteractText.gameObject.SetActive(false);
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundDistance);
         }
     }
 }

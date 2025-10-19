@@ -5,24 +5,28 @@ using UnityEngine;
 public class SPAnimController : MonoBehaviour
 {
     private Animator animator;
-    private CharacterController controller;
-    // Small buffer so jump can still trigger right after leaving ground
-    private float coyoteTime = 0.1f;  
+    private Rigidbody rb;
+
+    [Header("Ground Check")]
+    public Transform groundCheck;
+    public float groundDistance = 0.3f;
+    private bool isGrounded;
+
+    // Coyote time
+    private float coyoteTime = 0.1f;
     private float lastGroundedTime;
 
     void Start()
     {
-        animator = GetComponent<Animator>(); 
-        controller = GetComponentInParent<CharacterController>(); 
+        animator = GetComponent<Animator>();
+        rb = GetComponentInParent<Rigidbody>();
     }
 
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
-
-        // Track grounded state with coyote time
-        if (controller.isGrounded)
+        // Check grounded with sphere for reliability
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~0, QueryTriggerInteraction.Ignore);
+        if (isGrounded)
         {
             lastGroundedTime = Time.time;
         }
@@ -30,31 +34,29 @@ public class SPAnimController : MonoBehaviour
         bool isGroundedOrCoyote = (Time.time - lastGroundedTime) <= coyoteTime;
 
         // Jump input
-        if (Input.GetButtonDown("P1Jump") || Input.GetButtonDown("Jump") && isGroundedOrCoyote)
+        if ((Input.GetButtonDown("P1Jump") || Input.GetButtonDown("Jump")) && isGroundedOrCoyote)
         {
-            animator.ResetTrigger("IsJumping"); // ensures clean trigger
+            animator.ResetTrigger("IsJumping");
             animator.SetTrigger("IsJumping");
         }
 
-        // Falling check (don’t override jump immediately)
-        if (!controller.isGrounded)
-        {
-            // Only set falling if not already in jump animation
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
-            {
-                animator.SetBool("IsFalling", true);
-            }
+        // Determine horizontal movement
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        bool isMoving = horizontalVelocity.magnitude > 0.1f;
 
-            // Stop running while in air
-            animator.SetBool("IsRunning", false);
-        }
-        else
-        {
-            animator.SetBool("IsFalling", false);
+        animator.SetBool("IsRunning", isGrounded && isMoving);
 
-            // Only check running when grounded
-            bool isMoving = (horizontal != 0 || vertical != 0);
-            animator.SetBool("IsRunning", isMoving);
+        // Falling check
+        bool isFalling = !isGrounded && rb.linearVelocity.y < -0.1f;
+        animator.SetBool("IsFalling", isFalling);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
         }
     }
 }
