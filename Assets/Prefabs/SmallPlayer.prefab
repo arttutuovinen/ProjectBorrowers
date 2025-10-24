@@ -5304,7 +5304,10 @@ MonoBehaviour:
   jumpForce: 20
   mouseSensitivity: 300
   groundCheck: {fileID: 849331249188711111}
-  groundDistance: 0.3
+  groundDistance: 0.1
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1048439
   cameraFollowTarget: {fileID: 9091730586132460224}
   cameraDistance: 3
   cameraHeight: 0.5
@@ -5711,5 +5714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64e34ce1f475824eaaddc8538b469fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  rb: {fileID: 0}
   groundCheck: {fileID: 849331249188711111}
   groundDistance: 0.3

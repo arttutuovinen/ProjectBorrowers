@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class ThirdPersonController : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -14,6 +13,7 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Ground Check")]
     public Transform groundCheck;
     public float groundDistance = 0.3f;
+    public LayerMask groundLayers;      // ✅ Added — choose which layers count as ground
 
     [Header("Camera Settings")]
     public Transform cameraFollowTarget;
@@ -81,23 +81,64 @@ public class ThirdPersonController : MonoBehaviour
 
     void ApplyMovement()
     {
+        // Get the desired velocity on the XZ plane
+        Vector3 targetVelocity = moveInput * moveSpeed;
+
+        // Current horizontal velocity
+        Vector3 currentVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
+        // Acceleration towards target velocity
+        Vector3 velocityChange = (targetVelocity - currentVelocity) * acceleration;
+
+        // If near a wall, project movement along wall to prevent sticking
+        if (isGrounded)
+        {
+            // When grounded, just apply as usual
+            rb.AddForce(velocityChange, ForceMode.Acceleration);
+        }
+        else
+        {
+            // When airborne, check if hitting a wall
+            if (Physics.Raycast(transform.position, moveInput, out RaycastHit hit, 0.6f))
+            {
+                if (!hit.collider.CompareTag("SmallPlayer"))
+                {
+                    // Slide along the wall instead of pushing into it
+                    Vector3 wallNormal = hit.normal;
+                    Vector3 slideDir = Vector3.ProjectOnPlane(moveInput, wallNormal).normalized;
+                    Vector3 slideVelocity = slideDir * moveSpeed;
+
+                    Vector3 airborneVelocityChange = (slideVelocity - currentVelocity) * acceleration * 0.5f;
+                    rb.AddForce(airborneVelocityChange, ForceMode.Acceleration);
+                    return;
+                }
+            }
+
+            // Normal mid-air movement (no wall hit)
+            rb.AddForce(velocityChange * 0.5f, ForceMode.Acceleration);
+        }
+
+        // Rotate toward move direction if moving
         if (moveInput.sqrMagnitude > 0.01f)
         {
-            Vector3 targetVelocity = moveInput * moveSpeed;
-            Vector3 velocityChange = targetVelocity - new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-
-            // Apply acceleration-based movement
-            rb.AddForce(velocityChange * acceleration, ForceMode.Acceleration);
-
-            // Rotate toward move direction
             Quaternion targetRotation = Quaternion.LookRotation(moveInput, Vector3.up);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
         }
+        // Stop tiny residual movement when no input
+        if (moveInput.sqrMagnitude < 0.01f && isGrounded)
+        {
+            Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            if (horizontalVelocity.magnitude < 0.2f)
+            {
+                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+            }
+        }
     }
+
 
     void HandleJump()
     {
-        if (isGrounded && Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump"))
+        if (isGrounded && (Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")))
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -120,8 +161,11 @@ public class ThirdPersonController : MonoBehaviour
 
     void CheckGrounded()
     {
-         // Use a small sphere to detect ground contact
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, ~0, QueryTriggerInteraction.Ignore);
+        // ✅ Only detects colliders in the specified ground layers
+        isGrounded = Physics.CheckSphere(groundCheck.position,groundDistance,groundLayers);
+
+        // Debug visualization
+        Debug.DrawRay(groundCheck.position, Vector3.down * groundDistance, isGrounded ? Color.green : Color.red, 0.1f);
     }
 
     void HandleMouseLook()
@@ -145,13 +189,14 @@ public class ThirdPersonController : MonoBehaviour
         playerCamera.transform.LookAt(cameraFollowTarget.position + Vector3.up * cameraHeight);
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (groundCheck != null)
         {
             Gizmos.color = isGrounded ? Color.green : Color.red;
-            Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundDistance);
+            Gizmos.DrawWireSphere(groundCheck.position, groundDistance); // ✅ visualize sphere radius
         }
     }
 }
+
 
