@@ -24,6 +24,10 @@ public class ThirdPersonController : MonoBehaviour
     public float fallMultiplier = 2.5f;     // Faster falling
     public float lowJumpMultiplier = 2f;    // Short hops
 
+    [Header("Jump Settings")]
+    public float coyoteTime = 0.2f;  // Grace period after leaving ground
+    private float coyoteCounter;
+
     private Rigidbody rb;
     private bool isGrounded;
 
@@ -81,36 +85,31 @@ public class ThirdPersonController : MonoBehaviour
 
     void ApplyMovement()
     {
-        // Get the desired velocity on the XZ plane
+        // 1️⃣ Calculate target horizontal velocity based on input
         Vector3 targetVelocity = moveInput * moveSpeed;
-
-        // Current horizontal velocity
         Vector3 currentVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-
-        // Acceleration towards target velocity
         Vector3 velocityChange = (targetVelocity - currentVelocity) * acceleration;
 
-        // If near a wall, project movement along wall to prevent sticking
+        // 2️⃣ Apply movement forces
         if (isGrounded)
         {
-            // When grounded, just apply as usual
+            // Normal grounded movement
             rb.AddForce(velocityChange, ForceMode.Acceleration);
         }
         else
         {
-            // When airborne, check if hitting a wall
+            // Airborne movement with wall-slide prevention
             if (Physics.Raycast(transform.position, moveInput, out RaycastHit hit, 0.6f))
             {
                 if (!hit.collider.CompareTag("SmallPlayer"))
                 {
-                    // Slide along the wall instead of pushing into it
+                    // Project movement along wall to slide instead of sticking
                     Vector3 wallNormal = hit.normal;
                     Vector3 slideDir = Vector3.ProjectOnPlane(moveInput, wallNormal).normalized;
                     Vector3 slideVelocity = slideDir * moveSpeed;
-
                     Vector3 airborneVelocityChange = (slideVelocity - currentVelocity) * acceleration * 0.5f;
                     rb.AddForce(airborneVelocityChange, ForceMode.Acceleration);
-                    return;
+                    return; // skip further movement force
                 }
             }
 
@@ -118,30 +117,29 @@ public class ThirdPersonController : MonoBehaviour
             rb.AddForce(velocityChange * 0.5f, ForceMode.Acceleration);
         }
 
-        // Rotate toward move direction if moving
+        // 3️⃣ Rotate player toward movement direction if moving
         if (moveInput.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveInput, Vector3.up);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, 10f * Time.fixedDeltaTime));
         }
-        // Stop tiny residual movement when no input
-        if (moveInput.sqrMagnitude < 0.01f && isGrounded)
-        {
-            Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-            if (horizontalVelocity.magnitude < 0.2f)
-            {
-                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-            }
-        }
-    }
 
+        
+    }
 
     void HandleJump()
     {
-        if (isGrounded && (Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")))
+        // Allow jump if within coyote time
+        if (coyoteCounter > 0f && (Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")))
         {
+            // Reset vertical velocity before jumping
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+            // Apply jump force
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            // Consume coyote time
+            coyoteCounter = 0f;
         }
     }
 
@@ -152,20 +150,22 @@ public class ThirdPersonController : MonoBehaviour
             // Falling — apply stronger gravity
             rb.AddForce(Physics.gravity * (fallMultiplier - 1f), ForceMode.Acceleration);
         }
-        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            // Early jump release — smaller hop
-            rb.AddForce(Physics.gravity * (lowJumpMultiplier - 1f), ForceMode.Acceleration);
-        }
+        
     }
 
     void CheckGrounded()
     {
-        // ✅ Only detects colliders in the specified ground layers
-        isGrounded = Physics.CheckSphere(groundCheck.position,groundDistance,groundLayers);
+        // Raycast down for more reliable detection on small surfaces
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundDistance + 0.05f, groundLayers);
+
+        // Update coyote timer
+        if (isGrounded)
+            coyoteCounter = coyoteTime;
+        else
+            coyoteCounter -= Time.deltaTime;
 
         // Debug visualization
-        Debug.DrawRay(groundCheck.position, Vector3.down * groundDistance, isGrounded ? Color.green : Color.red, 0.1f);
+        Debug.DrawRay(groundCheck.position, Vector3.down * (groundDistance + 0.05f), isGrounded ? Color.green : Color.red);
     }
 
     void HandleMouseLook()

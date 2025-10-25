@@ -5228,7 +5228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 886398015
+  GlobalObjectIdHash: 3700363164
   InScenePlacedSourceGlobalObjectIdHash: 3700363164
   DeferredDespawnTick: 0
   Ownership: 1
@@ -5313,6 +5313,7 @@ MonoBehaviour:
   cameraHeight: 0.5
   fallMultiplier: 20
   lowJumpMultiplier: 5
+  coyoteTime: 0.2
 --- !u!135 &7365710028398305443
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5714,7 +5715,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64e34ce1f475824eaaddc8538b469fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  rb: {fileID: 0}
-  groundCheck: {fileID: 849331249188711111}
-  groundDistance: 0.3
+  isRunningParam: IsRunning
+  isFallingParam: IsFalling
+  jumpTriggerParam: IsJumping
+  movementThreshold: 0.1
+  groundCheckPoint: {fileID: 849331249188711111}
+  groundCheckRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1048439
