@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SPAnimController : MonoBehaviour
 {
@@ -57,16 +57,13 @@ public class SPAnimController : MonoBehaviour
         bool isFallingNow = false;
 
         // Early fall after jump starts
-        if (!isGrounded && Time.time - jumpStartTime >= fallDelay)
+        if (!isGrounded && jumpStartTime >= fallDelay)
         {
-            isFallingNow = true;
+            animator.SetBool(isFallingParam, true);
         }
 
-        // Set animator bool
-        animator.SetBool(isFallingParam, isFallingNow);
-
         // Reset IsFalling when grounded
-        if (isGrounded)
+        else
         {
             animator.SetBool(isFallingParam, false);
         }
@@ -74,18 +71,7 @@ public class SPAnimController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        // Use CheckSphere for 3D ground detection
         return Physics.CheckSphere(groundCheckPoint.position, groundCheckRadius, groundLayer);
-    }
-
-    // Optional: visualize ground check in editor
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheckPoint != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
-        }
     }
 }
 
