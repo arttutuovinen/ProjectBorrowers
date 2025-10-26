@@ -1,6 +1,7 @@
 using UnityEngine;
+using TMPro;
 
-public class ThirdPersonController : MonoBehaviour
+public class SPMovementNET : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 6f;        // Max running speed
@@ -28,6 +29,13 @@ public class ThirdPersonController : MonoBehaviour
     public float coyoteTime = 0.2f;  // Grace period after leaving ground
     private float coyoteCounter;
 
+    [Header("Ladder Settings")]
+    public float climbSpeed = 8f;
+    private bool nearLadder;
+    private bool isClimbing;
+    private Collider currentLadder;
+    private TextMeshProUGUI ladderInteractText;
+
     private Rigidbody rb;
     private bool isGrounded;
 
@@ -44,25 +52,38 @@ public class ThirdPersonController : MonoBehaviour
         rb.useGravity = true;
         rb.isKinematic = false;
 
-        // Make sure damping (drag) values are reasonable
+        
         rb.linearDamping = 6f;   // replaces "drag" — reduces sliding
         rb.angularDamping = 0.05f;
 
         playerCamera = GameObject.Find("SmallPlayerCamera").GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
+        ladderInteractText = GameObject.Find("SPinteractLadder")?.GetComponent<TextMeshProUGUI>();
+        ladderInteractText.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        HandleInput();
         HandleMouseLook();
         HandleCamera();
+        if (nearLadder && (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("P1Interact")))
+        {
+            ToggleClimb();
+        }
+        if (isClimbing)
+        {
+            ClimbLadder();
+            return; // ✅ stop normal movement while climbing
+        }
+        HandleInput();
         CheckGrounded();
         HandleJump();
     }
 
     void FixedUpdate()
     {
+        if (isClimbing)
+            return; // skip normal movement + gravity while climbing
         ApplyMovement();
         ApplyBetterGravity();
     }
@@ -182,11 +203,82 @@ public class ThirdPersonController : MonoBehaviour
     {
         if (playerCamera == null || cameraFollowTarget == null) return;
 
+        // Desired camera position based on rotation
         Quaternion rotation = Quaternion.Euler(cameraXRotation, cameraYRotation, 0);
-        Vector3 offset = rotation * new Vector3(0, 0, -cameraDistance);
+        Vector3 desiredOffset = rotation * new Vector3(0, 0, -cameraDistance);
+        Vector3 desiredPosition = cameraFollowTarget.position + desiredOffset + Vector3.up * cameraHeight;
 
-        playerCamera.transform.position = cameraFollowTarget.position + offset + Vector3.up * cameraHeight;
-        playerCamera.transform.LookAt(cameraFollowTarget.position + Vector3.up * cameraHeight);
+        // Camera collision logic
+        Vector3 targetCenter = cameraFollowTarget.position + Vector3.up * cameraHeight;
+        Vector3 direction = (desiredPosition - targetCenter).normalized;
+        float distance = Vector3.Distance(targetCenter, desiredPosition);
+
+        float minCameraDistance = 0.2f; // ✅ The closest the camera can get to the player
+
+        if (Physics.Raycast(targetCenter, direction, out RaycastHit hit, distance, ~0, QueryTriggerInteraction.Ignore))
+        {
+            if (!hit.collider.CompareTag("SmallPlayer"))
+            {
+                // Move camera in front of hit object, but never closer than minCameraDistance
+                float hitDistance = Vector3.Distance(targetCenter, hit.point) - 0.1f;
+                hitDistance = Mathf.Max(hitDistance, minCameraDistance); // Ensure it doesn't go closer than min distance
+                desiredPosition = targetCenter + direction * hitDistance;
+            }
+        }
+
+        // Apply final camera position
+        playerCamera.transform.position = desiredPosition;
+        playerCamera.transform.LookAt(targetCenter);
+    }
+
+
+    private void ToggleClimb()
+    {
+        if (!isClimbing)
+        {
+            // Start climbing
+            isClimbing = true;
+            rb.useGravity = false;
+            rb.linearVelocity = Vector3.zero;
+        }
+        else
+        {
+            // Stop climbing
+            isClimbing = false;
+            rb.useGravity = true;
+        }
+    }
+
+    private void ClimbLadder()
+    {
+        float vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
+        Vector3 climbDirection = Vector3.up * vertical;
+
+        rb.linearVelocity = climbDirection * climbSpeed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            nearLadder = true;
+            currentLadder = other;
+            ladderInteractText.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other == currentLadder)
+        {
+            nearLadder = false;
+            currentLadder = null;
+            ladderInteractText.gameObject.SetActive(false);
+            if (isClimbing)
+            {
+                ToggleClimb(); // stop climbing when leaving ladder
+            }
+        }
     }
 
     private void OnDrawGizmos()

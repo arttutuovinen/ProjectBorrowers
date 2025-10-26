@@ -5314,6 +5314,7 @@ MonoBehaviour:
   fallMultiplier: 20
   lowJumpMultiplier: 5
   coyoteTime: 0.2
+  climbSpeed: 8
 --- !u!135 &7365710028398305443
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5724,3 +5725,4 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1048439
+  fallDelay: 0.2
