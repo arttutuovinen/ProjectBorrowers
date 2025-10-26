@@ -4940,7 +4940,6 @@ GameObject:
   - component: {fileID: 7365710028398305443}
   - component: {fileID: 2217136696443275711}
   - component: {fileID: 8223838733859303511}
-  - component: {fileID: 1001004733733542258}
   m_Layer: 7
   m_Name: SmallPlayer
   m_TagString: SmallPlayer
@@ -5228,7 +5227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3700363164
+  GlobalObjectIdHash: 886398015
   InScenePlacedSourceGlobalObjectIdHash: 3700363164
   DeferredDespawnTick: 0
   Ownership: 1
@@ -5285,7 +5284,7 @@ MonoBehaviour:
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
   SwitchTransformSpaceWhenParented: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!114 &5644917193308100841
 MonoBehaviour:
@@ -5299,22 +5298,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ead6c271ea0e6e40a3b427a461e919e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SPMovementNET
+  ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 8
   acceleration: 60
-  jumpForce: 20
+  jumpForce: 17
   mouseSensitivity: 300
   groundCheck: {fileID: 849331249188711111}
-  groundDistance: 0.1
+  groundDistance: 0.3
   groundLayers:
     serializedVersion: 2
     m_Bits: 1048439
   cameraFollowTarget: {fileID: 9091730586132460224}
   cameraDistance: 3
   cameraHeight: 0.5
-  fallMultiplier: 20
-  lowJumpMultiplier: 5
+  fallMultiplier: 13
   coyoteTime: 0.2
   climbSpeed: 8
+  animator: {fileID: 0}
 --- !u!135 &7365710028398305443
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5370,7 +5370,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150109236876745808}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: eb97a3d79f5bb684abe485388f940490, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5386,23 +5386,6 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
---- !u!114 &1001004733733542258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3150109236876745808}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkRigidbody
-  ShowTopMostFoldoutHeaderGroup: 1
-  NetworkRigidbodyBaseExpanded: 0
-  UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
-  AutoSetKinematicOnDespawn: 1
 --- !u!1 &4756874142035087774
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,13 +35,18 @@ public class NetworkPlayerSpawner : MonoBehaviour
 
     private void SpawnPlayer(ulong clientId)
     {
-        // Pick a random spawn point (only once)
-        if (sharedSpawnPos == Vector3.zero && spawnPoints.Length > 0)
+        Vector3 spawnPos;
+        if (spawnPoints.Length > 0)
         {
-            sharedSpawnPos = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
+            int index = (int)(clientId % (ulong)spawnPoints.Length);
+            spawnPos = spawnPoints[index].position;
+        }
+        else
+        {
+            spawnPos = Vector3.zero;
         }
 
-        GameObject playerInstance = Instantiate(playerPrefab, sharedSpawnPos, Quaternion.identity);
+        GameObject playerInstance = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
         playerInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
     }
 }
