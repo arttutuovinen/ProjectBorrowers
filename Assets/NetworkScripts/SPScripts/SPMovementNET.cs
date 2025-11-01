@@ -52,6 +52,8 @@ public class SPMovementNET : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
 
         // Find the scene camera if it’s not assigned
         if (playerCamera == null)
