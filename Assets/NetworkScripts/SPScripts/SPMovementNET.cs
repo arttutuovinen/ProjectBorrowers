@@ -1,8 +1,7 @@
 using UnityEngine;
-using Unity.Netcode;
 using TMPro;
 
-public class SPMovementNET : NetworkBehaviour
+public class SPMovementNET : MonoBehaviour
 {
     public float moveSpeed = 5f; // Speed of movement
     public float climbSpeed = 3f; // Speed for climbing ladders
@@ -53,55 +52,49 @@ public class SPMovementNET : NetworkBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        if (IsOwner)
+
+        // Find the scene camera if it’s not assigned
+        if (playerCamera == null)
         {
-            // 🔹 Find the scene camera if it’s not assigned
-            if (playerCamera == null)
-            {
-                // Option 1: Find a tagged camera
-                GameObject foundCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            // Option 1: Find a tagged camera
+            GameObject foundCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
-                if (foundCamera != null)
-                {
-                    playerCamera = foundCamera;
-                }
-                else
-                {
-                    Debug.LogWarning("No MainCamera found in scene for player to attach!");
-                }
+            if (foundCamera != null)
+            {
+                playerCamera = foundCamera;
             }
-
-            // 🔹 Activate and link the camera
-            if (playerCamera != null)
+            else
             {
-                playerCamera.SetActive(true);
-                cameraTransform = playerCamera.transform;
-                cameraFollowTarget = this.transform;
-
-                // Unparent the camera for smooth follow movement
-                cameraTransform.SetParent(null);
+                Debug.LogWarning("No MainCamera found in scene for player to attach!");
             }
         }
-        else
+
+        // Activate and link the camera (single-player / non-networked behaviour)
+        if (playerCamera != null)
         {
-                // Disable camera for non-local players
-            if (playerCamera != null)
-                playerCamera.SetActive(false);
+            playerCamera.SetActive(true);
+            cameraTransform = playerCamera.transform;
+            cameraFollowTarget = this.transform;
+
+            // Unparent the camera for smooth follow movement
+            cameraTransform.SetParent(null);
         }
+
         // Hide the interact text at the start
         if (ladderInteractText != null)
         {
             ladderInteractText.gameObject.SetActive(false); // Disable the text object initially
         }
-        emissionModule = movementParticles.emission;
-        emissionModule.rateOverTime = 0f; // Start with no emission
-        
+
+        if (movementParticles != null)
+        {
+            emissionModule = movementParticles.emission;
+            emissionModule.rateOverTime = 0f; // Start with no emission
+        }
     }
 
     private void Update()
     {
-        if (!IsOwner) return;
-
         if (isClimbing)
         {
             ClimbLadder();
@@ -115,7 +108,6 @@ public class SPMovementNET : NetworkBehaviour
 
     private void LateUpdate()
     {   
-        if (!IsOwner) return; // Must only control the camera for the owner
         ControlCamera();
     }   
     // Method that allows enabling movement from other scripts
@@ -153,9 +145,12 @@ public class SPMovementNET : NetworkBehaviour
             Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
             // Handle particle emission when moving and grounded (smooth fade)
-            float targetRate = (isGrounded && direction.magnitude >= 0.1f) ? maxEmissionRate : 0f;
-            float newRate = Mathf.Lerp(emissionModule.rateOverTime.constant, targetRate, Time.deltaTime * emissionChangeSpeed);
-            emissionModule.rateOverTime = newRate;
+            if (movementParticles != null)
+            {
+                float targetRate = (isGrounded && direction.magnitude >= 0.1f) ? maxEmissionRate : 0f;
+                float newRate = Mathf.Lerp(emissionModule.rateOverTime.constant, targetRate, Time.deltaTime * emissionChangeSpeed);
+                emissionModule.rateOverTime = newRate;
+            }
 
             if (direction.magnitude >= 0.1f)
             {
