@@ -20,6 +20,7 @@ public class SPMovementNET : MonoBehaviour
     public float distanceFromPlayer = 5f; // Distance of the camera from the player
     public float minVerticalAngle = -30f; // Minimum vertical angle for camera
     public float maxVerticalAngle = 60f; // Maximum vertical angle for camera
+    public LayerMask cameraCollisionMask;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -246,7 +247,7 @@ public class SPMovementNET : MonoBehaviour
 
         // Raycast to check if environment blocks the view
         RaycastHit hit;
-        if (Physics.Raycast(cameraFollowTarget.position, desiredDirection, out hit, maxDistance))
+        if (Physics.Raycast(cameraFollowTarget.position, desiredDirection, out hit, maxDistance, cameraCollisionMask))
         {
             float hitDist = Mathf.Clamp(hit.distance - 0.3f, minDistance, maxDistance);
             desiredCameraPos = cameraFollowTarget.position + desiredDirection * hitDist;
