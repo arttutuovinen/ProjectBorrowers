@@ -5013,7 +5013,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2655924781333285241}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a337760020e27494a8c9fd5cde010650, type: 3}
   m_Name: 
@@ -5244,7 +5244,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150109236876745808}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39ac2b7313bfca34186fafaa8736104c, type: 3}
   m_Name: 
@@ -5315,8 +5315,6 @@ MonoBehaviour:
   flashbang: {fileID: 3565722106582068423, guid: 06219c75297d6ff46ab667851b905162,
     type: 3}
   throwOrigin: {fileID: 2200344053891395073}
-  throwForce: 0
-  playerCamera: {fileID: 4160048617881491384}
 --- !u!114 &7213267609248557840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5343,13 +5341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f457d03eff7a16841975b2bc762a0fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpText: {fileID: 0}
-  boppyPinItemImage: {fileID: 0}
-  flashbangItemImage: {fileID: 0}
-  springItemImage: {fileID: 0}
-  spBoppyPin: {fileID: 7213267609248557840}
-  spFlashBang: {fileID: 1453455095307449174}
-  spSpring: {fileID: 2265930764285613028}
+  interactButton: P1Interact
+  useButton: Fire1
 --- !u!114 &2809535191905125762
 MonoBehaviour:
   m_ObjectHideFlags: 0

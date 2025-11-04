@@ -1,55 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using Photon.Pun;  
+﻿using UnityEngine;
+using Photon.Pun;
 
 public class SmallPlayerItemCollector : MonoBehaviourPun
 {
-    public enum ItemType
+    [Header("Input Settings")]
+    public string interactButton = "P1Interact";
+    public string useButton = "Fire1"; // Default Unity Mouse1 mapping
+
+    [Header("State")]
+    private string currentItem = null;       // The name/type of collected item
+    private GameObject itemInTrigger = null; // The item currently in trigger
+
+    private SPBoppyPin boppyPinScript;
+    private SPFlashbang flashBangScript;
+    private SPSpring springScript;
+
+    private void Awake()
     {
-        None,
-        BoppyPin,
-        Flashbang,
-        Spring
+        // Cache the BoppyPin script if it's on this player
+        boppyPinScript = GetComponent<SPBoppyPin>();
+        flashBangScript = GetComponent<SPFlashbang>();
+        springScript = GetComponent<SPSpring>();
     }
 
-    private ItemType currentItem = ItemType.None;
-    private bool itemUsed = false;
-    private GameObject collectedItem;
-    private bool canPickUp = false;
-
-    [Header("UI References")]
-    public TextMeshProUGUI pickUpText;
-    public Image boppyPinItemImage;
-    public Image flashbangItemImage;
-    public Image springItemImage;
-
-    [Header("Item Scripts")]
-    public SPBoppyPin spBoppyPin;
-    public SPFlashbang spFlashBang;
-    public SPSpring spSpring;
-
-    void Start()
+    private void Update()
     {
-        // Disable UI at start
-        pickUpText.enabled = false;
-        boppyPinItemImage.enabled = false;
-        flashbangItemImage.enabled = false;
-        springItemImage.enabled = false;
+        // Only allow local player to handle input
+        if (!photonView.IsMine) return;
+
+        // Try picking up item
+        if (itemInTrigger != null && Input.GetButtonDown(interactButton))
+        {
+            TryPickupItem();
+        }
+
+        // Try using item
+        if (currentItem != null && Input.GetButtonDown(useButton))
+        {
+            UseCurrentItem();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Only the local player should run pickup logic
         if (!photonView.IsMine) return;
-        Debug.Log("Entered trigger with: " + other.name);
-        if (other.gameObject.CompareTag("Collectible") && currentItem == ItemType.None)
+
+        // Detect collectibles by tag
+        if (other.CompareTag("Collectible"))
         {
-            collectedItem = other.gameObject;
-            canPickUp = true;
-            pickUpText.enabled = true;
+            itemInTrigger = other.gameObject;
         }
     }
 
@@ -57,83 +56,74 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;
 
-        if (other.gameObject.CompareTag("Collectible") && currentItem == ItemType.None)
+        if (itemInTrigger == other.gameObject)
         {
-            canPickUp = false;
-            collectedItem = null;
-            pickUpText.enabled = false;
+            itemInTrigger = null;
         }
     }
 
-    void Update()
+    private void TryPickupItem()
     {
-        // 🔒 Ensure only local player handles input
-        if (!photonView.IsMine) return;
+        if (currentItem != null || itemInTrigger == null)
+            return; // Already holding something or nothing to pick up
 
-        // ----------- ITEM PICKUP -----------
-        if (canPickUp && currentItem == ItemType.None && Input.GetButtonDown("P1Interact"))
+        currentItem = itemInTrigger.name.Replace("(Clone)", "").Trim();
+
+        // Destroy item network-wide
+        PhotonView itemPhotonView = itemInTrigger.GetComponent<PhotonView>();
+        if (itemPhotonView != null && itemPhotonView.IsMine)
         {
-            if (collectedItem != null)
-            {
-                // Check what kind of item this is by finding its child tag
-                Transform boppyPinChild = collectedItem.transform.Find("BoppyPin");
-                if (boppyPinChild != null && boppyPinChild.CompareTag("BoppyPin"))
-                {
-                    currentItem = ItemType.BoppyPin;
-                    boppyPinItemImage.enabled = true;
-                    Debug.Log("Player picked up a Boppy Pin.");
-                }
-
-                Transform flashbangChild = collectedItem.transform.Find("Flashbang");
-                if (flashbangChild != null && flashbangChild.CompareTag("Flashbang"))
-                {
-                    currentItem = ItemType.Flashbang;
-                    flashbangItemImage.enabled = true;
-                    Debug.Log("Player picked up a Flashbang.");
-                }
-
-                Transform springChild = collectedItem.transform.Find("SPSpringCollectible");
-                if (springChild != null && springChild.CompareTag("SPSpringCollectible"))
-                {
-                    currentItem = ItemType.Spring;
-                    springItemImage.enabled = true;
-                    Debug.Log("Player picked up a Spring.");
-                }
-
-                // ❗ Destroy for everyone on the network
-                PhotonNetwork.Destroy(collectedItem);
-            }
-
-            itemUsed = false;
-            collectedItem = null;
-            canPickUp = false;
-            pickUpText.enabled = false;
+            PhotonNetwork.Destroy(itemInTrigger);
+        }
+        else if (itemPhotonView != null)
+        {
+            photonView.RPC(nameof(RequestItemDestroyRPC), itemPhotonView.Owner, itemPhotonView.ViewID);
         }
 
-        // ----------- ITEM USE -----------
-        if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("P1UseItem"))
-        {
-            if (currentItem == ItemType.BoppyPin)
-            {
-                spBoppyPin.SpawnBoppyPin();   // should use PhotonNetwork.Instantiate inside
-                Debug.Log("SpawnBoppyPin() called.");
-            }
-            else if (currentItem == ItemType.Flashbang)
-            {
-                spFlashBang.SpawnFlashbang();  // should use PhotonNetwork.Instantiate inside
-                Debug.Log("SpawnFlashbang() called.");
-            }
-            else if (currentItem == ItemType.Spring)
-            {
-                spSpring.UseSpring();          // should use PhotonNetwork.Instantiate or RPC
-                Debug.Log("UseSpring() called.");
-            }
+        itemInTrigger = null;
+        Debug.Log($"Picked up {currentItem}");
+    }
 
-            itemUsed = true;
-            currentItem = ItemType.None;
-            boppyPinItemImage.enabled = false;
-            flashbangItemImage.enabled = false;
-            springItemImage.enabled = false;
+    private void UseCurrentItem()
+    {
+        Debug.Log($"Used {currentItem}");
+
+        switch (currentItem)
+        {
+            case "BoppyPinCollectible":
+            case "BoppyPin":
+                if (boppyPinScript != null)
+                {
+                    boppyPinScript.SpawnBoppyPin();
+                }
+                break;
+
+            case "FlashBangCollectible":
+                if (flashBangScript != null)
+                {
+                    flashBangScript.SpawnFlashbang();
+                }
+                break;
+
+            case "SpringCollectible":
+                if (springScript != null)
+                {
+                    springScript.UseSpring();
+                }
+                break;
+        }
+
+        // Clear after use
+        currentItem = null;
+    }
+
+    [PunRPC]
+    private void RequestItemDestroyRPC(int viewID)
+    {
+        PhotonView itemView = PhotonView.Find(viewID);
+        if (itemView != null && itemView.IsMine)
+        {
+            PhotonNetwork.Destroy(itemView.gameObject);
         }
     }
 }

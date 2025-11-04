@@ -1,49 +1,62 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class SPSpring : MonoBehaviour
+public class SPSpring : MonoBehaviourPun
 {
-    public float knockbackForce = 10f;  // Strength of the upward knockback
-    public float knockbackDuration = 0.2f;
+    [Header("Spring Settings")]
+    public float knockbackForce = 35f;           // Strength of the upward knockback
+    public float knockbackDuration = 1f;       // How long the knockback lasts
+    public AnimationCurve jumpCurve;             // Curve to smooth out jump motion
+
     private bool isKnockedBack = false;
-    public AnimationCurve jumpCurve;
     private CharacterController controller;
-   
-    void Start()
+
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
     }
+
     public void UseSpring()
     {
+        if (!photonView.IsMine) return; // Only the local player should perform the knockback
+
         Debug.Log("SP used SPRING");
-        // Knockback direction is straight up (Y-axis only)
+
         Vector3 knockbackDirection = Vector3.up * knockbackForce;
-        // Start the knockback coroutine
+
+        // Run locally
         StartCoroutine(KnockbackCoroutine(knockbackDirection));
+
+        // Optionally tell others to play VFX or animation
+        photonView.RPC(nameof(PlaySpringEffectRPC), RpcTarget.Others);
     }
 
-    private System.Collections.IEnumerator KnockbackCoroutine(Vector3 direction)
+    private IEnumerator KnockbackCoroutine(Vector3 direction)
     {
         if (isKnockedBack)
-            yield break; // If already knocked back, ignore the call
+            yield break; // Prevent overlapping knockbacks
 
         isKnockedBack = true;
-
         float timer = 0f;
 
-        // Move the player upward over the knockback duration
         while (timer < knockbackDuration)
         {
-            // Apply upward knockback movement per frame
-            controller.Move(direction * jumpCurve.Evaluate(timer/knockbackDuration) * Time.deltaTime);
-
-            // Increment the timer
+            // Apply upward motion using CharacterController
+            controller.Move(direction * jumpCurve.Evaluate(timer / knockbackDuration) * Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
         }
 
-        // Reset the knockback state after the duration has ended
         isKnockedBack = false;
     }
+
+    [PunRPC]
+    private void PlaySpringEffectRPC()
+    {
+        // This is called on remote clients to play VFX, sound, or animation.
+        // Add effects here, but don't move remote players.
+        Debug.Log($"Spring used by {photonView.Owner.NickName}");
+    }
 }
+
