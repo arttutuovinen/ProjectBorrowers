@@ -1,10 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Photon.Pun;  
 
-public class SmallPlayerItemCollector : MonoBehaviour
+public class SmallPlayerItemCollector : MonoBehaviourPun
 {
     public enum ItemType
     {
@@ -14,63 +15,67 @@ public class SmallPlayerItemCollector : MonoBehaviour
         Spring
     }
 
-    private ItemType currentItem = ItemType.None;  // Tracks the type of the currently held item
-    private bool itemUsed = false; // Tracks if the item has been used after collection
-    private GameObject collectedItem; // The reference to the collectible item in range
+    private ItemType currentItem = ItemType.None;
+    private bool itemUsed = false;
+    private GameObject collectedItem;
     private bool canPickUp = false;
 
-    public TextMeshProUGUI pickUpText;  // Reference to the TextMeshPro UI element
+    [Header("UI References")]
+    public TextMeshProUGUI pickUpText;
     public Image boppyPinItemImage;
     public Image flashbangItemImage;
     public Image springItemImage;
 
-    public SPBoppyPin spBoppyPin; // Reference to another script that handles Boppy Pin behavior.
-    public SPFlashbang spFlashBang; // Reference to another script that handles Flashbang behavior.
+    [Header("Item Scripts")]
+    public SPBoppyPin spBoppyPin;
+    public SPFlashbang spFlashBang;
     public SPSpring spSpring;
 
     void Start()
     {
-        // Disable the pickup text and item images at the start of the game
+        // Disable UI at start
         pickUpText.enabled = false;
         boppyPinItemImage.enabled = false;
         flashbangItemImage.enabled = false;
         springItemImage.enabled = false;
     }
 
-    // Detect when the player enters the collider of a collectible item
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the player is near a collectible item and not already holding an item
+        // Only the local player should run pickup logic
+        if (!photonView.IsMine) return;
+        Debug.Log("Entered trigger with: " + other.name);
         if (other.gameObject.CompareTag("Collectible") && currentItem == ItemType.None)
         {
-            // Store the reference to the collectible item the player can pick up
             collectedItem = other.gameObject;
-            canPickUp = true;  // Player can now pick up the item
-            pickUpText.enabled = true;  // Show the pickup text
+            canPickUp = true;
+            pickUpText.enabled = true;
         }
     }
 
-    // Detect when the player leaves the collider of the collectible item
     private void OnTriggerExit(Collider other)
     {
-        // If the player moves away from the collectible item, they can no longer pick it up
+        if (!photonView.IsMine) return;
+
         if (other.gameObject.CompareTag("Collectible") && currentItem == ItemType.None)
         {
             canPickUp = false;
-            collectedItem = null; // Reset the collectible reference
+            collectedItem = null;
             pickUpText.enabled = false;
         }
     }
 
     void Update()
     {
-        // Check if the player is in range to pick up the item and presses "P1Interact"
+        // 🔒 Ensure only local player handles input
+        if (!photonView.IsMine) return;
+
+        // ----------- ITEM PICKUP -----------
         if (canPickUp && currentItem == ItemType.None && Input.GetButtonDown("P1Interact"))
         {
-            // Look for a child object with specific tags to determine the type of the item
             if (collectedItem != null)
             {
-                // Try to find a child tagged as "BoppyPin"
+                // Check what kind of item this is by finding its child tag
                 Transform boppyPinChild = collectedItem.transform.Find("BoppyPin");
                 if (boppyPinChild != null && boppyPinChild.CompareTag("BoppyPin"))
                 {
@@ -79,55 +84,51 @@ public class SmallPlayerItemCollector : MonoBehaviour
                     Debug.Log("Player picked up a Boppy Pin.");
                 }
 
-                // Try to find a child tagged as "Flashbang"
                 Transform flashbangChild = collectedItem.transform.Find("Flashbang");
                 if (flashbangChild != null && flashbangChild.CompareTag("Flashbang"))
                 {
                     currentItem = ItemType.Flashbang;
                     flashbangItemImage.enabled = true;
                     Debug.Log("Player picked up a Flashbang.");
-                    
                 }
-                // Try to find a child tagged as "Flashbang"
+
                 Transform springChild = collectedItem.transform.Find("SPSpringCollectible");
                 if (springChild != null && springChild.CompareTag("SPSpringCollectible"))
                 {
                     currentItem = ItemType.Spring;
                     springItemImage.enabled = true;
-                    Debug.Log("Player picked up a Flashbang.");
-
+                    Debug.Log("Player picked up a Spring.");
                 }
+
+                // ❗ Destroy for everyone on the network
+                PhotonNetwork.Destroy(collectedItem);
             }
 
-            // Destroy the parent collectible item and reset pickup state
-            Destroy(collectedItem);
             itemUsed = false;
             collectedItem = null;
             canPickUp = false;
             pickUpText.enabled = false;
         }
 
-        // Check if the player presses "P1UseItem", has collected an item, and hasn't used it yet
+        // ----------- ITEM USE -----------
         if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("P1UseItem"))
         {
-            // Call the appropriate method based on the currently held item type
             if (currentItem == ItemType.BoppyPin)
             {
-                spBoppyPin.SpawnBoppyPin();
-                Debug.Log("SpawnBoppyPin() method called.");
+                spBoppyPin.SpawnBoppyPin();   // should use PhotonNetwork.Instantiate inside
+                Debug.Log("SpawnBoppyPin() called.");
             }
             else if (currentItem == ItemType.Flashbang)
             {
-                spFlashBang.SpawnFlashbang();
-                Debug.Log("SpawnFlashbang() method called.");
+                spFlashBang.SpawnFlashbang();  // should use PhotonNetwork.Instantiate inside
+                Debug.Log("SpawnFlashbang() called.");
             }
             else if (currentItem == ItemType.Spring)
             {
-                spSpring.UseSpring();
-                Debug.Log("UseSpring() method called.");
+                spSpring.UseSpring();          // should use PhotonNetwork.Instantiate or RPC
+                Debug.Log("UseSpring() called.");
             }
 
-            // Mark the item as used and reset state
             itemUsed = true;
             currentItem = ItemType.None;
             boppyPinItemImage.enabled = false;
@@ -136,3 +137,4 @@ public class SmallPlayerItemCollector : MonoBehaviour
         }
     }
 }
+

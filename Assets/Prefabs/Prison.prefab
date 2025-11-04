@@ -66,9 +66,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c4a445fab1bc54397b9cdcaf0c1d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revealText: {fileID: 0}
+  scoreText: {fileID: 0}
   playerTag: SmallPlayer
   resetDelay: 5
+  smallPlayer: {fileID: 0}
+  finish: {fileID: 0}
 --- !u!1 &1360761591109850438
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6599271472219001609, guid: 5752b8a2cdb951144abcedd7bb2ad047,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d9f853163f0bf84479d3360fb91f2b89, type: 2}
     - target: {fileID: -650433988561056430, guid: 5752b8a2cdb951144abcedd7bb2ad047,

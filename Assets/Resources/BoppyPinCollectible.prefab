@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7290997393778079300}
   - component: {fileID: 2638041157455692031}
+  - component: {fileID: 3705153699313647407}
   m_Layer: 9
   m_Name: BoppyPinCollectible
   m_TagString: Collectible
@@ -56,6 +57,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.85
   m_Center: {x: 0, y: 0.38, z: 0}
+--- !u!114 &3705153699313647407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250552709475978594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7846097455092382054
 GameObject:
   m_ObjectHideFlags: 0

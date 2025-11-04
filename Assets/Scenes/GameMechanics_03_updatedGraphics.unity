@@ -26070,7 +26070,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978980996}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 319f3e1199c3e1f4289800ed0e6c6edf, type: 3}
   m_Name: 
@@ -43102,11 +43102,6 @@ PrefabInstance:
       objectReference: {fileID: 31879990}
     - target: {fileID: 2058587133424441318, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
         type: 3}
-      propertyPath: smallPlayerCamera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2058587133424441318, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
       propertyPath: 'objectsToHide.Array.data[0]'
       value: 
       objectReference: {fileID: 675554380}
@@ -43206,7 +43201,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1360761591109850438, guid: e2ef2e5d3cb208940ab8d91cc48c7568, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ef2e5d3cb208940ab8d91cc48c7568, type: 3}
