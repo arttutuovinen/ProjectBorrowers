@@ -4928,7 +4928,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2166375673638303613}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &7925051341323332004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5609,9 +5609,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 35
+  MaxDistance: 40
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -5619,23 +5619,23 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.0063232426
+      value: 0.9975052
+      inSlope: -2.0106633
+      outSlope: -2.0106633
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0.06320651
     - serializedVersion: 3
-      time: 1
+      time: 0.9626465
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.032648906
+      outSlope: 0.032648906
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.07988785
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
