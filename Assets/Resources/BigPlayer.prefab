@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 2272564012468612583}
   - component: {fileID: 6711433160043170722}
   - component: {fileID: 3447934495327288878}
+  - component: {fileID: 6759395729989228288}
   m_Layer: 0
   m_Name: BigPlayer
   m_TagString: BigPlayer
@@ -758,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1766250525
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -771,6 +772,20 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &6759395729989228288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb059529bec0dc47a08d5f9a55e3d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BpPlayerSetup
+  bpMovement: {fileID: 7549007834672380184}
+  playerCamera: {fileID: 5159615410664788595}
 --- !u!1 &5827039078137388844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,7 +1201,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5181024053420502283}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 704bae9812ae4094388dd425039ba783, type: 3}
   m_Name: 
@@ -1311,7 +1326,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1
+      value: -1.003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
