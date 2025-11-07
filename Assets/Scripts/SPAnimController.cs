@@ -1,25 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class SPAnimController : MonoBehaviour
+public class SPAnimController : MonoBehaviourPun
 {
     private Animator animator;
     private CharacterController controller;
-    // Small buffer so jump can still trigger right after leaving ground
-    private float coyoteTime = 0.1f;  
+
+    // Animation sync variables
+    private float horizontal;
+    private float vertical;
+    private bool isJumping;
+    private bool isFalling;
+    private bool isRunning;
+
+    private float coyoteTime = 0.1f;
     private float lastGroundedTime;
 
     void Start()
     {
-        animator = GetComponent<Animator>(); 
-        controller = GetComponentInParent<CharacterController>(); 
+        animator = GetComponent<Animator>();
+        controller = GetComponentInParent<CharacterController>();
     }
 
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
+        // 🟢 Only the local player should handle input and update animation state.
+        if (photonView.IsMine)
+        {
+            HandleLocalInput();
+        }
+
+        // 🟣 All players (including remote ones) should update their animator from current values
+        UpdateAnimator();
+    }
+
+    void HandleLocalInput()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
+        vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
 
         // Track grounded state with coyote time
         if (controller.isGrounded)
@@ -29,32 +49,64 @@ public class SPAnimController : MonoBehaviour
 
         bool isGroundedOrCoyote = (Time.time - lastGroundedTime) <= coyoteTime;
 
-        // Jump input
-        if (Input.GetButtonDown("P1Jump") || Input.GetButtonDown("Jump") && isGroundedOrCoyote)
+        // Jump
+        if ((Input.GetButtonDown("P1Jump") || Input.GetButtonDown("Jump")) && isGroundedOrCoyote)
         {
-            animator.ResetTrigger("IsJumping"); // ensures clean trigger
+            animator.ResetTrigger("IsJumping");
             animator.SetTrigger("IsJumping");
+            isJumping = true;
         }
 
-        // Falling check (don’t override jump immediately)
+        // Falling
         if (!controller.isGrounded)
         {
-            // Only set falling if not already in jump animation
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
             {
-                animator.SetBool("IsFalling", true);
+                isFalling = true;
             }
 
-            // Stop running while in air
-            animator.SetBool("IsRunning", false);
+            isRunning = false;
         }
         else
         {
-            animator.SetBool("IsFalling", false);
+            isFalling = false;
+            isJumping = false;
 
-            // Only check running when grounded
-            bool isMoving = (horizontal != 0 || vertical != 0);
-            animator.SetBool("IsRunning", isMoving);
+            bool moving = (horizontal != 0 || vertical != 0);
+            isRunning = moving;
+        }
+    }
+
+    void UpdateAnimator()
+    {
+        animator.SetBool("IsRunning", isRunning);
+        animator.SetBool("IsFalling", isFalling);
+        // Trigger for jump is set locally when happens
+    }
+
+    // 🔄 This synchronizes animation variables across the network
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send animation parameters
+            stream.SendNext(isRunning);
+            stream.SendNext(isFalling);
+            stream.SendNext(isJumping);
+        }
+        else
+        {
+            // Remote player: receive animation parameters
+            isRunning = (bool)stream.ReceiveNext();
+            isFalling = (bool)stream.ReceiveNext();
+            bool remoteJump = (bool)stream.ReceiveNext();
+
+            // Handle jump trigger safely
+            if (remoteJump && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            {
+                animator.ResetTrigger("IsJumping");
+                animator.SetTrigger("IsJumping");
+            }
         }
     }
 }
