@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class SPAnimController : MonoBehaviourPun
+public class SPAnimController : MonoBehaviourPun, IPunObservable
 {
     private Animator animator;
     private CharacterController controller;
@@ -26,13 +26,11 @@ public class SPAnimController : MonoBehaviourPun
 
     void Update()
     {
-        // 🟢 Only the local player should handle input and update animation state.
         if (photonView.IsMine)
         {
             HandleLocalInput();
         }
 
-        // 🟣 All players (including remote ones) should update their animator from current values
         UpdateAnimator();
     }
 
@@ -41,7 +39,6 @@ public class SPAnimController : MonoBehaviourPun
         horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
         vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
 
-        // Track grounded state with coyote time
         if (controller.isGrounded)
         {
             lastGroundedTime = Time.time;
@@ -49,7 +46,6 @@ public class SPAnimController : MonoBehaviourPun
 
         bool isGroundedOrCoyote = (Time.time - lastGroundedTime) <= coyoteTime;
 
-        // Jump
         if ((Input.GetButtonDown("P1Jump") || Input.GetButtonDown("Jump")) && isGroundedOrCoyote)
         {
             animator.ResetTrigger("IsJumping");
@@ -57,7 +53,6 @@ public class SPAnimController : MonoBehaviourPun
             isJumping = true;
         }
 
-        // Falling
         if (!controller.isGrounded)
         {
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
@@ -71,9 +66,7 @@ public class SPAnimController : MonoBehaviourPun
         {
             isFalling = false;
             isJumping = false;
-
-            bool moving = (horizontal != 0 || vertical != 0);
-            isRunning = moving;
+            isRunning = (horizontal != 0 || vertical != 0);
         }
     }
 
@@ -81,27 +74,23 @@ public class SPAnimController : MonoBehaviourPun
     {
         animator.SetBool("IsRunning", isRunning);
         animator.SetBool("IsFalling", isFalling);
-        // Trigger for jump is set locally when happens
     }
 
-    // 🔄 This synchronizes animation variables across the network
+    // ⚡ Must implement IPunObservable for Photon to sync animations
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            // We own this player: send animation parameters
             stream.SendNext(isRunning);
             stream.SendNext(isFalling);
             stream.SendNext(isJumping);
         }
         else
         {
-            // Remote player: receive animation parameters
             isRunning = (bool)stream.ReceiveNext();
             isFalling = (bool)stream.ReceiveNext();
             bool remoteJump = (bool)stream.ReceiveNext();
 
-            // Handle jump trigger safely
             if (remoteJump && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
             {
                 animator.ResetTrigger("IsJumping");
@@ -110,3 +99,4 @@ public class SPAnimController : MonoBehaviourPun
         }
     }
 }
+
