@@ -16,23 +16,29 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            CreateSpawnList();
-            SpawnItems();
-        }
+        // Always request item spawn from MasterClient
+        photonView.RPC(nameof(RequestItemSpawn), RpcTarget.MasterClient);
     }
+
+    [PunRPC]
+    void RequestItemSpawn()
+    {
+        // Only MasterClient performs the actual spawning
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        CreateSpawnList();
+        SpawnItems();
+    }
+
     void CreateSpawnList()
     {
         spawnList.Clear();
 
         int totalSpawnPoints = spawnPoints.Length;
 
-        // Calculate total of all chances (doesn't have to be 100)
         int totalChance = 0;
         foreach (int c in spawnChances) totalChance += c;
 
-        // Step 1: assign count per prefab based on percentage
         int[] prefabCounts = new int[itemPrefabs.Length];
         int assigned = 0;
 
@@ -42,7 +48,6 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
             assigned += prefabCounts[i];
         }
 
-        // Step 2: distribute any leftover slots (because of rounding)
         int remaining = totalSpawnPoints - assigned;
         while (remaining > 0)
         {
@@ -53,7 +58,6 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
             }
         }
 
-        // Step 3: build the spawnList
         for (int i = 0; i < itemPrefabs.Length; i++)
         {
             for (int j = 0; j < prefabCounts[i]; j++)
@@ -62,7 +66,6 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
             }
         }
 
-        // Step 4: shuffle so spawns are randomized
         Shuffle(spawnList);
     }
 
@@ -70,7 +73,8 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
     {
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            Instantiate(spawnList[i], spawnPoints[i].position, spawnPoints[i].rotation);
+            // Network-wide spawn using PhotonNetwork.Instantiate
+            PhotonNetwork.Instantiate(spawnList[i].name, spawnPoints[i].position, spawnPoints[i].rotation);
         }
     }
 
@@ -86,3 +90,4 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
         }
     }
 }
+
