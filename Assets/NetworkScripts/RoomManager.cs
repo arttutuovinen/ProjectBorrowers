@@ -41,16 +41,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     // Called by JoinButton OnClick
     public void OnJoinButtonPressed()
+{
+    if (nameInput == null || string.IsNullOrWhiteSpace(nameInput.text))
     {
-        string nick = "Player";
-        if (nameInput != null && !string.IsNullOrWhiteSpace(nameInput.text))
-            nick = nameInput.text;
-
-        PhotonNetwork.NickName = nick;
-
-        if (joinButtonText != null) joinButtonText.text = "Connecting...";
-        PhotonNetwork.ConnectUsingSettings();
+        Debug.Log("Name is required before joining a room!");
+        if (joinButtonText != null) joinButtonText.text = "Enter a Name!";
+        return;
     }
+
+    PhotonNetwork.NickName = nameInput.text.Trim();
+    if (joinButtonText != null) joinButtonText.text = "Connecting...";
+    PhotonNetwork.ConnectUsingSettings();
+}
+
 
     // ---------- Photon callbacks ----------
     public override void OnConnectedToMaster()

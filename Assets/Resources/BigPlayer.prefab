@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 4387901889807618486}
   - component: {fileID: 7549007834672380184}
   - component: {fileID: 259571919989222573}
+  - component: {fileID: 6597793729881182503}
   - component: {fileID: 2272564012468612583}
   - component: {fileID: 6711433160043170722}
   - component: {fileID: 3447934495327288878}
@@ -707,6 +708,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000004, y: 2, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6597793729881182503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4111609a0a5114abbb6c390646860bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNameDisplay
+  nameTagPrefab: {fileID: 0}
 --- !u!114 &2272564012468612583
 MonoBehaviour:
   m_ObjectHideFlags: 0
