@@ -155,8 +155,8 @@ public class BigPlayerMovement : MonoBehaviour
         }
 
         // Get input for movement (WASD/arrow keys or PS5 left stick)
-        float horizontal = Input.GetAxisRaw("P2Horizontal"); // WASD or PS5 Left Stick X
-        float vertical = Input.GetAxisRaw("P2Vertical"); // WASD or PS5 Left Stick Y
+        float horizontal = Input.GetAxisRaw("Horizontal"); // WASD or PS5 Left Stick X
+        float vertical = Input.GetAxisRaw("Vertical"); // WASD or PS5 Left Stick Y
 
         // Calculate the movement direction relative to the camera's orientation
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;

@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
-public class BPItemSpawner : MonoBehaviour
+using Photon.Pun;
+
+public class BPItemSpawner : MonoBehaviourPunCallbacks
 {
     [Header("Assign in Inspector")]
     public GameObject[] itemPrefabs;      // Prefabs to spawn
@@ -12,12 +14,14 @@ public class BPItemSpawner : MonoBehaviour
 
     private List<GameObject> spawnList = new List<GameObject>();
 
-    void Start()
+    public override void OnJoinedRoom()
     {
-        CreateSpawnList();
-        SpawnItems();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            CreateSpawnList();
+            SpawnItems();
+        }
     }
-
     void CreateSpawnList()
     {
         spawnList.Clear();
