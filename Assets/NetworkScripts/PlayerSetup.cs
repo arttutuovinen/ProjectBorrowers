@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerSetup : MonoBehaviour
 {
     public SPMovementNET spMovement;
-    public SPAnimController spAnimController;
+
     public GameObject playerCamera;
     public SmallPlayerItemCollector spItemCollector;
     public SPBoppyPin spBobbyPin;
@@ -16,6 +16,6 @@ public class PlayerSetup : MonoBehaviour
         spItemCollector.enabled = true;
         spBobbyPin.enabled = true;
         spFlashbang.enabled = true;
-        spAnimController.enabled = true;
+        
     }
 }

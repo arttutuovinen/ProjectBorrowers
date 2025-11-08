@@ -5452,6 +5452,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8291499341622275778}
+  - {fileID: 5652239455369858129}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -5484,7 +5485,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSetup
   spMovement: {fileID: 5644917193308100841}
-  spAnimController: {fileID: 5652239455369858129}
   playerCamera: {fileID: 2166375673638303613}
   spItemCollector: {fileID: 457389529722468420}
   spBobbyPin: {fileID: 7213267609248557840}
@@ -6090,7 +6090,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8677598959027453414}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c64e34ce1f475824eaaddc8538b469fa, type: 3}
   m_Name: 

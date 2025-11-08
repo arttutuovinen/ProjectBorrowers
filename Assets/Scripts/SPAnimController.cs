@@ -74,6 +74,12 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
     {
         animator.SetBool("IsRunning", isRunning);
         animator.SetBool("IsFalling", isFalling);
+
+        if (isJumping)
+        {
+            animator.SetTrigger("IsJumping");
+            if (!photonView.IsMine) isJumping = false; // remote resets after triggering
+        }
     }
 
     // ⚡ Must implement IPunObservable for Photon to sync animations
