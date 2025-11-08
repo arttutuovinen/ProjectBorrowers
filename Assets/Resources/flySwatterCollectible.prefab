@@ -63,6 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3590415040196687825}
   - component: {fileID: 7054038424524949921}
+  - component: {fileID: 4389882253301198403}
   m_Layer: 11
   m_Name: flySwatterCollectible
   m_TagString: BPCollectible
@@ -108,6 +109,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7450135, y: 6.834901, z: 0.02906883}
   m_Center: {x: 0.023477644, y: 2.6897678, z: 0.010615272}
+--- !u!114 &4389882253301198403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866088957115400608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &6190588451827953954
 PrefabInstance:
   m_ObjectHideFlags: 0

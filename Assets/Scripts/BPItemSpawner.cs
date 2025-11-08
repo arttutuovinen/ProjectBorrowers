@@ -14,34 +14,63 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
     public int[] spawnChances = { 35, 35, 20, 10 };
 
     private List<GameObject> spawnList = new List<GameObject>();
+    private bool itemsSpawned = false; // Track if items have been spawned
 
-    // Called when this client joins a room
+    // Called when this client joins the room
     public override void OnJoinedRoom()
     {
-        // Ask the MasterClient to spawn items
-        photonView.RPC(nameof(RequestItemSpawnRPC), RpcTarget.MasterClient);
+        // Request the MasterClient to spawn items
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC(nameof(RequestItemSpawnRPC), RpcTarget.MasterClient);
+        }
+        else
+        {
+            // If we are MasterClient, spawn items immediately
+            SpawnItemsMaster();
+        }
     }
 
-    // Called when any new player joins the room (only fires on MasterClient)
+    // Called when a new player joins
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        // Only MasterClient should spawn items
         if (!PhotonNetwork.IsMasterClient) return;
 
-        // If items are not already spawned, ensure they spawn for all clients
-        if (spawnList.Count == 0)
-        {
-            CreateSpawnList();
-            SpawnItems();
-        }
+        // Spawn BigPlayer items for all players if not already spawned
+        if (!itemsSpawned)
+            SpawnItemsMaster();
     }
 
     [PunRPC]
     private void RequestItemSpawnRPC()
     {
+        // Only MasterClient responds
         if (!PhotonNetwork.IsMasterClient) return;
 
+        // Spawn items for everyone
+        SpawnItemsMaster();
+    }
+
+    private void SpawnItemsMaster()
+    {
+        if (itemsSpawned) return;
+
         CreateSpawnList();
-        SpawnItems();
+
+        for (int i = 0; i < spawnPoints.Length && i < spawnList.Count; i++)
+        {
+            GameObject prefab = spawnList[i];
+            Transform spawnPoint = spawnPoints[i];
+
+            PhotonNetwork.InstantiateRoomObject(
+                prefab.name,
+                spawnPoint.position,
+                spawnPoint.rotation
+            );
+        }
+
+        itemsSpawned = true;
     }
 
     private void CreateSpawnList()
@@ -50,11 +79,11 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
 
         int totalSpawnPoints = spawnPoints.Length;
 
-        // Calculate total of all chances
+        // Calculate total chance
         int totalChance = 0;
         foreach (int c in spawnChances) totalChance += c;
 
-        // Step 1: assign count per prefab based on percentage
+        // Step 1: assign counts per prefab
         int[] prefabCounts = new int[itemPrefabs.Length];
         int assigned = 0;
 
@@ -64,7 +93,7 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
             assigned += prefabCounts[i];
         }
 
-        // Step 2: distribute any leftover slots
+        // Step 2: distribute leftover slots
         int remaining = totalSpawnPoints - assigned;
         while (remaining > 0)
         {
@@ -75,7 +104,7 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
             }
         }
 
-        // Step 3: build the spawn list
+        // Step 3: build spawnList
         for (int i = 0; i < itemPrefabs.Length; i++)
         {
             for (int j = 0; j < prefabCounts[i]; j++)
@@ -84,20 +113,8 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
             }
         }
 
-        // Step 4: shuffle so spawns are randomized
+        // Step 4: shuffle
         Shuffle(spawnList);
-    }
-
-    private void SpawnItems()
-    {
-        for (int i = 0; i < spawnPoints.Length && i < spawnList.Count; i++)
-        {
-            PhotonNetwork.InstantiateRoomObject(
-                spawnList[i].name,
-                spawnPoints[i].position,
-                spawnPoints[i].rotation
-            );
-        }
     }
 
     // Fisher–Yates shuffle
@@ -112,4 +129,5 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
         }
     }
 }
+
 
