@@ -5482,6 +5482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSetup
   spMovement: {fileID: 5644917193308100841}
+  spAnimController: {fileID: 5652239455369858129}
   playerCamera: {fileID: 2166375673638303613}
   spItemCollector: {fileID: 457389529722468420}
   spBobbyPin: {fileID: 7213267609248557840}
@@ -5498,7 +5499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2283113866
+  GlobalObjectIdHash: 4088710418
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -6021,6 +6022,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5652239455369858129}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 015c18d51ff513f4fa915f840ae9ce95,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7911526244335965129}
   m_SourcePrefab: {fileID: 100100000, guid: 015c18d51ff513f4fa915f840ae9ce95, type: 3}
 --- !u!4 &8297555670875580252 stripped
 Transform:
@@ -6063,8 +6068,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8677598959027453414}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c64e34ce1f475824eaaddc8538b469fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7911526244335965129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677598959027453414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
