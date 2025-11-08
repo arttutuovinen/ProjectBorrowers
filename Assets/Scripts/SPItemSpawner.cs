@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class SPItemSpawner : MonoBehaviourPunCallbacks
 {
@@ -9,17 +10,62 @@ public class SPItemSpawner : MonoBehaviourPunCallbacks
     public Transform[] spawnPoints;
 
     private List<GameObject> spawnList = new List<GameObject>();
+    private bool itemsSpawned = false;
 
     public override void OnJoinedRoom()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient)
         {
-            CreateSpawnList();
-            SpawnItems();
+            // Ask MasterClient to spawn items
+            photonView.RPC(nameof(RequestItemSpawnRPC), RpcTarget.MasterClient);
+        }
+        else
+        {
+            SpawnItemsMaster();
         }
     }
 
-    void CreateSpawnList()
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        // Ensure items exist for late joiners
+        if (!itemsSpawned)
+        {
+            SpawnItemsMaster();
+        }
+    }
+
+    [PunRPC]
+    private void RequestItemSpawnRPC()
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        SpawnItemsMaster();
+    }
+
+    private void SpawnItemsMaster()
+    {
+        if (itemsSpawned) return;
+
+        CreateSpawnList();
+
+        for (int i = 0; i < spawnPoints.Length && i < spawnList.Count; i++)
+        {
+            GameObject prefab = spawnList[i];
+            Transform spawnPoint = spawnPoints[i];
+
+            PhotonNetwork.Instantiate(
+                prefab.name,
+                spawnPoint.position,
+                spawnPoint.rotation
+            );
+        }
+
+        itemsSpawned = true;
+    }
+
+    private void CreateSpawnList()
     {
         spawnList.Clear();
 
@@ -36,19 +82,7 @@ public class SPItemSpawner : MonoBehaviourPunCallbacks
         }
     }
 
-    void SpawnItems()
-    {
-        for (int i = 0; i < spawnPoints.Length; i++)
-        {
-            PhotonNetwork.Instantiate(
-                spawnList[i].name,
-                spawnPoints[i].position,
-                spawnPoints[i].rotation
-            );
-        }
-    }
-
-    void Shuffle<T>(List<T> list)
+    private void Shuffle<T>(List<T> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
@@ -57,4 +91,5 @@ public class SPItemSpawner : MonoBehaviourPunCallbacks
         }
     }
 }
+
 
