@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class BPItemCollector : MonoBehaviour
+public class BPItemCollector : MonoBehaviourPun
 {
     public enum ItemType
     {
