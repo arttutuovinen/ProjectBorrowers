@@ -291,7 +291,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 79.5
+  field of view: 67.4
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -386,8 +386,8 @@ GameObject:
   - component: {fileID: 2272564012468612583}
   - component: {fileID: 6711433160043170722}
   - component: {fileID: 3447934495327288878}
-  - component: {fileID: 6368843660994411660}
   - component: {fileID: 6759395729989228288}
+  - component: {fileID: 5307150729043974029}
   m_Layer: 0
   m_Name: BigPlayer
   m_TagString: BigPlayer
@@ -773,18 +773,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &6368843660994411660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481b9c650e90fcb49a22774c67d73e86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BPPlayerInit
 --- !u!114 &6759395729989228288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,6 +787,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BpPlayerSetup
   bpMovement: {fileID: 7549007834672380184}
   playerCamera: {fileID: 5159615410664788595}
+--- !u!114 &5307150729043974029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481b9c650e90fcb49a22774c67d73e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPPlayerInit
 --- !u!1 &5827039078137388844
 GameObject:
   m_ObjectHideFlags: 0
