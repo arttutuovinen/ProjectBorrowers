@@ -33,6 +33,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         //Reference BigPlayer
         //playerInstance.GetComponent<BpPlayerSetup>().IsLocalPlayer();
         //Reference SmallPlayer
-        playerInstance.GetComponent<PlayerSetup>().IsLocalPlayer();
+        
     }
 }
