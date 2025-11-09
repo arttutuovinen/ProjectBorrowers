@@ -1547,7 +1547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &48695042
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1581,7 +1581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerListUI
   playerListText: {fileID: 1178158081}
-  panel: {fileID: 48695041}
+  panel: {fileID: 0}
+  verboseDebugLogs: 1
 --- !u!114 &48695044
 MonoBehaviour:
   m_ObjectHideFlags: 0
