@@ -215,51 +215,54 @@ public class SPMovementNET : MonoBehaviour
 
     private void ControlCamera()
     {
+        // === INPUT ===
         float mouseX, mouseY;
 
-        // Input handling (PS5 controller or mouse)
         if (Mathf.Abs(Input.GetAxis("P1RightStickHorizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("P1RightStickVertical")) > 0.1f)
         {
-            mouseX = Input.GetAxis("P1RightStickHorizontal") * controllerSensitivity * 2f; // Make it snappier
+            mouseX = Input.GetAxis("P1RightStickHorizontal") * controllerSensitivity * 2f;
             mouseY = Input.GetAxis("P1RightStickVertical") * controllerSensitivity * 2f;
         }
         else
         {
-            // Remove deltaTime here so rotation feels instant & consistent
             mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * 0.02f;
             mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 0.02f;
         }
 
-        // Update rotation
+        // === ROTATION ===
         yaw += mouseX;
         pitch -= mouseY;
         pitch = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
 
-        // Desired direction from player to camera (behind the player)
-        Vector3 desiredDirection = Quaternion.Euler(pitch, yaw, 0f) * Vector3.back;
+        // Direction behind player
+        Vector3 desiredDir = Quaternion.Euler(pitch, yaw, 0f) * Vector3.back;
 
-        // Calculate ideal and minimum camera distances
-        float minDistance = 1.0f; // camera never gets closer than this to player
+        // === CAMERA DISTANCE ===
         float maxDistance = distanceFromPlayer;
+        float minDistance = 0.5f;  // closest camera can get
+        float targetDistance = maxDistance;
 
-        // Desired position before raycast adjustment
-        Vector3 desiredCameraPos = cameraFollowTarget.position + desiredDirection * maxDistance;
-
-        // Raycast to check if environment blocks the view
+        // Raycast from player toward desired camera direction
         RaycastHit hit;
-        if (Physics.Raycast(cameraFollowTarget.position, desiredDirection, out hit, maxDistance, cameraCollisionMask))
+        if (Physics.Raycast(cameraFollowTarget.position, desiredDir, out hit, maxDistance, cameraCollisionMask))
         {
-            float hitDist = Mathf.Clamp(hit.distance - 0.3f, minDistance, maxDistance);
-            desiredCameraPos = cameraFollowTarget.position + desiredDirection * hitDist;
+            // If something is in between, move camera closer
+            targetDistance = Mathf.Clamp(hit.distance - 0.3f, minDistance, maxDistance);
         }
 
-        // Smooth follow with faster reaction (adjust speed for feel)
-        float smoothSpeed = 15f;
-        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredCameraPos, Time.deltaTime * smoothSpeed);
+        // === DESIRED POSITION ===
+        Vector3 desiredPos = cameraFollowTarget.position + desiredDir * targetDistance;
 
-        // Always look toward the player
+        // === SMOOTH MOVEMENT ===
+        // Lerp position (smooth but responsive)
+        float moveSpeed = 10f; // higher = snappier
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPos, Time.deltaTime * moveSpeed);
+
+        // Always look at player (chest height)
         cameraTransform.LookAt(cameraFollowTarget.position + Vector3.up * 1.5f);
     }
+
+
 
 
     // Detect when the player is near a ladder (use triggers or raycast)
