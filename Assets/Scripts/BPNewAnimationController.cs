@@ -6,22 +6,17 @@ using Photon.Pun;
 public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
 {
     [Header("Input Settings")]
-    public string horizontalAxis = "P2Horizontal";
-    public string verticalAxis = "P2Vertical";
-    public string crouchButton = "P2Crouch";
-
-    [Header("Movement Settings")]
-    public float inputThreshold = 0.1f;
-    public float speedSmoothTime = 0.1f;
+    private float horizontal;
+    private float vertical;       // Default Unity input: W/S or Up/Down
+    public string crouchButton = "Crouch";         // Optional Input Manager button
 
     private Animator animator;
-    private float currentSpeed = 0f;
-    private float speedVelocity = 0f;
     private bool isCrouching = false;
+    private bool isMoving = false;
 
     // Synced variables for remote players
-    private float networkSpeed = 0f;
     private bool networkCrouch = false;
+    private bool networkMove = false;
 
     void Awake()
     {
@@ -37,9 +32,9 @@ public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
         }
         else
         {
-            // Smooth transitions for remote players
-            currentSpeed = Mathf.Lerp(currentSpeed, networkSpeed, Time.deltaTime * 8f);
+            // Smoothly update remote player animation states
             isCrouching = networkCrouch;
+            isMoving = networkMove;
         }
 
         UpdateAnimator();
@@ -47,7 +42,8 @@ public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
 
     void HandleCrouchInput()
     {
-        if (Input.GetButtonDown(crouchButton))
+        // Default crouch key (Left Control)
+        if (Input.GetButtonDown(crouchButton) || Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCrouching = !isCrouching;
         }
@@ -55,38 +51,29 @@ public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
 
     void HandleMovementInput()
     {
-        float h = Input.GetAxis(horizontalAxis);
-        float v = Input.GetAxis(verticalAxis);
-        float targetSpeed = new Vector2(h, v).magnitude;
-
-        // Apply threshold
-        if (targetSpeed < inputThreshold)
-            targetSpeed = 0f;
-
-        // Smooth speed
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity, speedSmoothTime);
+        horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
+        vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
+        isMoving = (horizontal != 0 || vertical != 0);
     }
 
     void UpdateAnimator()
     {
         animator.SetBool("IsCrouching", isCrouching);
-        animator.SetFloat("Speed", currentSpeed);
+        animator.SetBool("IsMoving", isMoving);
     }
 
-    // Sync animation data across network
+    // Photon network sync
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            // Send local player animation data
-            stream.SendNext(currentSpeed);
             stream.SendNext(isCrouching);
+            stream.SendNext(isMoving);
         }
         else
         {
-            // Receive and apply data for remote players
-            networkSpeed = (float)stream.ReceiveNext();
             networkCrouch = (bool)stream.ReceiveNext();
+            networkMove = (bool)stream.ReceiveNext();
         }
     }
 }

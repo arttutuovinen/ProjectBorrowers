@@ -743,6 +743,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6711433160043170722}
+  - {fileID: 2926053485195722703}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -774,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3261869827
+  GlobalObjectIdHash: 1766250525
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1959,6 +1960,7 @@ MonoBehaviour:
   maxPitch: 30
   pitchIntensity: 1
   rotationAxis: {x: 1, y: 0, z: 0}
+  rotationLerpSpeed: 8
 --- !u!114 &2926053485195722703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1971,11 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ccb7ec4e3b2b942a8b438bb84e5499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxis: P2Horizontal
-  verticalAxis: P2Vertical
   crouchButton: P2Crouch
-  inputThreshold: 0.1
-  speedSmoothTime: 0.1
 --- !u!95 &4734701019181051656
 Animator:
   serializedVersion: 7
