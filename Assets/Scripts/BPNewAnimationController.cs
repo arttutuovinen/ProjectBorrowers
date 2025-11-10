@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class BPNewAnimationController : MonoBehaviour
+public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
 {
+    [Header("Input Settings")]
     public string horizontalAxis = "P2Horizontal";
     public string verticalAxis = "P2Vertical";
     public string crouchButton = "P2Crouch";
 
+    [Header("Movement Settings")]
     public float inputThreshold = 0.1f;
     public float speedSmoothTime = 0.1f;
 
@@ -16,6 +19,10 @@ public class BPNewAnimationController : MonoBehaviour
     private float speedVelocity = 0f;
     private bool isCrouching = false;
 
+    // Synced variables for remote players
+    private float networkSpeed = 0f;
+    private bool networkCrouch = false;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -23,8 +30,18 @@ public class BPNewAnimationController : MonoBehaviour
 
     void Update()
     {
-        HandleCrouchInput();
-        HandleMovementInput();
+        if (photonView.IsMine)
+        {
+            HandleCrouchInput();
+            HandleMovementInput();
+        }
+        else
+        {
+            // Smooth transitions for remote players
+            currentSpeed = Mathf.Lerp(currentSpeed, networkSpeed, Time.deltaTime * 8f);
+            isCrouching = networkCrouch;
+        }
+
         UpdateAnimator();
     }
 
@@ -52,8 +69,25 @@ public class BPNewAnimationController : MonoBehaviour
 
     void UpdateAnimator()
     {
-        // Set Animator values AFTER logic is stable
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetFloat("Speed", currentSpeed);
     }
+
+    // Sync animation data across network
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // Send local player animation data
+            stream.SendNext(currentSpeed);
+            stream.SendNext(isCrouching);
+        }
+        else
+        {
+            // Receive and apply data for remote players
+            networkSpeed = (float)stream.ReceiveNext();
+            networkCrouch = (bool)stream.ReceiveNext();
+        }
+    }
 }
+
