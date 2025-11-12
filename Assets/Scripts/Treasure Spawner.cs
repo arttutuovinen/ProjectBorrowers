@@ -10,10 +10,11 @@ public class TreasureSpawner : MonoBehaviour
     public string playerTag = "SmallPlayer";
     public TextMeshProUGUI smallPlayerScoreText;
     private int score = 0;
-    public CompassBar compassBar;            // Reference to the CompassBar script
+    private CompassBar compassBar;            // Reference to the CompassBar script
 
     void Start()
     {
+        compassBar = FindObjectOfType<CompassBar>();
         spawnPoints = GameObject.FindGameObjectsWithTag("TreasureSpawnPoint");
         smallPlayerScoreText.text = score.ToString();
         TeleportTreasureToRandomPoint();
@@ -44,11 +45,7 @@ public class TreasureSpawner : MonoBehaviour
             TeleportTreasureToRandomPoint();
             compassBar.ResetTreasure();
         }
-        if (hit.gameObject.CompareTag("Treasure"))
-        {
-            // Switch compass to point at finish
-            compassBar.CollectTreasure();
-        }
+        
     }
     
 }
