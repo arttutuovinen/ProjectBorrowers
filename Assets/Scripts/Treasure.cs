@@ -21,7 +21,7 @@ public class Treasure : MonoBehaviour
             other.gameObject.GetComponent<SmallPlayerMovement>().isTreasureCollected = true;  // Set treasure as collected
             Debug.Log("Treasure collected!");
             treasure.SetActive(false);   
-            compass.CollectTreasure();
+            //compass.CollectTreasure();
         }
     }
 }

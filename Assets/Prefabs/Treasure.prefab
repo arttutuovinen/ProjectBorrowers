@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 3589565098007097491}
   - component: {fileID: 4186736152461657200}
   - component: {fileID: 1996274183202244039}
+  - component: {fileID: 4039133647274126949}
   - component: {fileID: 3327425050231165423}
   - component: {fileID: 1498920845007395516}
+  - component: {fileID: -4600101936434664322}
   m_Layer: 0
   m_Name: Treasure
   m_TagString: Treasure
@@ -92,7 +94,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3327425050231165423
+--- !u!114 &4039133647274126949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,12 +103,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 5979521016899162531}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a5ee2842c0b72468f97e49b55bed7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreasureController
+--- !u!114 &3327425050231165423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979521016899162531}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eecb5b8f48ce7ca47a6d510dae979487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: SmallPlayer
-  compass: {fileID: 0}
-  treasure: {fileID: 0}
+  treasure: {fileID: 5979521016899162531}
 --- !u!135 &1498920845007395516
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -128,6 +141,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4600101936434664322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979521016899162531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &8585157952417819367
 PrefabInstance:
   m_ObjectHideFlags: 0
