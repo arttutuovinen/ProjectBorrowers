@@ -28,7 +28,7 @@ public class PlayerListUI : MonoBehaviourPunCallbacks
         if (verboseDebugLogs && Time.frameCount % 60 == 0)
             Debug.Log("[PlayerListUI] Update() running. Selected: " + GetSelectedObjectName());
 
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.BackQuote))
+        if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.BackQuote))
         {
             Debug.Log("[PlayerListUI] Detected key via Update()");
             TryToggleFromInput();
@@ -40,7 +40,7 @@ public class PlayerListUI : MonoBehaviourPunCallbacks
         Event e = Event.current;
         if (e != null && e.type == EventType.KeyDown)
         {
-            if (e.keyCode == KeyCode.Tab || e.keyCode == KeyCode.BackQuote)
+            if (e.keyCode == KeyCode.L || e.keyCode == KeyCode.BackQuote)
             {
                 Debug.Log("[PlayerListUI] Detected key via OnGUI(): " + e.keyCode);
                 TryToggleFromInput();
