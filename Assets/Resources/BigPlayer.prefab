@@ -586,21 +586,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   playerCamera: {fileID: 2004338299970110419}
-  bpPickUpText: {fileID: 0}
-  throwingItem: {fileID: 0}
-  flySwatterImage: {fileID: 0}
-  mouseTrapImage: {fileID: 0}
-  compassImage: {fileID: 0}
-  vacuumCleanerImage: {fileID: 0}
-  tapeImage: {fileID: 0}
-  medicineImage: {fileID: 0}
-  bpThrowItem: {fileID: 3774273787329705725}
-  bpAnimation: {fileID: 4707978626620499756}
-  bpMouseTrap: {fileID: 1680146458477775708}
-  bpCompass: {fileID: 6282008728592654131}
-  bpVacuumCleaner: {fileID: 3348664134161292876}
-  bpTapeManager: {fileID: 2681469819170339142}
-  bpMedicine: {fileID: 4387901889807618486}
 --- !u!114 &2865288026283827184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,7 +621,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb959919706adae43bcf413d2b4ed6af, type: 3}
   m_Name: 
@@ -802,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BpPlayerSetup
   bpMovement: {fileID: 7549007834672380184}
+  bpItemCollector: {fileID: 6636025762960350756}
   playerCamera: {fileID: 5159615410664788595}
 --- !u!114 &5307150729043974029
 MonoBehaviour:

@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 8547508968406915072}
   m_Layer: 11
   m_Name: TapeCollectible
-  m_TagString: BPCollectible
+  m_TagString: BPTape
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +226,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8cdfa5e2eabde7d4d80f1718b077ea2b,
+        type: 3}
+      propertyPath: m_TagString
+      value: BPTape
       objectReference: {fileID: 0}
     - target: {fileID: 3541006519636367978, guid: 8cdfa5e2eabde7d4d80f1718b077ea2b,
         type: 3}
