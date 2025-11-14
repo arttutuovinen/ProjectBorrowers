@@ -1,21 +1,21 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using TMPro; // using TextMeshPro InputField
+using TMPro;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     [Header("Scene")]
-    public Transform spawnPoint;
+    public Transform[] smallPlayerSpawnPoints;   // <-- Multiple SP spawn points
+    public Transform bigPlayerSpawnPoint;        // <-- Single BP spawn point
 
     [Header("UI (hook these in Inspector)")]
-    public TMP_InputField nameInput;           // NameInput from your LobbyPanel
-    public GameObject[] characterButtons;      // CharButton_0, CharButton_1 assigned in Inspector
-    public TMPro.TextMeshProUGUI joinButtonText; // optional label to show status
-    public GameObject lobbyPanel;              // assign your LobbyPanel here
+    public TMP_InputField nameInput;
+    public GameObject[] characterButtons;
+    public TMPro.TextMeshProUGUI joinButtonText;
+    public GameObject lobbyPanel;
 
-    // 0 = SmallPlayer, 1 = BigPlayer
-    int selectedCharacterIndex = 0;
+    int selectedCharacterIndex = 0; // 0 = SmallPlayer, 1 = BigPlayer
 
     // ---------- UI callbacks ----------
     public void OnNameInputChanged(string newName) { }
@@ -41,26 +41,29 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     // Called by JoinButton OnClick
     public void OnJoinButtonPressed()
-{
-    if (nameInput == null || string.IsNullOrWhiteSpace(nameInput.text))
     {
-        Debug.Log("Name is required before joining a room!");
-        if (joinButtonText != null) joinButtonText.text = "Enter a Name!";
-        return;
+        if (nameInput == null || string.IsNullOrWhiteSpace(nameInput.text))
+        {
+            Debug.Log("Name is required before joining a room!");
+            if (joinButtonText != null) joinButtonText.text = "Enter a Name!";
+            return;
+        }
+
+        PhotonNetwork.NickName = nameInput.text.Trim();
+        if (joinButtonText != null) joinButtonText.text = "Connecting...";
+        PhotonNetwork.ConnectUsingSettings();
     }
-
-    PhotonNetwork.NickName = nameInput.text.Trim();
-    if (joinButtonText != null) joinButtonText.text = "Connecting...";
-    PhotonNetwork.ConnectUsingSettings();
-}
-
 
     // ---------- Photon callbacks ----------
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
         Debug.Log("Connected to Master. Joining/creating room...");
-        PhotonNetwork.JoinOrCreateRoom("TestRoom", new RoomOptions { MaxPlayers = 8 }, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(
+            "TestRoom",
+            new RoomOptions { MaxPlayers = 8 },
+            TypedLobby.Default
+        );
     }
 
     public override void OnJoinedRoom()
@@ -76,14 +79,31 @@ public class RoomManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        Vector3 spawnPos = (spawnPoint != null) ? spawnPoint.position : Vector3.zero;
+        // ------------ Spawn Point Selection ------------
+        Transform spawnPoint = null;
+
+        if (selectedCharacterIndex == 0) // SmallPlayer
+        {
+            if (smallPlayerSpawnPoints != null && smallPlayerSpawnPoints.Length > 0)
+            {
+                int rand = Random.Range(0, smallPlayerSpawnPoints.Length);
+                spawnPoint = smallPlayerSpawnPoints[rand];
+            }
+        }
+        else if (selectedCharacterIndex == 1) // BigPlayer
+        {
+            spawnPoint = bigPlayerSpawnPoint;
+        }
+
+        Vector3 spawnPos =
+            (spawnPoint != null) ? spawnPoint.position : Vector3.zero;
+
         PhotonNetwork.Instantiate(prefabName, spawnPos, Quaternion.identity);
 
-        // ===== Hide the lobby UI for this client =====
+        // Hide Lobby UI
         if (lobbyPanel != null)
             lobbyPanel.SetActive(false);
 
-        // Optional: lock cursor for gameplay
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -94,7 +114,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log("Disconnected: " + cause);
         if (joinButtonText != null) joinButtonText.text = "Join";
 
-        // If disconnected while in game, show lobby again
         if (lobbyPanel != null)
             lobbyPanel.SetActive(true);
     }
@@ -109,3 +128,5 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 }
+
+
