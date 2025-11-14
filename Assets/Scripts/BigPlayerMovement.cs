@@ -16,10 +16,10 @@ public class BigPlayerMovement : MonoBehaviour
     // ** Crouching variables **
     public float crouchSpeed = 1.0f;     // Speed when crouching
     [HideInInspector] public float currentSpeed;
-    public float standingHeight = 2.0f;
-    public float crouchingHeight = 1.0f;
+    public float standingHeight = 15.0f;
+    public float crouchingHeight = 7.5f;
     public Vector3 standingCenter = Vector3.zero;
-    public Vector3 crouchingCenter = new Vector3(0, -0.5f, 0);
+    public Vector3 crouchingCenter = new Vector3(0, -3.75f, 0);
     private bool isCrouching = false;
 
     public float crouchCameraYOffset = -0.5f;
