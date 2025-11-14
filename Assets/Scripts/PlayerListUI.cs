@@ -25,29 +25,18 @@ public class PlayerListUI : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (verboseDebugLogs && Time.frameCount % 60 == 0)
-            Debug.Log("[PlayerListUI] Update() running. Selected: " + GetSelectedObjectName());
-
         if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.BackQuote))
         {
-            Debug.Log("[PlayerListUI] Detected key via Update()");
             TryToggleFromInput();
+            return; // ensures instant toggle
         }
+
+        if (verboseDebugLogs && Time.frameCount % 60 == 0)
+            Debug.Log("[PlayerListUI] Update() running. Selected: " + GetSelectedObjectName());
     }
 
-    void OnGUI()
-    {
-        Event e = Event.current;
-        if (e != null && e.type == EventType.KeyDown)
-        {
-            if (e.keyCode == KeyCode.L || e.keyCode == KeyCode.BackQuote)
-            {
-                Debug.Log("[PlayerListUI] Detected key via OnGUI(): " + e.keyCode);
-                TryToggleFromInput();
-                e.Use();
-            }
-        }
-    }
+
+    
 
     private void TryToggleFromInput()
     {
