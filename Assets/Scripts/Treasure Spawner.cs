@@ -30,6 +30,15 @@ public class TreasureSpawner : MonoBehaviourPunCallbacks
             point.transform.position,
             point.transform.rotation);
     }
+    [PunRPC]
+    public void RPC_TeleportTreasure(Vector3 pos, Quaternion rot)
+    {
+        if (treasure != null)
+        {
+            treasure.transform.SetPositionAndRotation(pos, rot);
+            treasure.SetActive(true); // Reactivate treasure on all clients
+        }
+    }
 }
 
 

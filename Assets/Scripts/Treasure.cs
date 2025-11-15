@@ -1,27 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Treasure : MonoBehaviour
+public class Treasure : MonoBehaviourPun
 {
-    public string playerTag = "SmallPlayer";
-    private CompassBar compass;
-    public GameObject treasure;
-
-    void Star()
-    {
-        compass = FindObjectOfType<CompassBar>();
-    }
-    // This method is called when the player enters a trigger (Treasure is a trigger)
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the player has collided with the treasure
-        if (other.CompareTag(playerTag))
+        if (!photonView.IsMine) return; // Only owner triggers it
+
+        if (other.CompareTag("SmallPlayer"))
         {
-            other.gameObject.GetComponent<SmallPlayerMovement>().isTreasureCollected = true;  // Set treasure as collected
-            Debug.Log("Treasure collected!");
-            treasure.SetActive(false);   
-            //compass.CollectTreasure();
+            // Deactivate treasure across all clients
+            photonView.RPC("CollectTreasureRPC", RpcTarget.AllBuffered);
+        }
+    }
+
+    [PunRPC]
+    void CollectTreasureRPC()
+    {
+        gameObject.SetActive(false);
+
+        // Tell the compass to switch to Finish
+        CompassBar compass = FindObjectOfType<CompassBar>();
+        if (compass != null)
+        {
+            compass.photonView.RPC("OnTreasureCollected", RpcTarget.AllBuffered);
         }
     }
 }
