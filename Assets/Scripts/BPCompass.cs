@@ -1,45 +1,52 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
 
-public class BPCompass : MonoBehaviour
+public class BPCompass : MonoBehaviourPun
 {
-    public GameObject smallPlayer;
+    public GameObject smallPlayer; // Can be null if no small player exists
     public GameObject bpCompass;
-    
 
-    void Start()
+    private void Start()
     {
         bpCompass.SetActive(false);
     }
 
     public void UseCompass()
     {
+        if (!photonView.IsMine) return;   // Only local player can use their compass
+
         bpCompass.SetActive(true);
         StartCoroutine(UpdateCompass());
-        Debug.Log("Kompassi toimii");
     }
+
     private IEnumerator UpdateCompass()
-{
-    float duration = 4f; // Example duration in seconds
-    float elapsed = 0f;
-
-    while (elapsed < duration)
     {
-        Vector3 directionToSmallPlayer = smallPlayer.transform.position - transform.position;
-        directionToSmallPlayer.y = 0;
+        float duration = 4f;
+        float elapsed = 0f;
 
-        if (directionToSmallPlayer != Vector3.zero)
+        while (elapsed < duration)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(directionToSmallPlayer);
-            transform.rotation = targetRotation;
+            if (smallPlayer != null)
+            {
+                Vector3 directionToSmallPlayer = smallPlayer.transform.position - transform.position;
+                directionToSmallPlayer.y = 0;
+
+                if (directionToSmallPlayer != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(directionToSmallPlayer);
+                    transform.rotation = targetRotation;
+                }
+            }
+
+            // If smallPlayer is null, compass just stays active but does nothing
+            elapsed += Time.deltaTime;
+            yield return null;
         }
 
-        elapsed += Time.deltaTime;
-        yield return null; // Wait for the next frame
+        bpCompass.SetActive(false); // Hide compass after duration
     }
+}
 
-    bpCompass.SetActive(false); // Deactivate compass after duration
-}
-}
+
+

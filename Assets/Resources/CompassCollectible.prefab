@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 3559756942975216023}
   m_Layer: 11
   m_Name: CompassCollectible
-  m_TagString: BPCollectible
+  m_TagString: BPCompass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +226,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 48128368a9cb13d4689d6b95c7b2442f,
+        type: 3}
+      propertyPath: m_TagString
+      value: BPCompass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

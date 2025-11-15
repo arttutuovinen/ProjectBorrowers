@@ -1,20 +1,22 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class BPTapeManager : MonoBehaviour
+public class BPTapeManager : MonoBehaviourPun
 {
     public Camera playerCamera;
     public float rayDistance = 10f;
     public float activationDistance = 3f;
-    public LayerMask tapeAreaLayer; // Assign "Tape" layer in Inspector (for TapeWeapon prefabs)
+    public LayerMask tapeAreaLayer;
 
     private GameObject currentTapeArea;
 
     void Update()
     {
+        if (!photonView.IsMine) return;   // Only local player does raycasts
         DetectTapeArea();
     }
 
-    void DetectTapeArea()
+    private void DetectTapeArea()
     {
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit hit;
@@ -35,41 +37,69 @@ public class BPTapeManager : MonoBehaviour
     /// </summary>
     public bool TryActivateTape()
     {
+        if (!photonView.IsMine) return false;  // Only the owner triggers activation
+
         if (currentTapeArea == null)
         {
-            Debug.Log("No tape area in sight.");
             return false;
         }
 
         // Check distance
-        float distance = Vector3.Distance(playerCamera.transform.position, currentTapeArea.transform.position);
+        float distance = Vector3.Distance(
+            playerCamera.transform.position,
+            currentTapeArea.transform.position
+        );
+
         if (distance > activationDistance)
         {
-            Debug.Log("Too far from tape area to activate.");
             return false;
         }
 
-        // Check if area already used
         if (!currentTapeArea.TryGetComponent(out TapeArea areaComponent))
         {
-            Debug.LogWarning($"Tape area '{currentTapeArea.name}' missing TapeArea component!");
             return false;
         }
 
+        // Already activated?
         if (areaComponent.IsActivated)
         {
-            Debug.Log($"Tape area '{currentTapeArea.name}' already has tape placed.");
             return false;
         }
 
-        // Activate children (the actual tape meshes)
-        foreach (Transform child in currentTapeArea.transform)
+        // Activate across the network using RPC
+        PhotonView areaPv = currentTapeArea.GetComponent<PhotonView>();
+        if (areaPv == null)
+        {
+            Debug.LogError("TapeArea object MUST have a PhotonView to sync!");
+            return false;
+        }
+
+        photonView.RPC("RPC_ActivateTapeArea", RpcTarget.All, areaPv.ViewID);
+
+        return true;
+    }
+
+    [PunRPC]
+    private void RPC_ActivateTapeArea(int areaID)
+    {
+        PhotonView areaPv = PhotonView.Find(areaID);
+        if (areaPv == null) return;
+
+        GameObject areaObj = areaPv.gameObject;
+
+        if (!areaObj.TryGetComponent(out TapeArea areaComponent))
+            return;
+
+        if (areaComponent.IsActivated)
+            return; // Avoid double-activating
+
+        // Activate all tape meshes (children)
+        foreach (Transform child in areaObj.transform)
         {
             child.gameObject.SetActive(true);
         }
 
         areaComponent.IsActivated = true;
-        Debug.Log($"Activated tape area: {currentTapeArea.name}");
-        return true;
     }
 }
+

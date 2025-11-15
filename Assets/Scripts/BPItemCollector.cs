@@ -159,50 +159,64 @@ public class BPItemCollector : MonoBehaviourPun
     // -----------------------------------------------------------------------
     // ✔ Use item
     // -----------------------------------------------------------------------
-    void UseItem()
+    public void UseItem()
     {
+        if (!photonView.IsMine) return; // Only the local player can use items
+
         switch (currentItem)
         {
             case ItemType.ThrowingItem:
-                bpThrowItem.SpawnThrowItem();
+                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem();
                 break;
 
             case ItemType.ThrowingItem_02:
-                bpThrowItem.SpawnThrowItem2();
+                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem2();
                 break;
 
             case ItemType.ThrowingItem_03:
-                bpThrowItem.SpawnThrowItem3();
+                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem3();
                 break;
 
             case ItemType.FlySwatter:
-                bpAnimation.FlySwatter();
+                if (bpAnimation != null) bpAnimation.FlySwatter();
                 break;
 
             case ItemType.MouseTrap:
-                bpMouseTrap.SpawnMouseTrap();
+                if (bpMouseTrap != null) bpMouseTrap.SpawnMouseTrap();
                 break;
 
             case ItemType.Compass:
-                bpCompass.UseCompass();
+                if (bpCompass != null) bpCompass.UseCompass();
                 break;
 
             case ItemType.VacuumCleaner:
-                bpVacuumCleaner.TryPullTarget();
+                if (bpVacuumCleaner != null) bpVacuumCleaner.TryPullTarget();
                 break;
 
             case ItemType.Tape:
-                if (!bpTapeManager.TryActivateTape())
-                    return; // don't consume if failed
+                if (bpTapeManager != null)
+                {
+                    if (!bpTapeManager.TryActivateTape())
+                    {
+                        // Don't consume item if activation failed
+                        return;
+                    }
+                }
                 break;
 
             case ItemType.Medicine:
-                bpMedicine.ActivateSpeedBoost();
+                if (bpMedicine != null) bpMedicine.ActivateSpeedBoost();
                 break;
+
+            default:
+                Debug.LogWarning("UseItem called but no valid currentItem selected.");
+                return;
         }
 
+        // Mark as used and reset
         itemUsed = true;
         currentItem = ItemType.None;
     }
+
 }
 

@@ -129,7 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a82ea88f44290b4d8c993a192061bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallPlayer: {fileID: 0}
+  smallPlayer: {fileID: 3150109236876745808, guid: 5ae7330550eb3984590712a49a411561,
+    type: 3}
   bpCompass: {fileID: 4573913741737606444}
 --- !u!1 &5159615410664788595
 GameObject:
@@ -289,7 +290,6 @@ GameObject:
   - component: {fileID: 3774273787329705725}
   - component: {fileID: 2681469819170339142}
   - component: {fileID: 6636025762960350756}
-  - component: {fileID: 2865288026283827184}
   - component: {fileID: 726549868499103897}
   - component: {fileID: 4387901889807618486}
   - component: {fileID: 7549007834672380184}
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f38243d8024064489a97185b3dabc70, type: 3}
   m_Name: 
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46785975506478a499ace611bb191945, type: 3}
   m_Name: 
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ccc7fd9faba72458be6fe46ff13cf8, type: 3}
   m_Name: 
@@ -493,21 +493,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   playerCamera: {fileID: 2004338299970110419}
---- !u!114 &2865288026283827184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 730778b6ee8d1b4469d3c062ea16b04f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashbangedImage: {fileID: 0}
-  fadeDuration: 1
-  initialDelay: 3
 --- !u!114 &726549868499103897
 MonoBehaviour:
   m_ObjectHideFlags: 0
