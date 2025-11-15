@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 9113464947835078047}
   m_Layer: 11
   m_Name: MouseTrapCollectible
-  m_TagString: BPCollectible
+  m_TagString: BPMouseTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,18 +219,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8405941983154566471, guid: 88d34443b3583f44b8b2b5891c6cce62,
         type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: -8405941983154566471, guid: 88d34443b3583f44b8b2b5891c6cce62,
+        type: 3}
       propertyPath: m_TagString
-      value: BPCollectible
+      value: BPMouseTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: -1647722945458899086, guid: 88d34443b3583f44b8b2b5891c6cce62,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -1647722945458899086, guid: 88d34443b3583f44b8b2b5891c6cce62,
         type: 3}
       propertyPath: m_TagString
-      value: BPCollectible
+      value: BPMouseTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 255636599358921403, guid: 88d34443b3583f44b8b2b5891c6cce62,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 255636599358921403, guid: 88d34443b3583f44b8b2b5891c6cce62,
         type: 3}
       propertyPath: m_TagString
-      value: BPCollectible
+      value: BPMouseTrap
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 88d34443b3583f44b8b2b5891c6cce62,
         type: 3}
@@ -239,8 +254,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 88d34443b3583f44b8b2b5891c6cce62,
         type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88d34443b3583f44b8b2b5891c6cce62,
+        type: 3}
       propertyPath: m_TagString
-      value: BPCollectible
+      value: BPMouseTrap
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

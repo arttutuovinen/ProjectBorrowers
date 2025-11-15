@@ -1,44 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class BPMouseTrap : MonoBehaviour
+public class BPMouseTrap : MonoBehaviourPun
 {
     public GameObject mouseTrap;
     public Transform throwOrigin;
 
     public void SpawnMouseTrap()
     {
-        // Spawn the collected item at the player's position
-        GameObject MouseTrapObject = Instantiate(mouseTrap, throwOrigin.transform.position, Quaternion.identity);
+        if (!photonView.IsMine) return;  // Only owner can spawn
 
-        // Set layer visibility
-        SetMouseTrapVisibility(MouseTrapObject);
+        // Correct network spawn
+        GameObject trap = PhotonNetwork.Instantiate(mouseTrap.name, throwOrigin.position, Quaternion.identity);
+
+        // Sync to *everyone*, but only the local player will handle camera logic
+        photonView.RPC("RPC_SetMouseTrapVisibility", RpcTarget.All, trap.GetComponent<PhotonView>().ViewID);
     }
 
-    private void SetMouseTrapVisibility(GameObject mouseTrapObject)
+    [PunRPC]
+    void RPC_SetMouseTrapVisibility(int trapViewID, PhotonMessageInfo info)
     {
-        // Create LayerMasks
+        // Only the LOCAL client should adjust its camera
+        if (!photonView.IsMine) return;
+
+        PhotonView trapPv = PhotonView.Find(trapViewID);
+        if (trapPv == null) return;
+
+        GameObject trapObject = trapPv.gameObject;
+
+        Camera cam = Camera.main;
+        if (cam == null) return;
+
         int smallPlayerLayer = LayerMask.NameToLayer("SmallPlayer");
-        int defaultLayer = LayerMask.NameToLayer("BigPlayer");
+        int bigPlayerLayer = LayerMask.NameToLayer("BigPlayer");
 
-        // Get all cameras in the scene
-        Camera[] cameras = Camera.allCameras;
+        int playerLayer = gameObject.layer;
 
-        foreach (Camera cam in cameras)
+        // Small player should NOT see the trap
+        if (playerLayer == smallPlayerLayer)
         {
-            // Check if the camera belongs to Small Player
-            if (cam.gameObject.layer == smallPlayerLayer)
-            {
-                // Exclude the mouseTrap's layer from the Small Player's culling mask
-                cam.cullingMask &= ~(1 << mouseTrapObject.layer);
-            }
-            // Check if the camera belongs to Big Player
-            else if (cam.gameObject.layer == defaultLayer)
-            {
-                // Ensure the mouseTrap's layer is included in the Big Player's culling mask
-                cam.cullingMask |= (1 << mouseTrapObject.layer);
-            }
+            cam.cullingMask &= ~(1 << trapObject.layer);
+        }
+        // Big player SHOULD see the trap
+        else if (playerLayer == bigPlayerLayer)
+        {
+            cam.cullingMask |= (1 << trapObject.layer);
         }
     }
 }

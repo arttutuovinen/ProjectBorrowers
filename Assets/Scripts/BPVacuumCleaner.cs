@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using Photon.Pun;
 
 public class BPVacuumCleaner : MonoBehaviour
 {
@@ -10,36 +10,61 @@ public class BPVacuumCleaner : MonoBehaviour
 
     [Header("Area Offset")]
     public Vector3 areaOffset = new Vector3(0f, 0f, 0.5f);
+
     [Header("Layer Mask")]
     public LayerMask smallPlayerLayer;
+
+    private PhotonView pv;
+
+    void Awake()
+    {
+        pv = GetComponent<PhotonView>();
+    }
+
+    // Called by your input or animation event
     public void TryPullTarget()
     {
-        Vector3 center = transform.position + transform.TransformDirection(areaOffset);
-        Collider[] hits = Physics.OverlapSphere(center, vacuumRadius, smallPlayerLayer);
+        // Only the local owner performs detection
+        if (!pv.IsMine) return;
 
+        Vector3 center = transform.position + transform.TransformDirection(areaOffset);
+
+        Collider[] hits = Physics.OverlapSphere(center, vacuumRadius, smallPlayerLayer);
         if (hits.Length == 0) return;
 
-        // Pick closest small player
+        // Find closest target
         Collider closest = null;
         float closestDist = Mathf.Infinity;
 
-        foreach (var hit in hits)
+        foreach (Collider hit in hits)
         {
             float dist = Vector3.Distance(center, hit.transform.position);
             if (dist < closestDist)
             {
-                closest = hit;
                 closestDist = dist;
+                closest = hit;
             }
         }
 
-        if (closest != null)
+        if (closest == null) return;
+
+        PhotonView targetPv = closest.GetComponent<PhotonView>();
+        if (targetPv == null) return;
+
+        // Tell all players to pull this exact target
+        pv.RPC("RPC_PullTarget", RpcTarget.All, targetPv.ViewID);
+    }
+
+    [PunRPC]
+    void RPC_PullTarget(int targetViewID)
+    {
+        PhotonView targetPv = PhotonView.Find(targetViewID);
+        if (targetPv == null) return;
+
+        SPPullTarget pullTarget = targetPv.GetComponent<SPPullTarget>();
+        if (pullTarget != null)
         {
-            SPPullTarget pullTarget = closest.GetComponent<SPPullTarget>();
-            if (pullTarget != null)
-            {
-                pullTarget.PullTowards(transform, pullForce, pullDuration);
-            }
+            pullTarget.PullTowards(transform, pullForce, pullDuration);
         }
     }
 
