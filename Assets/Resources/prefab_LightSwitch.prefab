@@ -140,7 +140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27871695898647343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6adb5dca277a547aff4c6b3e598e6d, type: 3}
   m_Name: 
@@ -148,6 +148,7 @@ MonoBehaviour:
   targetLight: {fileID: 0}
   switchHandle: {fileID: 269222381123600340}
   rotationAngle: 35
+  rotationSpeed: 5
 --- !u!65 &5712471450808511264
 BoxCollider:
   m_ObjectHideFlags: 0
