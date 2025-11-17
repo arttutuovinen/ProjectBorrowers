@@ -20,8 +20,8 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        controller = GetComponentInParent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
+        controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -29,13 +29,6 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
         if (photonView.IsMine)
         {
             HandleLocalInput();
-        }
-
-        // ✅ Detect early landing: if landed before jump animation finishes
-        if (isGrounded && animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
-        {
-            string target = (isRunning ? "Run" : "Idle");
-            animator.CrossFade(target, 0.1f);
         }
 
         UpdateAnimator();
@@ -50,78 +43,62 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
 
         // Track grounded state with coyote time
         if (isGrounded)
-        {
             lastGroundedTime = Time.time;
-        }
 
         bool isGroundedOrCoyote = (Time.time - lastGroundedTime) <= coyoteTime;
 
         // Jump
         if ((Input.GetButtonDown("P1Jump") || Input.GetButtonDown("Jump")) && isGroundedOrCoyote)
         {
-            animator.ResetTrigger("IsJumping");
-            animator.SetTrigger("IsJumping");
             isJumping = true;
-            isFalling = false;
         }
 
         // Falling
-        if (!isGrounded)
+        if (!isGrounded && !isJumping)
         {
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
-            {
-                isFalling = true;
-            }
-
-            isRunning = false;
+            isFalling = true;
         }
         else
         {
             isFalling = false;
-            isJumping = false;
-            isRunning = (horizontal != 0 || vertical != 0);
         }
+
+        isRunning = (horizontal != 0 || vertical != 0) && isGrounded;
+
+        // Reset jump if grounded
+        if (isGrounded && isJumping)
+            isJumping = false;
     }
 
     void UpdateAnimator()
     {
         animator.SetBool("IsRunning", isRunning);
+        animator.SetBool("IsJumping", isJumping);
         animator.SetBool("IsFalling", isFalling);
         animator.SetBool("IsGrounded", isGrounded);
-
-        if (isJumping)
-        {
-            animator.SetTrigger("IsJumping");
-            if (!photonView.IsMine) isJumping = false; // remote reset
-        }
     }
 
-    // 🔁 Sync animation states across network
+    // ------------------------------
+    // Network sync
+    // ------------------------------
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
+            // Send local animation bools
             stream.SendNext(isRunning);
-            stream.SendNext(isFalling);
             stream.SendNext(isJumping);
+            stream.SendNext(isFalling);
             stream.SendNext(isGrounded);
         }
         else
         {
+            // Receive remote bools
             isRunning = (bool)stream.ReceiveNext();
+            isJumping = (bool)stream.ReceiveNext();
             isFalling = (bool)stream.ReceiveNext();
-            bool remoteJump = (bool)stream.ReceiveNext();
             isGrounded = (bool)stream.ReceiveNext();
-
-            if (remoteJump && !animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
-            {
-                animator.ResetTrigger("IsJumping");
-                animator.SetTrigger("IsJumping");
-            }
         }
     }
 }
-
-
-
 
