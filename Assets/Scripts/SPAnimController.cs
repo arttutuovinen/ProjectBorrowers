@@ -7,7 +7,7 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
     private Animator animator;
     private CharacterController controller;
 
-    // Animation sync variables
+    // Animation state variables
     private float horizontal;
     private float vertical;
     private bool isJumping;
@@ -15,6 +15,11 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
     private bool isRunning;
     private bool isGrounded;
 
+    // Jump timing
+    private float jumpTimer = 0f;
+    public float jumpDuration = 0.5f; // Length of your jump animation
+
+    // Coyote time
     private float coyoteTime = 0.1f;
     private float lastGroundedTime;
 
@@ -39,35 +44,50 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
         horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
         vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
 
-        isGrounded = controller.isGrounded;
+        bool groundedNow = controller.isGrounded;
 
         // Track grounded state with coyote time
-        if (isGrounded)
+        if (groundedNow)
             lastGroundedTime = Time.time;
+
+        isGrounded = groundedNow;
 
         bool isGroundedOrCoyote = (Time.time - lastGroundedTime) <= coyoteTime;
 
-        // Jump
-        if ((Input.GetButtonDown("P1Jump") || Input.GetButtonDown("Jump")) && isGroundedOrCoyote)
+        // Jump input
+        if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGroundedOrCoyote && !isJumping)
         {
             isJumping = true;
+            isFalling = false;
+            jumpTimer = 0f;
         }
 
-        // Falling
+        // Update jump timer
+        if (isJumping)
+        {
+            jumpTimer += Time.deltaTime;
+
+            // End jump after jump animation duration
+            if (jumpTimer >= jumpDuration)
+            {
+                isJumping = false;
+
+                // If still in air, switch to falling
+                if (!isGrounded)
+                {
+                    isFalling = true;
+                }
+            }
+        }
+
+        // Falling detection (only if not jumping)
         if (!isGrounded && !isJumping)
         {
             isFalling = true;
         }
-        else
-        {
-            isFalling = false;
-        }
 
+        // Running
         isRunning = (horizontal != 0 || vertical != 0) && isGrounded;
-
-        // Reset jump if grounded
-        if (isGrounded && isJumping)
-            isJumping = false;
     }
 
     void UpdateAnimator()
@@ -79,13 +99,13 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
     }
 
     // ------------------------------
-    // Network sync
+    // Photon animation sync
     // ------------------------------
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            // Send local animation bools
+            // Send local animation states
             stream.SendNext(isRunning);
             stream.SendNext(isJumping);
             stream.SendNext(isFalling);
@@ -93,7 +113,7 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
         }
         else
         {
-            // Receive remote bools
+            // Receive remote animation states
             isRunning = (bool)stream.ReceiveNext();
             isJumping = (bool)stream.ReceiveNext();
             isFalling = (bool)stream.ReceiveNext();
@@ -101,4 +121,5 @@ public class SPAnimController : MonoBehaviourPun, IPunObservable
         }
     }
 }
+
 
