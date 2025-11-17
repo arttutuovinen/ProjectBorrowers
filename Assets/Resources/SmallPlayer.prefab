@@ -5069,7 +5069,6 @@ GameObject:
   - component: {fileID: 1453455095307449174}
   - component: {fileID: 7213267609248557840}
   - component: {fileID: 457389529722468420}
-  - component: {fileID: 2809535191905125762}
   - component: {fileID: 5644917193308100841}
   - component: {fileID: 7365710028398305443}
   - component: {fileID: 8643245985604792946}
@@ -5238,7 +5237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunDuration: 5
-  smallPlayerMovement: {fileID: 2809535191905125762}
+  smallPlayerMovement: {fileID: 0}
   spIsStunnedText: {fileID: 0}
 --- !u!114 &2265930764285613028
 MonoBehaviour:
@@ -5294,15 +5293,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150109236876745808}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63932f293bc9b3745ab67b064c8a4ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 3
+  knockbackForce: 5
   upwardForce: 7
   knockbackDuration: 0.2
-  spIsStunnedText: {fileID: 0}
 --- !u!114 &1453455095307449174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5346,36 +5344,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactButton: P1Interact
   useButton: Fire1
---- !u!114 &2809535191905125762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3150109236876745808}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32370c0b7a8fcb94f93a1ac34a62aeb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 7
-  climbSpeed: 8
-  gravity: -30
-  jumpHeight: 3
-  turnSmoothTime: 0.1
-  cameraTransform: {fileID: 0}
-  cameraFollowTarget: {fileID: 9091730586132460224}
-  mouseSensitivity: 900
-  controllerSensitivity: 2
-  distanceFromPlayer: 2.5
-  minVerticalAngle: -30
-  maxVerticalAngle: 70
-  isTreasureCollected: 0
-  ladderInteractText: {fileID: 0}
-  itemInteractText: {fileID: 0}
-  movementParticles: {fileID: 1257212597661535666}
-  maxEmissionRate: 20
-  emissionChangeSpeed: 10
 --- !u!114 &5644917193308100841
 MonoBehaviour:
   m_ObjectHideFlags: 0
