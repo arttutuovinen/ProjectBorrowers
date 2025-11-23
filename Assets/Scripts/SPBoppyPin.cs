@@ -4,7 +4,7 @@ using Photon.Pun;
 public class SPBoppyPin : MonoBehaviourPun
 {
     [Header("Item Settings")]
-    public GameObject itemPrefab; // Must be inside a Resources folder
+    public GameObject itemPrefab; // The prefab of the item to spawn (must be in Resources folder)
 
     public void SpawnBoppyPin()
     {
@@ -16,22 +16,13 @@ public class SPBoppyPin : MonoBehaviourPun
             return;
         }
 
-        // Spawn slightly in front of the SmallPlayer
+        // The prefab must exist under a "Resources" folder for PhotonNetwork.Instantiate to work
         Vector3 spawnPos = transform.position + transform.forward * 1.0f;
+        Quaternion spawnRot = Quaternion.identity;
 
-        // Spawn over the network
-        GameObject spawnedItem = PhotonNetwork.Instantiate(itemPrefab.name, spawnPos, Quaternion.identity);
-        var rb = spawnedItem.AddComponent<Rigidbody>();
-        rb.isKinematic = true;
-        rb.useGravity = false;
+        // Spawn network-wide
+        GameObject spawnedItem = PhotonNetwork.Instantiate(itemPrefab.name, spawnPos, spawnRot);
 
-        // --- FLOOR SNAP (Raycast Down) ---
-        if (Physics.Raycast(spawnedItem.transform.position, Vector3.down, out RaycastHit hit, 5f))
-        {
-            spawnedItem.transform.position = hit.point;
-        }
-
-        Debug.Log($"[SPBoppyPin] Spawned and dropped item: {spawnedItem.name}");
+        Debug.Log($"[SPBoppyPin] Spawned networked item: {spawnedItem.name}");
     }
 }
-

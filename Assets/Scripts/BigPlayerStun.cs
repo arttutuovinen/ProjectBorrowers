@@ -4,65 +4,60 @@ using Photon.Pun;
 
 public class BigPlayerStun : MonoBehaviourPun
 {
-    public float stunDuration = 3f;
-    public float stunRadius = 1f; // radius to check for nearby BoppyPins
+    public float stunDuration = 5f;
     private bool isStunned = false;
     private BigPlayerMovement bigPlayerMovement;
 
     void Start()
     {
         bigPlayerMovement = GetComponent<BigPlayerMovement>();
+    }
 
-        // Ensure Rigidbody exists for physics checks (optional)
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb == null)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("StunItem"))
         {
-            rb = gameObject.AddComponent<Rigidbody>();
-            rb.isKinematic = true;
-            rb.useGravity = false;
+            // Request the BigPlayer to stun themselves on their own client
+            photonView.RPC(nameof(StunRPC), photonView.Owner);
+
+            // Destroy the StunItem over network
+            PhotonView itemPV = other.GetComponent<PhotonView>();
+            if (itemPV != null && itemPV.IsMine)
+                PhotonNetwork.Destroy(other.gameObject);
+            else if (itemPV != null)
+                photonView.RPC(nameof(RequestItemDestroyRPC), itemPV.Owner, itemPV.ViewID);
         }
     }
 
-    void Update()
+    [PunRPC]
+    private void StunRPC()
     {
-        if (!photonView.IsMine) return; // only run on local player
-
-        // Check for BoppyPins nearby using tag only
-        Collider[] hits = Physics.OverlapSphere(transform.position, stunRadius);
-        foreach (var hit in hits)
-        {
-            if (hit.CompareTag("StunItem"))
-            {
-                // Stun locally
-                if (!isStunned)
-                    StartCoroutine(StunPlayer());
-
-                // Destroy item on MasterClient
-                PhotonView itemPV = hit.GetComponent<PhotonView>();
-                if (itemPV != null && PhotonNetwork.IsMasterClient)
-                {
-                    PhotonNetwork.Destroy(itemPV.gameObject);
-                }
-            }
-        }
+        if (!photonView.IsMine) return; // Only stun on the owner client
+        if (isStunned) return;
+        StartCoroutine(StunPlayer());
     }
 
     IEnumerator StunPlayer()
     {
         isStunned = true;
-        bigPlayerMovement.enabled = false;
+
+        if (bigPlayerMovement != null)
+            bigPlayerMovement.enabled = false;
 
         yield return new WaitForSeconds(stunDuration);
 
-        bigPlayerMovement.enabled = true;
+        if (bigPlayerMovement != null)
+            bigPlayerMovement.enabled = true;
+
         isStunned = false;
     }
 
-    // Optional: visualize the stun radius in editor
-    private void OnDrawGizmosSelected()
+    [PunRPC]
+    private void RequestItemDestroyRPC(int viewID)
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, stunRadius);
+        PhotonView itemView = PhotonView.Find(viewID);
+        if (itemView != null && itemView.IsMine)
+            PhotonNetwork.Destroy(itemView.gameObject);
     }
 }
 
