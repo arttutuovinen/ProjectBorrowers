@@ -926,6 +926,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c9912e8df35fd194d891af6abaf978e3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1790183945725220954, guid: c9912e8df35fd194d891af6abaf978e3,
         type: 3}
       propertyPath: m_Layer
@@ -1720,6 +1725,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 6874353608283400507, guid: 3285bd15cd1164f47b2b6b1954c5b663,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6971026719295074779, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
       propertyPath: m_Layer
@@ -1801,11 +1811,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5964347165331417513}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2926053485195722703}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4734701019181051656}
+    - targetCorrespondingSourceObject: {fileID: -5661121819606500967, guid: 3285bd15cd1164f47b2b6b1954c5b663,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4395786151249208325}
   m_SourcePrefab: {fileID: 100100000, guid: 3285bd15cd1164f47b2b6b1954c5b663, type: 3}
 --- !u!4 &1214375915518281941 stripped
 Transform:
@@ -1813,6 +1831,34 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9083268663115612692}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5720107038857870221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5661121819606500967, guid: 3285bd15cd1164f47b2b6b1954c5b663,
+    type: 3}
+  m_PrefabInstance: {fileID: 9083268663115612692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &4395786151249208325
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720107038857870221}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3463584386298441447, guid: 3285bd15cd1164f47b2b6b1954c5b663, type: 3}
 --- !u!1 &8272876570184302405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
@@ -1840,6 +1886,24 @@ MonoBehaviour:
   pitchIntensity: 1
   rotationAxis: {x: 1, y: 0, z: 0}
   rotationLerpSpeed: 8
+--- !u!114 &5964347165331417513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8272876570184302405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4e7bd59265b744d996427cd73e9378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPCatchController
+  grabAnimation: BPRig_BP_Catch
+  playerCamera: {fileID: 4682854195769893218}
+  shoulderBoneName: shoulder.l
+  aimBlend: 1
+  cameraAimDistance: 15
+  verticalOffset: 8
 --- !u!114 &2926053485195722703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1862,7 +1926,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8272876570184302405}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 3285bd15cd1164f47b2b6b1954c5b663, type: 3}
   m_Controller: {fileID: 9100000, guid: a3b3c76a6d50f17478860a2a5b8ab573, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
