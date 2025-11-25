@@ -1,134 +1,139 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class BPCatchController : MonoBehaviour
 {
-    private Animator animator;
-    private PhotonView parentPhotonView;
+    [Header("Animation Settings")]
+    [SerializeField] private string grabAnimation = "BPRig_BP_Catch"; // Catch animation
+    [SerializeField] private int catchLayer = 1; // CatchAnim layer index
 
-    [SerializeField] private string grabAnimation = "BPRig_BP_Catch";
-
-    // Assign your BigPlayerCamera transform in the inspector
+    [Header("Camera / Arm Settings")]
     public Transform playerCamera;
-
-    // bone name to find
     [SerializeField] private string shoulderBoneName = "shoulder.l";
-
-    private Transform shoulderBone;
-    private bool isGrabbing = false;
-
-    // blending speed for rotation (0 - no change, 1 - instant)
     [Range(0.01f, 1f)]
-    public float aimBlend = 0.2f;
-
-    // distance ahead of camera to aim at
+    public float aimBlend = 0.2f; // Smoothness of shoulder rotation
     public float cameraAimDistance = 10f;
-
-    // vertical offset in meters (positive = lower, negative = higher)
     public float verticalOffset = 0.0f;
+
+    [Header("Catch Cooldown")]
+    public float catchCooldown = 1f; // time in seconds between catches
+    private bool canCatch = true;
+
+    private Animator animator;
+    private PhotonView photonView;
+    private Transform shoulderBone;
+
+    private bool isGrabbing = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        parentPhotonView = GetComponentInParent<PhotonView>();
+        photonView = GetComponentInParent<PhotonView>();
 
         if (animator == null)
-            Debug.LogError("Animator missing on this GameObject.");
+            Debug.LogError("Animator missing!");
+        if (photonView == null)
+            Debug.LogError("PhotonView not found!");
 
-        if (parentPhotonView == null)
-            Debug.LogError("No PhotonView found on parent.");
-
-        // find shoulder bone anywhere under the animator's transform
         shoulderBone = FindDeepChild(animator.transform, shoulderBoneName);
         if (shoulderBone == null)
-            Debug.LogError($"Bone '{shoulderBoneName}' not found in rig hierarchy! Check spelling and case.");
+            Debug.LogError($"Bone '{shoulderBoneName}' not found!");
 
-        if (playerCamera == null)
-            Debug.LogWarning("playerCamera not assigned. Assign BigPlayerCamera in inspector.");
+        // Ensure CatchAnim layer starts disabled
+        animator.SetLayerWeight(catchLayer, 0f);
     }
 
     void Update()
     {
-        if (parentPhotonView != null && parentPhotonView.IsMine && Input.GetButtonDown("Fire1"))
+        if (photonView != null && photonView.IsMine && Input.GetButtonDown("Fire1") && canCatch)
         {
-            PlayGrabLocally();
-            parentPhotonView.RPC(nameof(RPC_PlayGrab), RpcTarget.Others);
+            PlayCatchLocally();
+            photonView.RPC(nameof(RPC_PlayCatch), RpcTarget.Others);
+
+            // Start cooldown
+            canCatch = false;
+            Invoke(nameof(ResetCatchCooldown), catchCooldown);
         }
     }
 
     void LateUpdate()
     {
-        if (!isGrabbing || shoulderBone == null || playerCamera == null) return;
+        if (shoulderBone == null || playerCamera == null) return;
 
-        RotateShoulderTowardCamera();
+        if (isGrabbing)
+        {
+            RotateShoulderTowardCamera();
+
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(catchLayer);
+            if (state.IsName(grabAnimation) && state.normalizedTime >= 1f)
+            {
+                animator.SetLayerWeight(catchLayer, 0f); // instantly remove layer
+                isGrabbing = false;
+            }
+        }
     }
 
-    void PlayGrabLocally()
+    void PlayCatchLocally()
     {
+        StartCoroutine(StartCatch());
+    }
+
+    private IEnumerator StartCatch()
+    {
+        // 1. Force layer weight to 1 immediately
+        animator.SetLayerWeight(catchLayer, 1f);
+
+        // 2. Wait one frame so Animator updates the layer
+        yield return null;
+
+        // 3. Play the catch animation immediately
+        animator.Play(grabAnimation, catchLayer, 0f);
+
+        // 4. Set grabbing flag
         isGrabbing = true;
-
-        // Layer 1 is assumed to be your masked Catch/Grab layer
-        animator.CrossFade(grabAnimation, 0.05f, 1, 0f);
-
-        // schedule stop when animation on layer 1 finishes
-        var state = animator.GetCurrentAnimatorStateInfo(1);
-        float length = state.length;
-        if (length <= 0f) length = 1f; // fallback if state info not ready
-        CancelInvoke(nameof(StopGrab));
-        Invoke(nameof(StopGrab), length);
     }
 
-    void StopGrab()
+    private void ResetCatchCooldown()
     {
-        isGrabbing = false;
+        canCatch = true;
     }
 
     [PunRPC]
-    void RPC_PlayGrab()
+    void RPC_PlayCatch()
     {
-        PlayGrabLocally();
+        PlayCatchLocally();
     }
 
-    // -----------------------------------------------------
-    // Rotate shoulder.l to aim toward a point in camera view with vertical offset
-    // -----------------------------------------------------
     void RotateShoulderTowardCamera()
     {
-        // Base target point in front of camera
         Vector3 targetPoint = playerCamera.position + playerCamera.forward * cameraAimDistance;
-
-        // Apply vertical offset (lower = positive, higher = negative)
         targetPoint.y -= verticalOffset;
 
-        // Direction vector from shoulder to target
         Vector3 direction = targetPoint - shoulderBone.position;
-
-        // World rotation needed to point shoulder toward target
         Quaternion targetWorldRot = Quaternion.LookRotation(direction, Vector3.up);
 
         Transform parent = shoulderBone.parent;
-        if (parent == null)
+        if (parent != null)
+        {
+            Quaternion targetLocal = Quaternion.Inverse(parent.rotation) * targetWorldRot;
+            shoulderBone.localRotation = Quaternion.Slerp(
+                shoulderBone.localRotation,
+                targetLocal,
+                aimBlend
+            );
+        }
+        else
         {
             shoulderBone.rotation = Quaternion.Slerp(
                 shoulderBone.rotation,
                 targetWorldRot,
                 aimBlend
             );
-            return;
         }
-
-        // Convert to local rotation
-        Quaternion targetLocal = Quaternion.Inverse(parent.rotation) * targetWorldRot;
-
-        // Smooth blend
-        shoulderBone.localRotation = Quaternion.Slerp(
-            shoulderBone.localRotation,
-            targetLocal,
-            aimBlend
-        );
     }
 
-    // Recursive search to find a child by name anywhere in hierarchy
+    // Recursive search for a child by name
     Transform FindDeepChild(Transform parent, string name)
     {
         foreach (Transform child in parent)

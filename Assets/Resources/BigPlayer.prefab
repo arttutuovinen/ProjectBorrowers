@@ -549,8 +549,8 @@ MonoBehaviour:
   mouseSensitivity: 200
   controllerSensitivity: 2
   distanceFromPlayer: 0.1
-  minVerticalAngle: -88
-  maxVerticalAngle: 88
+  minVerticalAngle: -50
+  maxVerticalAngle: 60
   rayDistance: 9
   playerCamera: {fileID: 2004338299970110419}
   offsetX: 0
@@ -1899,11 +1899,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BPCatchController
   grabAnimation: BPRig_BP_Catch
+  catchLayer: 1
   playerCamera: {fileID: 4682854195769893218}
   shoulderBoneName: shoulder.l
   aimBlend: 1
   cameraAimDistance: 15
   verticalOffset: 8
+  catchCooldown: 2
 --- !u!114 &2926053485195722703
 MonoBehaviour:
   m_ObjectHideFlags: 0
