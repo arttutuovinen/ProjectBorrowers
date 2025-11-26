@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 6636025762960350756}
   - component: {fileID: 726549868499103897}
   - component: {fileID: 4387901889807618486}
+  - component: {fileID: 8769194568731714403}
   - component: {fileID: 7549007834672380184}
   - component: {fileID: 259571919989222573}
   - component: {fileID: 6597793729881182503}
@@ -521,6 +522,20 @@ MonoBehaviour:
   playerMovement: {fileID: 7549007834672380184}
   boostDuration: 3
   boostedSpeed: 20
+--- !u!114 &8769194568731714403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4e7bd59265b744d996427cd73e9378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPCatchController
+  childAnimator: {fileID: 4734701019181051656}
+  catchLayerName: CatchAnim
 --- !u!114 &7549007834672380184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1811,10 +1826,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5964347165331417513}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2926053485195722703}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
@@ -1886,26 +1897,6 @@ MonoBehaviour:
   pitchIntensity: 1
   rotationAxis: {x: 1, y: 0, z: 0}
   rotationLerpSpeed: 8
---- !u!114 &5964347165331417513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8272876570184302405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4e7bd59265b744d996427cd73e9378, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BPCatchController
-  grabAnimation: BPRig_BP_Catch
-  catchLayer: 1
-  playerCamera: {fileID: 4682854195769893218}
-  shoulderBoneName: shoulder.l
-  aimBlend: 1
-  cameraAimDistance: 15
-  verticalOffset: 8
-  catchCooldown: 2
 --- !u!114 &2926053485195722703
 MonoBehaviour:
   m_ObjectHideFlags: 0
