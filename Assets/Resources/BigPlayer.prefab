@@ -535,7 +535,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BPCatchController
   childAnimator: {fileID: 4734701019181051656}
+  playerCamera: {fileID: 2004338299970110419}
   catchLayerName: CatchAnim
+  armVerticalLayerName: ArmVertical
+  catchCooldown: 0.8
 --- !u!114 &7549007834672380184
 MonoBehaviour:
   m_ObjectHideFlags: 0
