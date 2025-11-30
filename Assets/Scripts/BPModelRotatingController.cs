@@ -7,21 +7,20 @@ public class BPModelRotatingController : MonoBehaviourPun, IPunObservable
 {
     [Header("Camera Settings")]
     public Transform cameraTransform;
-
-    public Vector3 positionOffset = Vector3.zero; // Adjustable in Inspector
-    public bool useLocalOffset = false;           // Offset relative to camera rotation
+    public Vector3 positionOffset = Vector3.zero;
+    public bool useLocalOffset = false;
 
     [Header("Bone Pitch Settings")]
     public Transform targetBone;
-    public float minPitch = -30f;       // Minimum pitch angle (down)
-    public float maxPitch = 30f;        // Maximum pitch angle (up)
-    public float pitchIntensity = 1f;   // 0 = no effect, 1 = full pitch
-    public Vector3 rotationAxis = Vector3.right; // Default X-axis for pitch
+    public float minPitch = -60f;
+    public float maxPitch = 30f;
+    public float pitchIntensity = 1f;
+    public Vector3 rotationAxis = Vector3.right;
 
-    // Networked rotation data
+    [HideInInspector] public bool armRotationEnabled = false; // <<< start disabled
+
     private float networkPitch = 0f;
     private float networkYaw = 0f;
-
     private Quaternion boneInitialRotation;
 
     [Header("Smoothing for Remote Players")]
@@ -31,6 +30,9 @@ public class BPModelRotatingController : MonoBehaviourPun, IPunObservable
     {
         if (targetBone != null)
             boneInitialRotation = targetBone.localRotation;
+
+        // Make sure arm doesn't move before first Fire1
+        armRotationEnabled = false;
     }
 
     void Update()
@@ -39,63 +41,57 @@ public class BPModelRotatingController : MonoBehaviourPun, IPunObservable
 
         if (photonView.IsMine)
         {
-            // STEP 1: Compute position with offset
+            // Step 1: Position with optional offset
             Vector3 targetPosition = useLocalOffset
                 ? cameraTransform.position + cameraTransform.rotation * positionOffset
                 : cameraTransform.position + positionOffset;
 
-            // Keep current Y position (stay grounded)
             targetPosition.y = transform.position.y;
-
             transform.position = targetPosition;
 
-            // STEP 2: Match Y-axis rotation (body turning)
-            Vector3 currentEuler = transform.eulerAngles;
-            currentEuler.y = cameraTransform.eulerAngles.y;
-            transform.eulerAngles = currentEuler;
+            // Step 2: Match Y rotation
+            Vector3 e = transform.eulerAngles;
+            e.y = cameraTransform.eulerAngles.y;
+            transform.eulerAngles = e;
         }
         else
         {
-            // Remote players: smoothly interpolate body rotation
-            Vector3 currentEuler = transform.eulerAngles;
-            currentEuler.y = Mathf.LerpAngle(currentEuler.y, networkYaw, Time.deltaTime * rotationLerpSpeed);
-            transform.eulerAngles = currentEuler;
+            // Remote players interpolate
+            Vector3 e = transform.eulerAngles;
+            e.y = Mathf.LerpAngle(e.y, networkYaw, Time.deltaTime * rotationLerpSpeed);
+            transform.eulerAngles = e;
         }
     }
 
     void LateUpdate()
     {
+        if (!armRotationEnabled) return; // <<< critical: stop bone rotation until first Fire1
         if (targetBone == null || cameraTransform == null) return;
 
         if (photonView.IsMine)
         {
-            // Local player: compute pitch from camera
             float pitch = cameraTransform.eulerAngles.x;
             if (pitch > 180f) pitch -= 360f;
-
-            float clampedPitch = Mathf.Clamp(pitch, minPitch, maxPitch) * pitchIntensity;
-            targetBone.localRotation = boneInitialRotation * Quaternion.AngleAxis(clampedPitch, rotationAxis);
+            float clamped = Mathf.Clamp(pitch, minPitch, maxPitch) * pitchIntensity;
+            targetBone.localRotation = boneInitialRotation * Quaternion.AngleAxis(clamped, rotationAxis);
         }
         else
         {
-            // Remote players: interpolate bone pitch
-            Quaternion targetRotation = boneInitialRotation * Quaternion.AngleAxis(networkPitch, rotationAxis);
-            targetBone.localRotation = Quaternion.Slerp(targetBone.localRotation, targetRotation, Time.deltaTime * rotationLerpSpeed);
+            Quaternion targetRot = boneInitialRotation * Quaternion.AngleAxis(networkPitch, rotationAxis);
+            targetBone.localRotation = Quaternion.Slerp(targetBone.localRotation, targetRot,
+                Time.deltaTime * rotationLerpSpeed);
         }
     }
 
-    // Photon networking
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            // Send local player rotation data
-            stream.SendNext(targetBone.localEulerAngles.x);  // pitch
-            stream.SendNext(transform.eulerAngles.y);        // yaw
+            stream.SendNext(targetBone.localEulerAngles.x);
+            stream.SendNext(transform.eulerAngles.y);
         }
         else
         {
-            // Receive rotation data for remote players
             networkPitch = (float)stream.ReceiveNext();
             networkYaw = (float)stream.ReceiveNext();
         }

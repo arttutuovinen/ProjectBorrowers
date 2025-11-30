@@ -294,12 +294,13 @@ GameObject:
   - component: {fileID: 4387901889807618486}
   - component: {fileID: 8769194568731714403}
   - component: {fileID: 7549007834672380184}
+  - component: {fileID: 8801348146040194836}
   - component: {fileID: 259571919989222573}
+  - component: {fileID: 6759395729989228288}
   - component: {fileID: 6597793729881182503}
   - component: {fileID: 2272564012468612583}
   - component: {fileID: 6711433160043170722}
   - component: {fileID: 3447934495327288878}
-  - component: {fileID: 6759395729989228288}
   - component: {fileID: 5307150729043974029}
   m_Layer: 0
   m_Name: BigPlayer
@@ -538,7 +539,7 @@ MonoBehaviour:
   playerCamera: {fileID: 2004338299970110419}
   catchLayerName: CatchAnim
   armVerticalLayerName: ArmVertical
-  catchCooldown: 0.8
+  catchCooldown: 2
 --- !u!114 &7549007834672380184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +583,28 @@ MonoBehaviour:
   lightSwitchLayerMask:
     serializedVersion: 2
     m_Bits: 32768
+--- !u!114 &8801348146040194836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5257af78d886e0541a814b970f108fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 4682854195769893218}
+  positionOffset: {x: 0, y: 0, z: 0}
+  useLocalOffset: 0
+  targetBone: {fileID: 1214375915518281941}
+  minPitch: -60
+  maxPitch: 30
+  pitchIntensity: 1
+  rotationAxis: {x: 1, y: 0, z: 0}
+  armRotationEnabled: 0
+  rotationLerpSpeed: 8
 --- !u!65 &259571919989222573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -603,6 +626,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000004, y: 2, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6759395729989228288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb059529bec0dc47a08d5f9a55e3d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BpPlayerSetup
+  bpMovement: {fileID: 7549007834672380184}
+  bpItemCollector: {fileID: 6636025762960350756}
+  playerCamera: {fileID: 5159615410664788595}
 --- !u!114 &6597793729881182503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,8 +676,9 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8769194568731714403}
+  - {fileID: 8801348146040194836}
   - {fileID: 6711433160043170722}
-  - {fileID: 2559742605295200371}
+  - {fileID: 0}
   - {fileID: 2926053485195722703}
   sceneViewId: 0
   InstantiationId: 0
@@ -685,21 +724,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &6759395729989228288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb059529bec0dc47a08d5f9a55e3d53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BpPlayerSetup
-  bpMovement: {fileID: 7549007834672380184}
-  bpItemCollector: {fileID: 6636025762960350756}
-  playerCamera: {fileID: 5159615410664788595}
 --- !u!114 &5307150729043974029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1826,10 +1850,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2559742605295200371}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2926053485195722703}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
@@ -1880,27 +1900,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9083268663115612692}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2559742605295200371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8272876570184302405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5257af78d886e0541a814b970f108fee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 4682854195769893218}
-  positionOffset: {x: 0, y: 0, z: 0}
-  useLocalOffset: 0
-  targetBone: {fileID: 1214375915518281941}
-  minPitch: -60
-  maxPitch: 30
-  pitchIntensity: 1
-  rotationAxis: {x: 1, y: 0, z: 0}
-  rotationLerpSpeed: 8
 --- !u!114 &2926053485195722703
 MonoBehaviour:
   m_ObjectHideFlags: 0
