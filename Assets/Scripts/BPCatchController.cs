@@ -79,7 +79,7 @@ public class BPCatchController : MonoBehaviour, IPunObservable
     [PunRPC]
     private void RPC_PlayCatchAnimation()
     {
-        GetComponent<BPModelRotatingController>().armRotationEnabled = true;
+        
         if (isCatching) return;
 
         isCatching = true;

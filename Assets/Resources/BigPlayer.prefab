@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1022320169382202640
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3386776738438842885}
-  m_Layer: 0
-  m_Name: CameraFollowTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3386776738438842885
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022320169382202640}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.88, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8607215866161607478}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1649498093974023645
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +129,7 @@ Transform:
   m_GameObject: {fileID: 5159615410664788595}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08791492, y: 5.88, z: -0.12570317}
+  m_LocalPosition: {x: 0, y: 5.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -284,6 +253,8 @@ GameObject:
   - component: {fileID: 8607215866161607478}
   - component: {fileID: 137288733644335320}
   - component: {fileID: 6364498705690101605}
+  - component: {fileID: 2272564012468612583}
+  - component: {fileID: 5136079487784904055}
   - component: {fileID: 1348583416710600094}
   - component: {fileID: 3348664134161292876}
   - component: {fileID: 1680146458477775708}
@@ -294,12 +265,11 @@ GameObject:
   - component: {fileID: 4387901889807618486}
   - component: {fileID: 8769194568731714403}
   - component: {fileID: 7549007834672380184}
+  - component: {fileID: 3271016351445557058}
   - component: {fileID: 8801348146040194836}
   - component: {fileID: 259571919989222573}
   - component: {fileID: 6759395729989228288}
   - component: {fileID: 6597793729881182503}
-  - component: {fileID: 2272564012468612583}
-  - component: {fileID: 6711433160043170722}
   - component: {fileID: 3447934495327288878}
   - component: {fileID: 5307150729043974029}
   m_Layer: 0
@@ -324,7 +294,6 @@ Transform:
   m_Children:
   - {fileID: 4682854195769893218}
   - {fileID: 8756398196509173247}
-  - {fileID: 3386776738438842885}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &137288733644335320
@@ -383,6 +352,49 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2272564012468612583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 0
+  ObservedComponents:
+  - {fileID: 7549007834672380184}
+  - {fileID: 3271016351445557058}
+  - {fileID: 8769194568731714403}
+  - {fileID: 8801348146040194836}
+  - {fileID: 5136079487784904055}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5136079487784904055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonTransformView
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!143 &1348583416710600094
 CharacterController:
   m_ObjectHideFlags: 0
@@ -556,33 +568,33 @@ MonoBehaviour:
   gravity: -9.81
   turnSmoothTime: 0.1
   cameraTransform: {fileID: 4682854195769893218}
-  cameraFollowTarget: {fileID: 3386776738438842885}
+  minVerticalAngle: -50
+  maxVerticalAngle: 60
+  mouseSensitivity: 200
+  controllerSensitivity: 2
   crouchSpeed: 5
-  currentSpeed: 0
   standingHeight: 15
   crouchingHeight: 7.5
   standingCenter: {x: 0, y: 0, z: 0}
   crouchingCenter: {x: 0, y: -3.75, z: 0}
   crouchCameraYOffset: -7
-  cameraTransitionTime: 0.5
-  mouseSensitivity: 200
-  controllerSensitivity: 2
-  distanceFromPlayer: 0.1
-  minVerticalAngle: -50
-  maxVerticalAngle: 60
-  rayDistance: 9
-  playerCamera: {fileID: 2004338299970110419}
-  offsetX: 0
-  offsetY: 0.03
-  offsetZ: 0
-  crossHair: {fileID: 0}
-  doorLayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  doorInteractText: {fileID: 0}
-  lightSwitchLayerMask:
-    serializedVersion: 2
-    m_Bits: 32768
+  cameraTransitionTime: 0.2
+  currentSpeed: 0
+  rotationLerpSpeed: 8
+--- !u!114 &3271016351445557058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ccb7ec4e3b2b942a8b438bb84e5499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4734701019181051656}
+  crouchButton: P2Crouch
 --- !u!114 &8801348146040194836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,14 +608,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 4682854195769893218}
-  positionOffset: {x: 0, y: 0, z: 0}
-  useLocalOffset: 0
-  targetBone: {fileID: 1214375915518281941}
+  headBone: {fileID: 1214375915518281941}
   minPitch: -60
   maxPitch: 30
   pitchIntensity: 1
   rotationAxis: {x: 1, y: 0, z: 0}
-  armRotationEnabled: 0
   rotationLerpSpeed: 8
 --- !u!65 &259571919989222573
 BoxCollider:
@@ -656,49 +665,6 @@ MonoBehaviour:
   nameTagPrefab: {fileID: 0}
   verticalOffset: 2
   tryFindCameraInterval: 0.25
---- !u!114 &2272564012468612583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8769194568731714403}
-  - {fileID: 8801348146040194836}
-  - {fileID: 6711433160043170722}
-  - {fileID: 0}
-  - {fileID: 2926053485195722703}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &6711433160043170722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonTransformView
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &3447934495327288878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,10 +1816,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2926053485195722703}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4734701019181051656}
     - targetCorrespondingSourceObject: {fileID: -5661121819606500967, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
@@ -1900,19 +1862,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9083268663115612692}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2926053485195722703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8272876570184302405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45ccb7ec4e3b2b942a8b438bb84e5499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crouchButton: P2Crouch
 --- !u!95 &4734701019181051656
 Animator:
   serializedVersion: 7

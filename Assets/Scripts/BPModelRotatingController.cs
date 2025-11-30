@@ -1,85 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
 public class BPModelRotatingController : MonoBehaviourPun, IPunObservable
 {
-    [Header("Camera Settings")]
-    public Transform cameraTransform;
-    public Vector3 positionOffset = Vector3.zero;
-    public bool useLocalOffset = false;
+    [Header("Camera & Head")]
+    public Transform cameraTransform;  // local player camera
+    public Transform headBone;         // ONLY pitch rotates
 
-    [Header("Bone Pitch Settings")]
-    public Transform targetBone;
+    [Header("Settings")]
     public float minPitch = -60f;
     public float maxPitch = 30f;
     public float pitchIntensity = 1f;
     public Vector3 rotationAxis = Vector3.right;
+    public float rotationLerpSpeed = 8f; // smooth for remote players
 
-    [HideInInspector] public bool armRotationEnabled = false; // <<< start disabled
-
+    private float currentPitch = 0f;
     private float networkPitch = 0f;
-    private float networkYaw = 0f;
-    private Quaternion boneInitialRotation;
-
-    [Header("Smoothing for Remote Players")]
-    public float rotationLerpSpeed = 8f;
+    private Quaternion headInitialRotation;
 
     void Awake()
     {
-        if (targetBone != null)
-            boneInitialRotation = targetBone.localRotation;
-
-        // Make sure arm doesn't move before first Fire1
-        armRotationEnabled = false;
+        if (headBone != null)
+            headInitialRotation = headBone.localRotation;
     }
 
     void Update()
     {
-        if (cameraTransform == null) return;
+        if (!cameraTransform) return;
 
         if (photonView.IsMine)
         {
-            // Step 1: Position with optional offset
-            Vector3 targetPosition = useLocalOffset
-                ? cameraTransform.position + cameraTransform.rotation * positionOffset
-                : cameraTransform.position + positionOffset;
-
-            targetPosition.y = transform.position.y;
-            transform.position = targetPosition;
-
-            // Step 2: Match Y rotation
-            Vector3 e = transform.eulerAngles;
-            e.y = cameraTransform.eulerAngles.y;
-            transform.eulerAngles = e;
+            // Compute current head pitch from local camera
+            float pitch = cameraTransform.eulerAngles.x;
+            if (pitch > 180f) pitch -= 360f;
+            currentPitch = Mathf.Clamp(pitch, minPitch, maxPitch) * pitchIntensity;
         }
-        else
-        {
-            // Remote players interpolate
-            Vector3 e = transform.eulerAngles;
-            e.y = Mathf.LerpAngle(e.y, networkYaw, Time.deltaTime * rotationLerpSpeed);
-            transform.eulerAngles = e;
-        }
+        // remote players do nothing in Update
     }
 
     void LateUpdate()
     {
-        if (!armRotationEnabled) return; // <<< critical: stop bone rotation until first Fire1
-        if (targetBone == null || cameraTransform == null) return;
+        if (!headBone) return;
 
         if (photonView.IsMine)
         {
-            float pitch = cameraTransform.eulerAngles.x;
-            if (pitch > 180f) pitch -= 360f;
-            float clamped = Mathf.Clamp(pitch, minPitch, maxPitch) * pitchIntensity;
-            targetBone.localRotation = boneInitialRotation * Quaternion.AngleAxis(clamped, rotationAxis);
+            // Apply pitch after Animator updates
+            headBone.localRotation = headInitialRotation * Quaternion.AngleAxis(currentPitch, rotationAxis);
         }
         else
         {
-            Quaternion targetRot = boneInitialRotation * Quaternion.AngleAxis(networkPitch, rotationAxis);
-            targetBone.localRotation = Quaternion.Slerp(targetBone.localRotation, targetRot,
-                Time.deltaTime * rotationLerpSpeed);
+            // Smoothly interpolate head pitch for remote players
+            Quaternion desired = headInitialRotation * Quaternion.AngleAxis(networkPitch, rotationAxis);
+            headBone.localRotation = Quaternion.Slerp(headBone.localRotation, desired, Time.deltaTime * rotationLerpSpeed);
         }
     }
 
@@ -87,13 +59,11 @@ public class BPModelRotatingController : MonoBehaviourPun, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(targetBone.localEulerAngles.x);
-            stream.SendNext(transform.eulerAngles.y);
+            stream.SendNext(currentPitch);  // send head pitch only
         }
         else
         {
             networkPitch = (float)stream.ReceiveNext();
-            networkYaw = (float)stream.ReceiveNext();
         }
     }
 }
