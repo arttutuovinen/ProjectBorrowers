@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 137288733644335320}
   - component: {fileID: 6364498705690101605}
   - component: {fileID: 2272564012468612583}
+  - component: {fileID: 75894307465078509}
   - component: {fileID: 5136079487784904055}
   - component: {fileID: 1348583416710600094}
   - component: {fileID: 3348664134161292876}
@@ -264,9 +265,9 @@ GameObject:
   - component: {fileID: 726549868499103897}
   - component: {fileID: 4387901889807618486}
   - component: {fileID: 8769194568731714403}
+  - component: {fileID: 1306958205652911868}
   - component: {fileID: 7549007834672380184}
   - component: {fileID: 3271016351445557058}
-  - component: {fileID: 8801348146040194836}
   - component: {fileID: 259571919989222573}
   - component: {fileID: 6759395729989228288}
   - component: {fileID: 6597793729881182503}
@@ -374,12 +375,12 @@ MonoBehaviour:
   - {fileID: 7549007834672380184}
   - {fileID: 3271016351445557058}
   - {fileID: 8769194568731714403}
-  - {fileID: 8801348146040194836}
-  - {fileID: 5136079487784904055}
+  - {fileID: 75894307465078509}
+  - {fileID: 1306958205652911868}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &5136079487784904055
+--- !u!114 &75894307465078509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -387,6 +388,39 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5745515364123179349}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonTransformViewClassic
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
+--- !u!114 &5136079487784904055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -552,6 +586,24 @@ MonoBehaviour:
   catchLayerName: CatchAnim
   armVerticalLayerName: ArmVertical
   catchCooldown: 2
+--- !u!114 &1306958205652911868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5257af78d886e0541a814b970f108fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 4682854195769893218}
+  animator: {fileID: 4734701019181051656}
+  minPitch: -50
+  maxPitch: 60
+  headParam: HeadVert
+  networkLerpSpeed: 8
 --- !u!114 &7549007834672380184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,25 +647,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4734701019181051656}
   crouchButton: P2Crouch
---- !u!114 &8801348146040194836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745515364123179349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5257af78d886e0541a814b970f108fee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 4682854195769893218}
-  headBone: {fileID: 1214375915518281941}
-  minPitch: -60
-  maxPitch: 30
-  pitchIntensity: 1
-  rotationAxis: {x: 1, y: 0, z: 0}
-  rotationLerpSpeed: 8
 --- !u!65 &259571919989222573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1817,17 +1850,15 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4734701019181051656}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3285bd15cd1164f47b2b6b1954c5b663,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7635199910136843043}
     - targetCorrespondingSourceObject: {fileID: -5661121819606500967, guid: 3285bd15cd1164f47b2b6b1954c5b663,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4395786151249208325}
   m_SourcePrefab: {fileID: 100100000, guid: 3285bd15cd1164f47b2b6b1954c5b663, type: 3}
---- !u!4 &1214375915518281941 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7986030920072186561, guid: 3285bd15cd1164f47b2b6b1954c5b663,
-    type: 3}
-  m_PrefabInstance: {fileID: 9083268663115612692}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5720107038857870221 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5661121819606500967, guid: 3285bd15cd1164f47b2b6b1954c5b663,
@@ -1884,6 +1915,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7635199910136843043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8272876570184302405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5257af78d886e0541a814b970f108fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 4682854195769893218}
+  animator: {fileID: 0}
+  minPitch: -60
+  maxPitch: 30
+  headParam: HeadVert
+  networkLerpSpeed: 8
 --- !u!4 &8756398196509173247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3285bd15cd1164f47b2b6b1954c5b663,
