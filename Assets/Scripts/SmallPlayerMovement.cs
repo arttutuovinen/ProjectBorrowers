@@ -42,18 +42,27 @@ public class SmallPlayerMovement : MonoBehaviour
     public TextMeshProUGUI ladderInteractText;
     
     public TextMeshProUGUI itemInteractText;
+    
+    //Particles Stuff
+    public ParticleSystem movementParticles;
+    public float maxEmissionRate = 20f; // Maximum emission rate when running
+    public float emissionChangeSpeed = 10f; // How fast to fade in/out
+    private ParticleSystem.EmissionModule emissionModule;
 
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked; // Locks the cursor to the center of the screen
- 
+        Cursor.visible = false; // Hide the cursor
+
         // Hide the interact text at the start
         if (ladderInteractText != null)
         {
             ladderInteractText.gameObject.SetActive(false); // Disable the text object initially
         }
+        emissionModule = movementParticles.emission;
+        emissionModule.rateOverTime = 0f; // Start with no emission
 
     }
 
@@ -69,9 +78,12 @@ public class SmallPlayerMovement : MonoBehaviour
             Move();
             ApplyGravity();
         }
-        ControlCamera();
-        
     }
+
+    private void LateUpdate()
+    {
+        ControlCamera();
+    }   
     // Method that allows enabling movement from other scripts
     public void EnableMovement()
     {
@@ -100,12 +112,16 @@ public class SmallPlayerMovement : MonoBehaviour
             }
 
             // Get input for movement (WASD/arrow keys or PS5 left stick)
-            float horizontal = Input.GetAxisRaw("P1Horizontal"); // WASD or PS5 Left Stick X
-            float vertical = Input.GetAxisRaw("P1Vertical"); // WASD or PS5 Left Stick Y
-                                                             //Debug.Log(horizontal +" "+vertical);
+            float horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal"); // WASD or PS5 Left Stick X
+            float vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical"); // WASD or PS5 Left Stick Y
 
             // Calculate the movement direction relative to the camera's orientation
             Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+
+            // Handle particle emission when moving and grounded (smooth fade)
+            float targetRate = (isGrounded && direction.magnitude >= 0.1f) ? maxEmissionRate : 0f;
+            float newRate = Mathf.Lerp(emissionModule.rateOverTime.constant, targetRate, Time.deltaTime * emissionChangeSpeed);
+            emissionModule.rateOverTime = newRate;
 
             if (direction.magnitude >= 0.1f)
             {
@@ -125,7 +141,7 @@ public class SmallPlayerMovement : MonoBehaviour
             // PS5 Cross button (Button 0) or Space key for jump
             if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
             {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);   
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
 
             // Ladder interaction: press E to start climbing if near a ladder
@@ -135,6 +151,7 @@ public class SmallPlayerMovement : MonoBehaviour
                 velocity.y = 0f; // Reset vertical velocity
             }
         }
+        
     }
 
     private void ApplyGravity()
@@ -151,7 +168,7 @@ public class SmallPlayerMovement : MonoBehaviour
         velocity.y = 0f;
 
         // Get vertical input for climbing (W and S keys or PS5 D-Pad Up/Down)
-        float vertical = Input.GetAxisRaw("P1Vertical");
+        float vertical = Input.GetAxisRaw("P1Vertical") + Input.GetAxisRaw("Vertical");
 
         // Move the player up or down the ladder
         Vector3 climbDirection = new Vector3(0, vertical, 0).normalized;

@@ -1,19 +1,19 @@
 fileFormatVersion: 2
 guid: 322e5d6a98d58144aab95c2c433ebea6
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Yellow
-    second: {fileID: 2100000, guid: bc1b156cadc440f4ab93fa5e3bbad0f6, type: 2}
+    second: {fileID: 2100000, guid: 2f6c46d69276d6949a3d23e8ff12ae41, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: darkGreen
-    second: {fileID: 2100000, guid: 52ed5c6645beb7646b467e88c3229616, type: 2}
+    second: {fileID: 2100000, guid: 2fe7d776b09205c4689d30d0384dab5f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -36,8 +36,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -78,6 +76,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8

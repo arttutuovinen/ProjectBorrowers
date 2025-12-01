@@ -1,0 +1,298 @@
+using UnityEngine;
+using TMPro;
+
+public class SPMovementNET : MonoBehaviour
+{
+    public float moveSpeed = 5f; // Speed of movement
+    public float climbSpeed = 3f; // Speed for climbing ladders
+    public float gravity = -9.81f; // Gravity applied to the player
+    public float jumpHeight = 1.5f; // How high the player can jump
+    public GameObject playerCamera; 
+
+    public float turnSmoothTime = 0.1f; // Smoothing for rotation
+    private bool canMove = true; // A flag to control movement
+
+    public Transform cameraTransform; // Reference to the main camera for directional movement
+    public Transform cameraFollowTarget; // Target for the camera to follow (usually the player)
+
+    public float mouseSensitivity = 100f; // Mouse sensitivity for camera movement
+    public float controllerSensitivity = 2f; // Controller sensitivity for camera movement
+    public float distanceFromPlayer = 5f; // Distance of the camera from the player
+    public float minVerticalAngle = -30f; // Minimum vertical angle for camera
+    public float maxVerticalAngle = 60f; // Maximum vertical angle for camera
+    public LayerMask cameraCollisionMask;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private float turnSmoothVelocity;
+
+    private float yaw; // Horizontal rotation
+    private float pitch; // Vertical rotation
+
+    // Ladder climbing variables
+    private bool isClimbing = false; // Is the player currently climbing a ladder?
+    private bool nearLadder = false; // Is the player near a ladder?
+    private Collider ladder; // Reference to the ladder the player is interacting with
+
+    private bool isTreasureCollected = true;
+
+    //Ladder text
+    public TextMeshProUGUI ladderInteractText;
+    
+    public TextMeshProUGUI itemInteractText;
+    
+    //Particles Stuff
+    public ParticleSystem movementParticles;
+    public float maxEmissionRate = 20f; // Maximum emission rate when running
+    public float emissionChangeSpeed = 10f; // How fast to fade in/out
+    private ParticleSystem.EmissionModule emissionModule;
+
+
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+
+        // Find the scene camera if it’s not assigned
+        if (playerCamera == null)
+        {
+            // Option 1: Find a tagged camera
+            GameObject foundCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
+            if (foundCamera != null)
+            {
+                playerCamera = foundCamera;
+            }
+            else
+            {
+                Debug.LogWarning("No MainCamera found in scene for player to attach!");
+            }
+        }
+
+        // Activate and link the camera (single-player / non-networked behaviour)
+        if (playerCamera != null)
+        {
+            playerCamera.SetActive(true);
+            cameraTransform = playerCamera.transform;
+            cameraFollowTarget = this.transform;
+
+            // Unparent the camera for smooth follow movement
+            cameraTransform.SetParent(null);
+        }
+
+        // Hide the interact text at the start
+        if (ladderInteractText != null)
+        {
+            ladderInteractText.gameObject.SetActive(false); // Disable the text object initially
+        }
+
+        if (movementParticles != null)
+        {
+            emissionModule = movementParticles.emission;
+            emissionModule.rateOverTime = 0f; // Start with no emission
+        }
+    }
+
+    private void Update()
+    {
+        if (isClimbing)
+        {
+            ClimbLadder();
+        }
+        else
+        {
+            Move();
+            ApplyGravity();
+        }
+    }
+
+    private void LateUpdate()
+    {   
+        ControlCamera();
+    }   
+    // Method that allows enabling movement from other scripts
+    public void EnableMovement()
+    {
+        canMove = true;
+        Debug.Log("Movement enabled.");
+    }
+
+    // Method that allows disabling movement from other scripts
+    public void DisableMovement()
+    {
+        canMove = false;
+        Debug.Log("Movement disabled.");
+    }
+
+    public void Move()
+    {
+        if (canMove)
+        {
+            // Check if the player is on the ground
+            isGrounded = controller.isGrounded;
+
+            // Reset velocity if on the ground
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f;
+            }
+
+            // Get input for movement (WASD/arrow keys or PS5 left stick)
+            float horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal"); // WASD or PS5 Left Stick X
+            float vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical"); // WASD or PS5 Left Stick Y
+
+            // Calculate the movement direction relative to the camera's orientation
+            Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+
+            // Handle particle emission when moving and grounded (smooth fade)
+            if (movementParticles != null)
+            {
+                float targetRate = (isGrounded && direction.magnitude >= 0.1f) ? maxEmissionRate : 0f;
+                float newRate = Mathf.Lerp(emissionModule.rateOverTime.constant, targetRate, Time.deltaTime * emissionChangeSpeed);
+                emissionModule.rateOverTime = newRate;
+            }
+
+            if (direction.magnitude >= 0.1f)
+            {
+                // Calculate the target angle for rotation based on camera orientation
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+                // Smoothly rotate towards the target angle
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                // Move in the direction the player is facing
+                Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
+            }
+
+            // Jumping mechanic
+            // PS5 Cross button (Button 0) or Space key for jump
+            if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+
+            // Ladder interaction: press E to start climbing if near a ladder
+            if (nearLadder && Input.GetKeyDown(KeyCode.E) || nearLadder && Input.GetButtonDown("P1Interact"))
+            {
+                isClimbing = true;
+                velocity.y = 0f; // Reset vertical velocity
+            }
+        }
+        
+    }
+
+    private void ApplyGravity()
+    {
+        // Apply gravity over time
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+        
+    }
+
+    private void ClimbLadder()
+    {
+        // Disable gravity while climbing
+        velocity.y = 0f;
+
+        // Get vertical input for climbing (W and S keys or PS5 D-Pad Up/Down)
+        float vertical = Input.GetAxisRaw("P1Vertical") + Input.GetAxisRaw("Vertical");
+
+        // Move the player up or down the ladder
+        Vector3 climbDirection = new Vector3(0, vertical, 0).normalized;
+        controller.Move(climbDirection * climbSpeed * Time.deltaTime);
+
+        // Exit climbing mode when the player presses E again
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("P1Interact"))
+        {
+            isClimbing = false;
+        }
+    }
+
+    private void ControlCamera()
+    {
+        // === INPUT ===
+        float mouseX, mouseY;
+
+        if (Mathf.Abs(Input.GetAxis("P1RightStickHorizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("P1RightStickVertical")) > 0.1f)
+        {
+            mouseX = Input.GetAxis("P1RightStickHorizontal") * controllerSensitivity * 2f;
+            mouseY = Input.GetAxis("P1RightStickVertical") * controllerSensitivity * 2f;
+        }
+        else
+        {
+            mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * 0.02f;
+            mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 0.02f;
+        }
+
+        // === ROTATION ===
+        yaw += mouseX;
+        pitch -= mouseY;
+        pitch = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
+
+        // Direction behind player
+        Vector3 desiredDir = Quaternion.Euler(pitch, yaw, 0f) * Vector3.back;
+
+        // === CAMERA DISTANCE ===
+        float maxDistance = distanceFromPlayer;
+        float minDistance = 0.5f;  // closest camera can get
+        float targetDistance = maxDistance;
+
+        // Raycast from player toward desired camera direction
+        RaycastHit hit;
+        if (Physics.Raycast(cameraFollowTarget.position, desiredDir, out hit, maxDistance, cameraCollisionMask))
+        {
+            // If something is in between, move camera closer
+            targetDistance = Mathf.Clamp(hit.distance - 0.3f, minDistance, maxDistance);
+        }
+
+        // === DESIRED POSITION ===
+        Vector3 desiredPos = cameraFollowTarget.position + desiredDir * targetDistance;
+
+        // === SMOOTH MOVEMENT ===
+        // Lerp position (smooth but responsive)
+        float moveSpeed = 10f; // higher = snappier
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPos, Time.deltaTime * moveSpeed);
+
+        // Always look at player (chest height)
+        cameraTransform.LookAt(cameraFollowTarget.position + Vector3.up * 1.5f);
+    }
+
+
+
+
+    // Detect when the player is near a ladder (use triggers or raycast)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            nearLadder = true;
+            ladder = other;
+
+            // Enable the interact text when the player enters the trigger
+            if (ladderInteractText != null)
+            {
+                ladderInteractText.gameObject.SetActive(true); // Activate text when the player enters the trigger
+            }
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other == ladder)
+        {
+            nearLadder = false;
+            ladder = null;
+            isClimbing = false; // Stop climbing when leaving the ladder
+
+            if (ladderInteractText != null)
+            {
+                ladderInteractText.gameObject.SetActive(false); // Deactivate text when the player exits the trigger
+            }
+        }
+    }
+     
+}

@@ -67,6 +67,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -88,6 +93,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -107,7 +113,6 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -224,8 +229,12 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   cameraFollowTarget: {fileID: 1735088581532782266}
   crouchSpeed: 5
-  crouchOffset: 0.5
-  capsuleModel: {fileID: 0}
+  standingHeight: 2
+  crouchingHeight: 1
+  standingCenter: {x: 0, y: 0, z: 0}
+  crouchingCenter: {x: 0, y: -0.5, z: 0}
+  crouchCameraYOffset: -0.5
+  cameraTransitionTime: 0.5
   mouseSensitivity: 200
   controllerSensitivity: 2
   distanceFromPlayer: 0.1
@@ -241,6 +250,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   doorInteractText: {fileID: 0}
+  lightSwitchLayerMask:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!1 &4256986036373327801
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +342,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -351,6 +368,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0

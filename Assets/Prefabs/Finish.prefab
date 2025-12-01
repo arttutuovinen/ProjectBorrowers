@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 6331009651377500535}
   - component: {fileID: 1032534705014593536}
   - component: {fileID: 4889823746489516687}
-  - component: {fileID: 2311269034823750257}
-  m_Layer: 0
+  - component: {fileID: 5909375164338328550}
+  - component: {fileID: 2015226178335826368}
+  m_Layer: 14
   m_Name: Finish
-  m_TagString: Untagged
+  m_TagString: Finnish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,6 +61,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +87,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -106,7 +113,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2311269034823750257
+--- !u!114 &5909375164338328550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,9 +122,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8536394408400741620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3c3cc1aa61cae4ab9763aaadbf930b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d772a759f08dee44ad8c449bd71aa08, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  smallPlayer: {fileID: 0}
-  treasureTag: Treasure
-  playerTag: SmallPlayer
+  m_EditorClassIdentifier: Assembly-CSharp::FinishTrigger
+--- !u!114 &2015226178335826368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8536394408400741620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dfe5102356c5944fb53e943f0cd746c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreasureSpawner
+  treasure: {fileID: 0}

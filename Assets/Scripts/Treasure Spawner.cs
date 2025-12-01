@@ -1,46 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class TreasureSpawner : MonoBehaviour
+public class TreasureSpawner : MonoBehaviourPunCallbacks
 {
-    // Array to hold all spawn points found in the scene
-    private GameObject[] spawnPoints;
-
-    // Reference to the player object in the scene
     public GameObject treasure;
+    private GameObject[] spawnPoints;
 
     void Start()
     {
-        // Find all spawn points in the scene tagged as "SpawnPoint"
         spawnPoints = GameObject.FindGameObjectsWithTag("TreasureSpawnPoint");
-
-        // Check if there are any spawn points
-        if (spawnPoints.Length == 0)
-        {
-            Debug.LogError("No spawn points found in the scene!");
-            return;
-        }
-
-        // Teleport the player to a random spawn point
-        TeleportTreasureToRandomPoint();
     }
 
-    // Method to teleport the player to a random spawn point
-    void TeleportTreasureToRandomPoint()
+    public override void OnJoinedRoom()
     {
-        if (treasure == null)
+        if (PhotonNetwork.IsMasterClient)
+            TeleportTreasure();
+    }
+
+    public void TeleportTreasure()
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+        if (treasure == null || spawnPoints.Length == 0) return;
+
+        int index = Random.Range(0, spawnPoints.Length);
+        GameObject point = spawnPoints[index];
+
+        PhotonView pv = treasure.GetComponent<PhotonView>();
+        pv.RPC("RPC_TeleportTreasure", RpcTarget.AllBuffered,
+            point.transform.position,
+            point.transform.rotation);
+    }
+    [PunRPC]
+    public void RPC_TeleportTreasure(Vector3 pos, Quaternion rot)
+    {
+        if (treasure != null)
         {
-            Debug.LogError("Treasure object not set!");
-            return;
+            treasure.transform.SetPositionAndRotation(pos, rot);
+            treasure.SetActive(true); // Reactivate treasure on all clients
         }
-
-        // Choose a random spawn point from the array
-        int randomIndex = Random.Range(0, spawnPoints.Length);
-        GameObject randomSpawnPoint = spawnPoints[randomIndex];
-
-        // Move the player to the chosen spawn point's position and rotation
-        treasure.transform.position = randomSpawnPoint.transform.position;
-        treasure.transform.rotation = randomSpawnPoint.transform.rotation;
     }
 }
+
+

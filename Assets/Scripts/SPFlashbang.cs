@@ -1,27 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections; // ✅ Needed for IEnumerator
 using UnityEngine;
+using Photon.Pun;
 
-public class SPFlashbang : MonoBehaviour
+public class SPFlashbang : MonoBehaviourPun
 {
-    public GameObject flashbang;
-    public Transform throwOrigin;     // The point where the object is thrown from (e.g., player's hand or camera position)
-    public float throwForce = 10f;    // The force applied to the thrown object
-    private float destroyTime = 2f;
-    public Camera playerCamera;       // Reference to the player's camera
+    [Header("Item Settings")]
+    public GameObject flashbang;     // Prefab of the Flashbang (must be in Resources folder)
+    public Transform throwOrigin;    // The point where the flashbang spawns from (e.g. player's hand or camera)
+    private float destroyTime = 10f; // Optional auto-destroy time
 
-   
     public void SpawnFlashbang()
     {
-        // Spawn the collected item at the player's position
-        GameObject thrownObject = Instantiate(flashbang, transform.position + transform.forward, Quaternion.identity);
-        // Calculate the throw direction based on where the player's camera is looking
-        Vector3 throwDirection = playerCamera.transform.forward;
-        // Get the Rigidbody component of the thrown object
-        Rigidbody rb = thrownObject.GetComponent<Rigidbody>();
-        // Apply force to the Rigidbody to throw the object in the calculated direction
-        rb.AddForce(throwDirection * throwForce, ForceMode.Impulse);
-        Destroy(thrownObject, destroyTime);
+        if (!photonView.IsMine) return; // Only local player can spawn
+
+        if (flashbang == null)
+        {
+            Debug.LogWarning("SPFlashbang: No flashbang prefab assigned!");
+            return;
+        }
+
+        if (throwOrigin == null)
+        {
+            Debug.LogWarning("SPFlashbang: No throwOrigin assigned!");
+            return;
+        }
+
+        // Spawn at throwOrigin's position and rotation
+        Vector3 spawnPos = throwOrigin.position;
+        Quaternion spawnRot = throwOrigin.rotation;
+
+        // Photon instantiate (must be in a Resources folder)
+        GameObject spawnedFlashbang = PhotonNetwork.Instantiate(flashbang.name, spawnPos, spawnRot);
+
+        Debug.Log($"[SPFlashbang] Spawned networked flashbang: {spawnedFlashbang.name}");
+
+        // Optional: destroy after some time (for cleanup)
+        // StartCoroutine(DestroyAfterDelay(spawnedFlashbang));
     }
-    
+
+    private IEnumerator DestroyAfterDelay(GameObject obj)
+    {
+        yield return new WaitForSeconds(destroyTime);
+        if (obj != null && obj.GetComponent<PhotonView>()?.IsMine == true)
+        {
+            PhotonNetwork.Destroy(obj);
+        }
+    }
 }
+
+

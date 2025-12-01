@@ -15,11 +15,11 @@ public class BigPlayerMovement : MonoBehaviour
 
     // ** Crouching variables **
     public float crouchSpeed = 1.0f;     // Speed when crouching
-    private float currentSpeed;
-    public float standingHeight = 2.0f;
-    public float crouchingHeight = 1.0f;
+    [HideInInspector] public float currentSpeed;
+    public float standingHeight = 15.0f;
+    public float crouchingHeight = 7.5f;
     public Vector3 standingCenter = Vector3.zero;
-    public Vector3 crouchingCenter = new Vector3(0, -0.5f, 0);
+    public Vector3 crouchingCenter = new Vector3(0, -3.75f, 0);
     private bool isCrouching = false;
 
     public float crouchCameraYOffset = -0.5f;
@@ -56,6 +56,8 @@ public class BigPlayerMovement : MonoBehaviour
     public LayerMask doorLayerMask;
     public TextMeshProUGUI doorInteractText;
     private Door currentDoor;
+    public LayerMask lightSwitchLayerMask;          // Layer mask for switches
+    private LightSwitchInteraction currentLightSwitch;          // Track the switch you're looking at
 
     private void Start()
     {
@@ -86,44 +88,53 @@ public class BigPlayerMovement : MonoBehaviour
         //Camera Offset manager
         rayPosition = playerCamera.transform.position + new Vector3(offsetX, offsetY, offsetZ);
 
+        // Reset interaction reference each frame
+        currentDoor = null;
+        currentLightSwitch = null;
+
         // Cast a ray from the camera's position and forward direction.
         Ray ray = new Ray(rayPosition, playerCamera.transform.forward);
         RaycastHit hit;
 
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.blue);
-        // ** Door interaction detection **
-        // Check if the ray hits any object within the specified distance and on the door layer
-        if (Physics.Raycast(ray, out hit, rayDistance, doorLayerMask))
+
+        // Check if the ray hits any object within range
+        if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            // Check if the object hit has a DoorInteraction component
+            // --- Door check ---
             Door door = hit.collider.GetComponent<Door>();
-            if (door != null)
+            if (door != null && ((1 << hit.collider.gameObject.layer) & doorLayerMask) != 0)
             {
-                // If the player presses the interact key, toggle the door
                 if (Input.GetButtonDown("P2Interact"))
                 {
                     door.ToggleDoor();
                 }
-                // Display interaction text
-                if (doorInteractText != null)
-                {
-                    doorInteractText.gameObject.SetActive(true); // Activate the text when the door is in range
-                }
-                // Set the current door reference
+
                 currentDoor = door;
-            }
-        }
-        else
-        {
-            // If the ray doesn't hit a door or is too far, deactivate the text
-            if (doorInteractText != null)
-            {
-                doorInteractText.gameObject.SetActive(false); // Deactivate the text when no door is in range
+                if (doorInteractText != null)
+                    doorInteractText.gameObject.SetActive(true);
+                return; // Stop here so only one interaction is shown at a time
             }
 
-            // Clear the current door reference
-            currentDoor = null;
+            // --- Light switch check ---
+            LightSwitchInteraction lightSwitch = hit.collider.GetComponent<LightSwitchInteraction>();
+            if (lightSwitch != null && ((1 << hit.collider.gameObject.layer) & lightSwitchLayerMask) != 0)
+            {
+                if (Input.GetButtonDown("P2Interact"))
+                {
+                    lightSwitch.Interact();
+                }
+
+                currentLightSwitch = lightSwitch;
+                if (doorInteractText != null) // reuse the same UI text
+                    doorInteractText.gameObject.SetActive(true);
+                return;
+            }
         }
+
+        // If nothing is hit, hide the text
+        if (doorInteractText != null)
+            doorInteractText.gameObject.SetActive(false);
 
 
     }
@@ -144,8 +155,8 @@ public class BigPlayerMovement : MonoBehaviour
         }
 
         // Get input for movement (WASD/arrow keys or PS5 left stick)
-        float horizontal = Input.GetAxisRaw("P2Horizontal"); // WASD or PS5 Left Stick X
-        float vertical = Input.GetAxisRaw("P2Vertical"); // WASD or PS5 Left Stick Y
+        float horizontal = Input.GetAxisRaw("Horizontal"); // WASD or PS5 Left Stick X
+        float vertical = Input.GetAxisRaw("Vertical"); // WASD or PS5 Left Stick Y
 
         // Calculate the movement direction relative to the camera's orientation
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
@@ -245,6 +256,4 @@ public class BigPlayerMovement : MonoBehaviour
 
         cameraFollowTarget.localPosition = endPos; // Snap to final position
     }
-
-
 }

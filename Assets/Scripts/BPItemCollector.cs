@@ -1,176 +1,222 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using Photon.Pun;
 
-public class BPItemCollector : MonoBehaviour
+public class BPItemCollector : MonoBehaviourPun
 {
     public enum ItemType
     {
         None,
         ThrowingItem,
+        ThrowingItem_02,
+        ThrowingItem_03,
         FlySwatter,
         MouseTrap,
-        Compass
+        Compass,
+        VacuumCleaner,
+        Tape,
+        Medicine
     }
-    public float rayDistance = 10f; // The distance of the raycast
-    public LayerMask collectibleLayer; // Layer mask to specify which layers should be considered for the raycast
-    public Camera playerCamera;  // Reference to the Big Player's camera (assign via Inspector)
-    private ItemType currentItem = ItemType.None;  // Tracks the type of the currently held item
-    private bool itemUsed = false; // Tracks if the item has been used after collection
-    private GameObject collectedItem; // The reference to the collectible item in range
+
+    public float rayDistance = 10f;
+    public LayerMask collectibleLayer;
+    public Camera playerCamera;
+
+    private ItemType currentItem = ItemType.None;
+    private bool itemUsed = false;
+    private GameObject collectedItem;
     private bool canPickUp = false;
 
-    public TextMeshProUGUI bpPickUpText;  // Reference to the TextMeshPro UI element
-    public Image throwingItem;  // Reference to the UI Image for Boppy Pin
-    public Image flySwatterImage;  // Reference to the UI Image for Other Item
-    public Image mouseTrapImage;
-    public Image compassImage;
+    // Components
+    private BPThrowItem bpThrowItem;
+    private BigPlayerAnimation bpAnimation;
+    private BPMouseTrap bpMouseTrap;
+    private BPCompass bpCompass;
+    private BPVacuumCleaner bpVacuumCleaner;
+    private BPTapeManager bpTapeManager;
+    private BPMedicine bpMedicine;
 
-    public BPThrowItem bpThrowItem; // Reference to another script that handles Boppy Pin behavior.
-    public BigPlayerAnimation bpAnimation; // Reference to another script that handles Other Item behavior.
-    public BPMouseTrap bpMouseTrap;
-    public BPCompass bpCompass;
+    // ✔ All valid item tags
+    private readonly HashSet<string> itemTags = new HashSet<string>
+    {
+        "BPThrowItem",
+        "BPThrowItem2",
+        "BPThrowItem3",
+        "BPFlySwatter",
+        "BPMouseTrap",
+        "BPCompass",
+        "BPVacuumCleaner",
+        "BPTape",
+        "BPMedicine"
+    };
 
     void Start()
     {
-        // Disable the pickup text and item images at the start of the game
-        bpPickUpText.enabled = false;
-        throwingItem.enabled = false;
-        flySwatterImage.enabled = false;
-        mouseTrapImage.enabled = false;
-        compassImage.enabled = false;
+        bpThrowItem = GetComponent<BPThrowItem>();
+        bpAnimation = GetComponent<BigPlayerAnimation>();
+        bpMouseTrap = GetComponent<BPMouseTrap>();
+        bpCompass = GetComponent<BPCompass>();
+        bpVacuumCleaner = GetComponent<BPVacuumCleaner>();
+        bpTapeManager = GetComponent<BPTapeManager>();
+        bpMedicine = GetComponent<BPMedicine>();
     }
 
     void Update()
     {
-        // Check if the player is aiming at a collectible item using a raycast
+        if (!photonView.IsMine) return;
+
         CheckForCollectible();
 
-        // Check if the player presses the interact button when in range of a collectible item
-        if (canPickUp && currentItem == ItemType.None && Input.GetButtonDown("P2Interact"))
-        {
+        if (canPickUp && currentItem == ItemType.None && Input.GetButtonDown("P1Interact"))
             PickUpItem();
-        }
 
-        // Check if the player presses "P2UseItem", has collected an item, and hasn't used it yet
-        if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("P2PickUp"))
-        {
+        if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("Fire1"))
             UseItem();
-        }
     }
 
+    // -----------------------------------------------------------------------
+    // ✔ Detect closest item using only specific item tags
+    // -----------------------------------------------------------------------
     void CheckForCollectible()
     {
-        // Cast a ray from the center of the player's camera
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit[] hits = Physics.RaycastAll(ray, rayDistance, collectibleLayer);
 
-        float closestDistance = Mathf.Infinity;
-        GameObject closestCollectible = null;
+        float closestDist = Mathf.Infinity;
+        GameObject closest = null;
 
-        foreach (RaycastHit hit in hits)
+        foreach (var hit in hits)
         {
-            // Check if the hit object has the correct tag and the player doesn't already have an item
-            if (hit.collider.CompareTag("BPCollectible") && currentItem == ItemType.None)
+            if (itemTags.Contains(hit.collider.tag))
             {
-                // Update the closest collectible if it's nearer than the previous one
-                if (hit.distance < closestDistance)
+                if (hit.distance < closestDist)
                 {
-                    closestDistance = hit.distance;
-                    closestCollectible = hit.collider.gameObject;
+                    closestDist = hit.distance;
+                    closest = hit.collider.gameObject;
                 }
             }
         }
 
-        // If a collectible was found, update the pickup state
-        if (closestCollectible != null)
-        {
-            collectedItem = closestCollectible;
-            canPickUp = true; // Allow the player to pick up the item
-            bpPickUpText.enabled = true; // Show the pickup text
-        }
-        else
-        {
-            // If the raycast does not hit any collectible, disable the pickup option
-            canPickUp = false;
-            collectedItem = null; // Reset the reference to the collectible item
-            bpPickUpText.enabled = false; // Hide the pickup text
-        }
+        collectedItem = closest;
+        canPickUp = (closest != null);
     }
 
+    // -----------------------------------------------------------------------
+    // ✔ Determine item only by its tag
+    // -----------------------------------------------------------------------
     void PickUpItem()
     {
-        // Look for a child object with specific tags to determine the type of the item
-        if (collectedItem != null)
-        {
-            // Try to find a child tagged as "BPThrowItem"
-            Transform throwItemChild = collectedItem.transform.Find("BPThrowItem");
-            if (throwItemChild != null && throwItemChild.CompareTag("BPThrowItem"))
-            {
-                currentItem = ItemType.ThrowingItem;
-                throwingItem.enabled = true;
-                Debug.Log("Player picked up a ThrowItem.");
-            }
+        if (collectedItem == null) return;
 
-            // Try to find a child tagged as "BPFlySwatter"
-            Transform flyswatterChild = collectedItem.transform.Find("BPFlySwatter");
-            if (flyswatterChild != null && flyswatterChild.CompareTag("BPFlySwatter"))
-            {
+        switch (collectedItem.tag)
+        {
+            case "BPThrowItem":
+                currentItem = ItemType.ThrowingItem;
+                break;
+
+            case "BPThrowItem2":
+                currentItem = ItemType.ThrowingItem_02;
+                break;
+
+            case "BPThrowItem3":
+                currentItem = ItemType.ThrowingItem_03;
+                break;
+
+            case "BPFlySwatter":
                 currentItem = ItemType.FlySwatter;
-                flySwatterImage.enabled = true;
-                Debug.Log("Player picked up an Other Item.");
-            }
-            // Try to find a child tagged as "BPMouseTrap"
-            Transform mouseTrapChild = collectedItem.transform.Find("BPMouseTrap");
-            if (mouseTrapChild != null && mouseTrapChild.CompareTag("BPMouseTrap"))
-            {
+                break;
+
+            case "BPMouseTrap":
                 currentItem = ItemType.MouseTrap;
-                mouseTrapImage.enabled = true;
-                Debug.Log("Player picked up an Other Item.");
-            }
-            Transform compassChild = collectedItem.transform.Find("BPCompass");
-            if (compassChild != null && compassChild.CompareTag("BPCompass"))
-            {
+                break;
+
+            case "BPCompass":
                 currentItem = ItemType.Compass;
-                compassImage.enabled = true;
-                Debug.Log("Player picked up an Compass.");
-            }
-            // Destroy the parent collectible item and reset pickup state
-            Destroy(collectedItem);
-            itemUsed = false;
-            collectedItem = null;
-            canPickUp = false;
-            bpPickUpText.enabled = false;
+                break;
+
+            case "BPVacuumCleaner":
+                currentItem = ItemType.VacuumCleaner;
+                break;
+
+            case "BPTape":
+                currentItem = ItemType.Tape;
+                break;
+
+            case "BPMedicine":
+                currentItem = ItemType.Medicine;
+                break;
         }
+
+        Destroy(collectedItem);
+        itemUsed = false;
+        collectedItem = null;
+        canPickUp = false;
+
+        Debug.Log("Picked up: " + currentItem);
     }
 
-    void UseItem()
+    // -----------------------------------------------------------------------
+    // ✔ Use item
+    // -----------------------------------------------------------------------
+    public void UseItem()
     {
-        // Call the appropriate method based on the currently held item type
-        if (currentItem == ItemType.ThrowingItem)
+        if (!photonView.IsMine) return; // Only the local player can use items
+
+        switch (currentItem)
         {
-            bpThrowItem.SpawnThrowItem();
+            case ItemType.ThrowingItem:
+                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem();
+                break;
+
+            case ItemType.ThrowingItem_02:
+                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem2();
+                break;
+
+            case ItemType.ThrowingItem_03:
+                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem3();
+                break;
+
+            case ItemType.FlySwatter:
+                if (bpAnimation != null) bpAnimation.FlySwatter();
+                break;
+
+            case ItemType.MouseTrap:
+                if (bpMouseTrap != null) bpMouseTrap.SpawnMouseTrap();
+                break;
+
+            case ItemType.Compass:
+                if (bpCompass != null) bpCompass.UseCompass();
+                break;
+
+            case ItemType.VacuumCleaner:
+                if (bpVacuumCleaner != null) bpVacuumCleaner.TryPullTarget();
+                break;
+
+            case ItemType.Tape:
+                if (bpTapeManager != null)
+                {
+                    if (!bpTapeManager.TryActivateTape())
+                    {
+                        // Don't consume item if activation failed
+                        return;
+                    }
+                }
+                break;
+
+            case ItemType.Medicine:
+                if (bpMedicine != null) bpMedicine.ActivateSpeedBoost();
+                break;
+
+            default:
+                Debug.LogWarning("UseItem called but no valid currentItem selected.");
+                return;
         }
-        if (currentItem == ItemType.FlySwatter)
-        {
-            bpAnimation.FlySwatter();
-        }
-        if (currentItem == ItemType.MouseTrap)
-        {
-            bpMouseTrap.SpawnMouseTrap();
-        }
-        if (currentItem == ItemType.Compass)
-        {
-            bpCompass.UseCompass();       
-        }
-        // Mark the item as used and reset state
+
+        // Mark as used and reset
         itemUsed = true;
         currentItem = ItemType.None;
-        throwingItem.enabled = false;
-        flySwatterImage.enabled = false;
-        mouseTrapImage.enabled = false;
-        compassImage.enabled = false;
     }
+
 }
+

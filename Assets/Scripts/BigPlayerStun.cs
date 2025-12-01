@@ -1,59 +1,63 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using Photon.Pun;
 
-public class BigPlayerStun : MonoBehaviour
+public class BigPlayerStun : MonoBehaviourPun
 {
-    public float stunDuration = 5f;    // Duration for which the player is stunned
-    private bool isStunned = false;    // Tracks if the player is stunned
-    public BigPlayerMovement bigPlayerMovement; // Reference to the player's movement script (assuming a separate movement script exists)
-    public TextMeshProUGUI bigPlayerIsStunnedText;  // Reference to the TextMeshPro UI element
+    public float stunDuration = 5f;
+    private bool isStunned = false;
+    private BigPlayerMovement bigPlayerMovement;
 
     void Start()
     {
-        // Assuming the player has a movement script called "PlayerMovement"
         bigPlayerMovement = GetComponent<BigPlayerMovement>();
-        bigPlayerIsStunnedText.enabled = false;
     }
 
-    // Detect when the player touches an item
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the item is tagged as "StunItem"
-        if (other.gameObject.CompareTag("StunItem") && !isStunned)
+        if (other.CompareTag("StunItem"))
         {
-            // Start the stun process
-            StartCoroutine(StunPlayer());
-            Debug.Log("Hits boppyPin");
-            // Destroy the StunItem after collision
-            Destroy(other.gameObject);
+            // Request the BigPlayer to stun themselves on their own client
+            photonView.RPC(nameof(StunRPC), photonView.Owner);
+
+            // Destroy the StunItem over network
+            PhotonView itemPV = other.GetComponent<PhotonView>();
+            if (itemPV != null && itemPV.IsMine)
+                PhotonNetwork.Destroy(other.gameObject);
+            else if (itemPV != null)
+                photonView.RPC(nameof(RequestItemDestroyRPC), itemPV.Owner, itemPV.ViewID);
         }
     }
 
-    // Coroutine to handle the stun logic
+    [PunRPC]
+    private void StunRPC()
+    {
+        if (!photonView.IsMine) return; // Only stun on the owner client
+        if (isStunned) return;
+        StartCoroutine(StunPlayer());
+    }
+
     IEnumerator StunPlayer()
     {
-        // Set the player to stunned
         isStunned = true;
-        bigPlayerIsStunnedText.enabled = true;
-        
-        // Disable the player's movement
-        if (bigPlayerMovement != null)
-        {
-            bigPlayerMovement.enabled = false;
-        }
 
-        // Wait for the stun duration
+        if (bigPlayerMovement != null)
+            bigPlayerMovement.enabled = false;
+
         yield return new WaitForSeconds(stunDuration);
 
-        // Re-enable movement after stun is over
         if (bigPlayerMovement != null)
-        {
             bigPlayerMovement.enabled = true;
-        }
-        bigPlayerIsStunnedText.enabled = false;
-        // Reset the stun state
+
         isStunned = false;
     }
+
+    [PunRPC]
+    private void RequestItemDestroyRPC(int viewID)
+    {
+        PhotonView itemView = PhotonView.Find(viewID);
+        if (itemView != null && itemView.IsMine)
+            PhotonNetwork.Destroy(itemView.gameObject);
+    }
 }
+

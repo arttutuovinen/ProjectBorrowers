@@ -1,24 +1,92 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class BPThrowItem : MonoBehaviour
+public class BPThrowItem : MonoBehaviourPun
 {
-    public GameObject throwItemWeapon;
-    public Transform throwOrigin;     // The point where the object is thrown from (e.g., player's hand or camera position)
-    public float throwForce = 20f;    // The force applied to the thrown object
+    public string prefabThrowItem1 = "ThrowingItemWeapon";
+    public string prefabThrowItem2 = "ThrowingItemWeapon_02";
+    public string prefabThrowItem3 = "ThrowingItemWeapon_03";
+
+    public Transform throwOrigin;
+    public float throwForce = 20f;
     private float destroyTime = 5f;
-    public Camera playerCamera;       // Reference to the player's camera
 
+    public Camera playerCamera;
 
+    // ------------------------------
+    // THROW ITEM 1
+    // ------------------------------
     public void SpawnThrowItem()
     {
-        // Spawn the collected item at the player's position
-        GameObject thrownObject = Instantiate(throwItemWeapon, throwOrigin.transform.position, Quaternion.identity);
-        Rigidbody rb = thrownObject.GetComponent<Rigidbody>();
-        Vector3 throwDirection = playerCamera.transform.forward;
-        rb.AddForce(throwDirection * throwForce, ForceMode.Impulse);
-        Destroy(thrownObject, destroyTime);
+        if (!photonView.IsMine) return;
+
+        GameObject thrownObject = PhotonNetwork.Instantiate(
+            prefabThrowItem1,
+            throwOrigin.position,
+            Quaternion.identity
+        );
+
+        ApplyThrowForce(thrownObject);
+        StartCoroutine(DestroyAfterDelay(thrownObject));
     }
 
+    // ------------------------------
+    // THROW ITEM 2
+    // ------------------------------
+    public void SpawnThrowItem2()
+    {
+        if (!photonView.IsMine) return;
+
+        GameObject thrownObject = PhotonNetwork.Instantiate(
+            prefabThrowItem2,
+            throwOrigin.position,
+            Quaternion.identity
+        );
+
+        ApplyThrowForce(thrownObject);
+        StartCoroutine(DestroyAfterDelay(thrownObject));
+    }
+
+    // ------------------------------
+    // THROW ITEM 3
+    // ------------------------------
+    public void SpawnThrowItem3()
+    {
+        if (!photonView.IsMine) return;
+
+        GameObject thrownObject = PhotonNetwork.Instantiate(
+            prefabThrowItem3,
+            throwOrigin.position,
+            Quaternion.identity
+        );
+
+        ApplyThrowForce(thrownObject);
+        StartCoroutine(DestroyAfterDelay(thrownObject));
+    }
+
+    // ------------------------------
+    // APPLY FORCE
+    // ------------------------------
+    private void ApplyThrowForce(GameObject obj)
+    {
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        Vector3 dir = playerCamera.transform.forward;
+        rb.AddForce(dir * throwForce, ForceMode.Impulse);
+    }
+
+    // ------------------------------
+    // NETWORK SAFE AUTO DESTROY
+    // ------------------------------
+    private IEnumerator DestroyAfterDelay(GameObject obj)
+    {
+        yield return new WaitForSeconds(destroyTime);
+
+        if (obj != null)
+        {
+            PhotonNetwork.Destroy(obj);
+        }
+    }
 }
+
