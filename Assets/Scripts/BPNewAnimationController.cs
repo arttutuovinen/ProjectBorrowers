@@ -5,22 +5,28 @@ using Photon.Pun;
 
 public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
 {
+    [Header("Animator")]
+    public Animator animator;   // MUST be assigned in inspector (BG animator)
+
     [Header("Input Settings")]
     private float horizontal;
-    private float vertical;       // Default Unity input: W/S or Up/Down
-    public string crouchButton = "Crouch";         // Optional Input Manager button
+    private float vertical;
+    public string crouchButton = "Crouch";
 
-    private Animator animator;
     private bool isCrouching = false;
     private bool isMoving = false;
 
-    // Synced variables for remote players
+    // Network synced values
     private bool networkCrouch = false;
     private bool networkMove = false;
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        // Safety check
+        if (animator == null)
+        {
+            Debug.LogError("BPNewAnimationController: Animator reference missing! Assign BG Animator in inspector.");
+        }
     }
 
     void Update()
@@ -32,7 +38,7 @@ public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
         }
         else
         {
-            // Smoothly update remote player animation states
+            // Apply synced values
             isCrouching = networkCrouch;
             isMoving = networkMove;
         }
@@ -42,7 +48,6 @@ public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
 
     void HandleCrouchInput()
     {
-        // Default crouch key (Left Control)
         if (Input.GetButtonDown(crouchButton) || Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCrouching = !isCrouching;
@@ -53,16 +58,19 @@ public class BPNewAnimationController : MonoBehaviourPun, IPunObservable
     {
         horizontal = Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("P1Horizontal");
         vertical = Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("P1Vertical");
+
         isMoving = (horizontal != 0 || vertical != 0);
     }
 
     void UpdateAnimator()
     {
+        if (animator == null) return;
+
         animator.SetBool("IsCrouching", isCrouching);
         animator.SetBool("IsMoving", isMoving);
     }
 
-    // Photon network sync
+    // Photon sync
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
