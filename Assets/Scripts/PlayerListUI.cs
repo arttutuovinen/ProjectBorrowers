@@ -25,7 +25,7 @@ public class PlayerListUI : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.BackQuote))
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.BackQuote))
         {
             TryToggleFromInput();
             return; // ensures instant toggle
@@ -80,7 +80,7 @@ public class PlayerListUI : MonoBehaviourPunCallbacks
             return;
         }
 
-        playerListText.text = "Players in Room:\n";
+        playerListText.text = "";
         foreach (Player p in PhotonNetwork.PlayerList)
         {
             string displayName = string.IsNullOrEmpty(p.NickName) ? $"Player {p.ActorNumber}" : p.NickName;
