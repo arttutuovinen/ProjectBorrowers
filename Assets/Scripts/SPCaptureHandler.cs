@@ -46,9 +46,14 @@ public class SPCaptureHandler : MonoBehaviourPun
     {
         if (!isCaptured) return;
 
-        // Continue following the teleport anchor
+        // Disable CharacterController temporarily
         controller.enabled = false;
-        transform.position = followTarget.position;
+
+        // Follow the teleport target on all axes
+        Vector3 targetPos = followTarget.position;
+        transform.position = targetPos;
+
+        // Re-enable controller
         controller.enabled = true;
     }
 }
