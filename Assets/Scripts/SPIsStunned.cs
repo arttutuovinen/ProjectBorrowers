@@ -7,14 +7,14 @@ public class SPIsStunned : MonoBehaviour
 {
     public float stunDuration = 5f;    // Duration for which the player is stunned
     private bool isStunned = false;    // Tracks if the player is stunned
-    public SmallPlayerMovement smallPlayerMovement; // Reference to the player's movement script (assuming a separate movement script exists)
-    public TextMeshProUGUI spIsStunnedText;  // Reference to the TextMeshPro UI element
+    public SPMovementNET smallPlayerMovement; // Reference to the player's movement script (assuming a separate movement script exists)
+    
 
     void Start()
     {
         // Assuming the player has a movement script called "PlayerMovement"
-        smallPlayerMovement = GetComponent<SmallPlayerMovement>();
-        spIsStunnedText.enabled = false;
+        smallPlayerMovement = GetComponent<SPMovementNET>();
+        
     }
 
     // Detect when the player touches an item
@@ -36,7 +36,7 @@ public class SPIsStunned : MonoBehaviour
     {
         // Set the player to stunned
         isStunned = true;
-        spIsStunnedText.enabled = true;
+        //spIsStunnedText.enabled = true;
 
         // Disable the player's movement
         if (smallPlayerMovement != null)
@@ -52,7 +52,7 @@ public class SPIsStunned : MonoBehaviour
         {
             smallPlayerMovement.enabled = true;
         }
-        spIsStunnedText.enabled = false;
+        //spIsStunnedText.enabled = false;
         // Reset the stun state
         isStunned = false;
     }

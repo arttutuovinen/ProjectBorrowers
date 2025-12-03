@@ -5071,6 +5071,7 @@ GameObject:
   - component: {fileID: 7213267609248557840}
   - component: {fileID: 457389529722468420}
   - component: {fileID: 5644917193308100841}
+  - component: {fileID: 6352348488652347470}
   - component: {fileID: 7365710028398305443}
   - component: {fileID: 8643245985604792946}
   - component: {fileID: 4002545532128324940}
@@ -5245,14 +5246,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150109236876745808}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5014a7a5a3037994895d33fd66a3d368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stunDuration: 5
   smallPlayerMovement: {fileID: 0}
-  spIsStunnedText: {fileID: 0}
 --- !u!114 &2265930764285613028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5314,7 +5314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 5
   upwardForce: 7
-  knockbackDuration: 0.2
+  knockbackDuration: 3
 --- !u!114 &1453455095307449174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5391,6 +5391,18 @@ MonoBehaviour:
   movementParticles: {fileID: 1257212597661535666}
   maxEmissionRate: 20
   emissionChangeSpeed: 10
+--- !u!114 &6352348488652347470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a7f24b97b9dcb4cbf566144716f956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SPCaptureHandler
 --- !u!135 &7365710028398305443
 SphereCollider:
   m_ObjectHideFlags: 0
