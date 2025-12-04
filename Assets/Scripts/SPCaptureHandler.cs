@@ -26,34 +26,25 @@ public class SPCaptureHandler : MonoBehaviourPun
 
     public void Capture(Transform teleportPos)
     {
-        if (!photonView.IsMine)
-            return; // Only local player controls their teleport + movement disable
+        if (!photonView.IsMine) return;
 
         isCaptured = true;
         followTarget = teleportPos;
 
-        // Teleport immediately
-        controller.enabled = false;
-        transform.position = teleportPos.position;
-        controller.enabled = true;
+        // Disable controller before changing parent/position
+        if (controller != null) controller.enabled = false;
 
-        // Disable movement
-        if (movementScript != null)
-            movementScript.enabled = false;
+        // Parent the small player to the teleport target so it follows position & rotation exactly
+        transform.SetParent(followTarget, worldPositionStays: false);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+
+        // Disable movement script
+        if (movementScript != null) movementScript.enabled = false;
     }
 
     void Update()
     {
         if (!isCaptured) return;
-
-        // Disable CharacterController temporarily
-        controller.enabled = false;
-
-        // Follow the teleport target on all axes
-        Vector3 targetPos = followTarget.position;
-        transform.position = targetPos;
-
-        // Re-enable controller
-        controller.enabled = true;
     }
 }

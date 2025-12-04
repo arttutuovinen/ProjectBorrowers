@@ -25,12 +25,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649498093974023645}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.018168539, y: 0.38289404, z: 0.2554065, w: -0.8875977}
-  m_LocalPosition: {x: -0.00185, y: -0.05408, z: 0.03421}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.18, y: 3.15, z: 4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4382923893243761259}
+  m_Father: {fileID: 8607215866161607478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &645398547827413154
 MonoBehaviour:
@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 4682854195769893218}
   - component: {fileID: 2004338299970110419}
   - component: {fileID: 6741888492583637503}
+  - component: {fileID: 6845244120740865902}
   - component: {fileID: 3911635553399788942}
   m_Layer: 13
   m_Name: BigPlayerCamera
@@ -199,6 +200,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5159615410664788595}
   m_Enabled: 1
+--- !u!114 &6845244120740865902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5159615410664788595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d47565c5bd4b23429221576c6ab3413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPCameraFollower
+  smallPlayerTeleportPos: {fileID: 2000684582184130323}
 --- !u!114 &3911635553399788942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +310,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4682854195769893218}
+  - {fileID: 2000684582184130323}
   - {fileID: 8756398196509173247}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2096,11 +2111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8513675179256670395, guid: f3a236e31805cec49b7c50a1be63bdc6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2000684582184130323}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f3a236e31805cec49b7c50a1be63bdc6,
         type: 3}
@@ -2190,12 +2201,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!4 &4382923893243761259 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8513675179256670395, guid: f3a236e31805cec49b7c50a1be63bdc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 3821901898475455790}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7105566950540319984
 PrefabInstance:
   m_ObjectHideFlags: 0
