@@ -3,33 +3,26 @@ using Photon.Pun;
 
 public class BPCameraFollower : MonoBehaviourPun
 {
-    [SerializeField] private Transform smallPlayerTeleportPos;
-    private Vector3 initialLocalPos;
-    private Quaternion initialLocalRot;
+    [Header("Manual Offset (local to camera)")]
+    [SerializeField] private float offsetX = 0f;     // Left/Right
+    [SerializeField] private float offsetY = 0f;     // Height
+    [SerializeField] private float offsetZ = 0f;     // Forward/Backward
 
-    void Start()
-    {
-        if (smallPlayerTeleportPos != null)
-        {
-            // Store local position and rotation relative to camera
-            initialLocalPos = smallPlayerTeleportPos.localPosition;
-            initialLocalRot = smallPlayerTeleportPos.localRotation;
-        }
-    }
+    public Transform smallPlayerTeleportPos;
 
     void LateUpdate()
     {
-        if (!photonView.IsMine || smallPlayerTeleportPos == null) return;
+        if (!photonView.IsMine) return;
+        if (smallPlayerTeleportPos == null) return;
 
-        // Follow camera rotation only, preserve prefab world position
-        smallPlayerTeleportPos.rotation = transform.rotation * initialLocalRot;
+        // Calculate world offset from camera
+        Vector3 worldOffset =
+            transform.right * offsetX +
+            transform.up * offsetY +
+            transform.forward * offsetZ;
 
-        // Keep X and Z following camera direction, keep Y the original prefab Y
-        Vector3 forwardOffset = transform.forward * initialLocalPos.z + transform.right * initialLocalPos.x;
-        smallPlayerTeleportPos.position = new Vector3(
-            transform.position.x + forwardOffset.x,
-            initialLocalPos.y,   // preserve prefab Y
-            transform.position.z + forwardOffset.z
-        );
+        // Apply to teleport position
+        smallPlayerTeleportPos.position = transform.position + worldOffset;
+        smallPlayerTeleportPos.rotation = transform.rotation;
     }
 }
