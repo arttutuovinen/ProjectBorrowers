@@ -12,7 +12,6 @@ public class BPCameraFollower : MonoBehaviourPun
 
     void LateUpdate()
     {
-        if (!photonView.IsMine) return;
         if (smallPlayerTeleportPos == null) return;
 
         // Calculate world offset from camera

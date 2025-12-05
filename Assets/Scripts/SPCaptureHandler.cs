@@ -5,7 +5,6 @@ public class SPCaptureHandler : MonoBehaviourPun
 {
     private CharacterController controller;
     private SPMovementNET movementScript;
-
     private Transform followTarget; // where to stay after being captured
     private bool isCaptured = false;
 
@@ -18,33 +17,31 @@ public class SPCaptureHandler : MonoBehaviourPun
     [PunRPC]
     public void RPC_CapturePlayer(int teleportTargetID)
     {
+        // Only SP owner moves their own player
         if (!photonView.IsMine) return;
 
-        Transform target = PhotonView.Find(teleportTargetID).transform;
-        Capture(target);
-    }
+        PhotonView pv = PhotonView.Find(teleportTargetID);
+        if (pv == null)
+        {
+            Debug.LogError("Teleport target not found!");
+            return;
+        }
 
-    public void Capture(Transform teleportPos)
-    {
-        if (!photonView.IsMine) return;
-
+        followTarget = pv.transform;
         isCaptured = true;
-        followTarget = teleportPos;
 
-        // Disable controller before changing parent/position
-        if (controller != null) controller.enabled = false;
-
-        // Parent the small player to the teleport target so it follows position & rotation exactly
-        transform.SetParent(followTarget, worldPositionStays: false);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-
-        // Disable movement script
-        if (movementScript != null) movementScript.enabled = false;
+        if (movementScript != null)
+            movementScript.enabled = false;
     }
 
-    void Update()
+    private void Update()
     {
-        if (!isCaptured) return;
+        if (!isCaptured || followTarget == null || !photonView.IsMine) return;
+
+        // Follow teleport object manually (X, Y, Z)
+        controller.enabled = false;
+        transform.position = followTarget.position;
+        transform.rotation = followTarget.rotation;
+        controller.enabled = true;
     }
 }
