@@ -72,18 +72,18 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
-    InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 1
+    InterpolateOption: 4
+    InterpolateMoveTowardsSpeed: 15
+    InterpolateLerpSpeed: 15
     ExtrapolateOption: 0
     ExtrapolateSpeed: 1
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 1
+    InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 5
+    InterpolateLerpSpeed: 15
   m_ScaleModel:
     SynchronizeEnabled: 0
     InterpolateOption: 0
@@ -2163,6 +2163,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6215752428188760553}
+    - targetCorrespondingSourceObject: {fileID: -5661121819606500967, guid: f3a236e31805cec49b7c50a1be63bdc6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231868523969356419}
   m_SourcePrefab: {fileID: 100100000, guid: f3a236e31805cec49b7c50a1be63bdc6, type: 3}
 --- !u!1 &316861890617769143 stripped
 GameObject:
@@ -2205,6 +2209,28 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3463584386298441447, guid: f3a236e31805cec49b7c50a1be63bdc6, type: 3}
+--- !u!114 &1231868523969356419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316861890617769143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &3639092093730169541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f3a236e31805cec49b7c50a1be63bdc6,

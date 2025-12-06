@@ -38,7 +38,6 @@ public class SPCaptureHandler : MonoBehaviourPun
     {
         if (!isCaptured || followTarget == null || !photonView.IsMine) return;
 
-        // Follow teleport object manually (X, Y, Z)
         controller.enabled = false;
         transform.position = followTarget.position;
         transform.rotation = followTarget.rotation;
