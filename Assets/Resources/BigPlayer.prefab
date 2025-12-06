@@ -247,9 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d47565c5bd4b23429221576c6ab3413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BPCameraFollower
-  offsetX: 0
-  offsetY: -3
-  offsetZ: 6
+  offsetX: -0.02
+  offsetY: -2.3
+  offsetZ: 4.6
   smallPlayerTeleportPos: {fileID: 2000684582184130323}
 --- !u!114 &3911635553399788942
 MonoBehaviour:
@@ -637,6 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BPFpAnimationController
   fpAnimator: {fileID: 3096507146772830846}
+  catchCollider: {fileID: 316861890617769143}
   catchCooldown: 2
 --- !u!114 &8769194568731714403
 MonoBehaviour:
@@ -2188,6 +2189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BPCatchCollider
   teleportPV: {fileID: 645398547827413154}
   bpCamera: {fileID: 2004338299970110419}
+  bpAnimation: {fileID: 6481876273859450188}
 --- !u!64 &6215752428188760553
 MeshCollider:
   m_ObjectHideFlags: 0

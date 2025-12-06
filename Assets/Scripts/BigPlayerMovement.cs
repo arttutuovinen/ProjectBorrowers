@@ -55,16 +55,30 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
     {
         if (!photonView.IsMine)
         {
-            // Remote players: still lerp rotation
             RotateRoot();
             return;
         }
 
-        HandleCamera();    // camera pitch and yaw
-        RotateRoot();      // rotate root mesh to camera yaw
-        HandleMovement();  // move player relative to yaw
-        ApplyGravity();    // gravity
-        HandleCrouchInput();// crouch and camera offset
+        HandleCamera();
+        RotateRoot();
+        HandleMovement();
+        ApplyGravity();
+        HandleCrouchInput();
+        HandleDoorInteraction(); // <-- new
+    }
+    private void HandleDoorInteraction()
+    {
+        if (!Input.GetKeyDown(KeyCode.E)) return;
+
+        Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f, LayerMask.GetMask("Door")))
+        {
+            Door door = hit.collider.GetComponentInParent<Door>();
+            if (door != null)
+            {
+                door.ToggleDoor(); // will call RPC for all clients
+            }
+        }
     }
 
     private void HandleCamera()

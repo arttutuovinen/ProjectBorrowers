@@ -5,11 +5,16 @@ public class BPCatchCollider : MonoBehaviourPun
 {
     public PhotonView teleportPV; // Drag the SPTeleportLocation PhotonView here
     public Camera bpCamera;       // Assign BP's camera in Inspector
+    public BPFpAnimationController bpAnimation;
 
     private void OnTriggerEnter(Collider other)
     {
         if (!photonView.IsMine) return;         // Only BP owner triggers
         if (!other.CompareTag("SmallPlayer")) return;
+
+        // Play BP "Caught" animation
+        if (bpAnimation != null)
+            bpAnimation.PlayCaughtAnimation();
 
         PhotonView spPV = other.GetComponent<PhotonView>();
         if (spPV == null || teleportPV == null) return;

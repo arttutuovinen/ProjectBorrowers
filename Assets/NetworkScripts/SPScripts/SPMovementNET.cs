@@ -14,6 +14,7 @@ public class SPMovementNET : MonoBehaviour
 
     public Transform cameraTransform; // Reference to the main camera for directional movement
     public Transform cameraFollowTarget; // Target for the camera to follow (usually the player)
+    public Vector3 cameraOffset = new Vector3(0f, 2f, -5f); // X,Y,Z offset from follow target
 
     public float mouseSensitivity = 100f; // Mouse sensitivity for camera movement
     public float controllerSensitivity = 2f; // Controller sensitivity for camera movement
@@ -55,30 +56,15 @@ public class SPMovementNET : MonoBehaviour
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
 
-        // Find the scene camera if it’s not assigned
-        if (playerCamera == null)
-        {
-            // Option 1: Find a tagged camera
-            GameObject foundCamera = GameObject.FindGameObjectWithTag("MainCamera");
-
-            if (foundCamera != null)
-            {
-                playerCamera = foundCamera;
-            }
-            else
-            {
-                Debug.LogWarning("No MainCamera found in scene for player to attach!");
-            }
-        }
-
-        // Activate and link the camera (single-player / non-networked behaviour)
         if (playerCamera != null)
         {
             playerCamera.SetActive(true);
             cameraTransform = playerCamera.transform;
-            cameraFollowTarget = this.transform;
 
-            // Unparent the camera for smooth follow movement
+
+            // Apply initial offset
+            cameraTransform.position = cameraFollowTarget.position + cameraOffset;
+
             cameraTransform.SetParent(null);
         }
 
@@ -235,38 +221,23 @@ public class SPMovementNET : MonoBehaviour
         pitch -= mouseY;
         pitch = Mathf.Clamp(pitch, minVerticalAngle, maxVerticalAngle);
 
-        // Direction behind player
-        Vector3 desiredDir = Quaternion.Euler(pitch, yaw, 0f) * Vector3.back;
+        // Calculate desired camera position with offset
+        Vector3 rotatedOffset = Quaternion.Euler(pitch, yaw, 0f) * cameraOffset;
+        Vector3 desiredPos = cameraFollowTarget.position + rotatedOffset;
 
-        // === CAMERA DISTANCE ===
-        float maxDistance = distanceFromPlayer;
-        float minDistance = 0.5f;  // closest camera can get
-        float targetDistance = maxDistance;
-
-        // Raycast from player toward desired camera direction
+        // Collision check: snap camera if something is in between
         RaycastHit hit;
-        if (Physics.Raycast(cameraFollowTarget.position, desiredDir, out hit, maxDistance, cameraCollisionMask))
+        if (Physics.Raycast(cameraFollowTarget.position, rotatedOffset.normalized, out hit, rotatedOffset.magnitude, cameraCollisionMask))
         {
-            // If something is in between, move camera closer
-            targetDistance = Mathf.Clamp(hit.distance - 0.3f, minDistance, maxDistance);
+            desiredPos = hit.point;
         }
 
-        // === DESIRED POSITION ===
-        Vector3 desiredPos = cameraFollowTarget.position + desiredDir * targetDistance;
+        // Snap camera directly
+        cameraTransform.position = desiredPos;
 
-        // === SMOOTH MOVEMENT ===
-        // Lerp position (smooth but responsive)
-        float moveSpeed = 10f; // higher = snappier
-        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPos, Time.deltaTime * moveSpeed);
-
-        // Always look at player (chest height)
-        cameraTransform.LookAt(cameraFollowTarget.position + Vector3.up * 1.5f);
+        // Always look at the target
+        cameraTransform.LookAt(cameraFollowTarget.position);
     }
-
-
-
-
-    // Detect when the player is near a ladder (use triggers or raycast)
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ladder"))
@@ -274,13 +245,11 @@ public class SPMovementNET : MonoBehaviour
             nearLadder = true;
             ladder = other;
 
-            // Enable the interact text when the player enters the trigger
             if (ladderInteractText != null)
             {
-                ladderInteractText.gameObject.SetActive(true); // Activate text when the player enters the trigger
+                ladderInteractText.gameObject.SetActive(true); // Show text when near ladder
             }
         }
-        
     }
     private void OnTriggerExit(Collider other)
     {

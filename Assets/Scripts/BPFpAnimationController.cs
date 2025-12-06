@@ -1,15 +1,21 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class BPFpAnimationController : MonoBehaviourPun
 {
     [Header("References")]
     public Animator fpAnimator;   // Animator on BP_fpModel
+    public GameObject catchCollider;
 
     [Header("Settings")]
     public float catchCooldown = 1.5f;
-
     private bool isCoolingDown = false;
+
+    public void Start()
+    {
+        catchCollider.SetActive(false);
+        Debug.Log("CatchCOllider is deactivated");
+    }
 
     void Update()
     {
@@ -32,16 +38,27 @@ public class BPFpAnimationController : MonoBehaviourPun
     {
         isCoolingDown = true;
 
-        // Trigger the Catch animation
+        // Enable collider
+        catchCollider.SetActive(true);
+        Debug.Log("catchCollider is Active");
+        // Play animation
         fpAnimator.SetBool("IsCatching", true);
 
-        // Allow the Animator to manage the animation via transitions
-        yield return null;
+        // Wait for the animation clip length
+        float clipLength = fpAnimator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(clipLength);
+
+        // Animation done → stop animation + disable collider
         fpAnimator.SetBool("IsCatching", false);
-
-        // Start cooldown
+        catchCollider.SetActive(false);
+        Debug.Log("catchCollider is Deactivated");
+        // Cooldown
         yield return new WaitForSeconds(catchCooldown);
-
         isCoolingDown = false;
     }
+    public void PlayCaughtAnimation()
+    {
+        fpAnimator.SetBool("IsCaught", true);
+    }
+
 }
