@@ -7,6 +7,7 @@ public class BPCatchCollider : MonoBehaviourPun
     public Camera bpCamera;       // Assign BP's camera in Inspector
     public BPFpAnimationController bpAnimation;
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (!photonView.IsMine) return;         // Only BP owner triggers
