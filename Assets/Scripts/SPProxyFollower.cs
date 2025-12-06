@@ -3,17 +3,22 @@ using UnityEngine;
 public class SPProxyFollower : MonoBehaviour
 {
     public Transform teleportTarget;
-    public float yRotationOffset = 180f; // offset to face BP
+    public Camera bpCamera;
 
     void LateUpdate()
     {
         if (teleportTarget == null) return;
 
+        // Follow teleport position
         transform.position = teleportTarget.position;
 
-        // Apply teleport rotation + Y offset
-        Vector3 euler = teleportTarget.rotation.eulerAngles;
-        euler.y += yRotationOffset;
-        transform.rotation = Quaternion.Euler(euler);
+        // Look at BP camera
+        if (bpCamera != null)
+        {
+            Vector3 lookDir = bpCamera.transform.position - transform.position;
+            lookDir.y = 0f; // optional: keep proxy upright
+            if (lookDir.sqrMagnitude > 0.001f)
+                transform.rotation = Quaternion.LookRotation(lookDir);
+        }
     }
 }

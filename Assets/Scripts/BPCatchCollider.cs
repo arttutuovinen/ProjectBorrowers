@@ -4,6 +4,7 @@ using Photon.Pun;
 public class BPCatchCollider : MonoBehaviourPun
 {
     public PhotonView teleportPV; // Drag the SPTeleportLocation PhotonView here
+    public Camera bpCamera;       // Assign BP's camera in Inspector
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,10 +36,13 @@ public class BPCatchCollider : MonoBehaviourPun
         GameObject proxy = Instantiate(realSP);
         proxy.name = "SP_Proxy";
 
-        // Remove any PhotonView from the proxy (local object)
+        // Disable PhotonView on proxy instead of removing it
         PhotonView proxyPV = proxy.GetComponent<PhotonView>();
         if (proxyPV != null)
-            Destroy(proxyPV);
+        {
+            proxyPV.enabled = false;          // disables networking
+            proxyPV.ObservedComponents.Clear(); // prevents any synced scripts
+        }
 
         // Ensure all Renderers are visible on the proxy
         Renderer[] proxyRenderers = proxy.GetComponentsInChildren<Renderer>();
@@ -48,5 +52,7 @@ public class BPCatchCollider : MonoBehaviourPun
         // Attach follower script to proxy
         SPProxyFollower follower = proxy.AddComponent<SPProxyFollower>();
         follower.teleportTarget = teleportPV.transform;
+        follower.bpCamera = bpCamera;
     }
+
 }

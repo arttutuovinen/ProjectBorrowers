@@ -108,27 +108,21 @@ public class SPMovementNET : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
-    {   
-        ControlCamera();
-    }   
-    // Method that allows enabling movement from other scripts
-    public void EnableMovement()
-    {
-        canMove = true;
-        Debug.Log("Movement enabled.");
-    }
-
     // Method that allows disabling movement from other scripts
     public void DisableMovement()
     {
         canMove = false;
         Debug.Log("Movement disabled.");
     }
-
+    // Method that allows enabling movement from other scripts
+    public void EnableMovement()
+    {
+        canMove = true;
+        Debug.Log("Movement enabled.");
+    }
     public void Move()
     {
-        if (canMove)
+        if (!canMove) return;
         {
             // Check if the player is on the ground
             isGrounded = controller.isGrounded;
@@ -185,12 +179,20 @@ public class SPMovementNET : MonoBehaviour
         
     }
 
+    private void LateUpdate()
+    {
+        ControlCamera();
+    }
     private void ApplyGravity()
     {
-        // Apply gravity over time
+        // Skip gravity if captured
+        SPCaptureHandler capture = GetComponent<SPCaptureHandler>();
+        if (capture != null && capture.IsCaptured())
+            return;
+        //Apply gravity over time
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        
+
     }
 
     private void ClimbLadder()
