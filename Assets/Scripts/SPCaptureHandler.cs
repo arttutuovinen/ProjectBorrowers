@@ -15,18 +15,28 @@ public class SPCaptureHandler : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void RPC_CapturePlayer(int teleportTargetID)
+    public void RPC_CapturePlayer(int proxyTeleportID, int clientTeleportID)
     {
         if (!photonView.IsMine) return;
 
-        PhotonView pv = PhotonView.Find(teleportTargetID);
-        if (pv == null) return;
+        // Hide SmallPlayerMesh locally
+        Transform mesh = transform.Find("SmallPlayerMesh");
+        if (mesh != null)
+            mesh.gameObject.SetActive(false);
 
-        followTarget = pv.transform;
+        // Find SPClientTeleportLocation to follow
+        PhotonView clientPV = PhotonView.Find(clientTeleportID);
+        if (clientPV == null) return;
+
+        followTarget = clientPV.transform;
         isCaptured = true;
 
         if (movementScript != null)
             movementScript.DisableMovement();
+
+        BPCatchController bpController = FindObjectOfType<BPCatchController>();
+        if (bpController != null)
+            bpController.PlayCaughtReaction();
     }
 
     private void Update()

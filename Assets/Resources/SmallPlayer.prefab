@@ -5883,6 +5883,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6542367647312899303, guid: 015c18d51ff513f4fa915f840ae9ce95,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6542367647312899303, guid: 015c18d51ff513f4fa915f840ae9ce95,
+        type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1b04a515b65973a4f82cbf1ab8e96e40, type: 2}
@@ -5894,7 +5899,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 015c18d51ff513f4fa915f840ae9ce95,
         type: 3}
       propertyPath: m_Name
-      value: SmallPlayer (1)
+      value: SmallPlayerMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 015c18d51ff513f4fa915f840ae9ce95,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

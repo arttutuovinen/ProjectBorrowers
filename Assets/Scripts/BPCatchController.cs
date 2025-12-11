@@ -141,4 +141,23 @@ public class BPCatchController : MonoBehaviour, IPunObservable
         else
             syncedArmVert = (float)stream.ReceiveNext();
     }
+    
+    public void PlayCaughtReaction()
+    {
+        if (childAnimator == null) return;
+
+        int armLayer = childAnimator.GetLayerIndex(armVerticalLayerName);
+        int catchLayer = childAnimator.GetLayerIndex(catchLayerName);
+        int caughtLayer = childAnimator.GetLayerIndex("CaughtAnim");
+
+        // Disable these two
+        childAnimator.SetLayerWeight(armLayer, 0f);
+        childAnimator.SetLayerWeight(catchLayer, 0f);
+
+        // Enable caught layer
+        childAnimator.SetLayerWeight(caughtLayer, 1f);
+
+        // Trigger caught anim
+        childAnimator.SetBool("IsCaught", true);
+    }
 }
