@@ -7,6 +7,7 @@ public class BPCatchCollider : MonoBehaviourPun
     public PhotonView spClientTeleportPV; //SPClientTeleportLocation PhotonView
     public Camera bpCamera;       // Assign BP's camera in Inspector
     public BPFpAnimationController bpAnimation;
+    public BPCatchController bpSPClientanimation;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,50 +16,31 @@ public class BPCatchCollider : MonoBehaviourPun
 
         if (bpAnimation != null)
             bpAnimation.PlayCaughtAnimation();
+        if (bpSPClientanimation != null)
+            bpSPClientanimation.PlayCaughtReaction();
 
         PhotonView spPV = other.GetComponent<PhotonView>();
         if (spPV == null || teleportPV == null || spClientTeleportPV == null) return;
 
         Debug.Log("BP caught SP!");
 
-        // Tell SP owner they are captured → send teleport locations
+        // Tell SP client it is captured
         spPV.RPC("RPC_CapturePlayer", RpcTarget.All,
-            teleportPV.ViewID,                // proxy follows this
-            spClientTeleportPV.ViewID);       // SP client follows this
+            teleportPV.ViewID,       // BP proxy target
+            spClientTeleportPV.ViewID); // SP proxy target
 
-        // Spawn proxy for BP client and SP client locally
-        SpawnProxy(spPV);
+        // Spawn BP client proxy
+        SpawnBPProxy();
     }
 
-    private void SpawnProxy(PhotonView spPV)
+    private void SpawnBPProxy()
     {
-        GameObject realSP = spPV.gameObject;
+        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
+        if (proxyPrefab == null) return;
 
-        // Hide the real SP model ONLY on BP and SP clients
-        Renderer[] renderers = realSP.GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in renderers)
-            r.enabled = false;
+        GameObject proxy = Instantiate(proxyPrefab, teleportPV.transform.position, teleportPV.transform.rotation);
+        proxy.name = "SP_Proxy_BP";
 
-        // Hide SmallPlayerMesh if it exists
-        Transform mesh = realSP.transform.Find("SmallPlayerMesh");
-        if (mesh != null)
-            mesh.gameObject.SetActive(false);
-
-        // Spawn a local-only clone (proxy)
-        GameObject proxy = Instantiate(realSP);
-        proxy.name = "SP_Proxy";
-
-        PhotonView proxyPV = proxy.GetComponent<PhotonView>();
-        if (proxyPV != null)
-        {
-            proxyPV.enabled = false;
-            proxyPV.ObservedComponents.Clear();
-        }
-
-        foreach (Renderer r in proxy.GetComponentsInChildren<Renderer>())
-            r.enabled = true;
-
-        // Attach follower script → follows SmallPlayerTeleportLocation
         SPProxyFollower follower = proxy.AddComponent<SPProxyFollower>();
         follower.teleportTarget = teleportPV.transform;
         follower.bpCamera = bpCamera;

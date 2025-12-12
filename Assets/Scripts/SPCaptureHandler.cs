@@ -15,17 +15,16 @@ public class SPCaptureHandler : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void RPC_CapturePlayer(int proxyTeleportID, int clientTeleportID)
+    public void RPC_CapturePlayer(int bpProxyTeleportID, int spProxyTeleportID)
     {
         if (!photonView.IsMine) return;
 
-        // Hide SmallPlayerMesh locally
+        // Hide real SP mesh
         Transform mesh = transform.Find("SmallPlayerMesh");
-        if (mesh != null)
-            mesh.gameObject.SetActive(false);
+        if (mesh != null) mesh.gameObject.SetActive(false);
 
-        // Find SPClientTeleportLocation to follow
-        PhotonView clientPV = PhotonView.Find(clientTeleportID);
+        // SP proxy target
+        PhotonView clientPV = PhotonView.Find(spProxyTeleportID);
         if (clientPV == null) return;
 
         followTarget = clientPV.transform;
@@ -34,9 +33,21 @@ public class SPCaptureHandler : MonoBehaviourPun
         if (movementScript != null)
             movementScript.DisableMovement();
 
-        BPCatchController bpController = FindObjectOfType<BPCatchController>();
-        if (bpController != null)
-            bpController.PlayCaughtReaction();
+        // Spawn SP client proxy
+        SpawnSPProxy(followTarget);
+    }
+
+    private void SpawnSPProxy(Transform target)
+    {
+        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
+        if (proxyPrefab == null) return;
+
+        GameObject proxy = Instantiate(proxyPrefab, target.position, target.rotation);
+        proxy.name = "SP_Proxy_SP";
+
+        SPProxyFollower follower = proxy.AddComponent<SPProxyFollower>();
+        follower.teleportTarget = target;
+        follower.bpCamera = null;
     }
 
     private void Update()
@@ -44,7 +55,11 @@ public class SPCaptureHandler : MonoBehaviourPun
         if (!isCaptured || followTarget == null || !photonView.IsMine) return;
 
         controller.enabled = false;
-        transform.position = Vector3.Lerp(transform.position, followTarget.position, Time.deltaTime * 20f);
+        transform.position = Vector3.Lerp(
+            transform.position,
+            followTarget.position,
+            Time.deltaTime * 20f
+        );
         controller.enabled = true;
     }
 
