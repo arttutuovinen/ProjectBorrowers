@@ -7,35 +7,39 @@ public class BPCatchCollider : MonoBehaviourPun
     public PhotonView spClientTeleportPV; //SPClientTeleportLocation PhotonView
     public Camera bpCamera;       // Assign BP's camera in Inspector
     public BPFpAnimationController bpAnimation;
-    public BPCatchController bpSPClientanimation;
 
     private void OnTriggerEnter(Collider other)
     {
         if (!photonView.IsMine) return;
         if (!other.CompareTag("SmallPlayer")) return;
 
-        if (bpAnimation != null)
-            bpAnimation.PlayCaughtAnimation();
-        if (bpSPClientanimation != null)
-            bpSPClientanimation.PlayCaughtReaction();
-
         PhotonView spPV = other.GetComponent<PhotonView>();
         if (spPV == null || teleportPV == null || spClientTeleportPV == null) return;
 
         Debug.Log("BP caught SP!");
 
-        // Tell SP client it is captured
+        // Make SP invisible on both clients
+        spPV.RPC("RPC_HideSP", RpcTarget.All);
+
+        // Tell SP client it is captured and should spawn its own proxy
         spPV.RPC("RPC_CapturePlayer", RpcTarget.All,
-            teleportPV.ViewID,       // BP proxy target
-            spClientTeleportPV.ViewID); // SP proxy target
+            teleportPV.ViewID,
+            spClientTeleportPV.ViewID);
 
         // Spawn BP client proxy
         SpawnBPProxy();
+
+        // Play BP caught animation locally
+        if (bpAnimation != null)
+            bpAnimation.PlayCaughtAnimation();
+
+        // Trigger caught animation on SP client
+        spPV.RPC("RPC_PlayCaughtReaction", RpcTarget.Others);
     }
 
     private void SpawnBPProxy()
     {
-        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
+        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayer Proxy");
         if (proxyPrefab == null) return;
 
         GameObject proxy = Instantiate(proxyPrefab, teleportPV.transform.position, teleportPV.transform.rotation);

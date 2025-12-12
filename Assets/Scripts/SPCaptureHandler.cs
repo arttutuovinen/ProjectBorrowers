@@ -19,15 +19,11 @@ public class SPCaptureHandler : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;
 
-        // Hide real SP mesh
-        Transform mesh = transform.Find("SmallPlayerMesh");
-        if (mesh != null) mesh.gameObject.SetActive(false);
-
         // SP proxy target
-        PhotonView clientPV = PhotonView.Find(spProxyTeleportID);
-        if (clientPV == null) return;
+        PhotonView spPV = PhotonView.Find(spProxyTeleportID);
+        if (spPV == null) return;
 
-        followTarget = clientPV.transform;
+        followTarget = spPV.transform;
         isCaptured = true;
 
         if (movementScript != null)
@@ -39,7 +35,7 @@ public class SPCaptureHandler : MonoBehaviourPun
 
     private void SpawnSPProxy(Transform target)
     {
-        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
+        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayer Proxy");
         if (proxyPrefab == null) return;
 
         GameObject proxy = Instantiate(proxyPrefab, target.position, target.rotation);
@@ -61,6 +57,24 @@ public class SPCaptureHandler : MonoBehaviourPun
             Time.deltaTime * 20f
         );
         controller.enabled = true;
+    }
+
+    [PunRPC]
+    public void RPC_HideSP()
+    {
+        // Disable all renderers to make SP invisible but keep GameObject active for camera
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers)
+            r.enabled = false;
+    }
+
+    [PunRPC]
+    public void RPC_PlayCaughtReaction()
+    {
+        // Play BP caught animation on SP client
+        BPCatchController bpController = FindObjectOfType<BPCatchController>();
+        if (bpController != null)
+            bpController.PlayCaughtReaction();
     }
 
     public bool IsCaptured()
