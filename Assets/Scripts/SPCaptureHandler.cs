@@ -35,7 +35,7 @@ public class SPCaptureHandler : MonoBehaviourPun
 
     private void SpawnSPProxy(Transform target)
     {
-        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayer Proxy");
+        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
         if (proxyPrefab == null) return;
 
         GameObject proxy = Instantiate(proxyPrefab, target.position, target.rotation);

@@ -39,7 +39,7 @@ public class BPCatchCollider : MonoBehaviourPun
 
     private void SpawnBPProxy()
     {
-        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayer Proxy");
+        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
         if (proxyPrefab == null) return;
 
         GameObject proxy = Instantiate(proxyPrefab, teleportPV.transform.position, teleportPV.transform.rotation);

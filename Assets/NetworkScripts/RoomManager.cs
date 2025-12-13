@@ -70,6 +70,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
+        Debug.Log(
+    $"Joined room '{PhotonNetwork.CurrentRoom.Name}' | " +
+    $"Players: {PhotonNetwork.PlayerList.Length} | " +
+    $"Region: {PhotonNetwork.CloudRegion} | " +
+    $"GameVersion: {PhotonNetwork.GameVersion}"
+);
         string prefabName = GetPrefabNameForIndex(selectedCharacterIndex);
         Debug.Log("Joined Room. Instantiating player prefab: " + prefabName);
 

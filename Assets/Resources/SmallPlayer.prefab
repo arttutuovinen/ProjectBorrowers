@@ -5076,9 +5076,8 @@ GameObject:
   - component: {fileID: 8291499341622275778}
   - component: {fileID: 3033431496017041178}
   - component: {fileID: 8076860358831575956}
-  - component: {fileID: 3157586183244638446}
+  - component: {fileID: 3183353331106806548}
   - component: {fileID: 7206963240526797585}
-  - component: {fileID: 8978738609491274374}
   m_Layer: 7
   m_Name: SmallPlayer
   m_TagString: SmallPlayer
@@ -5463,7 +5462,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &3157586183244638446
+--- !u!114 &3183353331106806548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5487,18 +5486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PhotonVoice.PUN::Photon.Voice.PUN.PhotonVoiceView
---- !u!114 &8978738609491274374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3150109236876745808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 157dfd43f08f7dc4b92ba459e17b1171, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SPPersists
 --- !u!1 &4756874142035087774
 GameObject:
   m_ObjectHideFlags: 0
