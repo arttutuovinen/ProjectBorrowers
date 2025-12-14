@@ -9,16 +9,15 @@ public class SPProxyFollower : MonoBehaviour
     {
         if (teleportTarget == null) return;
 
-        // Follow teleport position
         transform.position = teleportTarget.position;
 
-        // Look at BP camera
         if (bpCamera != null)
         {
             Vector3 lookDir = bpCamera.transform.position - transform.position;
-            lookDir.y = 0f; // optional: keep proxy upright
+            lookDir.y = 0f;
+
             if (lookDir.sqrMagnitude > 0.001f)
-                transform.rotation = Quaternion.LookRotation(lookDir);
+                transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
         }
     }
 }

@@ -10,7 +10,7 @@ public class BPCatchCollider : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!photonView.IsMine) return;
+        if (!photonView.IsMine) return;          // Only BP owner
         if (!other.CompareTag("SmallPlayer")) return;
 
         PhotonView spPV = other.GetComponent<PhotonView>();
@@ -18,23 +18,26 @@ public class BPCatchCollider : MonoBehaviourPun
 
         Debug.Log("BP caught SP!");
 
-        // Make SP invisible on both clients
+        // Hide SP mesh on all clients
         spPV.RPC("RPC_HideSP", RpcTarget.All);
 
-        // Tell SP client it is captured and should spawn its own proxy
-        spPV.RPC("RPC_CapturePlayer", RpcTarget.All,
+        // Tell SP client ONLY to spawn its SP proxy locally
+        spPV.RPC(
+            "RPC_CapturePlayer",
+            spPV.Owner,                  // SP client only
             teleportPV.ViewID,
-            spClientTeleportPV.ViewID);
+            spClientTeleportPV.ViewID
+        );
 
-        // Spawn BP client proxy
+        // Spawn BP client proxy locally (BP client only)
         SpawnBPProxy();
 
         // Play BP caught animation locally
         if (bpAnimation != null)
             bpAnimation.PlayCaughtAnimation();
 
-        // Trigger caught animation on SP client
-        spPV.RPC("RPC_PlayCaughtReaction", RpcTarget.Others);
+        // Trigger SP caught animation on SP client
+        spPV.RPC("RPC_PlayCaughtReaction", spPV.Owner);
     }
 
     private void SpawnBPProxy()

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class SPCaptureHandler : MonoBehaviourPun
@@ -7,6 +7,7 @@ public class SPCaptureHandler : MonoBehaviourPun
     private SPMovementNET movementScript;
     private Transform followTarget;
     private bool isCaptured = false;
+    public Transform bpPrefabTransform;
 
     void Awake()
     {
@@ -17,19 +18,19 @@ public class SPCaptureHandler : MonoBehaviourPun
     [PunRPC]
     public void RPC_CapturePlayer(int bpProxyTeleportID, int spProxyTeleportID)
     {
-        if (!photonView.IsMine) return;
+        if (!photonView.IsMine) return; // Only SP client runs this
 
-        // SP proxy target
-        PhotonView spPV = PhotonView.Find(spProxyTeleportID);
-        if (spPV == null) return;
+        // SP client teleport target
+        PhotonView spTeleportPV = PhotonView.Find(spProxyTeleportID);
+        if (spTeleportPV == null) return;
 
-        followTarget = spPV.transform;
+        followTarget = spTeleportPV.transform;
         isCaptured = true;
 
         if (movementScript != null)
             movementScript.DisableMovement();
 
-        // Spawn SP client proxy
+        // Spawn SP client proxy locally (SP client only)
         SpawnSPProxy(followTarget);
     }
 
@@ -38,12 +39,13 @@ public class SPCaptureHandler : MonoBehaviourPun
         GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
         if (proxyPrefab == null) return;
 
-        GameObject proxy = Instantiate(proxyPrefab, target.position, target.rotation);
+        GameObject proxy = Instantiate(proxyPrefab, target.position, Quaternion.identity);
         proxy.name = "SP_Proxy_SP";
 
-        SPProxyFollower follower = proxy.AddComponent<SPProxyFollower>();
+        SPClientProxyFollower follower = proxy.AddComponent<SPClientProxyFollower>();
         follower.teleportTarget = target;
-        follower.bpCamera = null;
+        follower.bpTransform = bpPrefabTransform; // SP proxy looks at BP prefab
+        follower.yRotationOffset = 0f;
     }
 
     private void Update()
@@ -51,27 +53,20 @@ public class SPCaptureHandler : MonoBehaviourPun
         if (!isCaptured || followTarget == null || !photonView.IsMine) return;
 
         controller.enabled = false;
-        transform.position = Vector3.Lerp(
-            transform.position,
-            followTarget.position,
-            Time.deltaTime * 20f
-        );
+        transform.position = Vector3.Lerp(transform.position, followTarget.position, Time.deltaTime * 20f);
         controller.enabled = true;
     }
 
     [PunRPC]
     public void RPC_HideSP()
     {
-        // Disable all renderers to make SP invisible but keep GameObject active for camera
-        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in renderers)
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
             r.enabled = false;
     }
 
     [PunRPC]
     public void RPC_PlayCaughtReaction()
     {
-        // Play BP caught animation on SP client
         BPCatchController bpController = FindObjectOfType<BPCatchController>();
         if (bpController != null)
             bpController.PlayCaughtReaction();
