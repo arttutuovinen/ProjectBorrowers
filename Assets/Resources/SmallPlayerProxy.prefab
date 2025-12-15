@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8688724790149147744}
   m_Layer: 7
   m_Name: SmallPlayerProxy
-  m_TagString: SmallPlayer
+  m_TagString: SPProxy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 580512548462051685}
   m_Layer: 7
   m_Name: Speaker
-  m_TagString: Untagged
+  m_TagString: SPProxy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -278,6 +278,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 015c18d51ff513f4fa915f840ae9ce95,
+        type: 3}
+      propertyPath: m_TagString
+      value: SPProxy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

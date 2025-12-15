@@ -8,9 +8,13 @@ public class BPCatchCollider : MonoBehaviourPun
     public Camera bpCamera;       // Assign BP's camera in Inspector
     public BPFpAnimationController bpAnimation;
 
+    // Store reference to currently captured SP
+    [HideInInspector] public SPCaptureHandler capturedSP;
+    [HideInInspector] public PhotonView capturedSPPhotonView;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!photonView.IsMine) return;          // Only BP owner
+        if (!photonView.IsMine) return;
         if (!other.CompareTag("SmallPlayer")) return;
 
         PhotonView spPV = other.GetComponent<PhotonView>();
@@ -18,13 +22,17 @@ public class BPCatchCollider : MonoBehaviourPun
 
         Debug.Log("BP caught SP!");
 
+        // Store references for BPPrisonRaycaster
+        capturedSP = spPV.GetComponent<SPCaptureHandler>();
+        capturedSPPhotonView = spPV;
+
         // Hide SP mesh on all clients
         spPV.RPC("RPC_HideSP", RpcTarget.All);
 
-        // Tell SP client ONLY to spawn its SP proxy locally
+        // Tell SP client to spawn its SP proxy locally
         spPV.RPC(
             "RPC_CapturePlayer",
-            spPV.Owner,                  // SP client only
+            spPV.Owner,
             teleportPV.ViewID,
             spClientTeleportPV.ViewID
         );
@@ -46,6 +54,7 @@ public class BPCatchCollider : MonoBehaviourPun
         if (proxyPrefab == null) return;
 
         GameObject proxy = Instantiate(proxyPrefab, teleportPV.transform.position, teleportPV.transform.rotation);
+        proxy.tag = "SPProxy";
         proxy.name = "SP_Proxy_BP";
 
         SPProxyFollower follower = proxy.AddComponent<SPProxyFollower>();

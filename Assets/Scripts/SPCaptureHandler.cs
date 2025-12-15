@@ -27,25 +27,24 @@ public class SPCaptureHandler : MonoBehaviourPun
         followTarget = spTeleportPV.transform;
         isCaptured = true;
 
-        if (movementScript != null)
-            movementScript.DisableMovement();
+        movementScript.DisableMovement();
 
-        // Spawn SP client proxy locally (SP client only)
+        // Spawn SP client proxy locally
         SpawnSPProxy(followTarget);
     }
 
     private void SpawnSPProxy(Transform target)
     {
-        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
-        if (proxyPrefab == null) return;
+        GameObject prefab = Resources.Load<GameObject>("SmallPlayerProxy");
+        if (!prefab) return;
 
-        GameObject proxy = Instantiate(proxyPrefab, target.position, Quaternion.identity);
+        GameObject proxy = Instantiate(prefab, target.position, Quaternion.identity);
+        proxy.tag = "SPProxy";
         proxy.name = "SP_Proxy_SP";
 
         SPClientProxyFollower follower = proxy.AddComponent<SPClientProxyFollower>();
         follower.teleportTarget = target;
-        follower.bpTransform = bpPrefabTransform; // SP proxy looks at BP prefab
-        follower.yRotationOffset = 0f;
+        follower.bpTransform = bpPrefabTransform; // Faces BP prefab
     }
 
     private void Update()
@@ -53,8 +52,38 @@ public class SPCaptureHandler : MonoBehaviourPun
         if (!isCaptured || followTarget == null || !photonView.IsMine) return;
 
         controller.enabled = false;
-        transform.position = Vector3.Lerp(transform.position, followTarget.position, Time.deltaTime * 20f);
+        transform.position = followTarget.position;
         controller.enabled = true;
+    }
+
+    [PunRPC]
+    public void RPC_TeleportToJail(Vector3 jailPos)
+    {
+        if (!photonView.IsMine) return;
+
+        isCaptured = false;
+        followTarget = null;
+
+        controller.enabled = false;
+        transform.position = jailPos;
+        controller.enabled = true;
+
+        // Re-enable movement
+        movementScript.EnableMovement();
+
+        // Re-enable renderers
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+            r.enabled = true;
+
+        // Destroy all SP proxies
+        DestroyAllSPProxies();
+    }
+
+    private void DestroyAllSPProxies()
+    {
+        GameObject[] proxies = GameObject.FindGameObjectsWithTag("SPProxy");
+        foreach (GameObject p in proxies)
+            Destroy(p);
     }
 
     [PunRPC]

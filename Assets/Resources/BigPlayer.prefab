@@ -215,7 +215,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 507383
+    m_Bits: 1031671
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: 4387901889807618486}
   - component: {fileID: 6481876273859450188}
   - component: {fileID: 8769194568731714403}
+  - component: {fileID: 8039534777675431030}
   - component: {fileID: 1306958205652911868}
   - component: {fileID: 7549007834672380184}
   - component: {fileID: 3271016351445557058}
@@ -326,6 +327,7 @@ GameObject:
   - component: {fileID: 6597793729881182503}
   - component: {fileID: 3447934495327288878}
   - component: {fileID: 5307150729043974029}
+  - component: {fileID: 5096710206657678708}
   m_Layer: 0
   m_Name: BigPlayer
   m_TagString: BigPlayer
@@ -639,6 +641,23 @@ MonoBehaviour:
   catchLayerName: CatchAnim
   armVerticalLayerName: ArmVertical
   catchCooldown: 2
+--- !u!114 &8039534777675431030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8307f3d4d41e0a4384d2bdb231ae94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPPrisonRaycaster
+  rayDistance: 6
+  prisonLayer:
+    serializedVersion: 2
+    m_Bits: 524288
+  bpCameraTransform: {fileID: 4682854195769893218}
 --- !u!114 &1306958205652911868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,6 +807,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481b9c650e90fcb49a22774c67d73e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BPPlayerInit
+--- !u!114 &5096710206657678708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonTransformView
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &5827039078137388844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,6 +2209,8 @@ MonoBehaviour:
   spClientTeleportPV: {fileID: 6553973430446928474}
   bpCamera: {fileID: 2004338299970110419}
   bpAnimation: {fileID: 6481876273859450188}
+  capturedSP: {fileID: 0}
+  capturedSPPhotonView: {fileID: 0}
 --- !u!64 &6215752428188760553
 MeshCollider:
   m_ObjectHideFlags: 0
