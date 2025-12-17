@@ -7,17 +7,14 @@ public class BPPrisonRaycaster : MonoBehaviour
     public LayerMask prisonLayer; // assign Prison layer in Inspector
     private BPCatchCollider bpCatchCollider;
     public Transform bpCameraTransform;
-    private PhotonView bpPhotonView; // local BP PhotonView
 
     private void Awake()
     {
-        bpCatchCollider = GetComponent<BPCatchCollider>();
-        bpPhotonView = GetComponent<PhotonView>(); // root’s PhotonView
+        bpCatchCollider = GetComponentInChildren<BPCatchCollider>();
     }
 
     private void Update()
     {
-        if (bpPhotonView == null || !bpPhotonView.IsMine) return;
         if (bpCameraTransform == null)
         {
             Debug.LogWarning("BP Camera Transform not assigned!");

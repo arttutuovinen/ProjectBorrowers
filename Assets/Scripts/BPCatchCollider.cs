@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 
-public class BPCatchCollider : MonoBehaviourPun
+public class BPCatchCollider : MonoBehaviour
 {
     public PhotonView teleportPV; // Drag the SPTeleportLocation PhotonView here
     public PhotonView spClientTeleportPV; //SPClientTeleportLocation PhotonView
@@ -14,7 +14,7 @@ public class BPCatchCollider : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!photonView.IsMine) return;
+        
         if (!other.CompareTag("SmallPlayer")) return;
 
         PhotonView spPV = other.GetComponent<PhotonView>();
