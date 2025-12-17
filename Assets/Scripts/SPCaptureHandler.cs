@@ -92,6 +92,12 @@ public class SPCaptureHandler : MonoBehaviourPun
         foreach (Renderer r in GetComponentsInChildren<Renderer>())
             r.enabled = false;
     }
+    [PunRPC]
+    public void RPC_ShowSP()
+    {
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+            r.enabled = true;
+    }
 
     [PunRPC]
     public void RPC_PlayCaughtReaction()

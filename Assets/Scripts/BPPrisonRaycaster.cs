@@ -20,13 +20,13 @@ public class BPPrisonRaycaster : MonoBehaviour
             Debug.LogWarning("BP Camera Transform not assigned!");
             return;
         }
-
+        Debug.Log("UPDATE RUNNING");
         if (!Input.GetKeyDown(KeyCode.E)) return;
-        if (bpCatchCollider == null || bpCatchCollider.capturedSP == null) return;
+        if (bpCatchCollider == null) return;
 
         SPCaptureHandler sp = bpCatchCollider.capturedSP;
         PhotonView spPV = bpCatchCollider.capturedSPPhotonView;
-        if (!sp.IsCaptured() || spPV == null) return;
+        if (spPV == null) return;
 
         Ray ray = new Ray(bpCameraTransform.position, bpCameraTransform.forward);
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green, 1f);
@@ -53,5 +53,9 @@ public class BPPrisonRaycaster : MonoBehaviour
         if (jailTeleport == null) return;
 
         spPV.RPC("RPC_TeleportToJail", spPV.Owner, jailTeleport.position);
+        // Make SP visible again for everyone (including BP)
+        spPV.RPC("RPC_ShowSP", RpcTarget.All);
+        // Clean up BP side immediately
+        bpCatchCollider.ReleaseCapturedSP();
     }
 }

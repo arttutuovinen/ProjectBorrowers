@@ -61,4 +61,20 @@ public class BPCatchCollider : MonoBehaviour
         follower.teleportTarget = teleportPV.transform;
         follower.bpCamera = bpCamera;
     }
+
+    public void ReleaseCapturedSP()
+    {
+        // Clear references
+        capturedSP = null;
+        capturedSPPhotonView = null;
+
+        // Destroy BP-side proxy
+        GameObject bpProxy = GameObject.Find("SP_Proxy_BP");
+        if (bpProxy != null)
+            Destroy(bpProxy);
+
+        // Reset BP animation
+        if (bpAnimation != null)
+            bpAnimation.ResetCaughtAnimation();
+    }
 }

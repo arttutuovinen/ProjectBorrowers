@@ -60,5 +60,9 @@ public class BPFpAnimationController : MonoBehaviourPun
     {
         fpAnimator.SetBool("IsCaught", true);
     }
+    public void ResetCaughtAnimation()
+    {
+        fpAnimator.SetBool("IsCaught", false);
+    }
 
 }
