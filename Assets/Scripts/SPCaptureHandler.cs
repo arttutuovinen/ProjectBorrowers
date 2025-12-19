@@ -77,6 +77,10 @@ public class SPCaptureHandler : MonoBehaviourPun
 
         // Destroy all SP proxies
         DestroyAllSPProxies();
+
+        BPCatchController bpController = FindObjectOfType<BPCatchController>();
+        if (bpController != null)
+            bpController.ResetCaughtReaction();
     }
 
     private void DestroyAllSPProxies()

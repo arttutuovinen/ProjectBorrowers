@@ -160,4 +160,12 @@ public class BPCatchController : MonoBehaviour, IPunObservable
         // Trigger caught anim
         childAnimator.SetBool("IsCaught", true);
     }
+    // BPCatchController.cs
+    public void ResetCaughtReaction()
+    {
+        int caughtLayer = childAnimator.GetLayerIndex("CaughtAnim");
+
+        childAnimator.SetBool("IsCaught", false);
+        childAnimator.SetLayerWeight(caughtLayer, 0f);
+    }
 }
