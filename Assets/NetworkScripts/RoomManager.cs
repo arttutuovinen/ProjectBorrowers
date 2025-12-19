@@ -8,6 +8,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Header("Scene")]
     public Transform[] smallPlayerSpawnPoints;   // <-- Multiple SP spawn points
     public Transform bigPlayerSpawnPoint;        // <-- Single BP spawn point
+    public Transform[] prisonSpawnPoints;   // <-- Prison spawn locations
 
     [Header("UI (hook these in Inspector)")]
     public TMP_InputField nameInput;
@@ -105,6 +106,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
             (spawnPoint != null) ? spawnPoint.position : Vector3.zero;
 
         PhotonNetwork.Instantiate(prefabName, spawnPos, Quaternion.identity);
+
+        // ---- Prison Spawn (ONLY ONCE) ----
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (prisonSpawnPoints != null && prisonSpawnPoints.Length > 0)
+            {
+                int rand = Random.Range(0, prisonSpawnPoints.Length);
+                PhotonNetwork.Instantiate(
+                    "Prison",
+                    prisonSpawnPoints[rand].position,
+                    Quaternion.identity
+                );
+            }
+        }
 
         // Hide Lobby UI
         if (lobbyPanel != null)

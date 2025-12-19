@@ -6934,7 +6934,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 379707440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &238238164 stripped
 Transform:
@@ -9989,6 +9989,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 325980471}
   m_LocalEulerAnglesHint: {x: 0, y: -338.97, z: 0}
+--- !u!1 &379707439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 379707440}
+  m_Layer: 0
+  m_Name: SPSpawning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &379707440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379707439}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 800597412}
+  - {fileID: 885703967}
+  - {fileID: 237396717}
+  - {fileID: 2092301994}
+  - {fileID: 1780168567}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &383304294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15310,6 +15346,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563402260}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &565916750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 565916751}
+  m_Layer: 0
+  m_Name: PrisonSpawner_03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &565916751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565916750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -80.87, y: 9.03, z: -15.253}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 800089380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &567230533
 GameObject:
   m_ObjectHideFlags: 0
@@ -22067,6 +22134,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 798676055}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &800089379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800089380}
+  m_Layer: 0
+  m_Name: PrisonSpawning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &800089380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800089379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1820119919}
+  - {fileID: 1086926634}
+  - {fileID: 565916751}
+  - {fileID: 866726344}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &800597411
 GameObject:
   m_ObjectHideFlags: 0
@@ -22096,7 +22198,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 379707440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &806666452
 PrefabInstance:
@@ -23768,6 +23870,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c470dc8421fecda489d76d727c5a0b98, type: 3}
+--- !u!1 &866726343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 866726344}
+  m_Layer: 0
+  m_Name: PrisonSpawner_04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &866726344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866726343}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -92.4, y: 11.81, z: 25.51}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 800089380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &871340271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24635,7 +24768,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 379707440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &897645866
 PrefabInstance:
@@ -30288,6 +30421,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1084524293}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1086926633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1086926634}
+  m_Layer: 0
+  m_Name: PrisonSpawner_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1086926634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086926633}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27.7, y: 6.14, z: 0.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 800089380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1089073515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4c7ef9e81f584644691f637fb7bbdf17,
@@ -37169,7 +37333,7 @@ Transform:
   m_GameObject: {fileID: 1347640329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -92.23, y: 12.7, z: 24.95}
+  m_LocalPosition: {x: -92.45, y: 7.047, z: 21.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44101,151 +44265,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1619898270}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1621519334
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 757008622482193043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 813491731471456371, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 2058587133424441318, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: bigPlayerCamera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2058587133424441318, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: 'objectsToHide.Array.data[0]'
-      value: 
-      objectReference: {fileID: 675554380}
-    - target: {fileID: 2058587133424441318, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: 'objectsToHide.Array.data[1]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163928419507720332, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: sceneViewId
-      value: 102
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135777658475134902, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_Name
-      value: SmallPlayerJailTeleport
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135777658475134902, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_TagString
-      value: SmallPlayerJailTeleport
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066166998722967104, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_Name
-      value: Prison
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066166998722967104, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_TagString
-      value: Prison
-      objectReference: {fileID: 0}
-    - target: {fileID: 7979786634708262117, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -31.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -28.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167698747835413043, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8497554075034939810, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: finish
-      value: 
-      objectReference: {fileID: 675554380}
-    - target: {fileID: 8497554075034939810, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: scoreText
-      value: 
-      objectReference: {fileID: 308939555}
-    - target: {fileID: 8497554075034939810, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: resetDelay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8497554075034939810, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: revealText
-      value: 
-      objectReference: {fileID: 1720903047}
-    - target: {fileID: 8497554075034939810, guid: e2ef2e5d3cb208940ab8d91cc48c7568,
-        type: 3}
-      propertyPath: smallPlayer
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8497554075034939810, guid: e2ef2e5d3cb208940ab8d91cc48c7568, type: 3}
-    m_RemovedGameObjects:
-    - {fileID: 1360761591109850438, guid: e2ef2e5d3cb208940ab8d91cc48c7568, type: 3}
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e2ef2e5d3cb208940ab8d91cc48c7568, type: 3}
 --- !u!1 &1623589792 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3816392259467101924, guid: 7c45afc033873bc4c97267952b39d2a4,
@@ -45591,7 +45610,7 @@ PrefabInstance:
     - target: {fileID: 4870394702354333019, guid: 89ee4470f7ebe314f8c3ed371e8944b1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -77.07
+      value: -74.95
       objectReference: {fileID: 0}
     - target: {fileID: 4870394702354333019, guid: 89ee4470f7ebe314f8c3ed371e8944b1,
         type: 3}
@@ -49225,7 +49244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 379707440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1782077367
 GameObject:
@@ -50126,6 +50145,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 325980471}
   m_LocalEulerAnglesHint: {x: 0, y: -607.948, z: 0}
+--- !u!1 &1820119918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1820119919}
+  m_Layer: 0
+  m_Name: PrisonSpawner_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1820119919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820119918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -31.01, y: 9.922, z: -28.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 800089380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1820837708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56138,6 +56188,11 @@ MonoBehaviour:
   - {fileID: 2092301994}
   - {fileID: 1780168567}
   bigPlayerSpawnPoint: {fileID: 1306369117}
+  prisonSpawnPoints:
+  - {fileID: 1820119919}
+  - {fileID: 1086926634}
+  - {fileID: 565916751}
+  - {fileID: 866726344}
   nameInput: {fileID: 1893113567}
   characterButtons:
   - {fileID: 816508630}
@@ -56934,7 +56989,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 379707440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2094579876 stripped
 Transform:
@@ -60074,11 +60129,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2072471946}
-  - {fileID: 800597412}
-  - {fileID: 885703967}
-  - {fileID: 237396717}
-  - {fileID: 2092301994}
-  - {fileID: 1780168567}
+  - {fileID: 379707440}
   - {fileID: 1306369117}
   - {fileID: 410087041}
   - {fileID: 1659977819}
@@ -60086,7 +60137,7 @@ SceneRoots:
   - {fileID: 684010203}
   - {fileID: 832575519}
   - {fileID: 496253930}
-  - {fileID: 1621519334}
+  - {fileID: 800089380}
   - {fileID: 1576149956}
   - {fileID: 2050894389}
   - {fileID: 1550773085}
