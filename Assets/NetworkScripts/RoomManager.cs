@@ -2,18 +2,20 @@
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using System.Linq;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     [Header("Scene")]
-    public Transform[] smallPlayerSpawnPoints;   // <-- Multiple SP spawn points
-    public Transform bigPlayerSpawnPoint;        // <-- Single BP spawn point
-    public Transform[] prisonSpawnPoints;   // <-- Prison spawn locations
+    public Transform[] spFinishSpawnPoints;      // 10 Finish spawn points
+    public int finishCount = 5;
+    public Transform bigPlayerSpawnPoint;
+    public Transform[] prisonSpawnPoints;
 
     [Header("UI (hook these in Inspector)")]
     public TMP_InputField nameInput;
     public GameObject[] characterButtons;
-    public TMPro.TextMeshProUGUI joinButtonText;
+    public TextMeshProUGUI joinButtonText;
     public GameObject lobbyPanel;
 
     int selectedCharacterIndex = 0; // 0 = SmallPlayer, 1 = BigPlayer
@@ -31,21 +33,22 @@ public class RoomManager : MonoBehaviourPunCallbacks
     void UpdateCharacterButtonVisuals()
     {
         if (characterButtons == null) return;
+
         for (int i = 0; i < characterButtons.Length; i++)
         {
             if (characterButtons[i] == null) continue;
+
             var img = characterButtons[i].GetComponent<UnityEngine.UI.Image>();
             if (img != null)
                 img.color = (i == selectedCharacterIndex) ? Color.green : Color.white;
         }
     }
 
-    // Called by JoinButton OnClick
+    // ---------- Join ----------
     public void OnJoinButtonPressed()
     {
         if (nameInput == null || string.IsNullOrWhiteSpace(nameInput.text))
         {
-            Debug.Log("Name is required before joining a room!");
             if (joinButtonText != null) joinButtonText.text = "Enter a Name!";
             return;
         }
@@ -59,7 +62,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
-        Debug.Log("Connected to Master. Joining/creating room...");
+
         PhotonNetwork.JoinOrCreateRoom(
             "TestRoom",
             new RoomOptions { MaxPlayers = 8 },
@@ -71,45 +74,24 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
-        Debug.Log(
-    $"Joined room '{PhotonNetwork.CurrentRoom.Name}' | " +
-    $"Players: {PhotonNetwork.PlayerList.Length} | " +
-    $"Region: {PhotonNetwork.CloudRegion} | " +
-    $"GameVersion: {PhotonNetwork.GameVersion}"
-);
-        string prefabName = GetPrefabNameForIndex(selectedCharacterIndex);
-        Debug.Log("Joined Room. Instantiating player prefab: " + prefabName);
-
-        if (string.IsNullOrEmpty(prefabName))
-        {
-            Debug.LogError("No prefab name mapped for selection index: " + selectedCharacterIndex);
-            return;
-        }
-
-        // ------------ Spawn Point Selection ------------
-        Transform spawnPoint = null;
-
-        if (selectedCharacterIndex == 0) // SmallPlayer
-        {
-            if (smallPlayerSpawnPoints != null && smallPlayerSpawnPoints.Length > 0)
-            {
-                int rand = Random.Range(0, smallPlayerSpawnPoints.Length);
-                spawnPoint = smallPlayerSpawnPoints[rand];
-            }
-        }
-        else if (selectedCharacterIndex == 1) // BigPlayer
-        {
-            spawnPoint = bigPlayerSpawnPoint;
-        }
-
-        Vector3 spawnPos =
-            (spawnPoint != null) ? spawnPoint.position : Vector3.zero;
-
-        PhotonNetwork.Instantiate(prefabName, spawnPos, Quaternion.identity);
-
-        // ---- Prison Spawn (ONLY ONCE) ----
+        // ---------- Spawn Finish & Prison (ONCE) ----------
         if (PhotonNetwork.IsMasterClient)
         {
+            // Spawn 5 Finish prefabs
+            var selectedPoints = spFinishSpawnPoints
+                .OrderBy(x => Random.value)
+                .Take(finishCount);
+
+            foreach (var point in selectedPoints)
+            {
+                PhotonNetwork.Instantiate(
+                    "Finish",
+                    point.position,
+                    point.rotation // match Z axis
+                );
+            }
+
+            // Spawn Prison
             if (prisonSpawnPoints != null && prisonSpawnPoints.Length > 0)
             {
                 int rand = Random.Range(0, prisonSpawnPoints.Length);
@@ -121,7 +103,29 @@ public class RoomManager : MonoBehaviourPunCallbacks
             }
         }
 
-        // Hide Lobby UI
+        // ---------- Spawn Player ----------
+        if (selectedCharacterIndex == 0) // SmallPlayer
+        {
+            GameObject[] finishes = GameObject.FindGameObjectsWithTag("Finnish");
+            GameObject chosenFinish = finishes[Random.Range(0, finishes.Length)];
+            Transform spStart = chosenFinish.transform.Find("SPStart");
+
+            PhotonNetwork.Instantiate(
+                "SmallPlayer",
+                spStart.position,
+                spStart.rotation
+            );
+        }
+        else // BigPlayer
+        {
+            PhotonNetwork.Instantiate(
+                "BigPlayer",
+                bigPlayerSpawnPoint.position,
+                Quaternion.identity
+            );
+        }
+
+        // ---------- UI ----------
         if (lobbyPanel != null)
             lobbyPanel.SetActive(false);
 
@@ -132,21 +136,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         base.OnDisconnected(cause);
-        Debug.Log("Disconnected: " + cause);
-        if (joinButtonText != null) joinButtonText.text = "Join";
+
+        if (joinButtonText != null)
+            joinButtonText.text = "Join";
 
         if (lobbyPanel != null)
             lobbyPanel.SetActive(true);
-    }
-
-    private string GetPrefabNameForIndex(int index)
-    {
-        switch (index)
-        {
-            case 0: return "SmallPlayer";
-            case 1: return "BigPlayer";
-            default: return null;
-        }
     }
 }
 
