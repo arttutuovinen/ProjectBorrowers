@@ -11,6 +11,7 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
     private bool isDoorOpen = false;
     private Quaternion initialRotation;
     private Quaternion targetRotation;
+    private bool isAnimating;
 
     private void Awake()
     {
@@ -25,23 +26,46 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
 
     public void ToggleDoor()
     {
-        if (photonView != null && PhotonNetwork.InRoom)
+        if (!PhotonNetwork.InRoom) return;
+
+        // Only MasterClient actually changes door state
+        if (PhotonNetwork.IsMasterClient)
         {
             photonView.RPC(nameof(RPC_SetDoorState), RpcTarget.AllBuffered, !isDoorOpen);
-            return;
         }
+        else
+        {
+            // Ask MasterClient to toggle the door
+            photonView.RPC(nameof(RPC_RequestToggleDoor), RpcTarget.MasterClient);
+        }
+    }
 
-        if (isDoorOpen) CloseDoor();
-        else OpenDoor();
-        isDoorOpen = !isDoorOpen;
+    [PunRPC]
+    private void RPC_RequestToggleDoor()
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        photonView.RPC(nameof(RPC_SetDoorState), RpcTarget.AllBuffered, !isDoorOpen);
     }
 
     [PunRPC]
     private void RPC_SetDoorState(bool open)
     {
+        if (isAnimating) return;
+
+        isAnimating = true;
+
         if (open) OpenDoor();
         else CloseDoor();
+
         isDoorOpen = open;
+        StartCoroutine(ResetAnimating());
+    }
+
+    private IEnumerator ResetAnimating()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isAnimating = false;
     }
 
     private void OpenDoor()
