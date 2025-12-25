@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using System.Linq;
+using System.Collections;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -85,9 +86,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
             foreach (var point in selectedPoints)
             {
                 PhotonNetwork.Instantiate(
-                    "Finish",
+                    "SPFinish",
                     point.position,
-                    point.rotation // match Z axis
+                    point.rotation
                 );
             }
 
@@ -104,11 +105,38 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
 
         // ---------- Spawn Player ----------
+        StartCoroutine(SpawnPlayerAfterFinishesReady());
+
+        // ---------- UI ----------
+        if (lobbyPanel != null)
+            lobbyPanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private IEnumerator SpawnPlayerAfterFinishesReady()
+    {
+        // SmallPlayer needs Finish prefabs to exist
         if (selectedCharacterIndex == 0) // SmallPlayer
         {
-            GameObject[] finishes = GameObject.FindGameObjectsWithTag("Finnish");
+            GameObject[] finishes = null;
+
+            // Wait until at least one Finish prefab exists in the scene
+            while (finishes == null || finishes.Length == 0)
+            {
+                finishes = GameObject.FindGameObjectsWithTag("SPFinish");
+                yield return null; // wait 1 frame
+            }
+
             GameObject chosenFinish = finishes[Random.Range(0, finishes.Length)];
             Transform spStart = chosenFinish.transform.Find("SPStart");
+
+            if (spStart == null)
+            {
+                Debug.LogError("SPStart not found in Finish prefab!");
+                yield break;
+            }
 
             PhotonNetwork.Instantiate(
                 "SmallPlayer",
@@ -124,13 +152,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 Quaternion.identity
             );
         }
-
-        // ---------- UI ----------
-        if (lobbyPanel != null)
-            lobbyPanel.SetActive(false);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     public override void OnDisconnected(DisconnectCause cause)

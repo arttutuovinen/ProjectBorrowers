@@ -13,6 +13,20 @@ public class BigPlayerStun : MonoBehaviourPun
         bigPlayerMovement = GetComponent<BigPlayerMovement>();
     }
 
+    void OnTriggerEnter(Collider collider)
+    {
+        if (!photonView.IsMine) return;
+
+        if (!collider.CompareTag("StunItem")) return;
+        Debug.Log("BP hit the boppyPIN");
+
+        PhotonView weaponPV = collider.GetComponentInParent<PhotonView>();
+        if (weaponPV == null) return;
+
+        StunRPC();
+        weaponPV.RPC("DestroyWeaponRPC", weaponPV.Owner);
+    }
+
     [PunRPC]
     private void StunRPC()
     {
