@@ -1,28 +1,42 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class SPBoppyPin : MonoBehaviourPun
 {
     [Header("Item Settings")]
-    public GameObject itemPrefab; // The prefab of the item to spawn (must be in Resources folder)
+    public GameObject itemPrefab;
+    public Transform throwOrigin;
+    public LayerMask groundMask; // Ground only (NOT SmallPlayer)
 
     public void SpawnBoppyPin()
     {
-        if (!photonView.IsMine) return; // Only local player can spawn
+        if (!photonView.IsMine) return;
+        if (itemPrefab == null || throwOrigin == null) return;
 
-        if (itemPrefab == null)
+        Vector3 rayStart = throwOrigin.position + Vector3.up * 3f;
+        Vector3 finalSpawnPos = throwOrigin.position;
+
+        if (Physics.Raycast(
+            rayStart,
+            Vector3.down,
+            out RaycastHit hit,
+            20f,
+            groundMask,
+            QueryTriggerInteraction.Ignore))
         {
-            Debug.LogWarning("SPBoppyPin: No itemPrefab assigned!");
-            return;
+            finalSpawnPos = hit.point + Vector3.up * 0.05f;
+        }
+        else
+        {
+            Debug.LogError("GROUND NOT HIT — CHECK LAYERS");
         }
 
-        // The prefab must exist under a "Resources" folder for PhotonNetwork.Instantiate to work
-        Vector3 spawnPos = transform.position + transform.forward * 1.0f;
-        Quaternion spawnRot = Quaternion.identity;
-
-        // Spawn network-wide
-        GameObject spawnedItem = PhotonNetwork.Instantiate(itemPrefab.name, spawnPos, spawnRot);
-
-        Debug.Log($"[SPBoppyPin] Spawned networked item: {spawnedItem.name}");
+        // ⬅️ INSTANTIATE AT FINAL POSITION
+        PhotonNetwork.Instantiate(
+            itemPrefab.name,
+            finalSpawnPos,
+            Quaternion.identity
+        );
     }
+
 }

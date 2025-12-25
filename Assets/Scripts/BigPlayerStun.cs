@@ -13,26 +13,9 @@ public class BigPlayerStun : MonoBehaviourPun
         bigPlayerMovement = GetComponent<BigPlayerMovement>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("StunItem"))
-        {
-            // Request the BigPlayer to stun themselves on their own client
-            photonView.RPC(nameof(StunRPC), photonView.Owner);
-
-            // Destroy the StunItem over network
-            PhotonView itemPV = other.GetComponent<PhotonView>();
-            if (itemPV != null && itemPV.IsMine)
-                PhotonNetwork.Destroy(other.gameObject);
-            else if (itemPV != null)
-                photonView.RPC(nameof(RequestItemDestroyRPC), itemPV.Owner, itemPV.ViewID);
-        }
-    }
-
     [PunRPC]
     private void StunRPC()
     {
-        if (!photonView.IsMine) return; // Only stun on the owner client
         if (isStunned) return;
         StartCoroutine(StunPlayer());
     }
@@ -50,14 +33,6 @@ public class BigPlayerStun : MonoBehaviourPun
             bigPlayerMovement.enabled = true;
 
         isStunned = false;
-    }
-
-    [PunRPC]
-    private void RequestItemDestroyRPC(int viewID)
-    {
-        PhotonView itemView = PhotonView.Find(viewID);
-        if (itemView != null && itemView.IsMine)
-            PhotonNetwork.Destroy(itemView.gameObject);
     }
 }
 

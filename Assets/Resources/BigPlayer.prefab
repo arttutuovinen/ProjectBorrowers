@@ -322,7 +322,6 @@ GameObject:
   - component: {fileID: 1306958205652911868}
   - component: {fileID: 7549007834672380184}
   - component: {fileID: 3271016351445557058}
-  - component: {fileID: 259571919989222573}
   - component: {fileID: 6759395729989228288}
   - component: {fileID: 6597793729881182503}
   - component: {fileID: 3447934495327288878}
@@ -719,27 +718,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4734701019181051656}
   crouchButton: P2Crouch
---- !u!65 &259571919989222573
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745515364123179349}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0000004, y: 2, z: 1.0000002}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6759395729989228288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,7 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1766250525
+  GlobalObjectIdHash: 3261869827
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
