@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
@@ -34,6 +34,12 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
     private bool isCrouching = false;
     private float originalCameraLocalY;
 
+    [Header("Door Interaction")]
+    public float doorRayDistance = 3f;
+    public LayerMask doorLayer;
+
+    private Door lookedAtDoor;
+
     // Networking
     private float networkYaw = 0f;
     public float rotationLerpSpeed = 8f;
@@ -64,21 +70,32 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
         HandleMovement();
         ApplyGravity();
         HandleCrouchInput();
-        HandleDoorInteraction(); // <-- new
+
+        UpdateDoorRay();
+        HandleDoorInput();
     }
-    private void HandleDoorInteraction()
+    
+    private void UpdateDoorRay()
     {
-        if (!Input.GetKeyDown(KeyCode.E)) return;
+        lookedAtDoor = null;
 
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, 3f, LayerMask.GetMask("Door")))
+        if (Physics.Raycast(
+            ray,
+            out RaycastHit hit,
+            doorRayDistance,
+            doorLayer,
+            QueryTriggerInteraction.Collide)) // ✅ triggers only
         {
-            Door door = hit.collider.GetComponentInParent<Door>();
-            if (door != null)
-            {
-                door.ToggleDoor(); // will call RPC for all clients
-            }
+            lookedAtDoor = hit.collider.GetComponentInParent<Door>();
         }
+    }
+    private void HandleDoorInput()
+    {
+        if (!Input.GetKeyDown(KeyCode.E)) return;
+        if (lookedAtDoor == null) return;
+
+        lookedAtDoor.ToggleDoor();
     }
 
     private void HandleCamera()
