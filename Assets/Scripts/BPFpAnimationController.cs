@@ -11,6 +11,9 @@ public class BPFpAnimationController : MonoBehaviourPun
     public float catchCooldown = 1.5f;
     private bool isCoolingDown = false;
 
+    // Track if any SP is currently captured
+    private bool spCaptured = false;
+
     public void Start()
     {
         catchCollider.SetActive(false);
@@ -56,13 +59,17 @@ public class BPFpAnimationController : MonoBehaviourPun
         yield return new WaitForSeconds(catchCooldown);
         isCoolingDown = false;
     }
+    // Called by BPCatchCollider when BP catches SP
     public void PlayCaughtAnimation()
     {
         fpAnimator.SetBool("IsCaught", true);
+        spCaptured = true;         // ✅ Disable further catching
+        catchCollider.SetActive(false); // ✅ Immediately disable catch collider
     }
+    // Called when SP is teleported to jail
     public void ResetCaughtAnimation()
     {
         fpAnimator.SetBool("IsCaught", false);
+        spCaptured = false;        // ✅ Allow catching again
     }
-
 }

@@ -5,9 +5,14 @@ public class SPCaptureHandler : MonoBehaviourPun
 {
     private CharacterController controller;
     private SPMovementNET movementScript;
-    private Transform followTarget;
-    private bool isCaptured = false;
+    private Transform spFollowTarget;
+
+    private GameObject spProxy_SP;
+    private GameObject spProxy_BP;
+
     public Transform bpPrefabTransform;
+
+    private bool isCaptured = false; // ✅ RESTORED
 
     void Awake()
     {
@@ -15,102 +20,130 @@ public class SPCaptureHandler : MonoBehaviourPun
         movementScript = GetComponent<SPMovementNET>();
     }
 
-    [PunRPC]
-    public void RPC_CapturePlayer(int bpProxyTeleportID, int spProxyTeleportID)
+    void Start()
     {
-        if (!photonView.IsMine) return; // Only SP client runs this
-
-        // SP client teleport target
-        PhotonView spTeleportPV = PhotonView.Find(spProxyTeleportID);
-        if (spTeleportPV == null) return;
-
-        followTarget = spTeleportPV.transform;
-        isCaptured = true;
-
-        movementScript.DisableMovement();
-
-        // Spawn SP client proxy locally
-        SpawnSPProxy(followTarget);
+        CreateInvisibleProxies();
     }
 
-    private void SpawnSPProxy(Transform target)
+    void Update()
+    {
+        if (!isCaptured || !photonView.IsMine || spFollowTarget == null)
+            return;
+
+        controller.enabled = false;
+        transform.position = spFollowTarget.position;
+        controller.enabled = true;
+    }
+
+    void CreateInvisibleProxies()
     {
         GameObject prefab = Resources.Load<GameObject>("SmallPlayerProxy");
         if (!prefab) return;
 
-        GameObject proxy = Instantiate(prefab, target.position, Quaternion.identity);
-        proxy.tag = "SPProxy";
-        proxy.name = "SP_Proxy_SP";
+        spProxy_SP = Instantiate(prefab);
+        spProxy_SP.name = "SP_Proxy_SP";
+        spProxy_SP.tag = "SPProxy";
+        spProxy_SP.SetActive(false);
 
-        SPClientProxyFollower follower = proxy.AddComponent<SPClientProxyFollower>();
-        follower.teleportTarget = target;
-        follower.bpTransform = bpPrefabTransform; // Faces BP prefab
-    }
-
-    private void Update()
-    {
-        if (!isCaptured || followTarget == null || !photonView.IsMine) return;
-
-        controller.enabled = false;
-        transform.position = followTarget.position;
-        controller.enabled = true;
+        spProxy_BP = Instantiate(prefab);
+        spProxy_BP.name = "SP_Proxy_BP";
+        spProxy_BP.tag = "SPProxy";
+        spProxy_BP.SetActive(false);
     }
 
     [PunRPC]
-    public void RPC_TeleportToJail(Vector3 jailPos)
+    public void RPC_AssignTeleportTargets(int bpTeleportID, int spTeleportID)
     {
-        if (!photonView.IsMine) return;
+        PhotonView bpTP = PhotonView.Find(bpTeleportID);
+        PhotonView spTP = PhotonView.Find(spTeleportID);
+        if (bpTP == null || spTP == null) return;
 
+        if (photonView.IsMine)
+        {
+            spFollowTarget = spTP.transform;
+
+            if (!spProxy_SP.TryGetComponent(out SPClientProxyFollower spFollow))
+                spFollow = spProxy_SP.AddComponent<SPClientProxyFollower>();
+
+            spFollow.teleportTarget = spTP.transform;
+            spFollow.bpTransform = bpPrefabTransform;
+        }
+        else
+        {
+            if (!spProxy_BP.TryGetComponent(out SPProxyFollower bpFollow))
+                bpFollow = spProxy_BP.AddComponent<SPProxyFollower>();
+
+            bpFollow.teleportTarget = bpTP.transform;
+        }
+    }
+
+    [PunRPC]
+    public void RPC_OnCaptured()
+    {
+        isCaptured = true;
+
+        if (photonView.IsMine)
+        {
+            movementScript.DisableMovement();
+            SetRenderers(false); // hide real SP
+            spProxy_SP.SetActive(true); // show SP proxy following SPClientTeleportLocation
+        }
+        else
+        {
+            SetRenderers(false); // hide SP prefab for BP
+            spProxy_BP.SetActive(true); // show BP-side proxy following SmallPlayerTeleportPosition
+        }
+    }
+
+    [PunRPC]
+    public void RPC_OnJailed(Vector3 jailPos)
+    {
+        spFollowTarget = null;
         isCaptured = false;
-        followTarget = null;
 
         controller.enabled = false;
         transform.position = jailPos;
         controller.enabled = true;
 
-        // Re-enable movement
-        movementScript.EnableMovement();
+        if (photonView.IsMine)
+        {
+            movementScript.EnableMovement();
+            
+        }
+        SetRenderers(true); // show SP prefab
+        // Reset SP proxies on all clients
+        if (spProxy_SP != null) spProxy_SP.SetActive(false);
+        if (spProxy_BP != null && !photonView.IsMine)
+            spProxy_BP.SetActive(false);
 
-        // Re-enable renderers
-        foreach (Renderer r in GetComponentsInChildren<Renderer>())
-            r.enabled = true;
-
-        // Destroy all SP proxies
-        DestroyAllSPProxies();
-
-        BPCatchController bpController = FindObjectOfType<BPCatchController>();
-        if (bpController != null)
-            bpController.ResetCaughtReaction();
-    }
-
-    private void DestroyAllSPProxies()
-    {
-        GameObject[] proxies = GameObject.FindGameObjectsWithTag("SPProxy");
-        foreach (GameObject p in proxies)
-            Destroy(p);
-    }
-
-    [PunRPC]
-    public void RPC_HideSP()
-    {
-        foreach (Renderer r in GetComponentsInChildren<Renderer>())
-            r.enabled = false;
-    }
-    [PunRPC]
-    public void RPC_ShowSP()
-    {
-        foreach (Renderer r in GetComponentsInChildren<Renderer>())
-            r.enabled = true;
+        // Reset BP caught animation on SP client
+        BPCatchController[] bpControllers = FindObjectsOfType<BPCatchController>();
+        foreach (var bp in bpControllers)
+        {
+            if (!bp.photonView.IsMine)
+                bp.photonView.RPC("RPC_ResetCaughtReactionSP", RpcTarget.All);
+        }
     }
 
     [PunRPC]
-    public void RPC_PlayCaughtReaction()
+    void RPC_HideBPProxy()
     {
-        BPCatchController bpController = FindObjectOfType<BPCatchController>();
-        if (bpController != null)
-            bpController.PlayCaughtReaction();
+        if (spProxy_BP != null)
+            spProxy_BP.SetActive(false);
     }
 
+    void SetRenderers(bool state)
+    {
+        // Regular Mesh Renderers
+        foreach (Renderer r in GetComponentsInChildren<Renderer>(true))
+            r.enabled = state;
+
+        // Skinned Mesh Renderers
+        foreach (SkinnedMeshRenderer smr in GetComponentsInChildren<SkinnedMeshRenderer>(true))
+            smr.enabled = state;
+    }
+
+    // ✅ REQUIRED BY SPMovementNET
     public bool IsCaptured()
     {
         return isCaptured;

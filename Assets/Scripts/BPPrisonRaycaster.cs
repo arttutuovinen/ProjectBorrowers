@@ -4,58 +4,35 @@ using Photon.Pun;
 public class BPPrisonRaycaster : MonoBehaviour
 {
     public float rayDistance = 6f;
-    public LayerMask prisonLayer; // assign Prison layer in Inspector
-    private BPCatchCollider bpCatchCollider;
+    public LayerMask prisonLayer;
     public Transform bpCameraTransform;
 
-    private void Awake()
+    private PhotonView capturedSP;
+
+    public void SetCapturedSP(PhotonView sp)
     {
-        bpCatchCollider = GetComponentInChildren<BPCatchCollider>();
+        capturedSP = sp;
     }
 
-    private void Update()
+    void Update()
     {
-        if (bpCameraTransform == null)
-        {
-            Debug.LogWarning("BP Camera Transform not assigned!");
-            return;
-        }
-        Debug.Log("UPDATE RUNNING");
-        if (!Input.GetKeyDown(KeyCode.E)) return;
-        if (bpCatchCollider == null) return;
-
-        SPCaptureHandler sp = bpCatchCollider.capturedSP;
-        PhotonView spPV = bpCatchCollider.capturedSPPhotonView;
-        if (spPV == null) return;
-
+        if (!Input.GetKeyDown(KeyCode.E) || capturedSP == null) return;
+        Debug.Log("attempting to jail SP");
         Ray ray = new Ray(bpCameraTransform.position, bpCameraTransform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green, 1f);
-        Debug.Log("Shooting ray from BP camera");
+        if (!Physics.Raycast(ray, out RaycastHit hit, rayDistance, prisonLayer)) return;
 
-        if (!Physics.Raycast(ray, out RaycastHit hit, rayDistance, prisonLayer, QueryTriggerInteraction.Collide))
+        foreach (Transform t in hit.collider.GetComponentsInChildren<Transform>())
         {
-            Debug.Log("Ray did not hit any Prison layer collider");
-            return;
+            if (!t.CompareTag("SmallPlayerJailTeleport")) continue;
+
+            capturedSP.RPC("RPC_OnJailed", RpcTarget.All, t.position);
+            capturedSP = null;
+            break;
         }
-
-        Debug.Log("Ray hit: " + hit.collider.name);
-
-        Transform jailTeleport = null;
-        foreach (Transform t in hit.collider.GetComponentsInChildren<Transform>(true))
+        BPFpAnimationController bpAnim = GetComponentInParent<BPFpAnimationController>();
+        if (bpAnim != null && bpAnim.photonView.IsMine)
         {
-            if (t.CompareTag("SmallPlayerJailTeleport"))
-            {
-                jailTeleport = t;
-                break;
-            }
+            bpAnim.ResetCaughtAnimation();
         }
-
-        if (jailTeleport == null) return;
-
-        spPV.RPC("RPC_TeleportToJail", spPV.Owner, jailTeleport.position);
-        // Make SP visible again for everyone (including BP)
-        spPV.RPC("RPC_ShowSP", RpcTarget.All);
-        // Clean up BP side immediately
-        bpCatchCollider.ReleaseCapturedSP();
     }
 }

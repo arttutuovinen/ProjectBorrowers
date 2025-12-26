@@ -3,78 +3,48 @@ using Photon.Pun;
 
 public class BPCatchCollider : MonoBehaviour
 {
-    public PhotonView teleportPV; // Drag the SPTeleportLocation PhotonView here
-    public PhotonView spClientTeleportPV; //SPClientTeleportLocation PhotonView
-    public Camera bpCamera;       // Assign BP's camera in Inspector
-    public BPFpAnimationController bpAnimation;
-
-    // Store reference to currently captured SP
-    [HideInInspector] public SPCaptureHandler capturedSP;
-    [HideInInspector] public PhotonView capturedSPPhotonView;
+    public PhotonView bpTeleportPV;
+    public PhotonView spClientTeleportPV;
+    public Camera bpCamera;
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if (!other.CompareTag("SmallPlayer")) return;
 
         PhotonView spPV = other.GetComponent<PhotonView>();
-        if (spPV == null || teleportPV == null || spClientTeleportPV == null) return;
+        if (spPV == null) return;
 
-        Debug.Log("BP caught SP!");
-
-        // Store references for BPPrisonRaycaster
-        capturedSP = spPV.GetComponent<SPCaptureHandler>();
-        capturedSPPhotonView = spPV;
-
-        // Hide SP mesh on all clients
-        spPV.RPC("RPC_HideSP", RpcTarget.All);
-
-        // Tell SP client to spawn its SP proxy locally
+        // Assign teleport targets
         spPV.RPC(
-            "RPC_CapturePlayer",
-            spPV.Owner,
-            teleportPV.ViewID,
+            "RPC_AssignTeleportTargets",
+            RpcTarget.All,
+            bpTeleportPV.ViewID,
             spClientTeleportPV.ViewID
         );
 
-        // Spawn BP client proxy locally (BP client only)
-        SpawnBPProxy();
+        // Capture SP
+        spPV.RPC("RPC_OnCaptured", RpcTarget.All);
 
-        // Play BP caught animation locally
-        if (bpAnimation != null)
-            bpAnimation.PlayCaughtAnimation();
+        // ✅ Play caught animation on BP client
+        BPFpAnimationController bpAnim = GetComponentInParent<BPFpAnimationController>();
+        if (bpAnim != null && bpAnim.photonView.IsMine)
+        {
+            bpAnim.PlayCaughtAnimation();
+        }
 
-        // Trigger SP caught animation on SP client
-        spPV.RPC("RPC_PlayCaughtReaction", spPV.Owner);
+        // On BP client only
+        BPCatchController bpCatchController = GetComponentInParent<BPCatchController>();
+        if (bpCatchController != null)
+        {
+            // Call RPC to all other clients except BP client
+            bpCatchController.photonView.RPC("RPC_PlayCaughtReactionSP", RpcTarget.Others);
+        }
+        // After capturing SP
+        BPPrisonRaycaster prisonRaycaster = GetComponentInParent<BPPrisonRaycaster>();
+        if (prisonRaycaster != null)
+        {
+            prisonRaycaster.SetCapturedSP(spPV);
+        }
     }
 
-    private void SpawnBPProxy()
-    {
-        GameObject proxyPrefab = Resources.Load<GameObject>("SmallPlayerProxy");
-        if (proxyPrefab == null) return;
-
-        GameObject proxy = Instantiate(proxyPrefab, teleportPV.transform.position, teleportPV.transform.rotation);
-        proxy.tag = "SPProxy";
-        proxy.name = "SP_Proxy_BP";
-
-        SPProxyFollower follower = proxy.AddComponent<SPProxyFollower>();
-        follower.teleportTarget = teleportPV.transform;
-        follower.bpCamera = bpCamera;
-    }
-
-    public void ReleaseCapturedSP()
-    {
-        // Clear references
-        capturedSP = null;
-        capturedSPPhotonView = null;
-
-        // Destroy BP-side proxy
-        GameObject bpProxy = GameObject.Find("SP_Proxy_BP");
-        if (bpProxy != null)
-            Destroy(bpProxy);
-
-        // Reset BP animation
-        if (bpAnimation != null)
-            bpAnimation.ResetCaughtAnimation();
-    }
 }

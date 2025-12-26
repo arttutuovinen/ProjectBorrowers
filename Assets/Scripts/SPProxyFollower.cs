@@ -7,17 +7,16 @@ public class SPProxyFollower : MonoBehaviour
 
     void LateUpdate()
     {
-        if (teleportTarget == null) return;
+        if (!teleportTarget) return;
 
         transform.position = teleportTarget.position;
 
-        if (bpCamera != null)
+        if (bpCamera)
         {
-            Vector3 lookDir = bpCamera.transform.position - transform.position;
-            lookDir.y = 0f;
-
-            if (lookDir.sqrMagnitude > 0.001f)
-                transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
+            Vector3 dir = bpCamera.transform.position - transform.position;
+            dir.y = 0;
+            if (dir.sqrMagnitude > 0.01f)
+                transform.rotation = Quaternion.LookRotation(dir);
         }
     }
 }

@@ -2,7 +2,7 @@
 using Photon.Pun;
 using System.Collections;
 
-public class BPCatchController : MonoBehaviour, IPunObservable
+public class BPCatchController : MonoBehaviourPun, IPunObservable
 {
     [Header("References")]
     public Animator childAnimator;
@@ -79,7 +79,7 @@ public class BPCatchController : MonoBehaviour, IPunObservable
     [PunRPC]
     private void RPC_PlayCatchAnimation()
     {
-        
+
         if (isCatching) return;
 
         isCatching = true;
@@ -141,7 +141,7 @@ public class BPCatchController : MonoBehaviour, IPunObservable
         else
             syncedArmVert = (float)stream.ReceiveNext();
     }
-    
+
     public void PlayCaughtReaction()
     {
         if (childAnimator == null) return;
@@ -167,5 +167,18 @@ public class BPCatchController : MonoBehaviour, IPunObservable
 
         childAnimator.SetBool("IsCaught", false);
         childAnimator.SetLayerWeight(caughtLayer, 0f);
+    }
+
+    [PunRPC]
+    public void RPC_PlayCaughtReactionSP()
+    {
+        // Only execute locally on remote clients
+        PlayCaughtReaction();
+    }
+
+    [PunRPC]
+    public void RPC_ResetCaughtReactionSP()
+    {
+        ResetCaughtReaction();
     }
 }

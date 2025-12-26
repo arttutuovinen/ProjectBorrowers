@@ -73,6 +73,12 @@ MonoBehaviour:
   - RPC_ShowSP
   - RPC_RequestToggleDoor
   - DestroyWeaponRPC
+  - RPC_AssignTeleportTargets
+  - RPC_OnCaptured
+  - RPC_OnJailed
+  - RPC_PlayCaughtReactionSP
+  - RPC_ResetCaughtReactionSP
+  - RPC_HideBPProxy
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
