@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 3127760035959894033}
   - component: {fileID: 2688392265043823651}
   - component: {fileID: 667898758568031329}
+  - component: {fileID: 8385811344569692152}
   - component: {fileID: 9113464947835078047}
   - component: {fileID: 493712263302553462}
   m_Layer: 11
@@ -138,6 +139,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8385811344569692152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5363417905693999304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060cbd747b89bac46a8c8d848805aad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkItem
 --- !u!114 &9113464947835078047
 MonoBehaviour:
   m_ObjectHideFlags: 0

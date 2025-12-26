@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4444003606564400042}
   - component: {fileID: 3157067871839671108}
   - component: {fileID: 5034046172801966891}
+  - component: {fileID: 2428061715371978835}
   - component: {fileID: 15093812499128626}
   m_Layer: 11
   m_Name: ThrowingItemCollectible
@@ -108,6 +109,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &2428061715371978835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129631613515177745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060cbd747b89bac46a8c8d848805aad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkItem
 --- !u!114 &15093812499128626
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -80,26 +80,19 @@ public class BPItemCollector : MonoBehaviourPun
     // -----------------------------------------------------------------------
     void CheckForCollectible()
     {
+        collectedItem = null;
+        canPickUp = false;
+
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        RaycastHit[] hits = Physics.RaycastAll(ray, rayDistance, collectibleLayer);
 
-        float closestDist = Mathf.Infinity;
-        GameObject closest = null;
-
-        foreach (var hit in hits)
+        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, collectibleLayer, QueryTriggerInteraction.Collide))
         {
             if (itemTags.Contains(hit.collider.tag))
             {
-                if (hit.distance < closestDist)
-                {
-                    closestDist = hit.distance;
-                    closest = hit.collider.gameObject;
-                }
+                collectedItem = hit.collider.gameObject;
+                canPickUp = true;
             }
         }
-
-        collectedItem = closest;
-        canPickUp = (closest != null);
     }
 
     // -----------------------------------------------------------------------
@@ -148,7 +141,11 @@ public class BPItemCollector : MonoBehaviourPun
                 break;
         }
 
-        Destroy(collectedItem);
+        PhotonView itemPV = collectedItem.GetComponentInParent<PhotonView>();
+        if (itemPV != null)
+        {
+            itemPV.RPC("RPC_RequestDestroy", RpcTarget.MasterClient);
+        }
         itemUsed = false;
         collectedItem = null;
         canPickUp = false;
