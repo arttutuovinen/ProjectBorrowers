@@ -15,6 +15,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private SPFlashbang flashBangScript;
     private SPSpring springScript;
 
+
     private void Awake()
     {
         // Cache the BoppyPin script if it's on this player
@@ -67,7 +68,19 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         if (currentItem != null || itemInTrigger == null)
             return; // Already holding something or nothing to pick up
 
-        currentItem = itemInTrigger.name.Replace("(Clone)", "").Trim();
+        string itemName = itemInTrigger.name.Replace("(Clone)", "").Trim();
+
+        // Treat Treasure separately
+        if (itemInTrigger.CompareTag("Treasure"))
+        {
+            currentItem = "Treasure"; // You can use a specific name for treasure
+            Debug.Log("Picked up the Treasure!");
+        }
+        else
+        {
+            currentItem = itemName;
+            Debug.Log($"Picked up {currentItem}");
+        }
 
         // Destroy item network-wide
         PhotonView itemPhotonView = itemInTrigger.GetComponent<PhotonView>();
@@ -81,41 +94,39 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         }
 
         itemInTrigger = null;
-        Debug.Log($"Picked up {currentItem}");
     }
 
     private void UseCurrentItem()
     {
+        if (currentItem == null) return;
+
         Debug.Log($"Used {currentItem}");
 
         switch (currentItem)
         {
             case "BoppyPinCollectible":
             case "BoppyPin":
-                if (boppyPinScript != null)
-                {
-                    boppyPinScript.SpawnBoppyPin();
-                }
+                boppyPinScript?.SpawnBoppyPin();
+                currentItem = null;
                 break;
 
             case "FlashBangCollectible":
-                if (flashBangScript != null)
-                {
-                    flashBangScript.SpawnFlashbang();
-                }
+                flashBangScript?.SpawnFlashbang();
+                currentItem = null;
                 break;
 
             case "SpringCollectible":
-                if (springScript != null)
-                {
-                    springScript.UseSpring();
-                }
+                springScript?.UseSpring();
+                currentItem = null;
+                break;
+
+            case "Treasure":
+                // Do nothing here! Let FinishTrigger handle delivery
+                Debug.Log("Holding Treasure. Go to SPFinish to deliver.");
                 break;
         }
-
-        // Clear after use
-        currentItem = null;
     }
+
 
     [PunRPC]
     private void RequestItemDestroyRPC(int viewID)
@@ -125,6 +136,19 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         {
             PhotonNetwork.Destroy(itemView.gameObject);
         }
+    }
+
+    // Expose current item to other scripts
+    public string GetCurrentItem()
+    {
+        return currentItem;
+    }
+
+    // Consume the current item if it matches a specific type
+    public void ConsumeItem(string itemName)
+    {
+        if (currentItem == itemName)
+            currentItem = null;
     }
 }
 

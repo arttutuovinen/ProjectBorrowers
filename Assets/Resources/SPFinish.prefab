@@ -40,10 +40,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1059300076386283788}
-  - component: {fileID: 4889823746489516687}
   - component: {fileID: 5909375164338328550}
-  - component: {fileID: 2015226178335826368}
   - component: {fileID: 8046081717760311088}
+  - component: {fileID: 8521471972355023742}
   m_Layer: 14
   m_Name: SPFinish
   m_TagString: SPFinish
@@ -68,27 +67,6 @@ Transform:
   - {fileID: 6125386295039448766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4889823746489516687
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8536394408400741620}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.14, y: 1.29, z: 0.5}
-  m_Center: {x: 0, y: 0.81, z: 0.5}
 --- !u!114 &5909375164338328550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,19 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d772a759f08dee44ad8c449bd71aa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FinishTrigger
---- !u!114 &2015226178335826368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8536394408400741620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dfe5102356c5944fb53e943f0cd746c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TreasureSpawner
-  treasure: {fileID: 0}
+  door: {fileID: 6900348645643370389}
+  doorCloseAngle: 0
+  doorOpenAngle: 108
+  doorCloseSpeed: 2
 --- !u!114 &8046081717760311088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +105,27 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &8521471972355023742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8536394408400741620}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.55, z: 1}
+  m_Center: {x: 0, y: 0.78, z: 0.84}
 --- !u!1001 &7606448548653577724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -334,6 +324,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4630314, y: 0.10491799, z: 0.36652458}
   m_Center: {x: -0.0012580156, y: 0.030445, z: 0.0017213449}
+--- !u!4 &6900348645643370389 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3912922392005151337, guid: d037d5ad7c175664393e55164f89a3d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 7606448548653577724}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7927797535697359383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d037d5ad7c175664393e55164f89a3d5,

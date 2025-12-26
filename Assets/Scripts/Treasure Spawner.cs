@@ -1,17 +1,33 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class TreasureSpawner : MonoBehaviourPunCallbacks
 {
     public GameObject treasure;
-    private GameObject[] spawnPoints;
+    private Transform[] spawnPoints;
 
     void Start()
     {
-        spawnPoints = GameObject.FindGameObjectsWithTag("TreasureSpawnPoint");
+        // Collect all spawn points that are children and active
+        var points = GetComponentsInChildren<Transform>(true);
+        spawnPoints = System.Array.FindAll(points, t => t.CompareTag("TreasureSpawnPoint"));
     }
 
     public override void OnJoinedRoom()
+    {
+        if (PhotonNetwork.IsMasterClient)
+            StartCoroutine(TeleportAfterReady());
+    }
+
+    private IEnumerator TeleportAfterReady()
+    {
+        // Wait until spawn points exist and treasure is assigned
+        yield return new WaitUntil(() => spawnPoints != null && spawnPoints.Length > 0 && treasure != null);
+        TeleportTreasure();
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         if (PhotonNetwork.IsMasterClient)
             TeleportTreasure();
@@ -19,24 +35,23 @@ public class TreasureSpawner : MonoBehaviourPunCallbacks
 
     public void TeleportTreasure()
     {
-        if (!PhotonNetwork.IsMasterClient) return;
-        if (treasure == null || spawnPoints.Length == 0) return;
+        if (!PhotonNetwork.IsMasterClient || spawnPoints.Length == 0 || treasure == null) return;
 
         int index = Random.Range(0, spawnPoints.Length);
-        GameObject point = spawnPoints[index];
+        Transform point = spawnPoints[index];
 
         PhotonView pv = treasure.GetComponent<PhotonView>();
-        pv.RPC("RPC_TeleportTreasure", RpcTarget.AllBuffered,
-            point.transform.position,
-            point.transform.rotation);
+        if (pv != null)
+            pv.RPC("RPC_TeleportTreasure", RpcTarget.AllBuffered, point.position, point.rotation);
     }
+
     [PunRPC]
     public void RPC_TeleportTreasure(Vector3 pos, Quaternion rot)
     {
         if (treasure != null)
         {
             treasure.transform.SetPositionAndRotation(pos, rot);
-            treasure.SetActive(true); // Reactivate treasure on all clients
+            treasure.SetActive(true);
         }
     }
 }
