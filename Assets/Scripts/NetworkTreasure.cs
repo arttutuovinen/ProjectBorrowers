@@ -9,4 +9,10 @@ public class NetworkTreasure : MonoBehaviourPun
         transform.SetPositionAndRotation(pos, rot);
         gameObject.SetActive(true);
     }
+
+    [PunRPC]
+    public void RPC_DeactivateTreasure()
+    {
+        gameObject.SetActive(false);
+    }
 }

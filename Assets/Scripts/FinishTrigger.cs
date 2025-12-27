@@ -1,16 +1,16 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class FinishTrigger : MonoBehaviourPun
 {
     [Header("Door Settings")]
     public Transform door;
     public float doorCloseAngle = 0f;   // Final rotation when closed
-    public float doorOpenAngle = 108f;   // Initial rotation
-    public float doorCloseSpeed = 2f;    // Smooth rotation speed
+    public float doorOpenAngle = 108f;  // Initial rotation
+    public float doorCloseSpeed = 2f;   // Smooth rotation speed
 
     private bool treasureDelivered = false;
-   
 
     private void OnTriggerStay(Collider other)
     {
@@ -24,7 +24,7 @@ public class FinishTrigger : MonoBehaviourPun
         if (spCollector.GetCurrentItem() != "Treasure") return;
 
         // Deliver treasure on Fire1 press
-        if (Input.GetButtonDown("Fire1") && photonView.IsMine)
+        if (Input.GetButtonDown("Fire1"))
         {
             DeliverTreasure(spCollector);
         }
@@ -34,7 +34,7 @@ public class FinishTrigger : MonoBehaviourPun
     {
         treasureDelivered = true;
 
-        // Disable this trigger
+        // Disable this trigger so it cannot be reused
         GetComponent<Collider>().enabled = false;
 
         // Consume the Treasure from the SP client
@@ -45,9 +45,42 @@ public class FinishTrigger : MonoBehaviourPun
             StartCoroutine(CloseDoor());
 
         Debug.Log("Treasure delivered to SPFinish!");
+
+        // Notify MasterClient to spawn/teleport new Treasure
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC(nameof(RPC_RequestNewTreasure), RpcTarget.MasterClient);
+        }
+        else
+        {
+            SpawnNewTreasure();
+        }
     }
 
-    private System.Collections.IEnumerator CloseDoor()
+    [PunRPC]
+    private void RPC_RequestNewTreasure()
+    {
+        SpawnNewTreasure();
+    }
+
+    private void SpawnNewTreasure()
+    {
+        TreasureSpawner spawner = FindObjectOfType<TreasureSpawner>();
+        if (spawner != null)
+        {
+            // Reactivate the Treasure prefab instead of instantiating
+            if (spawner.treasure != null)
+                spawner.treasure.SetActive(true);
+
+            // Teleport it to a random spawn point
+            spawner.TeleportTreasure();
+
+            Debug.Log("Treasure reactivated and teleported by MasterClient.");
+        }
+    }
+
+
+    private IEnumerator CloseDoor()
     {
         float t = 0f;
         Quaternion startRot = door.localRotation;
@@ -61,17 +94,6 @@ public class FinishTrigger : MonoBehaviourPun
         }
 
         door.localRotation = targetRot;
-
-        // Find TreasureSpawner dynamically and teleport new treasure
-        if (PhotonNetwork.IsMasterClient)
-        {
-            TreasureSpawner spawner = FindObjectOfType<TreasureSpawner>();
-            if (spawner != null)
-            {
-                spawner.TeleportTreasure();
-            }
-        }
     }
-
 }
 

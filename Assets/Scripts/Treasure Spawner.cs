@@ -45,6 +45,7 @@ public class TreasureSpawner : MonoBehaviourPunCallbacks
             pv.RPC("RPC_TeleportTreasure", RpcTarget.AllBuffered, point.position, point.rotation);
     }
 
+
     [PunRPC]
     public void RPC_TeleportTreasure(Vector3 pos, Quaternion rot)
     {
