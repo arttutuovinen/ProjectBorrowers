@@ -15,12 +15,32 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private SPFlashbang flashBangScript;
     private SPSpring springScript;
 
+    private GameObject boppyPinUIImage;
+    private GameObject flashbangUIImage;
+    private GameObject springUIImage;
+    private GameObject treasureUIImage;
+
     private void Awake()
     {
         // Cache item scripts if attached
         boppyPinScript = GetComponent<SPBoppyPin>();
         flashBangScript = GetComponent<SPFlashbang>();
         springScript = GetComponent<SPSpring>();
+    }
+
+    private void Start()
+    {
+        if (!photonView.IsMine) return;
+        Canvas canvas = FindObjectOfType<Canvas>();
+        boppyPinUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/BoppyPin")?.gameObject;
+        flashbangUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Flashbang")?.gameObject;
+        springUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Spring")?.gameObject;
+        treasureUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Treasure")?.gameObject;
+
+        boppyPinUIImage.SetActive(false);
+        flashbangUIImage.SetActive(false);
+        springUIImage.SetActive(false);
+        treasureUIImage.SetActive(false);
     }
 
     private void Update()
@@ -70,6 +90,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         if (itemInTrigger.CompareTag("Collectible") && itemInTrigger.name.Contains("Treasure"))
         {
             currentItem = "Treasure";
+            treasureUIImage.SetActive(true);
             Debug.Log("Picked up the Treasure!");
 
             // Deactivate Treasure on all clients
@@ -84,6 +105,19 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
             // Other collectibles: destroy network-wide
             currentItem = itemName;
             Debug.Log($"Picked up {currentItem}");
+
+            if (itemName.Contains("BoppyPinCollectible"))
+            {
+                boppyPinUIImage.SetActive(true);
+            }
+            if (itemName.Contains("FlashBangCollectible"))
+            {
+                flashbangUIImage.SetActive(true);
+            }
+            if (itemName.Contains("SpringCollectible"))
+            {
+                springUIImage.SetActive(true);
+            }
 
             PhotonView itemPhotonView = itemInTrigger.GetComponent<PhotonView>();
             if (itemPhotonView != null && itemPhotonView.IsMine)
@@ -110,16 +144,19 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
             case "BoppyPinCollectible":
             case "BoppyPin":
                 boppyPinScript?.SpawnBoppyPin();
+                boppyPinUIImage.SetActive(false);
                 currentItem = null;
                 break;
 
             case "FlashBangCollectible":
                 flashBangScript?.SpawnFlashbang();
+                flashbangUIImage.SetActive(false);
                 currentItem = null;
                 break;
 
             case "SpringCollectible":
                 springScript?.UseSpring();
+                springUIImage.SetActive(false);
                 currentItem = null;
                 break;
 
@@ -157,6 +194,11 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     {
         if (currentItem == itemName)
             currentItem = null;
+    }
+    public void HideTreasureUI()
+    {
+        if (treasureUIImage != null)
+            treasureUIImage.SetActive(false);
     }
 }
 

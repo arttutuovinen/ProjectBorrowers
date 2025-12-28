@@ -39,7 +39,7 @@ public class FinishTrigger : MonoBehaviourPun
 
         // Consume the Treasure from the SP client
         spCollector.ConsumeItem("Treasure");
-
+        spCollector.HideTreasureUI();
         // Close the door smoothly
         if (door != null)
             StartCoroutine(CloseDoor());
