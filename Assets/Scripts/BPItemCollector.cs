@@ -37,6 +37,13 @@ public class BPItemCollector : MonoBehaviourPun
     private BPTapeManager bpTapeManager;
     private BPMedicine bpMedicine;
 
+    //Images
+    private GameObject medicineUIImage;
+    private GameObject vacuumUIImage;
+    private GameObject mouseTrapUIImage;
+    private GameObject tapeUIImage;
+    private GameObject throwingItem1UIImage;
+
     // ✔ All valid item tags
     private readonly HashSet<string> itemTags = new HashSet<string>
     {
@@ -60,6 +67,15 @@ public class BPItemCollector : MonoBehaviourPun
         bpVacuumCleaner = GetComponent<BPVacuumCleaner>();
         bpTapeManager = GetComponent<BPTapeManager>();
         bpMedicine = GetComponent<BPMedicine>();
+
+        if (!photonView.IsMine) return;
+        Canvas canvas = FindObjectOfType<Canvas>();
+        medicineUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Medicine")?.gameObject;
+        mouseTrapUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/MouseTrap")?.gameObject;
+        tapeUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Tape")?.gameObject;
+        vacuumUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Vacuum")?.gameObject;
+        throwingItem1UIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/ThrowingItem1")?.gameObject;
+
     }
 
     void Update()
@@ -106,6 +122,7 @@ public class BPItemCollector : MonoBehaviourPun
         {
             case "BPThrowItem":
                 currentItem = ItemType.ThrowingItem;
+                throwingItem1UIImage.SetActive(true);
                 break;
 
             case "BPThrowItem2":
@@ -118,26 +135,32 @@ public class BPItemCollector : MonoBehaviourPun
 
             case "BPFlySwatter":
                 currentItem = ItemType.FlySwatter;
+                //mouseTrapUIImage.SetActive(true);
                 break;
 
             case "BPMouseTrap":
                 currentItem = ItemType.MouseTrap;
+                mouseTrapUIImage.SetActive(true);
                 break;
 
             case "BPCompass":
                 currentItem = ItemType.Compass;
+                //vacuumUIImage.SetActive(true);
                 break;
 
             case "BPVacuumCleaner":
                 currentItem = ItemType.VacuumCleaner;
+                vacuumUIImage.SetActive(true);
                 break;
 
             case "BPTape":
                 currentItem = ItemType.Tape;
+                tapeUIImage.SetActive(true);
                 break;
 
             case "BPMedicine":
                 currentItem = ItemType.Medicine;
+                medicineUIImage.SetActive(true);
                 break;
         }
 
@@ -164,6 +187,7 @@ public class BPItemCollector : MonoBehaviourPun
         {
             case ItemType.ThrowingItem:
                 if (bpThrowItem != null) bpThrowItem.SpawnThrowItem();
+                throwingItem1UIImage.SetActive(false);
                 break;
 
             case ItemType.ThrowingItem_02:
@@ -180,6 +204,7 @@ public class BPItemCollector : MonoBehaviourPun
 
             case ItemType.MouseTrap:
                 if (bpMouseTrap != null) bpMouseTrap.SpawnMouseTrap();
+                mouseTrapUIImage.SetActive(false);
                 break;
 
             case ItemType.Compass:
@@ -188,6 +213,7 @@ public class BPItemCollector : MonoBehaviourPun
 
             case ItemType.VacuumCleaner:
                 if (bpVacuumCleaner != null) bpVacuumCleaner.TryPullTarget();
+                vacuumUIImage.SetActive(false);
                 break;
 
             case ItemType.Tape:
@@ -199,10 +225,12 @@ public class BPItemCollector : MonoBehaviourPun
                         return;
                     }
                 }
+                tapeUIImage.SetActive(false);
                 break;
 
             case ItemType.Medicine:
                 if (bpMedicine != null) bpMedicine.ActivateSpeedBoost();
+                medicineUIImage.SetActive(false);
                 break;
 
             default:
