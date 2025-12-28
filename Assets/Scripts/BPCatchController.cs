@@ -23,9 +23,12 @@ public class BPCatchController : MonoBehaviourPun, IPunObservable
 
     private float syncedArmVert = 0f;
 
+    private BPItemCollector itemCollector;
+
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
+        itemCollector = GetComponent<BPItemCollector>();
     }
 
     private void Update()
@@ -67,6 +70,7 @@ public class BPCatchController : MonoBehaviourPun, IPunObservable
     // -----------------------------------------------------------
     private void TryCatch()
     {
+        if (itemCollector != null && itemCollector.IsUsingItem) return;
         if (isCatching) return;
         if (Time.time < nextCatchTime) return;
 

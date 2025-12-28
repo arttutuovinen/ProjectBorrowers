@@ -44,6 +44,9 @@ public class BPItemCollector : MonoBehaviourPun
     private GameObject tapeUIImage;
     private GameObject throwingItem1UIImage;
 
+    public bool IsUsingItem { get; private set; }
+
+
     // ✔ All valid item tags
     private readonly HashSet<string> itemTags = new HashSet<string>
     {
@@ -89,6 +92,8 @@ public class BPItemCollector : MonoBehaviourPun
 
         if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("Fire1"))
             UseItem();
+
+
     }
 
     // -----------------------------------------------------------------------
@@ -182,6 +187,7 @@ public class BPItemCollector : MonoBehaviourPun
     public void UseItem()
     {
         if (!photonView.IsMine) return; // Only the local player can use items
+        IsUsingItem = true;
 
         switch (currentItem)
         {
@@ -237,10 +243,21 @@ public class BPItemCollector : MonoBehaviourPun
                 Debug.LogWarning("UseItem called but no valid currentItem selected.");
                 return;
         }
+        StartCoroutine(ResetUsingItem());
+    }
 
-        // Mark as used and reset
+    private IEnumerator ResetUsingItem()
+    {
+        yield return new WaitForSeconds(0.5f); // or item animation duration
+        IsUsingItem = false;
+
         itemUsed = true;
         currentItem = ItemType.None;
+    }
+
+    public bool HasItem()
+    {
+        return currentItem != ItemType.None;
     }
 
 }

@@ -14,8 +14,11 @@ public class BPFpAnimationController : MonoBehaviourPun
     // Track if any SP is currently captured
     private bool spCaptured = false;
 
+    private BPItemCollector itemCollector;
+
     public void Start()
     {
+        itemCollector = GetComponentInParent<BPItemCollector>();
         catchCollider.SetActive(false);
         Debug.Log("CatchCOllider is deactivated");
     }
@@ -23,6 +26,10 @@ public class BPFpAnimationController : MonoBehaviourPun
     void Update()
     {
         if (!photonView.IsMine) return;
+
+        // ❗ Block catch if BP is holding an item
+        if (itemCollector != null && itemCollector.HasItem())
+            return;
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -32,6 +39,7 @@ public class BPFpAnimationController : MonoBehaviourPun
 
     void TryCatch()
     {
+        if (itemCollector != null && itemCollector.IsUsingItem) return;
         if (isCoolingDown) return;
 
         StartCoroutine(CatchRoutine());
