@@ -12,49 +12,70 @@ public class FinishTrigger : MonoBehaviourPun
 
     private bool treasureDelivered = false;
 
+    private SPInteractionUI interactionUI;
+
+    void Start()
+    {
+        interactionUI = FindObjectOfType<SPInteractionUI>();
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if (treasureDelivered) return;
         if (!other.CompareTag("SmallPlayer")) return;
 
         var spCollector = other.GetComponent<SmallPlayerItemCollector>();
-        if (spCollector == null) return;
+        if (spCollector == null || !spCollector.photonView.IsMine) return;
 
-        // Check if player is holding Treasure
-        if (spCollector.GetCurrentItem() != "Treasure") return;
-
-        // Deliver treasure on Fire1 press
-        if (Input.GetButtonDown("Fire1"))
+        // Show Return-text only if holding treasure and not delivered
+        if (!treasureDelivered && spCollector.GetCurrentItem() == "Treasure")
         {
-            DeliverTreasure(spCollector);
+            spCollector.GetInteractionUI()?.ShowReturn();
+
+            // Deliver treasure
+            if (Input.GetButtonDown("Fire1"))
+            {
+                DeliverTreasure(spCollector);
+            }
         }
+        else
+        {
+            spCollector.GetInteractionUI()?.HideAll();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("SmallPlayer")) return;
+
+        var spCollector = other.GetComponent<SmallPlayerItemCollector>();
+        if (spCollector == null || !spCollector.photonView.IsMine) return;
+
+        // Always hide UI when leaving
+        spCollector.GetInteractionUI()?.HideAll();
     }
 
     private void DeliverTreasure(SmallPlayerItemCollector spCollector)
     {
         treasureDelivered = true;
 
-        // Disable this trigger so it cannot be reused
-        GetComponent<Collider>().enabled = false;
-
-        // Consume the Treasure from the SP client
+        // Consume treasure and hide its UI
         spCollector.ConsumeItem("Treasure");
         spCollector.HideTreasureUI();
-        // Close the door smoothly
+
+        // Hide the Return-text immediately after delivery
+        spCollector.GetInteractionUI()?.HideAll();
+
+        // Close door smoothly
         if (door != null)
             StartCoroutine(CloseDoor());
 
-        Debug.Log("Treasure delivered to SPFinish!");
+        Debug.Log("Treasure delivered!");
 
-        // Notify MasterClient to spawn/teleport new Treasure
+        // Spawn new treasure on MasterClient
         if (!PhotonNetwork.IsMasterClient)
-        {
             photonView.RPC(nameof(RPC_RequestNewTreasure), RpcTarget.MasterClient);
-        }
         else
-        {
             SpawnNewTreasure();
-        }
     }
 
     [PunRPC]

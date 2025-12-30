@@ -119,13 +119,11 @@ public class BPItemCollector : MonoBehaviourPun
         }
         if (interactionUI == null) return;
 
-        if (canPickUp)
+        // Only show Take-text if looking at collectible AND not holding an item
+        if (canPickUp && currentItem == ItemType.None)
             interactionUI.ShowTake();
         else
-            if (!canPickUp)
-        {
-            // do nothing, let door UI handle itself
-        }
+            interactionUI.HideTakeOnly(); // <-- only hide Take-text, not Open/Close
     }
 
     // -----------------------------------------------------------------------

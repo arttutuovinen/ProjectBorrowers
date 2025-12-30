@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro;
+
 
 public class SPMovementNET : MonoBehaviour
 {
@@ -37,11 +37,6 @@ public class SPMovementNET : MonoBehaviour
     private Collider ladder; // Reference to the ladder the player is interacting with
 
     private bool isTreasureCollected = true;
-
-    //Ladder text
-    public TextMeshProUGUI ladderInteractText;
-    
-    public TextMeshProUGUI itemInteractText;
     
     //Particles Stuff
     public ParticleSystem movementParticles;
@@ -49,12 +44,15 @@ public class SPMovementNET : MonoBehaviour
     public float emissionChangeSpeed = 10f; // How fast to fade in/out
     private ParticleSystem.EmissionModule emissionModule;
 
+    private SPInteractionUI interactionUI;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+        interactionUI = FindObjectOfType<SPInteractionUI>();
+
 
         if (playerCamera != null)
         {
@@ -68,11 +66,6 @@ public class SPMovementNET : MonoBehaviour
             cameraTransform.SetParent(null);
         }
 
-        // Hide the interact text at the start
-        if (ladderInteractText != null)
-        {
-            ladderInteractText.gameObject.SetActive(false); // Disable the text object initially
-        }
 
         if (movementParticles != null)
         {
@@ -160,6 +153,7 @@ public class SPMovementNET : MonoBehaviour
             {
                 isClimbing = true;
                 velocity.y = 0f; // Reset vertical velocity
+                interactionUI?.ShowRelease();
             }
         }
         
@@ -197,6 +191,7 @@ public class SPMovementNET : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("P1Interact"))
         {
             isClimbing = false;
+            interactionUI?.ShowClimb();
         }
     }
 
@@ -245,10 +240,7 @@ public class SPMovementNET : MonoBehaviour
             nearLadder = true;
             ladder = other;
 
-            if (ladderInteractText != null)
-            {
-                ladderInteractText.gameObject.SetActive(true); // Show text when near ladder
-            }
+            interactionUI?.ShowClimb();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -259,10 +251,7 @@ public class SPMovementNET : MonoBehaviour
             ladder = null;
             isClimbing = false; // Stop climbing when leaving the ladder
 
-            if (ladderInteractText != null)
-            {
-                ladderInteractText.gameObject.SetActive(false); // Deactivate text when the player exits the trigger
-            }
+            interactionUI?.HideAll();
         }
     }
      

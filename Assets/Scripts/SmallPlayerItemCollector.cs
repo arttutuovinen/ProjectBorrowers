@@ -20,6 +20,8 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private GameObject springUIImage;
     private GameObject treasureUIImage;
 
+    private SPInteractionUI interactionUI;
+
     private void Awake()
     {
         // Cache item scripts if attached
@@ -36,6 +38,8 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         flashbangUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Flashbang")?.gameObject;
         springUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Spring")?.gameObject;
         treasureUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Treasure")?.gameObject;
+
+        interactionUI = FindObjectOfType<SPInteractionUI>();
 
         boppyPinUIImage.SetActive(false);
         flashbangUIImage.SetActive(false);
@@ -64,9 +68,10 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;
 
-        if (other.CompareTag("Collectible"))
+        if (other.CompareTag("Collectible") && currentItem == null)
         {
             itemInTrigger = other.gameObject;
+            interactionUI?.ShowTake();
         }
     }
 
@@ -77,6 +82,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         if (itemInTrigger == other.gameObject)
         {
             itemInTrigger = null;
+            interactionUI?.HideAll();
         }
     }
 
@@ -131,6 +137,8 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         }
 
         itemInTrigger = null;
+        interactionUI?.HideAll();
+
     }
 
     private void UseCurrentItem()
@@ -199,6 +207,11 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     {
         if (treasureUIImage != null)
             treasureUIImage.SetActive(false);
+    }
+
+    public SPInteractionUI GetInteractionUI()
+    {
+        return interactionUI;
     }
 }
 

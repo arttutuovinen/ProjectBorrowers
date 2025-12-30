@@ -40,4 +40,8 @@ public class BPInteractionUI : MonoBehaviourPun
         closeText.SetActive(false);
         takeText.SetActive(false);
     }
+    public void HideTakeOnly()
+    {
+        takeText.SetActive(false);
+    }
 }
