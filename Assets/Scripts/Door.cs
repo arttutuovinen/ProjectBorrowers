@@ -13,6 +13,8 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
     private Quaternion targetRotation;
     private bool isAnimating;
 
+    public bool IsOpen => isDoorOpen;
+
     private void Awake()
     {
         initialRotation = transform.rotation;

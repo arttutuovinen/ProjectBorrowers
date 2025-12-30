@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 3271016351445557058}
   - component: {fileID: 6759395729989228288}
   - component: {fileID: 5266493116249135532}
+  - component: {fileID: 369396142448013922}
   - component: {fileID: 6597793729881182503}
   - component: {fileID: 3447934495327288878}
   - component: {fileID: 5307150729043974029}
@@ -751,6 +752,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf15b17e4fd53354b8e91c670f612c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BPUIHandler
+--- !u!114 &369396142448013922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b047922cd11c649a28e0ef17e38a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPInteractionUI
 --- !u!114 &6597793729881182503
 MonoBehaviour:
   m_ObjectHideFlags: 0

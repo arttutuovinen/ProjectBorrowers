@@ -44,6 +44,8 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
     private float networkYaw = 0f;
     public float rotationLerpSpeed = 8f;
 
+    private BPInteractionUI interactionUI;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -52,7 +54,7 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
         currentSpeed = moveSpeed;
         controller.height = standingHeight;
         controller.center = standingCenter;
-
+        interactionUI = FindObjectOfType<BPInteractionUI>();
         if (cameraTransform != null)
             originalCameraLocalY = cameraTransform.localPosition.y;
     }
@@ -89,6 +91,21 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
         {
             lookedAtDoor = hit.collider.GetComponentInParent<Door>();
         }
+
+        if (interactionUI == null) return;
+
+        if (lookedAtDoor == null)
+        {
+            interactionUI.HideAll();
+        }
+        else
+        {
+            if (lookedAtDoor.IsOpen)
+                interactionUI.ShowClose();
+            else
+                interactionUI.ShowOpen();
+        }
+
     }
     private void HandleDoorInput()
     {

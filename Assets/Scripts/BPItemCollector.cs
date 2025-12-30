@@ -46,6 +46,7 @@ public class BPItemCollector : MonoBehaviourPun
 
     public bool IsUsingItem { get; private set; }
 
+    private BPInteractionUI interactionUI;
 
     // ✔ All valid item tags
     private readonly HashSet<string> itemTags = new HashSet<string>
@@ -70,6 +71,8 @@ public class BPItemCollector : MonoBehaviourPun
         bpVacuumCleaner = GetComponent<BPVacuumCleaner>();
         bpTapeManager = GetComponent<BPTapeManager>();
         bpMedicine = GetComponent<BPMedicine>();
+
+        interactionUI = FindObjectOfType<BPInteractionUI>();
 
         if (!photonView.IsMine) return;
         Canvas canvas = FindObjectOfType<Canvas>();
@@ -113,6 +116,15 @@ public class BPItemCollector : MonoBehaviourPun
                 collectedItem = hit.collider.gameObject;
                 canPickUp = true;
             }
+        }
+        if (interactionUI == null) return;
+
+        if (canPickUp)
+            interactionUI.ShowTake();
+        else
+            if (!canPickUp)
+        {
+            // do nothing, let door UI handle itself
         }
     }
 
