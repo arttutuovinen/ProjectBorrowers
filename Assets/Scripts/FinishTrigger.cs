@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using System.Collections;
 
@@ -13,6 +13,7 @@ public class FinishTrigger : MonoBehaviourPun
     private bool treasureDelivered = false;
 
     private SPInteractionUI interactionUI;
+    private SPScoreManager scoreManager;
 
     void Start()
     {
@@ -26,20 +27,34 @@ public class FinishTrigger : MonoBehaviourPun
         var spCollector = other.GetComponent<SmallPlayerItemCollector>();
         if (spCollector == null || !spCollector.photonView.IsMine) return;
 
-        // Show Return-text only if holding treasure and not delivered
+        var scoreManager = spCollector.GetComponent<SPScoreManager>();
+        var interactionUI = spCollector.GetInteractionUI();
+
+        // 1️⃣ If player is holding treasure and hasn't delivered yet → show Return
         if (!treasureDelivered && spCollector.GetCurrentItem() == "Treasure")
         {
-            spCollector.GetInteractionUI()?.ShowReturn();
+            interactionUI?.ShowReturn();
 
-            // Deliver treasure
             if (Input.GetButtonDown("Fire1"))
             {
                 DeliverTreasure(spCollector);
+                scoreManager?.AddTreasure();
             }
         }
+        // 2️⃣ Show Enter ONLY if all treasures collected AND this door hasn't been closed
+        else if (!treasureDelivered && scoreManager != null && scoreManager.treasuresCollected >= scoreManager.totalTreasures)
+        {
+            interactionUI?.ShowEnter();
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                spCollector.gameObject.SetActive(false);
+            }
+        }
+        // 3️⃣ Otherwise hide UI
         else
         {
-            spCollector.GetInteractionUI()?.HideAll();
+            interactionUI?.HideAll();
         }
     }
 
@@ -50,7 +65,6 @@ public class FinishTrigger : MonoBehaviourPun
         var spCollector = other.GetComponent<SmallPlayerItemCollector>();
         if (spCollector == null || !spCollector.photonView.IsMine) return;
 
-        // Always hide UI when leaving
         spCollector.GetInteractionUI()?.HideAll();
     }
 
