@@ -22,28 +22,16 @@ public class BPScoreManager : MonoBehaviourPun
         // Update UI on all clients when joining mid-game
         UpdateText(currentCaptured);
     }
-    
-    private void OnTriggerEnter(Collider other)
+
+    [PunRPC]
+    private void RPC_RequestAddCapture()
     {
-        if (!PhotonNetwork.IsMasterClient) return; // Only Master Client counts
-        if (!other.CompareTag("SmallPlayer")) return;
+        if (!PhotonNetwork.IsMasterClient)
+            return;
 
         currentCaptured++;
         currentCaptured = Mathf.Clamp(currentCaptured, 0, maxCaptured);
 
-        // Sync count to all clients
-        photonView.RPC("RPC_UpdateCapturedCount", RpcTarget.All, currentCaptured);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!PhotonNetwork.IsMasterClient) return; // Only Master Client counts
-        if (!other.CompareTag("SmallPlayer")) return;
-
-        currentCaptured--;
-        currentCaptured = Mathf.Clamp(currentCaptured, 0, maxCaptured);
-
-        // Sync count to all clients
         photonView.RPC("RPC_UpdateCapturedCount", RpcTarget.All, currentCaptured);
     }
 

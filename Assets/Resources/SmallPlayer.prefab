@@ -5070,6 +5070,7 @@ GameObject:
   - component: {fileID: 457389529722468420}
   - component: {fileID: 5644917193308100841}
   - component: {fileID: 6352348488652347470}
+  - component: {fileID: 2698806620285314437}
   - component: {fileID: 8643245985604792946}
   - component: {fileID: 1690847718266613209}
   - component: {fileID: 2418062032959012515}
@@ -5351,6 +5352,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SPCaptureHandler
   bpPrefabTransform: {fileID: 8607215866161607478, guid: 7dd40257ced48d9478948e279c7526d3,
     type: 3}
+--- !u!114 &2698806620285314437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562c112eec05e7d499f67aeabce13ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SPCaptureReporter
 --- !u!114 &8643245985604792946
 MonoBehaviour:
   m_ObjectHideFlags: 0
