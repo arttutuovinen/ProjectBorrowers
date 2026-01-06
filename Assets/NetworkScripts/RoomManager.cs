@@ -64,6 +64,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnConnectedToMaster();
 
+        PhotonNetwork.AutomaticallySyncScene = true;
+
         PhotonNetwork.JoinOrCreateRoom(
             "TestRoom",
             new RoomOptions { MaxPlayers = 8 },

@@ -1,25 +1,24 @@
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using System.Collections;
 
 public class BPScoreManager : MonoBehaviourPun
 {
     [Header("Settings")]
-    public int maxCaptured = 2;
+    public int maxCaptured = 1;
 
     private int currentCaptured = 0;
     private TextMeshProUGUI captureText;
+    private GameObject bpWins;
+    private bool gameEnded = false;
 
     private void Start()
     {
-        // Find Capture text at runtime
-        GameObject captureObj = GameObject.Find("Canvas/BigPlayerUI/Capture");
-        if (captureObj != null)
-            captureText = captureObj.GetComponent<TextMeshProUGUI>();
-        else
-            Debug.LogError("Capture text not found in scene!");
+        captureText = GameObject.Find("Canvas/BigPlayerUI/Capture")
+            ?.GetComponent<TextMeshProUGUI>();
 
-        // Update UI on all clients when joining mid-game
+        bpWins = GameObject.Find("Canvas/BPWins");
         UpdateText(currentCaptured);
     }
 
@@ -29,9 +28,7 @@ public class BPScoreManager : MonoBehaviourPun
         if (!PhotonNetwork.IsMasterClient)
             return;
 
-        currentCaptured++;
-        currentCaptured = Mathf.Clamp(currentCaptured, 0, maxCaptured);
-
+        currentCaptured = Mathf.Clamp(currentCaptured + 1, 0, maxCaptured);
         photonView.RPC("RPC_UpdateCapturedCount", RpcTarget.All, currentCaptured);
     }
 
@@ -40,6 +37,24 @@ public class BPScoreManager : MonoBehaviourPun
     {
         currentCaptured = newCount;
         UpdateText(currentCaptured);
+
+        if (!gameEnded && currentCaptured >= maxCaptured)
+        {
+            gameEnded = true;
+
+            if (bpWins != null)
+                bpWins.SetActive(true);
+
+            StartCoroutine(WinTimer());
+        }
+    }
+
+    private IEnumerator WinTimer()
+    {
+        yield return new WaitForSeconds(3f);
+
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel("MainMenu");
     }
 
     private void UpdateText(int count)
