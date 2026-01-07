@@ -15,10 +15,11 @@ public class BPScoreManager : MonoBehaviourPun
 
     private void Start()
     {
+        Canvas canvas = FindObjectOfType<Canvas>();
         captureText = GameObject.Find("Canvas/BigPlayerUI/Capture")
             ?.GetComponent<TextMeshProUGUI>();
 
-        bpWins = GameObject.Find("Canvas/BPWins");
+        bpWins = canvas.transform.Find("BPWins")?.gameObject;
         UpdateText(currentCaptured);
     }
 
@@ -45,13 +46,14 @@ public class BPScoreManager : MonoBehaviourPun
             if (bpWins != null)
                 bpWins.SetActive(true);
 
-            StartCoroutine(WinTimer());
+            if (PhotonNetwork.IsMasterClient)
+                StartCoroutine(WinTimer());
         }
     }
 
     private IEnumerator WinTimer()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
 
         if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.LoadLevel("MainMenu");
