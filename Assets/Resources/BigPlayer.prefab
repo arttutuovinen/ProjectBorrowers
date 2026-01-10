@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 6481876273859450188}
   - component: {fileID: 8769194568731714403}
   - component: {fileID: 8039534777675431030}
+  - component: {fileID: 4952890808896296961}
   - component: {fileID: 1306958205652911868}
   - component: {fileID: 7549007834672380184}
   - component: {fileID: 3271016351445557058}
@@ -578,7 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae62bb4e07c3fc64485af1d197bec173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDistance: 8
+  rayDistance: 6
   collectibleLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -655,6 +656,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8307f3d4d41e0a4384d2bdb231ae94f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BPPrisonRaycaster
+  rayDistance: 10
+  prisonLayer:
+    serializedVersion: 2
+    m_Bits: 524288
+  bpCameraTransform: {fileID: 4682854195769893218}
+--- !u!114 &4952890808896296961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98ae798c58de5246a048f89f829e648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPPrisonUICaster
   rayDistance: 10
   prisonLayer:
     serializedVersion: 2

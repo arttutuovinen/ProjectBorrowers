@@ -75,7 +75,7 @@ public class BPItemCollector : MonoBehaviourPun
         interactionUI = FindObjectOfType<BPInteractionUI>();
 
         if (!photonView.IsMine) return;
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         medicineUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Medicine")?.gameObject;
         mouseTrapUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/MouseTrap")?.gameObject;
         tapeUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Tape")?.gameObject;

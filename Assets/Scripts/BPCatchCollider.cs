@@ -24,7 +24,8 @@ public class BPCatchCollider : MonoBehaviour
 
         // Capture SP
         spPV.RPC("RPC_OnCaptured", RpcTarget.All);
-
+        BPScoreManager pm = FindFirstObjectByType<BPScoreManager>();
+        pm.photonView.RPC("RPC_DisableScoreTrigger", RpcTarget.All);
         // ✅ Play caught animation on BP client
         BPFpAnimationController bpAnim = GetComponentInParent<BPFpAnimationController>();
         if (bpAnim != null && bpAnim.photonView.IsMine)

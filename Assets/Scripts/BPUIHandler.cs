@@ -12,7 +12,7 @@ public class BPUIHandler : MonoBehaviourPun
         // If not assigned, find it even if inactive
         if (bigPlayerUI == null)
         {
-            Canvas canvas = FindObjectOfType<Canvas>();
+            Canvas canvas = Object.FindFirstObjectByType<Canvas>();
             bigPlayerUI = canvas.transform.Find("BigPlayerUI")?.gameObject;
         }
 

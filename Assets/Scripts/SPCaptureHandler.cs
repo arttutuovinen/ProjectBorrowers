@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using System.Linq;
 
 public class SPCaptureHandler : MonoBehaviourPun
 {
@@ -117,7 +118,8 @@ public class SPCaptureHandler : MonoBehaviourPun
             spProxy_BP.SetActive(false);
 
         // Reset BP caught animation on SP client
-        BPCatchController[] bpControllers = FindObjectsOfType<BPCatchController>();
+        BPCatchController[] bpControllers =
+    FindObjectsByType<BPCatchController>(FindObjectsSortMode.None);
         foreach (var bp in bpControllers)
         {
             if (!bp.photonView.IsMine)

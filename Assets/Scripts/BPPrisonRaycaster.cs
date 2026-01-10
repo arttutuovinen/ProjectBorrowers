@@ -26,6 +26,8 @@ public class BPPrisonRaycaster : MonoBehaviour
             if (!t.CompareTag("SmallPlayerJailTeleport")) continue;
 
             capturedSP.RPC("RPC_OnJailed", RpcTarget.All, t.position);
+            BPScoreManager pm = FindFirstObjectByType<BPScoreManager>();
+            pm.photonView.RPC("RPC_EnableScoreTrigger", RpcTarget.All);
             capturedSP = null;
             break;
         }

@@ -12,10 +12,11 @@ public class BPScoreManager : MonoBehaviourPun
     private TextMeshProUGUI captureText;
     private GameObject bpWins;
     private bool gameEnded = false;
+    public Collider scoreTrigger;
 
     private void Start()
     {
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         captureText = GameObject.Find("Canvas/BigPlayerUI/Capture")
             ?.GetComponent<TextMeshProUGUI>();
 
@@ -63,5 +64,17 @@ public class BPScoreManager : MonoBehaviourPun
     {
         if (captureText != null)
             captureText.text = $"Captured: {count}/{maxCaptured}";
+    }
+
+    [PunRPC]
+    public void RPC_DisableScoreTrigger()
+    {
+        scoreTrigger.enabled = false;
+    }
+
+    [PunRPC]
+    public void RPC_EnableScoreTrigger()
+    {
+        scoreTrigger.enabled = true;
     }
 }
