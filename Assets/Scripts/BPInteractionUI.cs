@@ -8,14 +8,12 @@ public class BPInteractionUI : MonoBehaviourPun
 
     void Awake()
     {
-        if (!photonView.IsMine) return;
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         openText = canvas.transform.Find("BigPlayerUI/Open")?.gameObject;
         closeText = canvas.transform.Find("BigPlayerUI/Close")?.gameObject;
         takeText = canvas.transform.Find("BigPlayerUI/Take")?.gameObject;
-        captureSPText = canvas.GetComponentsInChildren<Transform>(true) // 'true' includes inactive
-                     .FirstOrDefault(t => t.name == "CaptureSP")?.gameObject;
-
+        captureSPText = canvas.transform.Find("BigPlayerUI/CaptureSP")?.gameObject;
+                      
         HideAll();
     }
 
@@ -40,8 +38,19 @@ public class BPInteractionUI : MonoBehaviourPun
     public void ShowCaptureSP()
     {
         HideAll();
+
+        if (captureSPText == null)
+        {
+            Debug.LogError("BPInteractionUI: captureSPText is null!");
+            return;
+        }
+
         captureSPText.SetActive(true);
+
+        Debug.Log("ShowCaptureSP called. Active in hierarchy: " + captureSPText.activeInHierarchy +
+                  ", parent active: " + (captureSPText.transform.parent != null ? captureSPText.transform.parent.gameObject.activeInHierarchy : "no parent"));
     }
+
 
     public void HideAll()
     {
@@ -53,5 +62,10 @@ public class BPInteractionUI : MonoBehaviourPun
     public void HideTakeOnly()
     {
         takeText.SetActive(false);
+    }
+    public void HideCaptureSP()
+    {
+        if (captureSPText != null)
+            captureSPText.SetActive(false);
     }
 }
