@@ -5,6 +5,7 @@ using System.Linq;
 public class BPInteractionUI : MonoBehaviourPun
 {
     GameObject openText, closeText, takeText, captureSPText;
+    public bool captureModeActive;
 
     void Awake()
     {
@@ -37,6 +38,7 @@ public class BPInteractionUI : MonoBehaviourPun
 
     public void ShowCaptureSP()
     {
+        captureModeActive = true;
         HideAll();
 
         if (captureSPText == null)
@@ -46,23 +48,23 @@ public class BPInteractionUI : MonoBehaviourPun
         }
 
         captureSPText.SetActive(true);
-
-        Debug.Log("ShowCaptureSP called. Active in hierarchy: " + captureSPText.activeInHierarchy +
-                  ", parent active: " + (captureSPText.transform.parent != null ? captureSPText.transform.parent.gameObject.activeInHierarchy : "no parent"));
     }
-
 
     public void HideAll()
     {
+        if (captureModeActive) return;   // <---- THIS IS THE FIX
+
         openText.SetActive(false);
         closeText.SetActive(false);
         takeText.SetActive(false);
         captureSPText.SetActive(false);
     }
+
     public void HideTakeOnly()
     {
         takeText.SetActive(false);
     }
+
     public void HideCaptureSP()
     {
         if (captureSPText != null)

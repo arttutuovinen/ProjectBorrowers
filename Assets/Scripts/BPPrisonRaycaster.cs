@@ -34,30 +34,31 @@ public class BPPrisonRaycaster : MonoBehaviour
 
     void Update()
     {
-        // Only local Big Player runs this
         if (ownerPV == null || !ownerPV.IsMine) return;
         if (bpCameraTransform == null || interactionUI == null) return;
 
-        // Draw debug ray
         Ray ray = new Ray(bpCameraTransform.position, bpCameraTransform.forward);
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green);
 
-        // Show CaptureSP UI if BP has a captured SP and ray hits prison trigger
-        if (capturedSP != null)
+        if (capturedSP != null &&
+            Physics.Raycast(ray, out RaycastHit hit, rayDistance, prisonLayer, QueryTriggerInteraction.Collide))
         {
-            if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, prisonLayer, QueryTriggerInteraction.Collide))
-            {
-                interactionUI.ShowCaptureSP();
-                Debug.Log("Ray hit prison trigger: " + hit.collider.name);
+            interactionUI.ShowCaptureSP();
+            Debug.Log("Ray hit prison trigger: " + hit.collider.name);
 
-                // Handle E press to jail SP
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    JailSP(hit);
-                }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                JailSP(hit);
             }
         }
+        else
+        {
+            // If ANY condition fails, release capture UI
+            interactionUI.captureModeActive = false;
+            interactionUI.HideCaptureSP();
+        }
     }
+
 
     private void JailSP(RaycastHit hit)
     {

@@ -33,6 +33,8 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private void Start()
     {
         if (!photonView.IsMine) return;
+
+        // Cache UI
         Canvas canvas = FindObjectOfType<Canvas>();
         boppyPinUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/BoppyPin")?.gameObject;
         flashbangUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Flashbang")?.gameObject;
@@ -92,14 +94,13 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
 
         string itemName = itemInTrigger.name.Replace("(Clone)", "").Trim();
 
-        // TREASURE pickup
         if (itemInTrigger.CompareTag("Collectible") && itemInTrigger.name.Contains("Treasure"))
         {
             currentItem = "Treasure";
             treasureUIImage.SetActive(true);
             Debug.Log("Picked up the Treasure!");
 
-            // Deactivate Treasure on all clients
+            // Deactivate treasure across all clients
             PhotonView pv = itemInTrigger.GetComponent<PhotonView>();
             if (pv != null)
                 pv.RPC("RPC_DeactivateTreasure", RpcTarget.AllBuffered);
@@ -108,44 +109,31 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         }
         else
         {
-            // Other collectibles: destroy network-wide
+            // Other collectibles
             currentItem = itemName;
             Debug.Log($"Picked up {currentItem}");
 
             if (itemName.Contains("BoppyPinCollectible"))
-            {
                 boppyPinUIImage.SetActive(true);
-            }
             if (itemName.Contains("FlashBangCollectible"))
-            {
                 flashbangUIImage.SetActive(true);
-            }
             if (itemName.Contains("SpringCollectible"))
-            {
                 springUIImage.SetActive(true);
-            }
 
             PhotonView itemPhotonView = itemInTrigger.GetComponent<PhotonView>();
             if (itemPhotonView != null && itemPhotonView.IsMine)
-            {
                 PhotonNetwork.Destroy(itemInTrigger);
-            }
             else if (itemPhotonView != null)
-            {
                 photonView.RPC(nameof(RequestItemDestroyRPC), itemPhotonView.Owner, itemPhotonView.ViewID);
-            }
         }
 
         itemInTrigger = null;
         interactionUI?.HideAll();
-
     }
 
     private void UseCurrentItem()
     {
         if (currentItem == null) return;
-
-        Debug.Log($"Used {currentItem}");
 
         switch (currentItem)
         {
@@ -169,7 +157,6 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
                 break;
 
             case "Treasure":
-                // Treasure usage is handled by FinishTrigger
                 Debug.Log("Holding Treasure. Go to SPFinish to deliver.");
                 break;
         }
@@ -180,9 +167,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     {
         PhotonView itemView = PhotonView.Find(viewID);
         if (itemView != null && itemView.IsMine)
-        {
             PhotonNetwork.Destroy(itemView.gameObject);
-        }
     }
 
     [PunRPC]
@@ -192,17 +177,15 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     }
 
     // Expose current item to other scripts
-    public string GetCurrentItem()
-    {
-        return currentItem;
-    }
+    public string GetCurrentItem() => currentItem;
 
-    // Consume the current item if it matches a specific type
+    // Consume current item if it matches a specific type
     public void ConsumeItem(string itemName)
     {
         if (currentItem == itemName)
             currentItem = null;
     }
+
     public void HideTreasureUI()
     {
         if (treasureUIImage != null)
