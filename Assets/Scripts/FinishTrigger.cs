@@ -11,16 +11,12 @@ public class FinishTrigger : MonoBehaviourPun
     public float doorOpenAngle = 108f;  // Initial rotation
     public float doorCloseSpeed = 2f;   // Smooth rotation speed
 
-    [Header("Treasure State")]
-    public int treasuresDelivered = 0;
-    public int totalTreasures = 3;
-
     private bool doorClosed = false;
 
     private SPInteractionUI interactionUI;
+    private bool doorUsed = false;
+    private bool treasureDeliveredHere = false;
 
-    // Keep track of which players have already delivered
-    private readonly System.Collections.Generic.HashSet<int> playersWhoDelivered = new();
 
     void Start()
     {
@@ -32,10 +28,7 @@ public class FinishTrigger : MonoBehaviourPun
         if (!other.CompareTag("SmallPlayer")) return;
 
         SmallPlayerItemCollector spCollector = other.GetComponent<SmallPlayerItemCollector>();
-        if (spCollector == null || !spCollector.photonView.IsMine) return;
-
-        // If player already delivered treasure, ignore
-        if (playersWhoDelivered.Contains(spCollector.photonView.ViewID)) return;
+        if (spCollector == null) return;
 
         // 1️⃣ If player is holding treasure → show Return
         if (spCollector.GetCurrentItem() == "Treasure")
@@ -47,21 +40,25 @@ public class FinishTrigger : MonoBehaviourPun
                 DeliverTreasure(spCollector);
             }
         }
-        // 2️⃣ Show Enter if all treasures collected and door not closed
-        else if (!doorClosed && treasuresDelivered >= totalTreasures)
+        // 2️⃣ If all treasures delivered AND this SPFinish hasn’t received a treasure → show Enter
+        else if (!doorClosed &&
+                 TreasureScoreManager.Instance.treasuresDelivered >=
+                 TreasureScoreManager.Instance.totalTreasures &&
+                 !treasureDeliveredHere)  // Only unused SPFinish
         {
             spCollector.GetInteractionUI()?.ShowEnter();
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && spCollector.photonView.IsMine)
             {
-                spCollector.gameObject.SetActive(false);
+                spCollector.photonView.RPC(nameof(SmallPlayerItemCollector.RPC_Escape), RpcTarget.All);
             }
         }
+        // 3️⃣ Otherwise → hide interaction UI
         else
         {
             spCollector.GetInteractionUI()?.HideAll();
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {
@@ -75,11 +72,11 @@ public class FinishTrigger : MonoBehaviourPun
 
     private void DeliverTreasure(SmallPlayerItemCollector spCollector)
     {
-        // Prevent multiple deliveries per player
-        if (playersWhoDelivered.Contains(spCollector.photonView.ViewID)) return;
+        if (doorUsed) return;   // door can only accept one treasure
+        doorUsed = true;
 
-        // Mark player as delivered
-        playersWhoDelivered.Add(spCollector.photonView.ViewID);
+        // Mark this SPFinish as used
+        treasureDeliveredHere = true;
 
         // Local visuals
         spCollector.ConsumeItem("Treasure");
@@ -89,7 +86,7 @@ public class FinishTrigger : MonoBehaviourPun
         // MasterClient handles authoritative treasure delivery
         if (!PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC(nameof(RPC_RequestTreasureDelivery), RpcTarget.MasterClient, spCollector.photonView.ViewID);
+            photonView.RPC(nameof(RPC_RequestTreasureDelivery), RpcTarget.MasterClient);
         }
         else
         {
@@ -101,48 +98,30 @@ public class FinishTrigger : MonoBehaviourPun
             StartCoroutine(CloseDoor());
     }
 
+
     [PunRPC]
-    private void RPC_RequestTreasureDelivery(int playerViewID)
+    private void RPC_RequestTreasureDelivery()
     {
-        // Mark player as delivered on MasterClient
-        playersWhoDelivered.Add(playerViewID);
+        if (doorUsed) return;
+        doorUsed = true;
         RegisterTreasureDelivery();
     }
 
     private void RegisterTreasureDelivery()
     {
-        treasuresDelivered++;
+        // Update the score
+        TreasureScoreManager.Instance.photonView
+            .RPC(nameof(TreasureScoreManager.RPC_AddTreasure), RpcTarget.MasterClient);
 
-        // Update UI for all clients
-        photonView.RPC(nameof(RPC_UpdateTreasureUI), RpcTarget.All, treasuresDelivered);
-
-        // Spawn a new treasure if needed (MasterClient only)
+        // Reactivate and teleport treasure (MasterClient only)
         if (PhotonNetwork.IsMasterClient)
-        {
             SpawnNewTreasure();
-        }
 
-        // If all treasures delivered, mark door closed
-        if (treasuresDelivered >= totalTreasures)
-        {
-            doorClosed = true;
-        }
-
-        Debug.Log($"Treasures Delivered: {treasuresDelivered}/{totalTreasures}");
+        // Close door
+        if (door != null && !doorClosed)
+            StartCoroutine(CloseDoor());
     }
 
-    [PunRPC]
-    private void RPC_UpdateTreasureUI(int value)
-    {
-        // Update UI for all SmallPlayer clients
-        SmallPlayerItemCollector[] allPlayers = FindObjectsOfType<SmallPlayerItemCollector>();
-        foreach (var sp in allPlayers)
-        {
-            var uiText = sp.GetComponentInChildren<TextMeshProUGUI>();
-            if (uiText != null)
-                uiText.text = $"Treasures: {value}/{totalTreasures}";
-        }
-    }
 
     private void SpawnNewTreasure()
     {

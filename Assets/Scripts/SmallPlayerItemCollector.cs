@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class SmallPlayerItemCollector : MonoBehaviourPun
 {
@@ -19,8 +20,10 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private GameObject flashbangUIImage;
     private GameObject springUIImage;
     private GameObject treasureUIImage;
+    private TextMeshProUGUI treasureText;
 
     private SPInteractionUI interactionUI;
+    private GameObject escapeText;
 
     private void Awake()
     {
@@ -40,6 +43,9 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         flashbangUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Flashbang")?.gameObject;
         springUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Spring")?.gameObject;
         treasureUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Treasure")?.gameObject;
+        treasureText = canvas.transform.Find("SmallPlayerUI/Treasures").GetComponent<TextMeshProUGUI>();
+        escapeText = canvas.transform.Find("SmallPlayerUI/Escape")?.gameObject; // NEW
+        if (escapeText != null) escapeText.SetActive(false);
 
         interactionUI = FindObjectOfType<SPInteractionUI>();
 
@@ -196,5 +202,32 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     {
         return interactionUI;
     }
+
+    public void SetTreasureCount(int value, int max)
+    {
+        if (treasureText != null)
+            treasureText.text = $"Treasures: {value}/{max}";
+    }
+
+    // Add a method to update Escape visibility
+    public void SetEscapeActive(bool active)
+    {
+        if (escapeText != null)
+            escapeText.SetActive(active);
+    }
+
+    [PunRPC]
+    public void RPC_Escape()
+    {
+        // Disable the SP client across all clients
+        gameObject.SetActive(false);
+
+        // Optional: hide UI for this client
+        if (photonView.IsMine)
+        {
+            interactionUI?.HideAll();
+        }
+    }
+
 }
 
