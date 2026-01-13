@@ -7,7 +7,6 @@ public class SPInteractionUI : MonoBehaviourPun
 
     void Awake()
     {
-        if (!photonView.IsMine) return;
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
         climbText = canvas.transform.Find("SmallPlayerUI/Climb")?.gameObject;
         releaseText = canvas.transform.Find("SmallPlayerUI/Release")?.gameObject;

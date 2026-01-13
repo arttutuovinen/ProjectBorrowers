@@ -228,6 +228,12 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
             interactionUI?.HideAll();
         }
     }
-
+    [PunRPC]
+    public void RPC_OnTreasureDelivered()
+    {
+        currentItem = null;
+        HideTreasureUI();
+        interactionUI?.HideAll();
+    }
 }
 

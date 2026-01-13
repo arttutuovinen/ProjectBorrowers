@@ -16,14 +16,13 @@ public class TreasureScoreManager : MonoBehaviourPun
     [PunRPC]
     public void RPC_AddTreasure()
     {
-        if (!PhotonNetwork.IsMasterClient) return;
-
         treasuresDelivered++;
+
         photonView.RPC(nameof(RPC_UpdateUI), RpcTarget.All, treasuresDelivered);
     }
 
     [PunRPC]
-    private void RPC_UpdateUI(int value)
+    public void RPC_UpdateUI(int value)
     {
         foreach (var sp in FindObjectsOfType<SmallPlayerItemCollector>())
         {
