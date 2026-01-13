@@ -26,15 +26,16 @@ public class TreasureScoreManager : MonoBehaviourPun
     {
         foreach (var sp in FindObjectsOfType<SmallPlayerItemCollector>())
         {
-            if (sp.photonView.IsMine)
-            {
-                sp.SetTreasureCount(value, totalTreasures);
+            // Remove the IsMine check so all clients update their UI
+            // if (sp.photonView.IsMine) <-- remove this line
 
-                // Show Escape text if all treasures delivered
-                if (value >= totalTreasures)
-                    sp.SetEscapeActive(true);
-            }
+            sp.SetTreasureCount(value, totalTreasures);
+
+            // Show Escape text if all treasures delivered
+            if (value >= totalTreasures)
+                sp.SetEscapeActive(true);
         }
     }
+
 
 }

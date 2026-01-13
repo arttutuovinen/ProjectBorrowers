@@ -39,26 +39,29 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
                 DeliverTreasure(spCollector);
             }
         }
-        // 2️⃣ If all treasures delivered AND this SPFinish hasn’t received a treasure → show Enter
         else if (!doorClosed &&
-                 TreasureScoreManager.Instance.treasuresDelivered >=
-                 TreasureScoreManager.Instance.totalTreasures &&
-                 !doorUsed)
+         TreasureScoreManager.Instance.treasuresDelivered >=
+         TreasureScoreManager.Instance.totalTreasures &&
+         !doorUsed)
 
         {
+            // Show Enter for everyone
             spCollector.GetInteractionUI()?.ShowEnter();
-            if (Input.GetKeyDown(KeyCode.E) && spCollector.photonView.IsMine)
+
+            // Let any SP client press E to escape
+            if (Input.GetKeyDown(KeyCode.E))
             {
+                // Call RPC_Escape on this player for all clients
                 spCollector.photonView.RPC(nameof(SmallPlayerItemCollector.RPC_Escape), RpcTarget.All);
             }
         }
+
         // 3️⃣ Otherwise → hide interaction UI
         else
         {
             spCollector.GetInteractionUI()?.HideAll();
         }
     }
-
 
     private void OnTriggerExit(Collider other)
     {
@@ -76,8 +79,6 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
 
         photonView.RPC(nameof(RPC_RequestTreasureDelivery), RpcTarget.MasterClient, spCollector.photonView.ViewID);
     }
-
-
 
     private void RegisterTreasureDelivery()
     {
@@ -126,8 +127,6 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
         }
     }
 
-
-
     [PunRPC]
     private void RPC_SpawnNewTreasure()
     {
@@ -145,8 +144,6 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
                 pv.RPC("RPC_DeactivateTreasure", RpcTarget.AllBuffered);  // Or create a proper RPC to activate
         }
     }
-
-
 
     private IEnumerator CloseDoor()
     {
