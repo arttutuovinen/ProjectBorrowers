@@ -102,6 +102,14 @@ public class SPCaptureHandler : MonoBehaviourPun
         spFollowTarget = null;
         isCaptured = false;
 
+        if (photonView.IsMine)
+        {
+            SPWinManager.Instance.photonView.RPC(
+                nameof(SPWinManager.RPC_ReportCaptured),
+                RpcTarget.MasterClient
+            );
+        }
+
         controller.enabled = false;
         transform.position = jailPos;
         controller.enabled = true;

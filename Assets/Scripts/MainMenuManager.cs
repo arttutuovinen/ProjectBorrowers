@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class MainMenuManager : MonoBehaviour
             StartCoroutine(FadeOutAndLoad());
     }
 
-    private System.Collections.IEnumerator FadeOutAndLoad()
+    private IEnumerator FadeOutAndLoad()
     {
         isFading = true;
 

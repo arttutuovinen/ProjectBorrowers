@@ -81,15 +81,22 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
             );
         }
 
+        // Increase treasure count
         TreasureScoreManager.Instance.AddTreasure_Master();
 
         if (!doorClosed && door != null)
             photonView.RPC(nameof(RPC_CloseDoor), RpcTarget.All);
 
-        TreasureSpawner spawner = FindObjectOfType<TreasureSpawner>();
-        if (spawner != null)
-            spawner.TeleportTreasure();
+        // Only teleport treasure if total treasures not yet reached
+        if (TreasureScoreManager.Instance.GetTreasureCount() <
+            TreasureScoreManager.Instance.totalTreasures)
+        {
+            TreasureSpawner spawner = FindObjectOfType<TreasureSpawner>();
+            if (spawner != null)
+                spawner.TeleportTreasure();
+        }
     }
+
 
     [PunRPC]
     private void RPC_CloseDoor()

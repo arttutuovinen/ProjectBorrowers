@@ -219,13 +219,17 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     [PunRPC]
     public void RPC_Escape()
     {
-        // Disable the SP client across all clients
         gameObject.SetActive(false);
 
-        // Optional: hide UI for this client
         if (photonView.IsMine)
         {
             interactionUI?.HideAll();
+
+            // REPORT ESCAPE
+            SPWinManager.Instance.photonView.RPC(
+                nameof(SPWinManager.RPC_ReportEscaped),
+                RpcTarget.MasterClient
+            );
         }
     }
     [PunRPC]
