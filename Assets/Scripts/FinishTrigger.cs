@@ -5,164 +5,115 @@ using TMPro;
 
 public class FinishTrigger : MonoBehaviourPun, IPunObservable
 {
-    [Header("Door Settings")]
     public Transform door;
-    public float doorCloseAngle = 0f;   // Final rotation when closed
-    public float doorOpenAngle = 108f;  // Initial rotation
-    public float doorCloseSpeed = 2f;   // Smooth rotation speed
+    public float doorCloseAngle = 0f;
+    public float doorCloseSpeed = 2f;
 
-    private SPInteractionUI interactionUI;
-
-    [SerializeField] private bool doorClosed;
-    [SerializeField] private bool treasureDeliveredHere;
-    [SerializeField] private bool doorUsed;
-
-    void Start()
-    {
-        interactionUI = FindObjectOfType<SPInteractionUI>();
-    }
+    private bool doorClosed;
+    private bool doorUsed;
 
     private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("SmallPlayer")) return;
 
-        SmallPlayerItemCollector spCollector = other.GetComponent<SmallPlayerItemCollector>();
-        if (spCollector == null) return;
+        SmallPlayerItemCollector sp = other.GetComponent<SmallPlayerItemCollector>();
+        if (sp == null || !sp.photonView.IsMine) return;
 
-        // 1️⃣ If player is holding treasure → show Return
-        if (spCollector.GetCurrentItem() == "Treasure" && !doorUsed)
+        // 1️⃣ Return treasure
+        if (sp.GetCurrentItem() == "Treasure" && !doorUsed)
         {
-            spCollector.GetInteractionUI()?.ShowReturn();
+            sp.GetInteractionUI()?.ShowReturn();
 
             if (Input.GetButtonDown("Fire1"))
             {
-                DeliverTreasure(spCollector);
+                photonView.RPC(
+                    nameof(RPC_RequestTreasureDelivery),
+                    RpcTarget.MasterClient,
+                    sp.photonView.ViewID
+                );
             }
+            return;
         }
-        else if (!doorClosed &&
-         TreasureScoreManager.Instance.treasuresDelivered >=
-         TreasureScoreManager.Instance.totalTreasures &&
-         !doorUsed)
 
+        // 2️⃣ Escape
+        if (!doorUsed &&
+            TreasureScoreManager.Instance.GetTreasureCount() >=
+            TreasureScoreManager.Instance.totalTreasures)
         {
-            // Show Enter for everyone
-            spCollector.GetInteractionUI()?.ShowEnter();
+            sp.GetInteractionUI()?.ShowEnter();
 
-            // Let any SP client press E to escape
             if (Input.GetKeyDown(KeyCode.E))
             {
-                // Call RPC_Escape on this player for all clients
-                spCollector.photonView.RPC(nameof(SmallPlayerItemCollector.RPC_Escape), RpcTarget.All);
+                sp.photonView.RPC(
+                    nameof(SmallPlayerItemCollector.RPC_Escape),
+                    RpcTarget.All
+                );
             }
+            return;
         }
 
-        // 3️⃣ Otherwise → hide interaction UI
-        else
-        {
-            spCollector.GetInteractionUI()?.HideAll();
-        }
+        sp.GetInteractionUI()?.HideAll();
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("SmallPlayer")) return;
 
-        SmallPlayerItemCollector spCollector = other.GetComponent<SmallPlayerItemCollector>();
-        if (spCollector == null || !spCollector.photonView.IsMine) return;
-
-        spCollector.GetInteractionUI()?.HideAll();
+        SmallPlayerItemCollector sp = other.GetComponent<SmallPlayerItemCollector>();
+        if (sp != null && sp.photonView.IsMine)
+            sp.GetInteractionUI()?.HideAll();
     }
 
-    private void DeliverTreasure(SmallPlayerItemCollector spCollector)
-    {
-        if (!spCollector.photonView.IsMine) return;
-
-        photonView.RPC(nameof(RPC_RequestTreasureDelivery), RpcTarget.MasterClient, spCollector.photonView.ViewID);
-    }
-
-    private void RegisterTreasureDelivery()
-    {
-        // Tell MasterClient to add a treasure
-        TreasureScoreManager.Instance.photonView
-            .RPC(nameof(TreasureScoreManager.RPC_AddTreasure), RpcTarget.MasterClient);
-
-        photonView.RPC(nameof(RPC_SpawnNewTreasure), RpcTarget.All);
-
-        if (door != null && !doorClosed)
-            photonView.RPC(nameof(RPC_CloseDoor), RpcTarget.All);
-
-    }
-
+    // MASTER ONLY
     [PunRPC]
     private void RPC_RequestTreasureDelivery(int playerViewID)
     {
-        if (doorUsed) return;   // Prevent double delivery
+        if (!PhotonNetwork.IsMasterClient || doorUsed) return;
 
         doorUsed = true;
-        treasureDeliveredHere = true;
 
-        // Remove treasure from player hand
         PhotonView playerPV = PhotonView.Find(playerViewID);
         if (playerPV != null)
         {
-            playerPV.RPC(nameof(SmallPlayerItemCollector.RPC_OnTreasureDelivered), RpcTarget.All);
+            playerPV.RPC(
+                nameof(SmallPlayerItemCollector.RPC_OnTreasureDelivered),
+                RpcTarget.All
+            );
         }
 
-        // Update treasure count
-        TreasureScoreManager.Instance.photonView
-            .RPC(nameof(TreasureScoreManager.RPC_AddTreasure), RpcTarget.MasterClient);
+        TreasureScoreManager.Instance.AddTreasure_Master();
 
-        // Close the SPFinish door for all clients
-        if (door != null)
+        if (!doorClosed && door != null)
             photonView.RPC(nameof(RPC_CloseDoor), RpcTarget.All);
 
-        // Only MasterClient handles treasure respawn via TreasureSpawner
-        if (PhotonNetwork.IsMasterClient)
-        {
-            TreasureSpawner spawner = FindObjectOfType<TreasureSpawner>();
-            if (spawner != null)
-            {
-                spawner.TeleportTreasure();   // Reactivate and move treasure
-            }
-        }
+        TreasureSpawner spawner = FindObjectOfType<TreasureSpawner>();
+        if (spawner != null)
+            spawner.TeleportTreasure();
     }
 
     [PunRPC]
-    private void RPC_SpawnNewTreasure()
+    private void RPC_CloseDoor()
     {
-        if (!PhotonNetwork.IsMasterClient) return;  // Only MasterClient controls the treasure
-
-        TreasureSpawner spawner = FindObjectOfType<TreasureSpawner>();
-        if (spawner != null && spawner.treasure != null)
-        {
-            spawner.treasure.SetActive(true);    // Reactivate
-            spawner.TeleportTreasure();           // Move to new location
-
-            // Optional: sync treasure object across clients
-            PhotonView pv = spawner.treasure.GetComponent<PhotonView>();
-            if (pv != null)
-                pv.RPC("RPC_DeactivateTreasure", RpcTarget.AllBuffered);  // Or create a proper RPC to activate
-        }
+        if (doorClosed) return;
+        StartCoroutine(CloseDoor());
     }
 
     private IEnumerator CloseDoor()
     {
-        if (door == null || doorClosed) yield break;
-
         doorClosed = true;
 
-        float t = 0f;
-        Quaternion startRot = door.localRotation;
-        Quaternion targetRot = Quaternion.Euler(0f, doorCloseAngle, 0f);
+        Quaternion start = door.localRotation;
+        Quaternion end = Quaternion.Euler(0f, doorCloseAngle, 0f);
 
+        float t = 0f;
         while (t < 1f)
         {
             t += Time.deltaTime * doorCloseSpeed;
-            door.localRotation = Quaternion.Slerp(startRot, targetRot, t);
+            door.localRotation = Quaternion.Slerp(start, end, t);
             yield return null;
         }
 
-        door.localRotation = targetRot;
+        door.localRotation = end;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -170,22 +121,13 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(doorClosed);
-            stream.SendNext(treasureDeliveredHere);
             stream.SendNext(doorUsed);
         }
         else
         {
             doorClosed = (bool)stream.ReceiveNext();
-            treasureDeliveredHere = (bool)stream.ReceiveNext();
             doorUsed = (bool)stream.ReceiveNext();
         }
     }
-    [PunRPC]
-    private void RPC_CloseDoor()
-    {
-        StartCoroutine(CloseDoor());
-    }
-
-
 }
 

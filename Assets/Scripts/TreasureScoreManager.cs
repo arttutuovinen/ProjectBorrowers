@@ -13,29 +13,26 @@ public class TreasureScoreManager : MonoBehaviourPun
         Instance = this;
     }
 
-    [PunRPC]
-    public void RPC_AddTreasure()
-    {
-        treasuresDelivered++;
-
-        photonView.RPC(nameof(RPC_UpdateUI), RpcTarget.All, treasuresDelivered);
-    }
+    public int GetTreasureCount() => treasuresDelivered;
 
     [PunRPC]
-    public void RPC_UpdateUI(int value)
+    public void RPC_SetTreasureCount(int value)
     {
+        treasuresDelivered = value;
+
         foreach (var sp in FindObjectsOfType<SmallPlayerItemCollector>())
         {
-            // Remove the IsMine check so all clients update their UI
-            // if (sp.photonView.IsMine) <-- remove this line
-
             sp.SetTreasureCount(value, totalTreasures);
-
-            // Show Escape text if all treasures delivered
-            if (value >= totalTreasures)
-                sp.SetEscapeActive(true);
+            sp.SetEscapeActive(value >= totalTreasures);
         }
     }
 
+    // ONLY MasterClient calls this
+    public void AddTreasure_Master()
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
 
+        treasuresDelivered++;
+        photonView.RPC(nameof(RPC_SetTreasureCount), RpcTarget.All, treasuresDelivered);
+    }
 }
