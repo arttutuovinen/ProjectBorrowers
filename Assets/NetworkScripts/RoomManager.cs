@@ -4,6 +4,8 @@ using Photon.Realtime;
 using TMPro;
 using System.Linq;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -20,6 +22,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject lobbyPanel;
 
     int selectedCharacterIndex = 0; // 0 = SmallPlayer, 1 = BigPlayer
+
+    // Prevent multiple leave triggers
+    private bool isLeaving = false;
 
     // ---------- UI callbacks ----------
     public void OnNameInputChanged(string newName) { }
@@ -39,11 +44,30 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             if (characterButtons[i] == null) continue;
 
-            var img = characterButtons[i].GetComponent<UnityEngine.UI.Image>();
-            if (img != null)
-                img.color = (i == selectedCharacterIndex) ? Color.green : Color.white;
+            var button = characterButtons[i].GetComponent<Button>();
+            if (button == null) continue;
+
+            // Enable interactable state if needed (optional)
+            button.interactable = true;
+
+            // Use the normal color for unselected, and just set the 'selected' state via a color tint
+            var colors = button.colors;
+
+            if (i == selectedCharacterIndex)
+            {
+                // Highlight the selected button by changing only the normal color
+                colors.normalColor = colors.pressedColor; // or a custom selected color
+            }
+            else
+            {
+                // Reset unselected buttons to their default normal color
+                colors.normalColor = Color.white;
+            }
+
+            button.colors = colors;
         }
     }
+
 
     // ---------- Join ----------
     public void OnJoinButtonPressed()
@@ -80,7 +104,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // ---------- Spawn Finish & Prison (ONCE) ----------
         if (PhotonNetwork.IsMasterClient)
         {
-            // Spawn 5 Finish prefabs
+            // Spawn Finish prefabs
             var selectedPoints = spFinishSpawnPoints
                 .OrderBy(x => Random.value)
                 .Take(finishCount);
@@ -156,16 +180,61 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
+    // ---------- Player Left Room ----------
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+
+        if (isLeaving) return;
+        isLeaving = true;
+
+        Debug.Log($"{otherPlayer.NickName} left the room. Disconnecting all players.");
+        StartCoroutine(LeaveRoomAndLoadMenu());
+    }
+
+    // ---------- Photon-safe leave ----------
+    private IEnumerator LeaveRoomAndLoadMenu()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom(); // async → OnLeftRoom will be called
+        }
+        else if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect(); // async → OnDisconnected will be called
+        }
+        else
+        {
+            LoadMainMenu(); // already disconnected
+        }
+
+        yield return null;
+    }
+
+    public override void OnLeftRoom()
+    {
+        if (PhotonNetwork.IsConnected)
+            PhotonNetwork.Disconnect();
+        else
+            LoadMainMenu();
+    }
+
     public override void OnDisconnected(DisconnectCause cause)
     {
-        base.OnDisconnected(cause);
-
         if (joinButtonText != null)
             joinButtonText.text = "Join";
 
         if (lobbyPanel != null)
             lobbyPanel.SetActive(true);
+
+        LoadMainMenu();
     }
+
+    private void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }
 
 
