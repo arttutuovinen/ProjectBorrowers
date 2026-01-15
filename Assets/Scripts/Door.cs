@@ -15,10 +15,23 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
 
     public bool IsOpen => isDoorOpen;
 
+    [Header("Visual Highlight")]
+    [SerializeField] private Renderer doorRenderer;
+    private Material edgeMaterial;
+    private Color originalEdgeColor;
+    private static readonly Color highlightColor = Color.white;
+
     private void Awake()
     {
         initialRotation = transform.rotation;
         targetRotation = initialRotation;
+
+        if (doorRenderer == null)
+            doorRenderer = GetComponentInChildren<Renderer>();
+
+        // Edge material is always last
+        edgeMaterial = doorRenderer.materials[doorRenderer.materials.Length - 1];
+        originalEdgeColor = edgeMaterial.color;
     }
 
     private void Update()
@@ -79,4 +92,12 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
     {
         targetRotation = initialRotation;
     }
+    
+    public void SetHighlight(bool highlighted)
+    {
+        if (edgeMaterial == null) return;
+
+        edgeMaterial.color = highlighted ? highlightColor : originalEdgeColor;
+    }
+
 }

@@ -39,6 +39,8 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
     public LayerMask doorLayer;
 
     private Door lookedAtDoor;
+    private Door lastLookedAtDoor;
+
 
     // Networking
     private float networkYaw = 0f;
@@ -76,37 +78,42 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
         UpdateDoorRay();
         HandleDoorInput();
     }
-    
+
     private void UpdateDoorRay()
     {
-        lookedAtDoor = null;
+        Door newDoor = null;
 
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-        if (Physics.Raycast(
-            ray,
-            out RaycastHit hit,
-            doorRayDistance,
-            doorLayer,
-            QueryTriggerInteraction.Collide)) // ✅ triggers only
+        if (Physics.Raycast(ray, out RaycastHit hit, doorRayDistance, doorLayer))
         {
-            lookedAtDoor = hit.collider.GetComponentInParent<Door>();
+            newDoor = hit.collider.GetComponentInParent<Door>();
         }
+
+        // Remove highlight from previous door
+        if (lastLookedAtDoor != null && lastLookedAtDoor != newDoor)
+        {
+            lastLookedAtDoor.SetHighlight(false);
+        }
+
+        // Apply highlight to new door
+        if (newDoor != null)
+        {
+            newDoor.SetHighlight(true);
+        }
+
+        lastLookedAtDoor = newDoor;
+        lookedAtDoor = newDoor;
 
         if (interactionUI == null) return;
 
         if (lookedAtDoor == null)
-        {
             interactionUI.HideAll();
-        }
+        else if (lookedAtDoor.IsOpen)
+            interactionUI.ShowClose();
         else
-        {
-            if (lookedAtDoor.IsOpen)
-                interactionUI.ShowClose();
-            else
-                interactionUI.ShowOpen();
-        }
-
+            interactionUI.ShowOpen();
     }
+
     private void HandleDoorInput()
     {
         if (!Input.GetKeyDown(KeyCode.E)) return;

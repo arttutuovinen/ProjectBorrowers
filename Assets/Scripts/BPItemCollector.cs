@@ -47,6 +47,8 @@ public class BPItemCollector : MonoBehaviourPun
     public bool IsUsingItem { get; private set; }
 
     private BPInteractionUI interactionUI;
+    //ItemHighlight
+    private BPItemHighlight lastHighlightedItem;
 
     // ✔ All valid item tags
     private readonly HashSet<string> itemTags = new HashSet<string>
@@ -109,14 +111,33 @@ public class BPItemCollector : MonoBehaviourPun
 
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
+        BPItemHighlight newHighlight = null;
+
         if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, collectibleLayer, QueryTriggerInteraction.Collide))
         {
             if (itemTags.Contains(hit.collider.tag))
             {
                 collectedItem = hit.collider.gameObject;
                 canPickUp = true;
+
+                newHighlight = hit.collider.GetComponentInParent<BPItemHighlight>();
             }
         }
+
+        // Remove highlight from last item
+        if (lastHighlightedItem != null && lastHighlightedItem != newHighlight)
+        {
+            lastHighlightedItem.SetHighlight(false);
+        }
+
+        // Apply highlight to new item
+        if (newHighlight != null)
+        {
+            newHighlight.SetHighlight(true);
+        }
+
+        lastHighlightedItem = newHighlight;
+
         if (interactionUI == null) return;
 
         // Only show Take-text if looking at collectible AND not holding an item
@@ -178,7 +199,11 @@ public class BPItemCollector : MonoBehaviourPun
                 medicineUIImage.SetActive(true);
                 break;
         }
-
+        if (lastHighlightedItem != null)
+        {
+            lastHighlightedItem.SetHighlight(false);
+            lastHighlightedItem = null;
+        }
         PhotonView itemPV = collectedItem.GetComponentInParent<PhotonView>();
         if (itemPV != null)
         {
