@@ -110,42 +110,41 @@ public class BPItemCollector : MonoBehaviourPun
         canPickUp = false;
 
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-
         BPItemHighlight newHighlight = null;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, collectibleLayer, QueryTriggerInteraction.Collide))
+        // Raycast against EVERYTHING
+        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, ~0, QueryTriggerInteraction.Collide))
         {
-            if (itemTags.Contains(hit.collider.tag))
+            // Only allow pickup if the FIRST hit is on collectible layer
+            if (((1 << hit.collider.gameObject.layer) & collectibleLayer) != 0)
             {
-                collectedItem = hit.collider.gameObject;
-                canPickUp = true;
-
-                newHighlight = hit.collider.GetComponentInParent<BPItemHighlight>();
+                if (itemTags.Contains(hit.collider.tag))
+                {
+                    collectedItem = hit.collider.gameObject;
+                    canPickUp = true;
+                    newHighlight = hit.collider.GetComponentInParent<BPItemHighlight>();
+                }
             }
         }
 
-        // Remove highlight from last item
+        // Remove old highlight
         if (lastHighlightedItem != null && lastHighlightedItem != newHighlight)
-        {
             lastHighlightedItem.SetHighlight(false);
-        }
 
-        // Apply highlight to new item
+        // Apply new highlight
         if (newHighlight != null)
-        {
             newHighlight.SetHighlight(true);
-        }
 
         lastHighlightedItem = newHighlight;
 
         if (interactionUI == null) return;
 
-        // Only show Take-text if looking at collectible AND not holding an item
         if (canPickUp && currentItem == ItemType.None)
             interactionUI.ShowTake();
         else
-            interactionUI.HideTakeOnly(); // <-- only hide Take-text, not Open/Close
+            interactionUI.HideTakeOnly();
     }
+
 
     // -----------------------------------------------------------------------
     // ✔ Determine item only by its tag

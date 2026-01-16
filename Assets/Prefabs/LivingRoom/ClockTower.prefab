@@ -90,6 +90,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1975478128849181933, guid: 47328f8ac7e5f6342af3ec9614da960e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -1941805591843960725, guid: 47328f8ac7e5f6342af3ec9614da960e,
         type: 3}
       propertyPath: m_Layer
@@ -126,10 +131,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4562988679395679724}
+    - targetCorrespondingSourceObject: {fileID: 3426149856237014747, guid: 47328f8ac7e5f6342af3ec9614da960e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8259975590544424200}
     - targetCorrespondingSourceObject: {fileID: -1975478128849181933, guid: 47328f8ac7e5f6342af3ec9614da960e,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6982643526257014787}
+    - targetCorrespondingSourceObject: {fileID: -1975478128849181933, guid: 47328f8ac7e5f6342af3ec9614da960e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1064472538970792329}
     - targetCorrespondingSourceObject: {fileID: -1941805591843960725, guid: 47328f8ac7e5f6342af3ec9614da960e,
         type: 3}
       insertIndex: -1
@@ -142,6 +155,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7830768976659451244}
+    - targetCorrespondingSourceObject: {fileID: -1941805591843960725, guid: 47328f8ac7e5f6342af3ec9614da960e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1318233051609147589}
     - targetCorrespondingSourceObject: {fileID: 9198642575021794631, guid: 47328f8ac7e5f6342af3ec9614da960e,
         type: 3}
       insertIndex: -1
@@ -534,6 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   rotationAmount: 95
   rotationSpeed: 5
+  doorRenderer: {fileID: 0}
 --- !u!65 &7830768976659451244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -555,6 +573,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.24, y: 2.6198006, z: 1.77}
   m_Center: {x: 1.93, y: -0.09382546, z: -0.89}
+--- !u!114 &1318233051609147589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4475620356563117317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4494628481449446007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1913489087011985639, guid: 47328f8ac7e5f6342af3ec9614da960e,
@@ -609,6 +649,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9396948, y: 9.603142, z: 0.11313593}
   m_Center: {x: 0.9508186, y: -1.4252293, z: 1.8862753e-23}
+--- !u!114 &1064472538970792329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576917269540605565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4759113561870844645 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7414596743746293877, guid: 47328f8ac7e5f6342af3ec9614da960e,
@@ -847,6 +909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   rotationAmount: 95
   rotationSpeed: 5
+  doorRenderer: {fileID: 0}
 --- !u!65 &4562988679395679724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -868,6 +931,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.76, y: 5.04, z: -2.13}
   m_Center: {x: 2.4, y: -0.25, z: -1.07}
+--- !u!114 &8259975590544424200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8403130032380634037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &8646531363054758960 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3237926971200667998, guid: 47328f8ac7e5f6342af3ec9614da960e,
