@@ -1,9 +1,11 @@
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class BPScoreManager : MonoBehaviourPun
+public class BPScoreManager : MonoBehaviourPunCallbacks
 {
     [Header("Settings")]
     public int maxCaptured = 1;
@@ -24,6 +26,10 @@ public class BPScoreManager : MonoBehaviourPun
         UpdateText(currentCaptured);
     }
 
+    // ======================
+    // SCORE
+    // ======================
+
     [PunRPC]
     private void RPC_RequestAddCapture()
     {
@@ -31,7 +37,7 @@ public class BPScoreManager : MonoBehaviourPun
             return;
 
         currentCaptured = Mathf.Clamp(currentCaptured + 1, 0, maxCaptured);
-        photonView.RPC("RPC_UpdateCapturedCount", RpcTarget.All, currentCaptured);
+        photonView.RPC(nameof(RPC_UpdateCapturedCount), RpcTarget.All, currentCaptured);
     }
 
     [PunRPC]
@@ -47,24 +53,68 @@ public class BPScoreManager : MonoBehaviourPun
             if (bpWins != null)
                 bpWins.SetActive(true);
 
-            if (PhotonNetwork.IsMasterClient)
-                StartCoroutine(WinTimer());
+            StartCoroutine(DelayedLeaveRoom());
         }
     }
 
-    private IEnumerator WinTimer()
+    // ======================
+    // MATCH END (SAFE EXIT)
+    // ======================
+
+    private IEnumerator DelayedLeaveRoom()
     {
+        // Show BPWins UI for a few seconds
         yield return new WaitForSeconds(6f);
 
-        if (PhotonNetwork.IsMasterClient)
-            PhotonNetwork.LoadLevel("MainMenu");
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom(); // async
+        }
+        else if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
+        else
+        {
+            LoadMainMenu();
+        }
     }
+
+    public override void OnLeftRoom()
+    {
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
+        else
+        {
+            LoadMainMenu();
+        }
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        LoadMainMenu();
+    }
+
+    private void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    // ======================
+    // UI
+    // ======================
 
     private void UpdateText(int count)
     {
         if (captureText != null)
             captureText.text = $"Captured: {count}/{maxCaptured}";
     }
+
+    // ======================
+    // SCORE TRIGGER CONTROL
+    // ======================
 
     [PunRPC]
     public void RPC_DisableScoreTrigger()

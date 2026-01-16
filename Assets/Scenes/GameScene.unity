@@ -59147,6 +59147,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 696833438454047882, guid: f32134290a8a83842858349149c73487,
+        type: 3}
+      propertyPath: m_Layer
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 1168143053485054971, guid: f32134290a8a83842858349149c73487,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59197,15 +59202,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2649860137396454771, guid: f32134290a8a83842858349149c73487,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3003780399222134469, guid: f32134290a8a83842858349149c73487,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f8610402676f3d74a9e964a28af1a652, type: 2}
+    - target: {fileID: 3507443291714773134, guid: f32134290a8a83842858349149c73487,
+        type: 3}
+      propertyPath: m_Layer
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 5148367204476951399, guid: f32134290a8a83842858349149c73487,
         type: 3}
       propertyPath: m_Name
       value: Hall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452822853092017222, guid: f32134290a8a83842858349149c73487,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813211497538594195, guid: f32134290a8a83842858349149c73487,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135735436794199220, guid: f32134290a8a83842858349149c73487,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843194954611252868, guid: f32134290a8a83842858349149c73487,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886434997474512556, guid: f32134290a8a83842858349149c73487,
+        type: 3}
+      propertyPath: m_Layer
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 8944516675576897980, guid: f32134290a8a83842858349149c73487,
         type: 3}
