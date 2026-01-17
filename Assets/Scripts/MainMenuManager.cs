@@ -1,64 +1,72 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Collections;
+using Photon.Pun;
+using Photon.Realtime;
+using TMPro;
 
-public class MainMenuManager : MonoBehaviour
+public class MainMenuManager : MonoBehaviourPunCallbacks
 {
-    [Tooltip("Exact name of the scene to load for joining (replace with your join scene name)")]
-    public string GameScene = "GameScene";
-
-    [Tooltip("CanvasGroup on the main menu panel")]
-    public CanvasGroup canvasGroup;
-
-    [Tooltip("How long the fade takes (seconds)")]
-    public float fadeDuration = 0.5f;
-
-    bool isFading = false;
+    [Header("UI")]
+    public TMP_InputField roomCodeInput;
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        if (canvasGroup == null)
-            canvasGroup = GetComponentInChildren<CanvasGroup>();
-    }
-
-    // Called by Start Game button
-    public void StartGame()
-    {
-        if (!isFading)
-            StartCoroutine(FadeOutAndLoad());
-    }
-
-    private IEnumerator FadeOutAndLoad()
-    {
-        isFading = true;
-
-        float t = 0f;
-        float startAlpha = canvasGroup.alpha;
-
-        // Fade from current alpha to 0
-        while (t < fadeDuration)
+        if (!PhotonNetwork.IsConnected)
         {
-            t += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, t / fadeDuration);
-            yield return null;
+            PhotonNetwork.ConnectUsingSettings();
+        }
+    }
+
+    public void CreateRoom()
+    {
+        string roomCode = roomCodeInput.text;
+
+        if (string.IsNullOrEmpty(roomCode))
+        {
+            Debug.LogWarning("Room code is empty!");
+            return;
         }
 
-        // Ensure fully invisible
-        canvasGroup.alpha = 0f;
+        RoomOptions options = new RoomOptions();
+        options.MaxPlayers = 3; // 1 Big + 2 Small
 
-        // Load next scene
-        SceneManager.LoadScene(GameScene);
+        PhotonNetwork.CreateRoom(roomCode, options);
+    }
+
+    public void JoinRoom()
+    {
+        string roomCode = roomCodeInput.text;
+
+        if (string.IsNullOrEmpty(roomCode))
+        {
+            Debug.LogWarning("Room code is empty!");
+            return;
+        }
+
+        PhotonNetwork.JoinRoom(roomCode);
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Joined room successfully");
+        PhotonNetwork.LoadLevel("LobbyScene");
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.LogError("Create room failed: " + message);
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.LogError("Join room failed: " + message);
     }
 
     public void QuitGame()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
 }
