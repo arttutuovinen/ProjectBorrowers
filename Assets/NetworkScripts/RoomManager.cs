@@ -17,6 +17,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        // Safety check
+        if (!PhotonNetwork.InRoom)
+            return;
+
         // Spawn shared objects (Master only)
         if (PhotonNetwork.IsMasterClient)
         {
@@ -27,6 +31,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // Spawn player based on lobby role
         StartCoroutine(SpawnPlayerFromLobbyRole());
     }
+
 
     // ---------- Shared Objects ----------
 
@@ -140,5 +145,3 @@ public class RoomManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("MainMenu");
     }
 }
-
-

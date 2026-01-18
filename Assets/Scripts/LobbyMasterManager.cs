@@ -11,8 +11,10 @@ public class LobbyMasterManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
+
         if (startButton != null)
-            startButton.SetActive(PhotonNetwork.IsMasterClient); // only master sees it
+            startButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
