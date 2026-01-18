@@ -135,4 +135,24 @@ public class LobbyUiManager : MonoBehaviourPunCallbacks
         spAmountFull.SetActive(false);
         bpAmountFull.SetActive(false);
     }
+
+    public void OnLeaveButtonPressed()
+    {
+        // Restore cursor locally
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Leave room (works for any client)
+        if (PhotonNetwork.InRoom)
+            PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        // Disconnect from Photon completely
+        PhotonNetwork.Disconnect();
+
+        // Go back to Main Menu
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
 }
