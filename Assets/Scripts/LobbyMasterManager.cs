@@ -33,14 +33,13 @@ public class LobbyMasterManager : MonoBehaviourPunCallbacks
 
         // Change button interactable
         startButton.interactable = canStart;
-        ColorBlock cb = startButton.colors; // <-- declare cb here!
-        // Change color safely using ColorBlock
-        Color whiteColor = new Color32(255, 255, 255, 255);
-        cb.normalColor = canStart ? Color.white : Color.gray;
-        cb.highlightedColor = canStart ? Color.white : Color.gray;
-        cb.pressedColor = canStart ? Color.white : Color.gray;
-        cb.disabledColor = Color.gray;
-        startButton.colors = cb;
+
+        // Change the button's background Image color directly
+        Image img = startButton.GetComponent<Image>();
+        if (img != null)
+        {
+            img.color = canStart ? Color.white : Color.gray; // FFFFFF for ready, gray if not
+        }
     }
 
     public void OnStartButtonPressed()

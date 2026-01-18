@@ -1,7 +1,9 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Linq;
 
 public class SPItemSpawner : MonoBehaviourPunCallbacks
 {
@@ -12,16 +14,26 @@ public class SPItemSpawner : MonoBehaviourPunCallbacks
     private List<GameObject> spawnList = new List<GameObject>();
     private bool itemsSpawned = false;
 
+    void Awake()
+    {
+        // Auto-assign spawnPoints if none set in Inspector
+        if (spawnPoints == null || spawnPoints.Length == 0)
+        {
+            spawnPoints = GetComponentsInChildren<Transform>(true)
+                .Where(t => t != transform) // ignore root
+                .ToArray();
+        }
+    }
+
     public override void OnJoinedRoom()
     {
-        if (!PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
-            // Ask MasterClient to spawn items
-            photonView.RPC(nameof(RequestItemSpawnRPC), RpcTarget.MasterClient);
+            StartCoroutine(SpawnAfterDelay());
         }
         else
         {
-            SpawnItemsMaster();
+            StartCoroutine(RequestSpawnAfterDelay());
         }
     }
 
@@ -29,24 +41,41 @@ public class SPItemSpawner : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        // Ensure items exist for late joiners
         if (!itemsSpawned)
         {
-            SpawnItemsMaster();
+            StartCoroutine(SpawnAfterDelay());
         }
+    }
+
+    private IEnumerator SpawnAfterDelay()
+    {
+        yield return new WaitForSeconds(0.1f); // allow scene to initialize
+        SpawnItemsMaster();
+    }
+
+    private IEnumerator RequestSpawnAfterDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        photonView.RPC(nameof(RequestItemSpawnRPC), RpcTarget.MasterClient);
     }
 
     [PunRPC]
     private void RequestItemSpawnRPC()
     {
         if (!PhotonNetwork.IsMasterClient) return;
-
         SpawnItemsMaster();
     }
 
-    private void SpawnItemsMaster()
+    public void SpawnItemsMaster()
     {
         if (itemsSpawned) return;
+        if (spawnPoints == null || spawnPoints.Length == 0)
+        {
+            Debug.LogWarning("[SPItemSpawner] No spawn points found!");
+            return;
+        }
+
+        Debug.Log("[SPItemSpawner] Spawning items. SpawnPoints: " + spawnPoints.Length);
 
         CreateSpawnList();
 
@@ -55,11 +84,7 @@ public class SPItemSpawner : MonoBehaviourPunCallbacks
             GameObject prefab = spawnList[i];
             Transform spawnPoint = spawnPoints[i];
 
-            PhotonNetwork.Instantiate(
-                prefab.name,
-                spawnPoint.position,
-                spawnPoint.rotation
-            );
+            PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
         }
 
         itemsSpawned = true;

@@ -31,10 +31,6 @@ public class SPWinManager : MonoBehaviourPunCallbacks
             spWinsUI.SetActive(false);
     }
 
-    // ======================
-    // REPORTS (called by SPs)
-    // ======================
-
     [PunRPC]
     public void RPC_ReportEscaped()
     {
@@ -53,10 +49,6 @@ public class SPWinManager : MonoBehaviourPunCallbacks
         CheckWinCondition();
     }
 
-    // ======================
-    // WIN CHECK
-    // ======================
-
     private void CheckWinCondition()
     {
         int totalDone = escapedAmount + capturedAmount;
@@ -68,66 +60,43 @@ public class SPWinManager : MonoBehaviourPunCallbacks
         }
     }
 
-    // ======================
-    // MATCH END
-    // ======================
-
     [PunRPC]
     private void RPC_SPWins()
     {
         if (spWinsUI != null)
             spWinsUI.SetActive(true);
 
-        StartCoroutine(DelayedLeaveRoom());
+        if (PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC(nameof(RPC_ResetPlayerRoles), RpcTarget.AllBuffered);
+        }
+
+        StartCoroutine(DelayedReturnToLobby());
     }
 
-    // ======================
-    // PHOTON-SAFE ROOM LEAVE
-    // ======================
-
-    private IEnumerator DelayedLeaveRoom()
+    private IEnumerator DelayedReturnToLobby()
     {
-        // Wait the endDelay for player to see SPWins text
         yield return new WaitForSeconds(endDelay);
 
-        // Start leaving the room
-        if (PhotonNetwork.InRoom)
+        if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LeaveRoom(); // async → OnLeftRoom() will trigger
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PhotonNetwork.LoadLevel("LobbyScene");
         }
-        else if (PhotonNetwork.IsConnected)
+    }
+    [PunRPC]
+    private void RPC_ResetPlayerRoles()
+    {
+        foreach (var player in PhotonNetwork.PlayerList)
         {
-            PhotonNetwork.Disconnect(); // async → OnDisconnected() will trigger
-        }
-        else
+            var props = new ExitGames.Client.Photon.Hashtable
         {
-            // Already disconnected, safe to load scene
-            LoadMainMenu();
+            { LobbyKeys.PlayerRole, null } // ← correct Photon way to clear role
+        };
+
+            player.SetCustomProperties(props);
         }
     }
 
-    public override void OnLeftRoom()
-    {
-        // After leaving room, safely disconnect
-        if (PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.Disconnect();
-        }
-        else
-        {
-            // Already disconnected, safe to load scene
-            LoadMainMenu();
-        }
-    }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        // Fully safe to load the main menu
-        LoadMainMenu();
-    }
-
-    private void LoadMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
 }

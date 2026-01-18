@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -8,6 +8,12 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     [Header("UI")]
     public TMP_InputField roomCodeInput;
 
+    void Awake()
+    {
+        // ✅ Always restore cursor when entering LobbyScene
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     void Start()
     {
         if (!PhotonNetwork.IsConnected)

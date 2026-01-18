@@ -17,22 +17,49 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        // Safety check
-        if (!PhotonNetwork.InRoom)
-            return;
+        if (!PhotonNetwork.InRoom) return;
 
-        // Spawn shared objects (Master only)
         if (PhotonNetwork.IsMasterClient)
         {
+            // Spawn shared objects
             SpawnFinishes();
             SpawnPrison();
-        }
 
-        // Spawn player based on lobby role
+            // Spawn items first
+            StartCoroutine(SpawnItemsThenPlayers());
+        }
+        else
+        {
+            // Non-Master clients: just spawn players after a short delay
+            StartCoroutine(DelayedPlayerSpawn());
+        }
+    }
+    private IEnumerator SpawnItemsThenPlayers()
+    {
+        // Wait a frame to ensure scene objects exist
+        yield return null;
+
+        // Find all item spawners and tell them to spawn items
+        foreach (var spawner in FindObjectsOfType<SPItemSpawner>())
+            spawner.SpawnItemsMaster(); // make SpawnItemsMaster public
+
+        foreach (var spawner in FindObjectsOfType<BPItemSpawner>())
+            spawner.SpawnItemsMaster(); // make SpawnItemsMaster public
+
+        // Wait one frame to ensure all items instantiated
+        yield return null;
+
+        // Now spawn players
         StartCoroutine(SpawnPlayerFromLobbyRole());
     }
 
+    private IEnumerator DelayedPlayerSpawn()
+    {
+        // Wait for MasterClient to spawn items
+        yield return new WaitForSeconds(0.2f);
 
+        StartCoroutine(SpawnPlayerFromLobbyRole());
+    }
     // ---------- Shared Objects ----------
 
     void SpawnFinishes()

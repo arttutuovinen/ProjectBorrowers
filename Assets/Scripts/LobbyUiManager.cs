@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -23,13 +23,20 @@ public class LobbyUiManager : MonoBehaviourPunCallbacks
     public GameObject spAmountFull;
     public GameObject bpAmountFull;
 
+    void Awake()
+    {
+        // ✅ Always restore cursor when entering LobbyScene
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     void Start()
     {
         roomCodeText.text = $"Room: {PhotonNetwork.CurrentRoom.Name}";
 
         smallPlayerButton.onClick.AddListener(() => SelectRole(1));
         bigPlayerButton.onClick.AddListener(() => SelectRole(0));
-
+        ResetRoleSelectionUI();
         RefreshRoleUI();
     }
 
@@ -110,5 +117,22 @@ public class LobbyUiManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         RefreshRoleUI();
+    }
+    void ResetRoleSelectionUI()
+    {
+        // Clear role selection locally
+        var localProps = PhotonNetwork.LocalPlayer.CustomProperties;
+        if (localProps.ContainsKey(LobbyKeys.PlayerRole))
+            localProps.Remove(LobbyKeys.PlayerRole);
+
+        PhotonNetwork.LocalPlayer.SetCustomProperties(localProps);
+
+        // Reset buttons colors
+        smallPlayerButton.image.color = Color.white;
+        bigPlayerButton.image.color = Color.white;
+
+        // Reset full indicators
+        spAmountFull.SetActive(false);
+        bpAmountFull.SetActive(false);
     }
 }

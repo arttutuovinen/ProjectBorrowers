@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -18,17 +18,13 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        Canvas canvas = Object.FindFirstObjectByType<Canvas>();
+        Canvas canvas = FindObjectOfType<Canvas>();
         captureText = GameObject.Find("Canvas/BigPlayerUI/Capture")
             ?.GetComponent<TextMeshProUGUI>();
 
         bpWins = canvas.transform.Find("BPWins")?.gameObject;
         UpdateText(currentCaptured);
     }
-
-    // ======================
-    // SCORE
-    // ======================
 
     [PunRPC]
     private void RPC_RequestAddCapture()
@@ -53,78 +49,44 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
             if (bpWins != null)
                 bpWins.SetActive(true);
 
-            StartCoroutine(DelayedLeaveRoom());
+            if (PhotonNetwork.IsMasterClient)
+            {
+                photonView.RPC(nameof(RPC_ResetPlayerRoles), RpcTarget.AllBuffered);
+            }
+
+            StartCoroutine(DelayedReturnToLobby());
         }
     }
 
-    // ======================
-    // MATCH END (SAFE EXIT)
-    // ======================
-
-    private IEnumerator DelayedLeaveRoom()
+    private IEnumerator DelayedReturnToLobby()
     {
-        // Show BPWins UI for a few seconds
         yield return new WaitForSeconds(6f);
 
-        if (PhotonNetwork.InRoom)
+        if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LeaveRoom(); // async
-        }
-        else if (PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.Disconnect();
-        }
-        else
-        {
-            LoadMainMenu();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PhotonNetwork.LoadLevel("LobbyScene");
         }
     }
 
-    public override void OnLeftRoom()
-    {
-        if (PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.Disconnect();
-        }
-        else
-        {
-            LoadMainMenu();
-        }
-    }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        LoadMainMenu();
-    }
-
-    private void LoadMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    // ======================
-    // UI
-    // ======================
 
     private void UpdateText(int count)
     {
         if (captureText != null)
             captureText.text = $"Captured: {count}/{maxCaptured}";
     }
-
-    // ======================
-    // SCORE TRIGGER CONTROL
-    // ======================
-
     [PunRPC]
-    public void RPC_DisableScoreTrigger()
+    private void RPC_ResetPlayerRoles()
     {
-        scoreTrigger.enabled = false;
-    }
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            var props = new ExitGames.Client.Photon.Hashtable
+        {
+            { LobbyKeys.PlayerRole, null } // <-- THIS clears the role correctly
+        };
 
-    [PunRPC]
-    public void RPC_EnableScoreTrigger()
-    {
-        scoreTrigger.enabled = true;
+            player.SetCustomProperties(props);
+        }
     }
 }
