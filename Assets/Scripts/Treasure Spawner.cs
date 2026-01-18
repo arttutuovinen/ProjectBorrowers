@@ -7,7 +7,7 @@ public class TreasureSpawner : MonoBehaviourPunCallbacks
     public GameObject treasure;
     private Transform[] spawnPoints;
 
-    void Start()
+    void Awake()
     {
         // Collect all spawn points that are children and active
         var points = GetComponentsInChildren<Transform>(true);

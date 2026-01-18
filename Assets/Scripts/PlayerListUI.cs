@@ -75,7 +75,13 @@ public class PlayerListUI : MonoBehaviourPunCallbacks
 
         foreach (var p in PhotonNetwork.PlayerList)
         {
-            string displayName = string.IsNullOrEmpty(p.NickName) ? $"Player {p.ActorNumber}" : p.NickName;
+            string displayName =
+    p.CustomProperties.TryGetValue(LobbyKeys.PlayerName, out object nameObj)
+        ? nameObj.ToString()
+        : !string.IsNullOrEmpty(p.NickName)
+            ? p.NickName
+            : $"Player {p.ActorNumber}";
+
 
             // Add Role
             string roleText = "";
@@ -84,16 +90,7 @@ public class PlayerListUI : MonoBehaviourPunCallbacks
                 int role = (int)roleObj;
                 roleText = role == 0 ? " [BigPlayer]" : " [SmallPlayer]";
             }
-
-            // Add Ready state
-            string readyText = "";
-            if (p.CustomProperties.TryGetValue(LobbyKeys.PlayerReady, out object readyObj))
-            {
-                bool ready = (bool)readyObj;
-                readyText = ready ? " (READY)" : "";
-            }
-
-            playerListText.text += $"• {displayName}{roleText}{readyText}\n";
+            playerListText.text += $"• {displayName}{roleText}\n";
         }
     }
 

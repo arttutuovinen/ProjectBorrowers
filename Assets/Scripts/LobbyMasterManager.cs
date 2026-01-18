@@ -1,53 +1,74 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using ExitGames.Client.Photon;
 
 public class LobbyMasterManager : MonoBehaviourPunCallbacks
 {
     [Header("UI")]
-    public GameObject startButton; // Assign the Master-only Start button in Inspector
+    public Button startButton; // Assign the Master-only Start button in Inspector
+    public int requiredSmallPlayers = 2;
+    public int requiredBigPlayers = 1;
 
     void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-
-        if (startButton != null)
-            startButton.SetActive(PhotonNetwork.IsMasterClient);
+        startButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
+        UpdateStartButton();
     }
 
-    public override void OnMasterClientSwitched(Player newMasterClient)
+    public override void OnPlayerPropertiesUpdate(Player target, ExitGames.Client.Photon.Hashtable changedProps)
     {
-        // Make sure new master sees the button
-        if (startButton != null)
-            startButton.SetActive(PhotonNetwork.IsMasterClient);
+        UpdateStartButton();
+    }
+
+    void UpdateStartButton()
+    {
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+
+        bool canStart = CanStartGame();
+
+        // Change button interactable
+        startButton.interactable = canStart;
+        ColorBlock cb = startButton.colors; // <-- declare cb here!
+        // Change color safely using ColorBlock
+        Color whiteColor = new Color32(255, 255, 255, 255);
+        cb.normalColor = canStart ? Color.white : Color.gray;
+        cb.highlightedColor = canStart ? Color.white : Color.gray;
+        cb.pressedColor = canStart ? Color.white : Color.gray;
+        cb.disabledColor = Color.gray;
+        startButton.colors = cb;
     }
 
     public void OnStartButtonPressed()
     {
-        if (!PhotonNetwork.IsMasterClient) return;
-
-        if (!AreAllPlayersReady())
-        {
-            Debug.Log("Cannot start: not all players are ready.");
+        if (!PhotonNetwork.IsMasterClient)
             return;
-        }
 
-        Debug.Log("All players ready! Starting game...");
-        PhotonNetwork.CurrentRoom.IsOpen = false; // prevent late joins
+        if (!CanStartGame())
+            return; // HARD STOP – cannot cheat start
 
-        // Load game scene for all players
-        PhotonNetwork.LoadLevel("GameScene"); // replace with your actual game scene name
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.LoadLevel("GameScene");
     }
 
-    private bool AreAllPlayersReady()
+    bool CanStartGame()
     {
+        int sp = 0;
+        int bp = 0;
+
         foreach (var p in PhotonNetwork.PlayerList)
         {
-            if (!p.CustomProperties.ContainsKey(LobbyKeys.PlayerReady)) return false;
-            if (!(bool)p.CustomProperties[LobbyKeys.PlayerReady]) return false;
+            if (!p.CustomProperties.TryGetValue(LobbyKeys.PlayerRole, out object r))
+                return false; // someone hasn't chosen yet
+
+            if ((int)r == 0) bp++;
+            else sp++;
         }
-        return true;
+
+        return sp == requiredSmallPlayers && bp == requiredBigPlayers;
     }
 }
