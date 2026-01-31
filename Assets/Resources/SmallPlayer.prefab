@@ -5071,6 +5071,7 @@ GameObject:
   - component: {fileID: 5644917193308100841}
   - component: {fileID: 6352348488652347470}
   - component: {fileID: 2698806620285314437}
+  - component: {fileID: 860750907698966064}
   - component: {fileID: 8643245985604792946}
   - component: {fileID: 1690847718266613209}
   - component: {fileID: 2418062032959012515}
@@ -5363,6 +5364,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562c112eec05e7d499f67aeabce13ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SPCaptureReporter
+--- !u!114 &860750907698966064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541eda942b87641449da5678577f8c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlantTrigger
 --- !u!114 &8643245985604792946
 MonoBehaviour:
   m_ObjectHideFlags: 0
