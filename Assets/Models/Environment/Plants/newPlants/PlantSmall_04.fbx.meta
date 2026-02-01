@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: d9e92f6b1ad6e994380a24cbd3788d1e
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -28,7 +28,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: m_plant_03
-    second: {fileID: 2100000, guid: 6380a14c02fc6f2428347619215c9e17, type: 2}
+    second: {fileID: 2100000, guid: 7e068a2770a0c23448a3b17e377dd744, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -41,8 +41,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -83,6 +81,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8

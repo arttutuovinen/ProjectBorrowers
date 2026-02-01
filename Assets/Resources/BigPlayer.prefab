@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 6636025762960350756}
   - component: {fileID: 726549868499103897}
   - component: {fileID: 4387901889807618486}
+  - component: {fileID: 207734190393102806}
   - component: {fileID: 6481876273859450188}
   - component: {fileID: 8769194568731714403}
   - component: {fileID: 369396142448013922}
@@ -611,6 +612,18 @@ MonoBehaviour:
   playerMovement: {fileID: 7549007834672380184}
   boostDuration: 3
   boostedSpeed: 20
+--- !u!114 &207734190393102806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541eda942b87641449da5678577f8c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlantTrigger
 --- !u!114 &6481876273859450188
 MonoBehaviour:
   m_ObjectHideFlags: 0

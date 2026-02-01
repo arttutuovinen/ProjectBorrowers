@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 989817539949895619}
+  - component: {fileID: 4936981564846107434}
   m_Layer: 0
   m_Name: PlantSmall_04
   m_TagString: Untagged
@@ -32,6 +33,27 @@ Transform:
   - {fileID: 5602699217453896739}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4936981564846107434
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419212329881569508}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 1.03, z: 3}
+  m_Center: {x: 0, y: 1.99, z: 0}
 --- !u!1001 &5353214516543861704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,6 +125,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6129056135119747412}
+    - targetCorrespondingSourceObject: {fileID: -7574904205782316542, guid: d9e92f6b1ad6e994380a24cbd3788d1e,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 4739680747658666945}
+    - targetCorrespondingSourceObject: {fileID: -7574904205782316542, guid: d9e92f6b1ad6e994380a24cbd3788d1e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7392274861194526827}
   m_SourcePrefab: {fileID: 100100000, guid: d9e92f6b1ad6e994380a24cbd3788d1e, type: 3}
 --- !u!4 &5602699217453896739 stripped
 Transform:
@@ -110,6 +140,46 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5353214516543861704}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6677423174444136906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7574904205782316542, guid: d9e92f6b1ad6e994380a24cbd3788d1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5353214516543861704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4739680747658666945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6677423174444136906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06f33fc39a931d41b7c5f13f81b1314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlantWiggle
+--- !u!114 &7392274861194526827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6677423174444136906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7178758958433316642 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3020335357873724650, guid: d9e92f6b1ad6e994380a24cbd3788d1e,
