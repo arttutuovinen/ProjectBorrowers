@@ -6850,8 +6850,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbd9f6bfa62c8f4e84797b204aa8471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SPFootstepAudio
-  footstepClip: {fileID: 8300000, guid: 3bdcb32e92c672a4fb18f0aa57b424e3, type: 3}
+  footstepClip: {fileID: 8300000, guid: 24ba870b299702d4d8b686da667725d2, type: 3}
   volume: 1
+  minPitch: 0.9
+  maxPitch: 1.1
   audioSource: {fileID: 4511945943439870236}
 --- !u!82 &4511945943439870236
 AudioSource:
