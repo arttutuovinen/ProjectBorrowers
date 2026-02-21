@@ -28,6 +28,10 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     //Audio
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip ítemSound;
+    [SerializeField] private AudioClip flashbangSound;
+    [SerializeField] private AudioClip springSound;
+    [SerializeField] private AudioClip boppyPinSound;
+    [SerializeField] private AudioClip treasureSound;
 
     private void Awake()
     {
@@ -109,7 +113,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
             currentItem = "Treasure";
             treasureUIImage.SetActive(true);
             Debug.Log("Picked up the Treasure!");
-
+            audioSource.PlayOneShot(treasureSound);
             // Deactivate treasure across all clients
             PhotonView pv = itemInTrigger.GetComponent<PhotonView>();
             if (pv != null)
@@ -152,18 +156,21 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
             case "BoppyPin":
                 boppyPinScript?.SpawnBoppyPin();
                 boppyPinUIImage.SetActive(false);
+                audioSource.PlayOneShot(boppyPinSound); 
                 currentItem = null;
                 break;
 
             case "FlashBangCollectible":
                 flashBangScript?.SpawnFlashbang();
                 flashbangUIImage.SetActive(false);
+                audioSource.PlayOneShot(flashbangSound);
                 currentItem = null;
                 break;
 
             case "SpringCollectible":
                 springScript?.UseSpring();
                 springUIImage.SetActive(false);
+                audioSource.PlayOneShot(springSound);
                 currentItem = null;
                 break;
 

@@ -21,6 +21,11 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
     private Color originalEdgeColor;
     private static readonly Color highlightColor = Color.white;
 
+    //Audio
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip doorOpenSound;
+    [SerializeField] private AudioClip doorCloseSound;
+
     private void Awake()
     {
         initialRotation = transform.rotation;
@@ -85,14 +90,21 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
 
     private void OpenDoor()
     {
+        audioSource.PlayOneShot(doorOpenSound);
         targetRotation = Quaternion.Euler(0, rotationAmount, 0) * initialRotation;
     }
 
     private void CloseDoor()
     {
+        Invoke(nameof(PlayCloseSound), 0.3f);
         targetRotation = initialRotation;
     }
-    
+
+    private void PlayCloseSound()
+    {
+        audioSource.PlayOneShot(doorCloseSound);
+    }
+
     public void SetHighlight(bool highlighted)
     {
         if (edgeMaterial == null) return;
