@@ -5306,6 +5306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactButton: P1Interact
   useButton: Fire1
+  audioSource: {fileID: 4511945943439870236}
+  "\xEDtemSound": {fileID: 8300000, guid: b3a7f5148ad241c4f98afd0592e280e3, type: 3}
 --- !u!114 &5644917193308100841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5338,6 +5340,8 @@ MonoBehaviour:
   movementParticles: {fileID: 1257212597661535666}
   maxEmissionRate: 20
   emissionChangeSpeed: 10
+  audioSource: {fileID: 4511945943439870236}
+  jumpSound: {fileID: 8300000, guid: df641dd7af01cad42af197463684a1f4, type: 3}
 --- !u!114 &6352348488652347470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6866,7 +6870,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 3bdcb32e92c672a4fb18f0aa57b424e3, type: 3}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

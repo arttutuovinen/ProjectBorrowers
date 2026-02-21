@@ -25,6 +25,10 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private SPInteractionUI interactionUI;
     private GameObject escapeText;
 
+    //Audio
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip ítemSound;
+
     private void Awake()
     {
         // Cache item scripts if attached
@@ -118,13 +122,14 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
             // Other collectibles
             currentItem = itemName;
             Debug.Log($"Picked up {currentItem}");
-
+            audioSource.PlayOneShot(ítemSound);
             if (itemName.Contains("BoppyPinCollectible"))
                 boppyPinUIImage.SetActive(true);
             if (itemName.Contains("FlashBangCollectible"))
                 flashbangUIImage.SetActive(true);
             if (itemName.Contains("SpringCollectible"))
                 springUIImage.SetActive(true);
+
 
             PhotonView itemPhotonView = itemInTrigger.GetComponent<PhotonView>();
             if (itemPhotonView != null && itemPhotonView.IsMine)

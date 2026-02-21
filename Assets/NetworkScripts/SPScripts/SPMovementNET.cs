@@ -46,6 +46,10 @@ public class SPMovementNET : MonoBehaviour
 
     private SPInteractionUI interactionUI;
 
+    //Audio
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSound;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -146,6 +150,7 @@ public class SPMovementNET : MonoBehaviour
             if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                PlayJumpSound();
             }
 
             // Ladder interaction: press E to start climbing if near a ladder
@@ -254,5 +259,12 @@ public class SPMovementNET : MonoBehaviour
             interactionUI?.HideAll();
         }
     }
-     
+    void PlayJumpSound()
+    {
+        if (audioSource != null && jumpSound != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
+    }
+
 }
