@@ -154,30 +154,87 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         {
             case "BoppyPinCollectible":
             case "BoppyPin":
-                boppyPinScript?.SpawnBoppyPin();
-                boppyPinUIImage.SetActive(false);
-                audioSource.PlayOneShot(boppyPinSound); 
-                currentItem = null;
+                UseBoppyPin();
                 break;
 
             case "FlashBangCollectible":
-                flashBangScript?.SpawnFlashbang();
-                flashbangUIImage.SetActive(false);
-                audioSource.PlayOneShot(flashbangSound);
-                currentItem = null;
+                UseFlashbang();
                 break;
 
             case "SpringCollectible":
-                springScript?.UseSpring();
-                springUIImage.SetActive(false);
-                audioSource.PlayOneShot(springSound);
-                currentItem = null;
+                UseSpring();
                 break;
 
             case "Treasure":
                 Debug.Log("Holding Treasure. Go to SPFinish to deliver.");
                 break;
         }
+    }
+
+    private void UseBoppyPin()
+    {
+        boppyPinScript?.SpawnBoppyPin();
+        boppyPinUIImage.SetActive(false);
+
+        PlayBoppyPinSound();
+
+        currentItem = null;
+    }
+
+    private void PlayBoppyPinSound()
+    {
+        audioSource.PlayOneShot(boppyPinSound);
+        photonView.RPC(nameof(RPC_PlayBoppyPinSound), RpcTarget.Others);
+    }
+
+    [PunRPC]
+    private void RPC_PlayBoppyPinSound()
+    {
+        audioSource.PlayOneShot(boppyPinSound);
+    }
+
+    private void UseFlashbang()
+    {
+        flashBangScript?.SpawnFlashbang();
+        flashbangUIImage.SetActive(false);
+
+        PlayFlashbangSound();
+
+        currentItem = null;
+    }
+
+    private void PlayFlashbangSound()
+    {
+        audioSource.PlayOneShot(flashbangSound);
+        photonView.RPC(nameof(RPC_PlayFlashbangSound), RpcTarget.Others);
+    }
+
+    [PunRPC]
+    private void RPC_PlayFlashbangSound()
+    {
+        audioSource.PlayOneShot(flashbangSound);
+    }
+
+    private void UseSpring()
+    {
+        springScript?.UseSpring();
+        springUIImage.SetActive(false);
+
+        PlaySpringSound();
+
+        currentItem = null;
+    }
+
+    private void PlaySpringSound()
+    {
+        audioSource.PlayOneShot(springSound);
+        photonView.RPC(nameof(RPC_PlaySpringSound), RpcTarget.Others);
+    }
+
+    [PunRPC]
+    private void RPC_PlaySpringSound()
+    {
+        audioSource.PlayOneShot(springSound);
     }
 
     [PunRPC]
