@@ -17,38 +17,27 @@ public class SPFootstepAudio : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        photonView = GetComponentInParent<PhotonView>(); // <-- get root PhotonView
+        photonView = GetComponentInParent<PhotonView>(); // get root
     }
 
-    // Called from Animation Event
+    // Called from Animation Event (works now!)
     public void PlayFootstep()
     {
         if (!photonView.IsMine)
             return;
 
-        float randomPitch = GetRandomPitch();
+        float pitch = Random.Range(minPitch, maxPitch);
 
         // Play locally
-        PlayWithPitch(randomPitch);
-
-        // Sync pitch to others
-        photonView.RPC(nameof(RPC_PlayFootstep), RpcTarget.Others, randomPitch);
-    }
-
-    [PunRPC]
-    private void RPC_PlayFootstep(float pitch)
-    {
         PlayWithPitch(pitch);
+
+        // Send RPC THROUGH the root PhotonView
+        photonView.RPC("RPC_PlayFootstep", RpcTarget.Others, pitch);
     }
 
-    private void PlayWithPitch(float pitch)
+    public void PlayWithPitch(float pitch)
     {
         audioSource.pitch = pitch;
         audioSource.PlayOneShot(footstepClip, volume);
-    }
-
-    private float GetRandomPitch()
-    {
-        return Random.Range(minPitch, maxPitch);
     }
 }
