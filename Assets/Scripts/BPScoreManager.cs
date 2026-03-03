@@ -11,23 +11,42 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
     public int maxCaptured = 1;
 
     private int currentCaptured = 0;
-    private TextMeshProUGUI captureText;
+    private TMP_Text captureText;
     private GameObject bpWins;
     private bool gameEnded = false;
     public Collider scoreTrigger;
 
     private void Start()
     {
-        Canvas canvas = FindObjectOfType<Canvas>();
-        captureText = GameObject.Find("Canvas/BigPlayerUI/Capture")
-            ?.GetComponent<TextMeshProUGUI>();
+        StartCoroutine(InitUI());
+    }
+
+    private IEnumerator InitUI()
+    {
+        yield return null; // wait 1 frame
+
+        Canvas canvas = FindFirstObjectByType<Canvas>();
+
+        if (canvas == null)
+        {
+            Debug.LogError("Canvas not found ❌");
+            yield break;
+        }
+
+        captureText = canvas.GetComponentInChildren<TMP_Text>(true);
+
+        if (captureText == null)
+        {
+            Debug.LogError("CaptureText is NULL ❌");
+        }
 
         bpWins = canvas.transform.Find("BPWins")?.gameObject;
+
         UpdateText(currentCaptured);
     }
 
     [PunRPC]
-    private void RPC_RequestAddCapture()
+    public void RPC_RequestAddCapture()
     {
         currentCaptured = Mathf.Clamp(currentCaptured + 1, 0, maxCaptured);
         photonView.RPC(nameof(RPC_UpdateCapturedCount), RpcTarget.All, currentCaptured);

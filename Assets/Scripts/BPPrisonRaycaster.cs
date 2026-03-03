@@ -75,7 +75,7 @@ public class BPPrisonRaycaster : MonoBehaviour
             BPScoreManager pm = FindFirstObjectByType<BPScoreManager>();
             if (pm != null)
             {
-                pm.photonView.RPC("RPC_RequestAddCapture", RpcTarget.All);
+                pm.photonView.RPC("RPC_RequestAddCapture", RpcTarget.AllViaServer);
             }
 
             // Enable the score trigger
