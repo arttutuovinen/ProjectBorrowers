@@ -29,9 +29,6 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RPC_RequestAddCapture()
     {
-        if (!PhotonNetwork.IsMasterClient)
-            return;
-
         currentCaptured = Mathf.Clamp(currentCaptured + 1, 0, maxCaptured);
         photonView.RPC(nameof(RPC_UpdateCapturedCount), RpcTarget.All, currentCaptured);
     }
@@ -87,6 +84,24 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
         };
 
             player.SetCustomProperties(props);
+        }
+    }
+    [PunRPC]
+    public void RPC_DisableScoreTrigger()
+    {
+        if (scoreTrigger != null)
+        {
+            scoreTrigger.enabled = false;
+            Debug.Log("Score trigger disabled via RPC!");
+        }
+    }
+    [PunRPC]
+    public void RPC_EnableScoreTrigger()
+    {
+        if (scoreTrigger != null)
+        {
+            scoreTrigger.enabled = true;
+            Debug.Log("Score trigger enabled via RPC!");
         }
     }
 }

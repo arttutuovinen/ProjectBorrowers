@@ -71,9 +71,18 @@ public class BPPrisonRaycaster : MonoBehaviour
             // Teleport SP to jail
             capturedSP.RPC("RPC_OnJailed", RpcTarget.All, t.position);
 
-            // Notify score manager
+            // Update captured count
             BPScoreManager pm = FindFirstObjectByType<BPScoreManager>();
-            pm.photonView.RPC("RPC_EnableScoreTrigger", RpcTarget.All);
+            if (pm != null)
+            {
+                pm.photonView.RPC("RPC_RequestAddCapture", RpcTarget.All);
+            }
+
+            // Enable the score trigger
+            if (pm != null)
+            {
+                pm.photonView.RPC("RPC_EnableScoreTrigger", RpcTarget.All);
+            }
 
             // Clear captured SP reference
             capturedSP = null;
