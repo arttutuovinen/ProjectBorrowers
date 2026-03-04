@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using System.Linq;
 
@@ -15,6 +15,8 @@ public class BPPrisonRaycaster : MonoBehaviour
     private PhotonView capturedSP;        // SP currently held by BP
     private PhotonView ownerPV;
 
+    private bool hasJailed = false;
+
     void Start()
     {
         ownerPV = GetComponent<PhotonView>();
@@ -30,6 +32,7 @@ public class BPPrisonRaycaster : MonoBehaviour
     public void SetCapturedSP(PhotonView sp)
     {
         capturedSP = sp;
+        hasJailed = false;
     }
 
     void Update()
@@ -62,32 +65,29 @@ public class BPPrisonRaycaster : MonoBehaviour
 
     private void JailSP(RaycastHit hit)
     {
-        if (capturedSP == null) return;
+        if (capturedSP == null || hasJailed) return;
 
-        foreach (Transform t in hit.collider.GetComponentsInChildren<Transform>())
+        hasJailed = true;
+
+        Transform target = hit.collider.GetComponentsInChildren<Transform>()
+            .FirstOrDefault(t => t.CompareTag("SmallPlayerJailTeleport"));
+
+        if (target == null)
         {
-            if (!t.CompareTag("SmallPlayerJailTeleport")) continue;
-
-            // Teleport SP to jail
-            capturedSP.RPC("RPC_OnJailed", RpcTarget.All, t.position);
-
-            // Update captured count
-            BPScoreManager pm = FindFirstObjectByType<BPScoreManager>();
-            if (pm != null)
-            {
-                pm.photonView.RPC("RPC_RequestAddCapture", RpcTarget.AllViaServer);
-            }
-
-            // Enable the score trigger
-            if (pm != null)
-            {
-                pm.photonView.RPC("RPC_EnableScoreTrigger", RpcTarget.All);
-            }
-
-            // Clear captured SP reference
-            capturedSP = null;
-            break;
+            hasJailed = false;
+            return;
         }
+
+        capturedSP.RPC("RPC_OnJailed", RpcTarget.All, target.position);
+
+        BPScoreManager pm = FindFirstObjectByType<BPScoreManager>();
+        if (pm != null)
+        {
+            pm.photonView.RPC("RPC_RequestAddCapture", RpcTarget.MasterClient);
+            pm.photonView.RPC("RPC_EnableScoreTrigger", RpcTarget.All);
+        }
+
+        capturedSP = null;
 
         // Reset BP animations
         BPFpAnimationController bpAnim = GetComponentInParent<BPFpAnimationController>();

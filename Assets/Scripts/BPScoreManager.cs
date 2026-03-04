@@ -27,13 +27,8 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
 
         Canvas canvas = FindFirstObjectByType<Canvas>();
 
-        if (canvas == null)
-        {
-            Debug.LogError("Canvas not found ❌");
-            yield break;
-        }
-
-        captureText = canvas.GetComponentInChildren<TMP_Text>(true);
+        captureText = canvas.transform.Find("BigPlayerUI/Capture")
+    ?.GetComponent<TMP_Text>();
 
         if (captureText == null)
         {
@@ -48,6 +43,8 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPC_RequestAddCapture()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         currentCaptured = Mathf.Clamp(currentCaptured + 1, 0, maxCaptured);
         photonView.RPC(nameof(RPC_UpdateCapturedCount), RpcTarget.All, currentCaptured);
     }
