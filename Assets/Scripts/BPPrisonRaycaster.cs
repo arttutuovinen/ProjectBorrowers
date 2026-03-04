@@ -32,7 +32,7 @@ public class BPPrisonRaycaster : MonoBehaviour
     public void SetCapturedSP(PhotonView sp)
     {
         capturedSP = sp;
-        hasJailed = false;
+        
     }
 
     void Update()
@@ -83,12 +83,11 @@ public class BPPrisonRaycaster : MonoBehaviour
         BPScoreManager pm = FindFirstObjectByType<BPScoreManager>();
         if (pm != null)
         {
-            pm.photonView.RPC("RPC_RequestAddCapture", RpcTarget.MasterClient);
             pm.photonView.RPC("RPC_EnableScoreTrigger", RpcTarget.All);
         }
 
         capturedSP = null;
-
+        hasJailed = false;
         // Reset BP animations
         BPFpAnimationController bpAnim = GetComponentInParent<BPFpAnimationController>();
         if (bpAnim != null && bpAnim.photonView.IsMine)

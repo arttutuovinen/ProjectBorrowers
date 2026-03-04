@@ -14,6 +14,13 @@ public class BPCatchCollider : MonoBehaviour
         PhotonView spPV = other.GetComponent<PhotonView>();
         if (spPV == null) return;
 
+        SPCaptureHandler spHandler = other.GetComponent<SPCaptureHandler>();
+        if (spHandler != null && spHandler.IsJailed())
+        {
+            // ❌ Already in jail → ignore
+            return;
+        }
+
         // Assign teleport targets
         spPV.RPC(
             "RPC_AssignTeleportTargets",

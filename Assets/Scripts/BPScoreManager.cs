@@ -4,17 +4,19 @@ using Photon.Realtime;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class BPScoreManager : MonoBehaviourPunCallbacks
 {
     [Header("Settings")]
-    public int maxCaptured = 1;
+    public int maxCaptured = 2;
 
     private int currentCaptured = 0;
     private TMP_Text captureText;
     private GameObject bpWins;
     private bool gameEnded = false;
     public Collider scoreTrigger;
+    private HashSet<int> playersInJail = new HashSet<int>();
 
     private void Start()
     {
@@ -40,13 +42,39 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
         UpdateText(currentCaptured);
     }
 
-    [PunRPC]
-    public void RPC_RequestAddCapture()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("SmallPlayer")) return;
+
+        PhotonView pv = other.GetComponent<PhotonView>();
+        if (pv == null) return;
+
+        if (playersInJail.Add(pv.ViewID)) // only if newly added
+        {
+            UpdateCapturedFromTrigger();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("SmallPlayer")) return;
+
+        PhotonView pv = other.GetComponent<PhotonView>();
+        if (pv == null) return;
+
+        if (playersInJail.Remove(pv.ViewID)) // only if actually removed
+        {
+            UpdateCapturedFromTrigger();
+        }
+    }
+
+    private void UpdateCapturedFromTrigger()
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        currentCaptured = Mathf.Clamp(currentCaptured + 1, 0, maxCaptured);
-        photonView.RPC(nameof(RPC_UpdateCapturedCount), RpcTarget.All, currentCaptured);
+        int count = playersInJail.Count;
+
+        photonView.RPC(nameof(RPC_UpdateCapturedCount), RpcTarget.All, count);
     }
 
     [PunRPC]

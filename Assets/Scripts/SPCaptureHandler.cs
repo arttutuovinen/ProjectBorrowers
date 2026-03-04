@@ -14,6 +14,7 @@ public class SPCaptureHandler : MonoBehaviourPun
     public Transform bpPrefabTransform;
 
     private bool isCaptured = false; // ✅ RESTORED
+    private bool isJailed = false;
 
     void Awake()
     {
@@ -101,6 +102,7 @@ public class SPCaptureHandler : MonoBehaviourPun
     {
         spFollowTarget = null;
         isCaptured = false;
+        isJailed = true;
 
         if (photonView.IsMine)
         {
@@ -157,5 +159,10 @@ public class SPCaptureHandler : MonoBehaviourPun
     public bool IsCaptured()
     {
         return isCaptured;
+    }
+
+    public bool IsJailed()
+    {
+        return isJailed;
     }
 }
