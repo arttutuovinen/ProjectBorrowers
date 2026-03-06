@@ -308,5 +308,27 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         HideTreasureUI();
         interactionUI?.HideAll();
     }
+
+    [PunRPC]
+    public void RPC_DropTreasureOnCapture()
+    {
+        if (currentItem != "Treasure") return;
+
+        currentItem = null;
+        treasureUIImage.SetActive(false);
+
+        // Ask MasterClient to respawn the treasure
+        photonView.RPC("RPC_RequestTreasureRespawn", RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    private void RPC_RequestTreasureRespawn()
+    {
+        TreasureSpawner spawner = FindFirstObjectByType<TreasureSpawner>();
+        if (spawner != null)
+        {
+            spawner.TeleportTreasure();
+        }
+    }
 }
 
