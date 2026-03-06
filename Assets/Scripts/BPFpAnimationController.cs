@@ -80,4 +80,9 @@ public class BPFpAnimationController : MonoBehaviourPun
         fpAnimator.SetBool("IsCaught", false);
         spCaptured = false;        // ✅ Allow catching again
     }
+    [PunRPC]
+    public void RPC_ResetCaughtAnimation()
+    {
+        ResetCaughtAnimation();
+    }
 }

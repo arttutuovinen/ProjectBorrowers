@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using System.Linq;
+using UnityEngine.UI;
+using TMPro;
 
 public class SPCaptureHandler : MonoBehaviourPun
 {
@@ -16,6 +18,14 @@ public class SPCaptureHandler : MonoBehaviourPun
     private bool isCaptured = false; // ✅ RESTORED
     private bool isJailed = false;
 
+    private GameObject escapeBar;
+    private Image escapePanel;
+    private float escapeValue = 0f;
+    private float escapeDecreaseSpeed = 0.92f;
+    private float escapeIncreaseAmount = 0.15f;
+
+    
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -25,6 +35,16 @@ public class SPCaptureHandler : MonoBehaviourPun
     void Start()
     {
         CreateInvisibleProxies();
+
+        if (photonView.IsMine)
+        {
+            Canvas canvas = FindObjectOfType<Canvas>();
+            escapeBar = canvas.transform.Find("SmallPlayerUI/EscapeBar")?.gameObject;
+            escapePanel = canvas.transform.Find("SmallPlayerUI/EscapeBar/Panel")?.GetComponent<UnityEngine.UI.Image>();
+
+            if (escapeBar != null)
+                escapeBar.SetActive(false);
+        }
     }
 
     void Update()
@@ -35,6 +55,8 @@ public class SPCaptureHandler : MonoBehaviourPun
         controller.enabled = false;
         transform.position = spFollowTarget.position;
         controller.enabled = true;
+
+        HandleEscape();
     }
 
     void CreateInvisibleProxies()
@@ -89,6 +111,13 @@ public class SPCaptureHandler : MonoBehaviourPun
             movementScript.DisableMovement();
             SetRenderers(false); // hide real SP
             spProxy_SP.SetActive(true); // show SP proxy following SPClientTeleportLocation
+            
+            if (escapeBar != null)
+            {
+                escapeBar.SetActive(true);
+                escapeValue = 0f;
+                escapePanel.fillAmount = 0f;
+            }
         }
         else
         {
@@ -164,5 +193,76 @@ public class SPCaptureHandler : MonoBehaviourPun
     public bool IsJailed()
     {
         return isJailed;
+    }
+
+    void HandleEscape()
+    {
+        if (escapePanel == null) return;
+
+        // decrease bar
+        escapeValue -= Time.deltaTime * escapeDecreaseSpeed;
+        escapeValue = Mathf.Clamp01(escapeValue);
+
+        // press interact to increase
+        if (Input.GetButtonDown("P1Interact"))
+        {
+            escapeValue += escapeIncreaseAmount;
+        }
+
+        escapePanel.fillAmount = escapeValue;
+
+        // escape success
+        if (escapeValue >= 1f)
+        {
+            Escape();
+        }
+    }
+
+    [PunRPC]
+    void RPC_OnEscape()
+    {
+        SetRenderers(true);
+
+        if (spProxy_BP != null)
+            spProxy_BP.SetActive(false);
+    }
+
+    void Escape()
+    {
+        isCaptured = false;
+        spFollowTarget = null;
+
+        if (escapeBar != null)
+            escapeBar.SetActive(false);
+
+        controller.enabled = true;
+        movementScript.EnableMovement();
+
+        SetRenderers(true);
+        photonView.RPC("RPC_OnEscape", RpcTarget.All);
+
+        if (spProxy_SP != null) spProxy_SP.SetActive(false);
+
+        photonView.RPC("RPC_HideBPProxy", RpcTarget.Others);
+
+        BPFpAnimationController bpAnim = FindFirstObjectByType<BPFpAnimationController>();
+        if (bpAnim != null)
+        {
+            bpAnim.photonView.RPC("RPC_ResetCaughtAnimation", bpAnim.photonView.Owner, null);
+        }
+
+        // stun BP
+        BigPlayerStun bp = FindFirstObjectByType<BigPlayerStun>();
+        if (bp != null)
+        {
+            bp.photonView.RPC("StunRPC", RpcTarget.All);
+        }
+
+        BPCatchController[] bpControllers = FindObjectsByType<BPCatchController>(FindObjectsSortMode.None);
+
+        foreach (var bpController in bpControllers)
+        {
+            bpController.photonView.RPC("RPC_ResetCaughtReactionSP", RpcTarget.All);
+        }
     }
 }

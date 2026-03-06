@@ -28,7 +28,7 @@ public class BigPlayerStun : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void StunRPC()
+    public void StunRPC()
     {
         if (isStunned) return;
         StartCoroutine(StunPlayer());
