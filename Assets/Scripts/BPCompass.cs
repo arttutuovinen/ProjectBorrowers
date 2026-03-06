@@ -1,50 +1,60 @@
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
+using System.Linq;
 
 public class BPCompass : MonoBehaviourPun
 {
-    public GameObject smallPlayer; // Can be null if no small player exists
-    public GameObject bpCompass;
+    public GameObject bpCompass; // The visual compass object
 
     private void Start()
     {
-        bpCompass.SetActive(false);
+        if (bpCompass != null)
+            bpCompass.SetActive(false);
     }
 
     public void UseCompass()
     {
-        if (!photonView.IsMine) return;   // Only local player can use their compass
+        if (!photonView.IsMine) return; // Only local BP client can use
 
-        bpCompass.SetActive(true);
-        StartCoroutine(UpdateCompass());
+        GameObject[] allSPs = GameObject.FindGameObjectsWithTag("SmallPlayer");
+
+        if (allSPs.Length == 0) return; // No SPs in the scene
+
+        // Pick a random SP
+        GameObject randomSP = allSPs[Random.Range(0, allSPs.Length)];
+
+        if (bpCompass != null)
+        {
+            bpCompass.SetActive(true);
+            StartCoroutine(UpdateCompass(randomSP));
+        }
     }
 
-    private IEnumerator UpdateCompass()
+    private IEnumerator UpdateCompass(GameObject targetSP)
     {
-        float duration = 4f;
+        float duration = 3f;
         float elapsed = 0f;
 
-        while (elapsed < duration)
+        while (elapsed < duration && targetSP != null)
         {
-            if (smallPlayer != null)
-            {
-                Vector3 directionToSmallPlayer = smallPlayer.transform.position - transform.position;
-                directionToSmallPlayer.y = 0;
+            // Direction from BP to SP, ignore y-axis
+            Vector3 direction = targetSP.transform.position - transform.position;
+            direction.y = 0f;
 
-                if (directionToSmallPlayer != Vector3.zero)
-                {
-                    Quaternion targetRotation = Quaternion.LookRotation(directionToSmallPlayer);
-                    transform.rotation = targetRotation;
-                }
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(direction); // world rotation
+                                                                           // Make local rotation ignore camera rotation
+                bpCompass.transform.localRotation = Quaternion.Euler(0f, targetRot.eulerAngles.y - transform.eulerAngles.y, 0f);
             }
 
-            // If smallPlayer is null, compass just stays active but does nothing
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        bpCompass.SetActive(false); // Hide compass after duration
+        if (bpCompass != null)
+            bpCompass.SetActive(false); // Hide after 3 seconds
     }
 }
 

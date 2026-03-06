@@ -43,6 +43,7 @@ public class BPItemCollector : MonoBehaviourPun
     private GameObject mouseTrapUIImage;
     private GameObject tapeUIImage;
     private GameObject throwingItem1UIImage;
+    private GameObject compassImage;
 
     public bool IsUsingItem { get; private set; }
 
@@ -83,6 +84,7 @@ public class BPItemCollector : MonoBehaviourPun
         tapeUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Tape")?.gameObject;
         vacuumUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Vacuum")?.gameObject;
         throwingItem1UIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/ThrowingItem1")?.gameObject;
+        compassImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Compass")?.gameObject;
 
     }
 
@@ -180,7 +182,7 @@ public class BPItemCollector : MonoBehaviourPun
 
             case "BPCompass":
                 currentItem = ItemType.Compass;
-                //vacuumUIImage.SetActive(true);
+                compassImage.SetActive(true);
                 break;
 
             case "BPVacuumCleaner":
@@ -249,6 +251,7 @@ public class BPItemCollector : MonoBehaviourPun
 
             case ItemType.Compass:
                 if (bpCompass != null) bpCompass.UseCompass();
+                compassImage.SetActive(false);
                 break;
 
             case ItemType.VacuumCleaner:
