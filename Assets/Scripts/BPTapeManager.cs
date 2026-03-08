@@ -10,6 +10,7 @@ public class BPTapeManager : MonoBehaviourPun
 
     private GameObject currentTapeArea;
 
+
     void Update()
     {
         if (!photonView.IsMine) return;   // Only local player does raycasts

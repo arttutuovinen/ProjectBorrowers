@@ -36,6 +36,7 @@ public class BPItemCollector : MonoBehaviourPun
     private BPVacuumCleaner bpVacuumCleaner;
     private BPTapeManager bpTapeManager;
     private BPMedicine bpMedicine;
+    private BPTapeUIManager tapeUIManager;
 
     //Images
     private GameObject medicineUIImage;
@@ -76,6 +77,7 @@ public class BPItemCollector : MonoBehaviourPun
         bpMedicine = GetComponent<BPMedicine>();
 
         interactionUI = FindObjectOfType<BPInteractionUI>();
+        tapeUIManager = FindObjectOfType<BPTapeUIManager>();
 
         if (!photonView.IsMine) return;
         Canvas canvas = Object.FindFirstObjectByType<Canvas>();
@@ -122,9 +124,14 @@ public class BPItemCollector : MonoBehaviourPun
             {
                 if (itemTags.Contains(hit.collider.tag))
                 {
-                    collectedItem = hit.collider.gameObject;
-                    canPickUp = true;
-                    newHighlight = hit.collider.GetComponentInParent<BPItemHighlight>();
+                    PhotonView pv = hit.collider.GetComponentInParent<PhotonView>();
+
+                    if (pv != null)
+                    {
+                        collectedItem = pv.gameObject;
+                        canPickUp = true;
+                        newHighlight = pv.GetComponentInChildren<BPItemHighlight>();
+                    }
                 }
             }
         }
@@ -193,6 +200,10 @@ public class BPItemCollector : MonoBehaviourPun
             case "BPTape":
                 currentItem = ItemType.Tape;
                 tapeUIImage.SetActive(true);
+
+                if (tapeUIManager != null)
+                    tapeUIManager.ShowTapeUI();
+
                 break;
 
             case "BPMedicine":
@@ -205,9 +216,10 @@ public class BPItemCollector : MonoBehaviourPun
             lastHighlightedItem.SetHighlight(false);
             lastHighlightedItem = null;
         }
-        PhotonView itemPV = collectedItem.GetComponentInParent<PhotonView>();
+        PhotonView itemPV = collectedItem.GetComponent<PhotonView>();
         if (itemPV != null)
         {
+            Debug.Log("Destroying item: " + collectedItem.name + " | ViewID: " + itemPV.ViewID);
             itemPV.RPC("RPC_RequestDestroy", RpcTarget.MasterClient);
         }
         itemUsed = false;
@@ -264,11 +276,15 @@ public class BPItemCollector : MonoBehaviourPun
                 {
                     if (!bpTapeManager.TryActivateTape())
                     {
-                        // Don't consume item if activation failed
                         return;
                     }
                 }
+
                 tapeUIImage.SetActive(false);
+
+                if (tapeUIManager != null)
+                    tapeUIManager.HideTapeUI();
+
                 break;
 
             case ItemType.Medicine:
