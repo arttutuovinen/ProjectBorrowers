@@ -15,9 +15,15 @@ public class BPItemHighlight : MonoBehaviour
 
         if (itemRenderer == null) return;
 
-        // Edge material is always last
-        edgeMaterial = itemRenderer.materials[itemRenderer.materials.Length - 1];
-        originalColor = edgeMaterial.color;
+        foreach (Material mat in itemRenderer.materials)
+        {
+            if (mat.name.Contains("EdgeLine"))
+            {
+                edgeMaterial = mat;
+                originalColor = mat.color;
+                break;
+            }
+        }
     }
 
     public void SetHighlight(bool highlighted)
