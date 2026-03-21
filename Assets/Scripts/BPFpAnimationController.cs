@@ -85,4 +85,21 @@ public class BPFpAnimationController : MonoBehaviourPun
     {
         ResetCaughtAnimation();
     }
+
+    public void PlayCompassAnimation()
+    {
+        fpAnimator.SetBool("IsCompass", true);
+    }
+    public void ResetCompassAnimation()
+    {
+        fpAnimator.SetBool("IsCompass", false);
+    }
+    public void PlayVacuumAnimation()
+    {
+        fpAnimator.SetBool("IsVacuum", true);
+    }
+    public void ResetVacuumAnimation()
+    {
+        fpAnimator.SetBool("IsVacuum", false);
+    }
 }

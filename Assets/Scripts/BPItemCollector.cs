@@ -38,6 +38,7 @@ public class BPItemCollector : MonoBehaviourPun
     private BPMedicine bpMedicine;
     private BPTapeUIManager tapeUIManager;
 
+
     //Images
     private GameObject medicineUIImage;
     private GameObject vacuumUIImage;
@@ -101,8 +102,6 @@ public class BPItemCollector : MonoBehaviourPun
 
         if (currentItem != ItemType.None && !itemUsed && Input.GetButtonDown("Fire1"))
             UseItem();
-
-
     }
 
     // -----------------------------------------------------------------------
@@ -240,34 +239,47 @@ public class BPItemCollector : MonoBehaviourPun
         switch (currentItem)
         {
             case ItemType.ThrowingItem:
-                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem();
+                if (bpThrowItem != null) 
+                    bpThrowItem.SpawnThrowItem();
                 throwingItem1UIImage.SetActive(false);
                 break;
 
             case ItemType.ThrowingItem_02:
-                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem2();
+                if (bpThrowItem != null) 
+                    bpThrowItem.SpawnThrowItem2();
                 break;
 
             case ItemType.ThrowingItem_03:
-                if (bpThrowItem != null) bpThrowItem.SpawnThrowItem3();
+                if (bpThrowItem != null) 
+                    bpThrowItem.SpawnThrowItem3();
                 break;
 
             case ItemType.FlySwatter:
-                if (bpAnimation != null) bpAnimation.FlySwatter();
+                if (bpAnimation != null) 
+                    bpAnimation.FlySwatter();
                 break;
 
             case ItemType.MouseTrap:
-                if (bpMouseTrap != null) bpMouseTrap.SpawnMouseTrap();
+                if (bpMouseTrap != null) 
+                    bpMouseTrap.SpawnMouseTrap();
                 mouseTrapUIImage.SetActive(false);
                 break;
 
             case ItemType.Compass:
-                if (bpCompass != null) bpCompass.UseCompass();
+                if (bpCompass != null)
+                {
+                    bpCompass.UseCompass();
+                }
                 compassImage.SetActive(false);
                 break;
 
             case ItemType.VacuumCleaner:
-                if (bpVacuumCleaner != null) bpVacuumCleaner.TryPullTarget();
+                if (bpVacuumCleaner != null)
+                {
+                    bpVacuumCleaner.TryPullTarget();
+                }
+                    
+                
                 vacuumUIImage.SetActive(false);
                 break;
 

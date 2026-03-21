@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class BPVacuumCleaner : MonoBehaviour
 {
@@ -15,10 +16,16 @@ public class BPVacuumCleaner : MonoBehaviour
     public LayerMask smallPlayerLayer;
 
     private PhotonView pv;
+    private BPFpAnimationController bpfpAnimation;
+    public GameObject bpVacuum;
 
     void Awake()
     {
         pv = GetComponent<PhotonView>();
+    }
+    private void Start()
+    {
+        bpfpAnimation = GetComponent<BPFpAnimationController>();
     }
 
     // Called by your input or animation event
@@ -26,7 +33,8 @@ public class BPVacuumCleaner : MonoBehaviour
     {
         // Only the local owner performs detection
         if (!pv.IsMine) return;
-
+        bpVacuum.SetActive(true);
+        bpfpAnimation.PlayVacuumAnimation();
         Vector3 center = transform.position + transform.TransformDirection(areaOffset);
 
         Collider[] hits = Physics.OverlapSphere(center, vacuumRadius, smallPlayerLayer);
@@ -53,6 +61,7 @@ public class BPVacuumCleaner : MonoBehaviour
 
         // Tell all players to pull this exact target
         pv.RPC("RPC_PullTarget", RpcTarget.All, targetPv.ViewID);
+        StartCoroutine(DisableVacuumAfterDelay());
     }
 
     [PunRPC]
@@ -66,6 +75,13 @@ public class BPVacuumCleaner : MonoBehaviour
         {
             pullTarget.PullTowards(transform, pullForce, pullDuration);
         }
+    }
+    IEnumerator DisableVacuumAfterDelay()
+    {
+        yield return new WaitForSeconds(pullDuration + 0.5f);
+
+        bpVacuum.SetActive(false);
+        bpfpAnimation.ResetVacuumAnimation();
     }
 
     void OnDrawGizmosSelected()

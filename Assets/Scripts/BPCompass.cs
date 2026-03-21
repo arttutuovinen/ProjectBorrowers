@@ -6,9 +6,11 @@ using System.Linq;
 public class BPCompass : MonoBehaviourPun
 {
     public GameObject bpCompass; // The visual compass object
-
+    private BPFpAnimationController bpfpAnimation;
+    public GameObject bpCompassNew;
     private void Start()
     {
+        bpfpAnimation = GetComponent<BPFpAnimationController>();
         if (bpCompass != null)
             bpCompass.SetActive(false);
     }
@@ -16,7 +18,8 @@ public class BPCompass : MonoBehaviourPun
     public void UseCompass()
     {
         if (!photonView.IsMine) return; // Only local BP client can use
-
+        bpCompassNew.SetActive(true);
+        bpfpAnimation.PlayCompassAnimation();
         GameObject[] allSPs = GameObject.FindGameObjectsWithTag("SmallPlayer");
 
         if (allSPs.Length == 0) return; // No SPs in the scene
@@ -33,7 +36,7 @@ public class BPCompass : MonoBehaviourPun
 
     private IEnumerator UpdateCompass(GameObject targetSP)
     {
-        float duration = 3f;
+        float duration = 5f;
         float elapsed = 0f;
 
         while (elapsed < duration && targetSP != null)
@@ -55,6 +58,8 @@ public class BPCompass : MonoBehaviourPun
 
         if (bpCompass != null)
             bpCompass.SetActive(false); // Hide after 3 seconds
+        bpfpAnimation.ResetCompassAnimation();
+        bpCompassNew.SetActive(false);
     }
 }
 
