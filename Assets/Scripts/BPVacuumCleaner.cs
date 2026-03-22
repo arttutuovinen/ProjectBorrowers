@@ -35,6 +35,7 @@ public class BPVacuumCleaner : MonoBehaviour
         if (!pv.IsMine) return;
         bpVacuum.SetActive(true);
         bpfpAnimation.PlayVacuumAnimation();
+        StartCoroutine(DisableVacuumAfterDelay());
         Vector3 center = transform.position + transform.TransformDirection(areaOffset);
 
         Collider[] hits = Physics.OverlapSphere(center, vacuumRadius, smallPlayerLayer);
@@ -61,7 +62,6 @@ public class BPVacuumCleaner : MonoBehaviour
 
         // Tell all players to pull this exact target
         pv.RPC("RPC_PullTarget", RpcTarget.All, targetPv.ViewID);
-        StartCoroutine(DisableVacuumAfterDelay());
     }
 
     [PunRPC]
