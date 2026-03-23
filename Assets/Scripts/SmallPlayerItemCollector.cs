@@ -20,6 +20,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private GameObject flashbangUIImage;
     private GameObject springUIImage;
     private GameObject treasureUIImage;
+    private GameObject scissorsUIImage;
     private TextMeshProUGUI treasureText;
 
     private SPInteractionUI interactionUI;
@@ -50,6 +51,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         boppyPinUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/BoppyPin")?.gameObject;
         flashbangUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Flashbang")?.gameObject;
         springUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Spring")?.gameObject;
+        scissorsUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Scissors")?.gameObject;
         treasureUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Treasure")?.gameObject;
         treasureText = canvas.transform.Find("SmallPlayerUI/Treasures").GetComponent<TextMeshProUGUI>();
         escapeText = canvas.transform.Find("SmallPlayerUI/Escape")?.gameObject; // NEW
@@ -61,6 +63,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         flashbangUIImage.SetActive(false);
         springUIImage.SetActive(false);
         treasureUIImage.SetActive(false);
+        scissorsUIImage.SetActive(false);
     }
 
     private void Update()
@@ -133,6 +136,8 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
                 flashbangUIImage.SetActive(true);
             if (itemName.Contains("SpringCollectible"))
                 springUIImage.SetActive(true);
+            if (itemName.Contains("ScissorsCollectible"))
+                scissorsUIImage.SetActive(true);
 
 
             PhotonView itemPhotonView = itemInTrigger.GetComponent<PhotonView>();
@@ -163,6 +168,10 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
 
             case "SpringCollectible":
                 UseSpring();
+                break;
+
+            case "ScissorsCollectible":
+                UseScissors();
                 break;
 
             case "Treasure":
@@ -235,6 +244,28 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private void RPC_PlaySpringSound()
     {
         audioSource.PlayOneShot(springSound);
+    }
+
+    private void UseScissors()
+    {
+        //scissorsScript?.UseScissors();
+        scissorsUIImage.SetActive(false);
+
+        PlayScissorsSound();
+
+        currentItem = null;
+    }
+
+    private void PlayScissorsSound()
+    {
+        //audioSource.PlayOneShot(springSound);
+        //photonView.RPC(nameof(RPC_PlayScissorsSound), RpcTarget.Others);
+    }
+
+    [PunRPC]
+    private void RPC_PlayScissorsSound()
+    {
+        //audioSource.PlayOneShot(springSound);
     }
 
     [PunRPC]
