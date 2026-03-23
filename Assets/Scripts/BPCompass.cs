@@ -5,61 +5,80 @@ using System.Linq;
 
 public class BPCompass : MonoBehaviourPun
 {
-    public GameObject bpCompass; // The visual compass object
+    [Header("References")]
+    public GameObject bpCompass;
+    public GameObject bpArrow;
+    public Transform arrow;        // Only the arrow rotates
+
     private BPFpAnimationController bpfpAnimation;
-    public GameObject bpCompassNew;
+
+    [Header("Settings")]
+    public float compassDuration = 5f;
+    private Quaternion initialArrowRotation;
+    private Coroutine compassRoutine;
+
     private void Start()
     {
         bpfpAnimation = GetComponent<BPFpAnimationController>();
+        initialArrowRotation = arrow.localRotation;
         if (bpCompass != null)
             bpCompass.SetActive(false);
+        if (bpArrow != null)
+            bpArrow.SetActive(false);
     }
 
     public void UseCompass()
     {
-        if (!photonView.IsMine) return; // Only local BP client can use
-        bpCompassNew.SetActive(true);
-        bpfpAnimation.PlayCompassAnimation();
+        if (!photonView.IsMine) return;
+
         GameObject[] allSPs = GameObject.FindGameObjectsWithTag("SmallPlayer");
+        if (allSPs.Length == 0) return;
 
-        if (allSPs.Length == 0) return; // No SPs in the scene
+        GameObject targetSP = allSPs[Random.Range(0, allSPs.Length)];
 
-        // Pick a random SP
-        GameObject randomSP = allSPs[Random.Range(0, allSPs.Length)];
+        // Activate visuals + animation
+        bpCompass.SetActive(true);
+        bpArrow.SetActive(true);
+        bpfpAnimation.PlayCompassAnimation();
 
-        if (bpCompass != null)
-        {
-            bpCompass.SetActive(true);
-            StartCoroutine(UpdateCompass(randomSP));
-        }
+        // Prevent stacking coroutines
+        if (compassRoutine != null)
+            StopCoroutine(compassRoutine);
+
+        compassRoutine = StartCoroutine(UpdateCompass(targetSP));
     }
 
     private IEnumerator UpdateCompass(GameObject targetSP)
     {
-        float duration = 5f;
         float elapsed = 0f;
 
-        while (elapsed < duration && targetSP != null)
+        while (elapsed < compassDuration && targetSP != null)
         {
-            // Direction from BP to SP, ignore y-axis
+            // Direction from player to target (ignore height)
             Vector3 direction = targetSP.transform.position - transform.position;
             direction.y = 0f;
 
-            if (direction != Vector3.zero)
+            if (direction.sqrMagnitude > 0.001f)
             {
-                Quaternion targetRot = Quaternion.LookRotation(direction); // world rotation
-                                                                           // Make local rotation ignore camera rotation
-                bpCompass.transform.localRotation = Quaternion.Euler(0f, targetRot.eulerAngles.y - transform.eulerAngles.y, 0f);
+                // Convert to local space for stable rotation
+                Vector3 localDir = transform.InverseTransformDirection(direction);
+
+                float angle = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
+
+                // Rotate only the arrow
+                arrow.localRotation = initialArrowRotation * Quaternion.Euler(0f, angle, 0f);
             }
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        if (bpCompass != null)
-            bpCompass.SetActive(false); // Hide after 3 seconds
+        // Reset everything after duration
+        bpCompass.SetActive(false);
+        bpArrow.SetActive(false);
         bpfpAnimation.ResetCompassAnimation();
-        bpCompassNew.SetActive(false);
+
+        compassRoutine = null;
     }
 }
 
