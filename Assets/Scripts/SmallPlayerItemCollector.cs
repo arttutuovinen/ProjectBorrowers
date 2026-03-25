@@ -41,6 +41,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         boppyPinScript = GetComponent<SPBoppyPin>();
         flashBangScript = GetComponent<SPFlashbang>();
         springScript = GetComponent<SPSpring>();
+        scissorsScript = GetComponent<SPScissors>();
     }
 
     private void Start()
@@ -138,7 +139,11 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
             if (itemName.Contains("SpringCollectible"))
                 springUIImage.SetActive(true);
             if (itemName.Contains("ScissorsCollectible"))
+            {
                 scissorsUIImage.SetActive(true);
+                scissorsScript?.GotScissors();
+            }
+                
 
 
             PhotonView itemPhotonView = itemInTrigger.GetComponent<PhotonView>();
@@ -250,6 +255,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private void UseScissors()
     {
         scissorsScript?.UseScissors();
+        scissorsScript?.UsedScissors();
         scissorsUIImage.SetActive(false);
 
         PlayScissorsSound();
