@@ -35,6 +35,12 @@ public class SPFootstepAudio : MonoBehaviour
         photonView.RPC("RPC_PlayFootstep", RpcTarget.Others, pitch);
     }
 
+    [PunRPC]
+    public void RPC_PlayFootstep(float pitch)
+    {
+        PlayWithPitch(pitch);
+    }
+
     public void PlayWithPitch(float pitch)
     {
         audioSource.pitch = pitch;

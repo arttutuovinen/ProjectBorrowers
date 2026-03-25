@@ -15,6 +15,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private SPBoppyPin boppyPinScript;
     private SPFlashbang flashBangScript;
     private SPSpring springScript;
+    private SPScissors scissorsScript;
 
     private GameObject boppyPinUIImage;
     private GameObject flashbangUIImage;
@@ -54,7 +55,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         scissorsUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Scissors")?.gameObject;
         treasureUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Treasure")?.gameObject;
         treasureText = canvas.transform.Find("SmallPlayerUI/Treasures").GetComponent<TextMeshProUGUI>();
-        escapeText = canvas.transform.Find("SmallPlayerUI/Escape")?.gameObject; // NEW
+        escapeText = canvas.transform.Find("SmallPlayerUI/Escape")?.gameObject;
         if (escapeText != null) escapeText.SetActive(false);
 
         interactionUI = FindObjectOfType<SPInteractionUI>();
@@ -248,7 +249,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
 
     private void UseScissors()
     {
-        //scissorsScript?.UseScissors();
+        scissorsScript?.UseScissors();
         scissorsUIImage.SetActive(false);
 
         PlayScissorsSound();

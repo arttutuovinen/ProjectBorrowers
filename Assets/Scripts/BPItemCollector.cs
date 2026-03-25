@@ -38,7 +38,6 @@ public class BPItemCollector : MonoBehaviourPun
     private BPMedicine bpMedicine;
     private BPTapeUIManager tapeUIManager;
 
-
     //Images
     private GameObject medicineUIImage;
     private GameObject vacuumUIImage;
@@ -46,6 +45,10 @@ public class BPItemCollector : MonoBehaviourPun
     private GameObject tapeUIImage;
     private GameObject throwingItem1UIImage;
     private GameObject compassImage;
+
+    //Audio
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip itemSound;
 
     public bool IsUsingItem { get; private set; }
 
@@ -160,7 +163,7 @@ public class BPItemCollector : MonoBehaviourPun
     void PickUpItem()
     {
         if (collectedItem == null) return;
-
+        audioSource.PlayOneShot(itemSound);
         switch (collectedItem.tag)
         {
             case "BPThrowItem":

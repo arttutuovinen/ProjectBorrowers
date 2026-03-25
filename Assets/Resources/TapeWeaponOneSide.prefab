@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4847556633105650868}
   - component: {fileID: 7005131413114047729}
+  - component: {fileID: 5461254394534077809}
   - component: {fileID: 6569449524210544291}
   - component: {fileID: 7942467523566846346}
   m_Layer: 18
@@ -56,6 +57,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.23, y: 2.38, z: 0.8}
   m_Center: {x: 0, y: 1.11, z: 0.37}
+--- !u!114 &5461254394534077809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639076795611474803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f068738c195f95c4894b3083a0e29c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SPCutTape
 --- !u!114 &6569449524210544291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +82,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TapeArea
   IsActivated: 0
-  tapeUIRenderer: {fileID: 0}
 --- !u!114 &7942467523566846346
 MonoBehaviour:
   m_ObjectHideFlags: 0
