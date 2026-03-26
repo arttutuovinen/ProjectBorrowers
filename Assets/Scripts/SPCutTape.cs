@@ -15,5 +15,11 @@ public class SPCutTape : MonoBehaviourPun
 
         if (mesh2 != null && mesh2.gameObject.activeSelf)
             mesh2.gameObject.SetActive(false);
+
+        TapeArea area = GetComponent<TapeArea>();
+        if (area != null)
+        {
+            area.IsActivated = false;
+        }
     }
 }
