@@ -2,32 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
-public class SPIsStunned : MonoBehaviour
+public class SPIsStunned : MonoBehaviourPun
 {
     public float stunDuration = 5f;    // Duration for which the player is stunned
     private bool isStunned = false;    // Tracks if the player is stunned
     public SPMovementNET smallPlayerMovement; // Reference to the player's movement script (assuming a separate movement script exists)
-    
 
     void Start()
     {
         // Assuming the player has a movement script called "PlayerMovement"
         smallPlayerMovement = GetComponent<SPMovementNET>();
-        
     }
 
-    // Detect when the player touches an item
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the item is tagged as "StunItem"
+        if (!photonView.IsMine) return;
+
         if (other.gameObject.CompareTag("MouseTrapWeapon") && !isStunned)
         {
-            // Start the stun process
             StartCoroutine(StunPlayer());
-            Debug.Log("Hits boppyPin");
-            // Destroy the StunItem after collision
-            Destroy(other.gameObject);
+
+            PhotonView trapPV = other.GetComponent<PhotonView>();
+            if (trapPV != null)
+            {
+                trapPV.RPC("RPC_DestroyTrap", trapPV.Owner);
+            }
         }
     }
 
