@@ -106,7 +106,7 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < itemPrefabs.Length; i++)
         {
-            prefabCounts[i] = Mathf.FloorToInt((spawnChances[i] / (float)totalChance) * totalSpawnPoints);
+            prefabCounts[i] = Mathf.Max(1, Mathf.FloorToInt((spawnChances[i] / (float)totalChance) * totalSpawnPoints));
             assigned += prefabCounts[i];
         }
 

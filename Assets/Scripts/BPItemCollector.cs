@@ -16,7 +16,8 @@ public class BPItemCollector : MonoBehaviourPun
         Compass,
         VacuumCleaner,
         Tape,
-        Medicine
+        Medicine,
+        Camera
     }
 
     public float rayDistance = 10f;
@@ -28,7 +29,7 @@ public class BPItemCollector : MonoBehaviourPun
     private GameObject collectedItem;
     private bool canPickUp = false;
 
-    // Components
+    //Scripts
     private BPThrowItem bpThrowItem;
     private BigPlayerAnimation bpAnimation;
     private BPMouseTrap bpMouseTrap;
@@ -45,6 +46,7 @@ public class BPItemCollector : MonoBehaviourPun
     private GameObject tapeUIImage;
     private GameObject throwingItem1UIImage;
     private GameObject compassImage;
+    private GameObject cameraUIImage;
 
     //Audio
     [SerializeField] private AudioSource audioSource;
@@ -67,7 +69,8 @@ public class BPItemCollector : MonoBehaviourPun
         "BPCompass",
         "BPVacuumCleaner",
         "BPTape",
-        "BPMedicine"
+        "BPMedicine",
+        "BPCameraCollectible"
     };
 
     void Start()
@@ -91,7 +94,7 @@ public class BPItemCollector : MonoBehaviourPun
         vacuumUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Vacuum")?.gameObject;
         throwingItem1UIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/ThrowingItem1")?.gameObject;
         compassImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Compass")?.gameObject;
-
+        cameraUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Camera")?.gameObject;
     }
 
     void Update()
@@ -212,6 +215,11 @@ public class BPItemCollector : MonoBehaviourPun
                 currentItem = ItemType.Medicine;
                 medicineUIImage.SetActive(true);
                 break;
+
+            case "BPCameraCollectible":
+                currentItem = ItemType.Camera;
+                cameraUIImage.SetActive(true);
+                break;
         }
         if (lastHighlightedItem != null)
         {
@@ -298,13 +306,22 @@ public class BPItemCollector : MonoBehaviourPun
                 tapeUIImage.SetActive(false);
 
                 if (tapeUIManager != null)
+                {
                     tapeUIManager.HideTapeUI();
-
+                }
                 break;
 
             case ItemType.Medicine:
                 if (bpMedicine != null) bpMedicine.ActivateSpeedBoost();
                 medicineUIImage.SetActive(false);
+                break;
+
+            case ItemType.Camera:
+                if (bpMedicine != null)
+                {  
+                    //bpCamera.ActivateCamera(); 
+                }
+                cameraUIImage.SetActive(false);
                 break;
 
             default:
