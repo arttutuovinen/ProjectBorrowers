@@ -38,6 +38,7 @@ public class BPItemCollector : MonoBehaviourPun
     private BPTapeManager bpTapeManager;
     private BPMedicine bpMedicine;
     private BPTapeUIManager tapeUIManager;
+    private BPCameraSpawner bpCamera;
 
     //Images
     private GameObject medicineUIImage;
@@ -82,6 +83,7 @@ public class BPItemCollector : MonoBehaviourPun
         bpVacuumCleaner = GetComponent<BPVacuumCleaner>();
         bpTapeManager = GetComponent<BPTapeManager>();
         bpMedicine = GetComponent<BPMedicine>();
+        bpCamera = GetComponent<BPCameraSpawner>();
 
         interactionUI = FindObjectOfType<BPInteractionUI>();
         tapeUIManager = FindObjectOfType<BPTapeUIManager>();
@@ -319,7 +321,7 @@ public class BPItemCollector : MonoBehaviourPun
             case ItemType.Camera:
                 if (bpMedicine != null)
                 {  
-                    //bpCamera.ActivateCamera(); 
+                    bpCamera.SpawnCamera(); 
                 }
                 cameraUIImage.SetActive(false);
                 break;

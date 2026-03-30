@@ -189,6 +189,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -7690762823185320855, guid: f9220d9bbb2585242a307756bf87142b,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8124981140635909155}
+    - targetCorrespondingSourceObject: {fileID: -7690762823185320855, guid: f9220d9bbb2585242a307756bf87142b,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 486368642528790732}
   m_SourcePrefab: {fileID: 100100000, guid: f9220d9bbb2585242a307756bf87142b, type: 3}
 --- !u!4 &705353322321747758 stripped
@@ -203,6 +207,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4553901372586213038}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8124981140635909155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059737304544840391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff613bfd44b49684ab9e3972632c21d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraRotate
+  rotationSpeed: 150
 --- !u!135 &486368642528790732
 SphereCollider:
   m_ObjectHideFlags: 0
