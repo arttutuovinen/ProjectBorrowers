@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class CameraRotate : MonoBehaviour,IPunObservable
 {
@@ -20,6 +21,9 @@ public class CameraRotate : MonoBehaviour,IPunObservable
 
     private bool goingRight = true;
     private bool isLocked = false;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip alarmSound;
 
     void Start()
     {
@@ -67,6 +71,8 @@ public class CameraRotate : MonoBehaviour,IPunObservable
 
             pv.RPC(nameof(RPC_LockCamera), RpcTarget.All);
             pv.RPC(nameof(RPC_SetFOVColorRed), RpcTarget.All);
+            pv.RPC(nameof(RPC_PlaySound), RpcTarget.All);
+            StartCoroutine(DestroyAfterDelay(5f));
         }
     }
 
@@ -90,6 +96,24 @@ public class CameraRotate : MonoBehaviour,IPunObservable
             {
                 mat.color = Color.red;
             }
+        }
+    }
+
+    [PunRPC]
+    void RPC_PlaySound()
+    {
+        audioSource.clip = alarmSound;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (pv != null && pv.IsMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
