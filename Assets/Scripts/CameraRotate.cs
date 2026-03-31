@@ -3,8 +3,12 @@ using Photon.Pun;
 
 public class CameraRotate : MonoBehaviour,IPunObservable
 {
+    [Header("References")]
+    public Transform cameraHead;     // 👈 child that rotates
+    public Collider fieldOfView;     // 👈 trigger collider
+
     [Header("Rotation Settings")]
-    public float rotationSpeed = 90f; // degrees per second
+    public float rotationSpeed = 100f; // degrees per second
 
     [SerializeField] private PhotonView pv;
 
@@ -15,34 +19,77 @@ public class CameraRotate : MonoBehaviour,IPunObservable
     private float targetY;
 
     private bool goingRight = true;
+    private bool isLocked = false;
 
     void Start()
     {
-        currentY = transform.localEulerAngles.y;
+        if (cameraHead == null)
+        {
+            Debug.LogError("CameraHead not assigned!");
+            return;
+        }
 
-        // Convert from 0–360 to -180–180
+        currentY = cameraHead.localEulerAngles.y;
+
         if (currentY > 180f)
             currentY -= 360f;
 
         targetY = maxY;
-
-        if (!pv.IsMine) return;
     }
 
     void Update()
     {
         if (pv == null || !pv.IsMine) return;
+        if (isLocked) return;
 
         float step = rotationSpeed * Time.deltaTime;
 
         currentY = Mathf.MoveTowards(currentY, targetY, step);
-        transform.localRotation = Quaternion.Euler(0f, currentY, 0f);
+
+        cameraHead.localRotation = Quaternion.Euler(0f, currentY, 0f);
 
         if (Mathf.Approximately(currentY, targetY))
         {
-            // Switch direction
             goingRight = !goingRight;
             targetY = goingRight ? maxY : minY;
+        }
+    }
+
+    public void OnChildTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger entered by: " + other.name);
+
+        if (!other.CompareTag("SmallPlayer")) return;
+
+        if (pv.IsMine)
+        {
+            isLocked = true;
+
+            pv.RPC(nameof(RPC_LockCamera), RpcTarget.All);
+            pv.RPC(nameof(RPC_SetFOVColorRed), RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    void RPC_LockCamera()
+    {
+        isLocked = true;
+    }
+
+    [PunRPC]
+    void RPC_SetFOVColorRed()
+    {
+        if (fieldOfView == null) return;
+
+        Renderer rend = fieldOfView.GetComponent<Renderer>();
+        if (rend == null) return;
+
+        foreach (Material mat in rend.materials)
+        {
+            if (mat.name.Contains("m_hologram"))
+            {
+                mat.color = Color.red;
+            }
         }
     }
 
@@ -53,20 +100,21 @@ public class CameraRotate : MonoBehaviour,IPunObservable
 
         if (stream.IsWriting && pv.IsMine)
         {
-            stream.SendNext(transform.localRotation);
+            stream.SendNext(cameraHead.localRotation);
+            stream.SendNext(isLocked);
         }
         else
         {
             Quaternion targetRot = (Quaternion)stream.ReceiveNext();
+            isLocked = (bool)stream.ReceiveNext();
 
-            // Smooth for other clients
-            transform.localRotation = Quaternion.Slerp(
-                transform.localRotation,
+            cameraHead.localRotation = Quaternion.Slerp(
+                cameraHead.localRotation,
                 targetRot,
                 10f * Time.deltaTime
             );
 
-            currentY = transform.localEulerAngles.y;
+            currentY = cameraHead.localEulerAngles.y;
             if (currentY > 180f) currentY -= 360f;
         }
     }

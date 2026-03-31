@@ -28,7 +28,6 @@ public class SPScissors : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("SP collided by " + other.gameObject.name);
 
         // Find the closest TapeWeapon object
         GameObject tape = FindTapeParent(other.transform);
@@ -36,7 +35,7 @@ public class SPScissors : MonoBehaviourPun
         if (tape != null)
         {
             currentTape = tape;
-            Debug.Log("Current tape (found TapeWeapon): " + currentTape.name);
+            
 
             // Only show cut UI if the player has scissors
             if (hasScissors)
