@@ -6,81 +6,68 @@ public class CameraRotate : MonoBehaviour,IPunObservable
     [Header("Rotation Settings")]
     public float rotationSpeed = 90f; // degrees per second
 
-    private PhotonView pv;
+    [SerializeField] private PhotonView pv;
 
-    private float targetAngle;
+    private float minY = -90f;
+    private float maxY = 90f;
+
     private float currentY;
-    private bool rotating = false;
+    private float targetY;
 
-    private int step = 0; // 0 = first (90), then alternates 180
-
-    void Awake()
-    {
-        // 🔑 Get PhotonView from parent (root)
-        pv = GetComponentInParent<PhotonView>();
-    }
+    private bool goingRight = true;
 
     void Start()
     {
-        currentY = transform.eulerAngles.y;
+        currentY = transform.localEulerAngles.y;
 
-        // Only owner controls rotation
-        if (pv != null && pv.IsMine)
-        {
-            SetNextTarget();
-        }
+        // Convert from 0–360 to -180–180
+        if (currentY > 180f)
+            currentY -= 360f;
+
+        targetY = maxY;
+
+        if (!pv.IsMine) return;
     }
 
     void Update()
     {
         if (pv == null || !pv.IsMine) return;
-        if (!rotating) return;
 
-        float stepAmount = rotationSpeed * Time.deltaTime;
+        float step = rotationSpeed * Time.deltaTime;
 
-        float newY = Mathf.MoveTowardsAngle(currentY, targetAngle, stepAmount);
-        transform.rotation = Quaternion.Euler(0, newY, 0);
+        currentY = Mathf.MoveTowards(currentY, targetY, step);
+        transform.localRotation = Quaternion.Euler(0f, currentY, 0f);
 
-        currentY = newY;
-
-        if (Mathf.Approximately(currentY, targetAngle))
+        if (Mathf.Approximately(currentY, targetY))
         {
-            rotating = false;
-            SetNextTarget();
+            // Switch direction
+            goingRight = !goingRight;
+            targetY = goingRight ? maxY : minY;
         }
     }
 
-    void SetNextTarget()
-    {
-        float rotationAmount;
-
-        if (step == 0)
-        {
-            rotationAmount = 90f; // first rotation
-        }
-        else
-        {
-            rotationAmount = (step % 2 == 1) ? -180f : 180f;
-        }
-
-        targetAngle = currentY + rotationAmount;
-        rotating = true;
-        step++;
-    }
-
-    // 🔄 Sync rotation across network
+    // 🔄 Photon Sync
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (pv == null) return;
 
         if (stream.IsWriting && pv.IsMine)
         {
-            stream.SendNext(transform.rotation);
+            stream.SendNext(transform.localRotation);
         }
         else
         {
-            transform.rotation = (Quaternion)stream.ReceiveNext();
-            currentY = transform.eulerAngles.y;
+            Quaternion targetRot = (Quaternion)stream.ReceiveNext();
+
+            // Smooth for other clients
+            transform.localRotation = Quaternion.Slerp(
+                transform.localRotation,
+                targetRot,
+                10f * Time.deltaTime
+            );
+
+            currentY = transform.localEulerAngles.y;
+            if (currentY > 180f) currentY -= 360f;
         }
     }
 }

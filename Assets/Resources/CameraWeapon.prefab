@@ -55,6 +55,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5466981095533214202}
+  - {fileID: 8124981140635909155}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -164,6 +165,26 @@ PrefabInstance:
       propertyPath: m_TagString
       value: CameraWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: -5261508146164457088, guid: f9220d9bbb2585242a307756bf87142b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071079
+      objectReference: {fileID: 0}
+    - target: {fileID: -5261508146164457088, guid: f9220d9bbb2585242a307756bf87142b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5261508146164457088, guid: f9220d9bbb2585242a307756bf87142b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: -5261508146164457088, guid: f9220d9bbb2585242a307756bf87142b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f9220d9bbb2585242a307756bf87142b,
         type: 3}
       propertyPath: m_Name
@@ -219,7 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff613bfd44b49684ab9e3972632c21d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraRotate
-  rotationSpeed: 150
+  rotationSpeed: 100
+  pv: {fileID: 9207916753664269680}
 --- !u!135 &486368642528790732
 SphereCollider:
   m_ObjectHideFlags: 0

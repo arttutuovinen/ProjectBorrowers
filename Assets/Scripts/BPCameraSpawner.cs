@@ -10,7 +10,11 @@ public class BPCameraSpawner : MonoBehaviourPun
     {
         if (!photonView.IsMine) return;  // Only owner can spawn
 
-        // Correct network spawn
-        GameObject trap = PhotonNetwork.Instantiate(cameraItem.name, throwOrigin.position, Quaternion.identity);
+        // Get ONLY Y rotation from player
+        float yRotation = transform.eulerAngles.y + 180f;
+        Quaternion spawnRotation = Quaternion.Euler(0f, yRotation, 0f);
+
+        // Spawn with correct rotation
+        GameObject cam = PhotonNetwork.Instantiate(cameraItem.name, throwOrigin.position, spawnRotation);
     }
 }
