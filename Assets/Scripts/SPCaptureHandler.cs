@@ -132,7 +132,7 @@ public class SPCaptureHandler : MonoBehaviourPun
         spFollowTarget = null;
         isCaptured = false;
         isJailed = true;
-
+        
         if (photonView.IsMine)
         {
             SPWinManager.Instance.photonView.RPC(
@@ -148,7 +148,7 @@ public class SPCaptureHandler : MonoBehaviourPun
         if (photonView.IsMine)
         {
             movementScript.EnableMovement();
-            
+            escapeBar.SetActive(false);
         }
         SetRenderers(true); // show SP prefab
         // Reset SP proxies on all clients
