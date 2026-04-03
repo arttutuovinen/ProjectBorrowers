@@ -9,7 +9,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     [Header("Scene")]
     public Transform[] spFinishSpawnPoints;
-    public int finishCount = 5;
     public Transform bigPlayerSpawnPoint;
     public Transform[] prisonSpawnPoints;
 
@@ -66,7 +65,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         var selectedPoints = spFinishSpawnPoints
             .OrderBy(x => Random.value)
-            .Take(finishCount);
+            .Take(RequiredPlayeramount.SPFinishCount);
 
         foreach (var point in selectedPoints)
         {

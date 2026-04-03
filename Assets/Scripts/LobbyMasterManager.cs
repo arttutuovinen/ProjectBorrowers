@@ -9,8 +9,6 @@ public class LobbyMasterManager : MonoBehaviourPunCallbacks
 {
     [Header("UI")]
     public Button startButton; // Assign the Master-only Start button in Inspector
-    public int requiredSmallPlayers = 2;
-    public int requiredBigPlayers = 1;
 
     void Start()
     {
@@ -62,12 +60,13 @@ public class LobbyMasterManager : MonoBehaviourPunCallbacks
         foreach (var p in PhotonNetwork.PlayerList)
         {
             if (!p.CustomProperties.TryGetValue(LobbyKeys.PlayerRole, out object r))
-                return false; // someone hasn't chosen yet
+                return false;
 
             if ((int)r == 0) bp++;
             else sp++;
         }
 
-        return sp == requiredSmallPlayers && bp == requiredBigPlayers;
+        return sp == RequiredPlayeramount.RequiredSmallPlayers &&
+               bp == RequiredPlayeramount.RequiredBigPlayers;
     }
 }

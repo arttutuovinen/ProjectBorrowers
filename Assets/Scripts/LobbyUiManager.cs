@@ -15,10 +15,6 @@ public class LobbyUiManager : MonoBehaviourPunCallbacks
     public TMP_Text spAmountText;
     public TMP_Text bpAmountText;
 
-    [Header("Role Limits")]
-    public int maxSmallPlayers = 2;
-    public int maxBigPlayers = 1;
-
     [Header("Full Indicators")]
     public GameObject spAmountFull;
     public GameObject bpAmountFull;
@@ -32,6 +28,14 @@ public class LobbyUiManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        // Clear stale properties from previous session
+        Hashtable props = new Hashtable
+        {
+            { LobbyKeys.PlayerRole, null },
+            { LobbyKeys.PlayerName, null }
+        };
+
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         roomCodeText.text = $"Room: {PhotonNetwork.CurrentRoom.Name}";
 
         smallPlayerButton.onClick.AddListener(() => SelectRole(1));
@@ -73,8 +77,8 @@ public class LobbyUiManager : MonoBehaviourPunCallbacks
             }
         }
 
-        if (role == 0) return count < maxBigPlayers;
-        return count < maxSmallPlayers;
+        if (role == 0) return count < RequiredPlayeramount.RequiredBigPlayers;
+        return count < RequiredPlayeramount.RequiredSmallPlayers;
     }
 
     void RefreshRoleUI()
@@ -91,17 +95,17 @@ public class LobbyUiManager : MonoBehaviourPunCallbacks
             else spCount++;
         }
 
-        spAmountText.text = $"{spCount}/{maxSmallPlayers}";
-        bpAmountText.text = $"{bpCount}/{maxBigPlayers}";
+        spAmountText.text = $"{spCount}/{RequiredPlayeramount.RequiredSmallPlayers}";
+        bpAmountText.text = $"{bpCount}/{RequiredPlayeramount.RequiredBigPlayers}";
 
         smallPlayerButton.image.color =
-            spCount >= maxSmallPlayers ? Color.black : Color.white;
+            spCount >= RequiredPlayeramount.RequiredSmallPlayers ? Color.black : Color.white;
 
         bigPlayerButton.image.color =
-            bpCount >= maxBigPlayers ? Color.black : Color.white;
+            bpCount >= RequiredPlayeramount.RequiredBigPlayers ? Color.black : Color.white;
 
-        spAmountFull.SetActive(spCount >= maxSmallPlayers);
-        bpAmountFull.SetActive(bpCount >= maxBigPlayers);
+        spAmountFull.SetActive(spCount >= RequiredPlayeramount.RequiredSmallPlayers);
+        bpAmountFull.SetActive(bpCount >= RequiredPlayeramount.RequiredBigPlayers);
     }
 
     public override void OnPlayerPropertiesUpdate(Player target, Hashtable changedProps)
@@ -120,18 +124,17 @@ public class LobbyUiManager : MonoBehaviourPunCallbacks
     }
     void ResetRoleSelectionUI()
     {
-        // Clear role selection locally
-        var localProps = PhotonNetwork.LocalPlayer.CustomProperties;
-        if (localProps.ContainsKey(LobbyKeys.PlayerRole))
-            localProps.Remove(LobbyKeys.PlayerRole);
+        Hashtable props = new Hashtable
+    {
+        { LobbyKeys.PlayerRole, null },
+        { LobbyKeys.PlayerName, null }
+    };
 
-        PhotonNetwork.LocalPlayer.SetCustomProperties(localProps);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
 
-        // Reset buttons colors
         smallPlayerButton.image.color = Color.white;
         bigPlayerButton.image.color = Color.white;
 
-        // Reset full indicators
         spAmountFull.SetActive(false);
         bpAmountFull.SetActive(false);
     }

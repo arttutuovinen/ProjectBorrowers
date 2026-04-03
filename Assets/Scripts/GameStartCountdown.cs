@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using System.Collections;
 
 public class GameStartCountdown : MonoBehaviourPun
 {
@@ -10,7 +11,6 @@ public class GameStartCountdown : MonoBehaviourPun
     [Header("Timing")]
     public float numberDuration = 1f; // duration per number (3,2,1)
     public float goDuration = 1f;     // GO duration
-
     private double startTime;
     private bool countdownStarted = false;
 
@@ -19,11 +19,43 @@ public class GameStartCountdown : MonoBehaviourPun
     void Start()
     {
         CanMove = false;
+
         if (PhotonNetwork.IsMasterClient)
         {
-            double networkTime = PhotonNetwork.Time + 1; // small delay
-            photonView.RPC(nameof(RPC_StartCountdown), RpcTarget.All, networkTime);
+            StartCoroutine(WaitForPlayersThenStart());
         }
+    }
+    bool AllPlayersReady()
+    {
+        int sp = 0;
+        int bp = 0;
+
+        foreach (var p in PhotonNetwork.PlayerList)
+        {
+            if (!p.CustomProperties.TryGetValue(LobbyKeys.PlayerRole, out object r))
+                return false; // someone not ready yet
+
+            if ((int)r == 0) bp++;
+            else sp++;
+        }
+
+        // match your lobby requirements
+        return sp == RequiredPlayeramount.RequiredSmallPlayers && bp == RequiredPlayeramount.RequiredBigPlayers;
+    }
+    IEnumerator WaitForPlayersThenStart()
+    {
+        // Wait until all players have selected roles
+        while (!AllPlayersReady())
+        {
+            yield return null;
+        }
+
+        // Small delay so everyone is synced
+        yield return new WaitForSeconds(1f);
+
+        double networkTime = PhotonNetwork.Time + 1;
+
+        photonView.RPC(nameof(RPC_StartCountdown), RpcTarget.All, networkTime);
     }
 
     [PunRPC]
@@ -65,4 +97,5 @@ public class GameStartCountdown : MonoBehaviourPun
             countdownStarted = false;
         }
     }
+    
 }

@@ -9,7 +9,6 @@ public class SPWinManager : MonoBehaviourPunCallbacks
     public static SPWinManager Instance;
 
     [Header("Win Settings")]
-    public int escapedMaxAmount = 2; // adjustable
     public float endDelay = 5f;
 
     private int escapedAmount;
@@ -53,7 +52,7 @@ public class SPWinManager : MonoBehaviourPunCallbacks
     {
         int totalDone = escapedAmount + capturedAmount;
 
-        if (escapedAmount > 0 && totalDone >= escapedMaxAmount)
+        if (escapedAmount > 0 && totalDone >= RequiredPlayeramount.RequiredSmallPlayers)
         {
             matchEnded = true;
             photonView.RPC(nameof(RPC_SPWins), RpcTarget.All);

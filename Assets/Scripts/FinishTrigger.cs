@@ -38,7 +38,7 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
         // 2️⃣ Escape
         if (!doorUsed &&
             TreasureScoreManager.Instance.GetTreasureCount() >=
-            TreasureScoreManager.Instance.totalTreasures)
+            RequiredPlayeramount.TotalTreasures)
         {
             sp.GetInteractionUI()?.ShowEnter();
 
@@ -89,7 +89,7 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
 
         // Only teleport treasure if total treasures not yet reached
         if (TreasureScoreManager.Instance.GetTreasureCount() <
-            TreasureScoreManager.Instance.totalTreasures)
+            RequiredPlayeramount.TotalTreasures)
         {
             TreasureSpawner spawner = FindObjectOfType<TreasureSpawner>();
             if (spawner != null)

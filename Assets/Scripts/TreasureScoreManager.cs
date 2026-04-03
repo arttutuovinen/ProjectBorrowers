@@ -6,7 +6,6 @@ public class TreasureScoreManager : MonoBehaviourPun
     public static TreasureScoreManager Instance;
 
     public int treasuresDelivered;
-    public int totalTreasures = 3;
 
     private void Awake()
     {
@@ -22,8 +21,8 @@ public class TreasureScoreManager : MonoBehaviourPun
 
         foreach (var sp in FindObjectsOfType<SmallPlayerItemCollector>())
         {
-            sp.SetTreasureCount(value, totalTreasures);
-            sp.SetEscapeActive(value >= totalTreasures);
+            sp.SetTreasureCount(value, RequiredPlayeramount.TotalTreasures);
+            sp.SetEscapeActive(value >= RequiredPlayeramount.TotalTreasures);
         }
     }
 

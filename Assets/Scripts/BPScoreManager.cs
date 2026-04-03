@@ -9,8 +9,6 @@ using System.Collections.Generic;
 public class BPScoreManager : MonoBehaviourPunCallbacks
 {
     [Header("Settings")]
-    public int maxCaptured = 2;
-
     private int currentCaptured = 0;
     private TMP_Text captureText;
     private GameObject bpWins;
@@ -83,7 +81,7 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
         currentCaptured = newCount;
         UpdateText(currentCaptured);
 
-        if (!gameEnded && currentCaptured >= maxCaptured)
+        if (!gameEnded && currentCaptured >= RequiredPlayeramount.RequiredSmallPlayers)
         {
             gameEnded = true;
 
@@ -115,7 +113,7 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
     private void UpdateText(int count)
     {
         if (captureText != null)
-            captureText.text = $"Captured: {count}/{maxCaptured}";
+            captureText.text = $"Captured: {count}/{RequiredPlayeramount.RequiredSmallPlayers}";
     }
     [PunRPC]
     private void RPC_ResetPlayerRoles()
