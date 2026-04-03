@@ -2,6 +2,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using System.Collections;
 
 public class MainMenuManager : MonoBehaviourPunCallbacks
 {
@@ -14,15 +15,28 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-    void Start()
+
+    public void CreateRoom()
     {
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();
+            StartCoroutine(WaitForConnectionThenCreate());
+            return;
         }
+
+        CreateRoomInternal();
     }
 
-    public void CreateRoom()
+    IEnumerator WaitForConnectionThenCreate()
+    {
+        while (!PhotonNetwork.IsConnectedAndReady)
+            yield return null;
+
+        CreateRoomInternal();
+    }
+
+    void CreateRoomInternal()
     {
         string roomCode = roomCodeInput.text;
 
@@ -33,7 +47,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
         }
 
         RoomOptions options = new RoomOptions();
-        options.MaxPlayers = 3; // 1 Big + 2 Small
+        options.MaxPlayers = 3;
 
         PhotonNetwork.CreateRoom(roomCode, options);
     }
@@ -48,6 +62,26 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
             return;
         }
 
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+            StartCoroutine(WaitForConnectionThenJoin(roomCode));
+            return;
+        }
+
+        JoinRoomInternal(roomCode);
+    }
+
+    IEnumerator WaitForConnectionThenJoin(string roomCode)
+    {
+        while (!PhotonNetwork.IsConnectedAndReady)
+            yield return null;
+
+        JoinRoomInternal(roomCode);
+    }
+
+    void JoinRoomInternal(string roomCode)
+    {
         PhotonNetwork.JoinRoom(roomCode);
     }
 
