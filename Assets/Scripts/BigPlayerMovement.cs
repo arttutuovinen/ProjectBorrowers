@@ -68,7 +68,6 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
             RotateRoot();
             return;
         }
-
         HandleCamera();
         RotateRoot();
         HandleMovement();
@@ -124,6 +123,7 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
 
     private void HandleCamera()
     {
+        
         float mouseX, mouseY;
 
         if (Mathf.Abs(Input.GetAxis("P2RightStickHorizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("P2RightStickVertical")) > 0.1f)
@@ -162,6 +162,8 @@ public class BigPlayerMovement : MonoBehaviourPun, IPunObservable
 
     private void HandleMovement()
     {
+        if (!GameStartCountdown.CanMove)
+            return;
         isGrounded = controller.isGrounded;
 
         if (isGrounded && velocity.y < 0)

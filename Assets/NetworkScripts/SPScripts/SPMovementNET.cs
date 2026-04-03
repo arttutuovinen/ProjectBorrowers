@@ -80,6 +80,13 @@ public class SPMovementNET : MonoBehaviour
 
     private void Update()
     {
+        // Combine BOTH conditions
+        if (!GameStartCountdown.CanMove || !canMove)
+        {
+            ApplyGravity(); // optional
+            return;
+        }
+
         if (isClimbing)
         {
             ClimbLadder();
@@ -103,6 +110,7 @@ public class SPMovementNET : MonoBehaviour
         canMove = true;
         Debug.Log("Movement enabled.");
     }
+    
     public void Move()
     {
         if (!canMove) return;

@@ -68,7 +68,14 @@ public class SmallPlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        
+        Debug.Log("CanMove = " + GameStartCountdown.CanMove);
+        if (!GameStartCountdown.CanMove)
+        {
+            // Optional: still allow gravity so player stays grounded properly
+            ApplyGravity();
+            return;
+        }
+
         if (isClimbing)
         {
             ClimbLadder();
@@ -100,6 +107,8 @@ public class SmallPlayerMovement : MonoBehaviour
 
     public void Move()
     {
+        if (!GameStartCountdown.CanMove)
+            return;
         if (canMove)
         {
             // Check if the player is on the ground
@@ -164,6 +173,8 @@ public class SmallPlayerMovement : MonoBehaviour
 
     private void ClimbLadder()
     {
+        if (!GameStartCountdown.CanMove)
+            return;
         // Disable gravity while climbing
         velocity.y = 0f;
 
