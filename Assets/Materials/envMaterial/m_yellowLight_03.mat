@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_template
+  m_Name: m_yellowLight_03
   m_Shader: {fileID: -6465566751694194690, guid: 8f9cfb559efe03e479f8effca42e2a9d,
     type: 3}
   m_Parent: {fileID: 0}
@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LineTexture:
-        m_Texture: {fileID: 2800000, guid: 2f34b155c5f649c41ba8f943d611c5bc, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -128,10 +128,10 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightColor: {r: 0.7207546, g: 0.52618223, b: 0.34133846, a: 0}
+    - _LightColor: {r: 0.85660374, g: 0.73390317, b: 0.560833, a: 0}
     - _ScaleBrushStr: {r: 1, g: 1, b: 0, a: 0}
-    - _ScaleLineTex: {r: 1, g: 1, b: 0, a: 0}
-    - _ShadowColor: {r: 0.6830188, g: 0.39894322, b: 0.04510492, a: 0}
+    - _ScaleLineTex: {r: 1.1, g: 1.1, b: 0, a: 0}
+    - _ShadowColor: {r: 0.98490566, g: 0.9179232, b: 0.7711997, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
