@@ -5062,6 +5062,7 @@ GameObject:
   - component: {fileID: 7047059007317789385}
   - component: {fileID: 1297298460316706185}
   - component: {fileID: 3470725793712673339}
+  - component: {fileID: 3058240866664964705}
   - component: {fileID: 4333646673090631511}
   - component: {fileID: 2265930764285613028}
   - component: {fileID: 3460755058453020208}
@@ -5177,6 +5178,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stunDuration: 5
   smallPlayerMovement: {fileID: 0}
+--- !u!114 &3058240866664964705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef1560da87f470945a56a6b97b15ec33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SPInkBottle
+  throwForce: 25
+  spCamera: {fileID: 6133324558258174057}
+  throwOrigin: {fileID: 2200344053891395073}
+  inkBottlePrefabName: InkBottleWeapon
 --- !u!114 &4333646673090631511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5582,7 +5599,7 @@ Transform:
   m_GameObject: {fileID: 4756874142035087774}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 0.05, z: 1.17}
+  m_LocalPosition: {x: -0.02, y: 1.56, z: 0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -16,12 +16,14 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     private SPFlashbang flashBangScript;
     private SPSpring springScript;
     private SPScissors scissorsScript;
+    private SPInkBottle inkBottleScript;
 
     private GameObject boppyPinUIImage;
     private GameObject flashbangUIImage;
     private GameObject springUIImage;
     private GameObject treasureUIImage;
     private GameObject scissorsUIImage;
+    private GameObject inkBottleUIImage;
     private TextMeshProUGUI treasureText;
 
     private SPInteractionUI interactionUI;
@@ -42,6 +44,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         flashBangScript = GetComponent<SPFlashbang>();
         springScript = GetComponent<SPSpring>();
         scissorsScript = GetComponent<SPScissors>();
+        inkBottleScript = GetComponent<SPInkBottle>();
     }
 
     private void Start()
@@ -54,6 +57,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         flashbangUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Flashbang")?.gameObject;
         springUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Spring")?.gameObject;
         scissorsUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Scissors")?.gameObject;
+        inkBottleUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/InkBottle")?.gameObject;
         treasureUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Treasure")?.gameObject;
         treasureText = canvas.transform.Find("SmallPlayerUI/Treasures").GetComponent<TextMeshProUGUI>();
         escapeText = canvas.transform.Find("SmallPlayerUI/Escape")?.gameObject;
@@ -66,6 +70,7 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
         springUIImage.SetActive(false);
         treasureUIImage.SetActive(false);
         scissorsUIImage.SetActive(false);
+        inkBottleUIImage.SetActive(false); 
     }
 
     private void Update()
@@ -143,7 +148,8 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
                 scissorsUIImage.SetActive(true);
                 scissorsScript?.GotScissors();
             }
-                
+            if (itemName.Contains("InkBottleCollectible"))
+                inkBottleUIImage.SetActive(true);
 
 
             PhotonView itemPhotonView = itemInTrigger.GetComponent<PhotonView>();
@@ -178,6 +184,10 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
 
             case "ScissorsCollectible":
                 UseScissors();
+                break;
+
+            case "InkBottleCollectible":
+                UseInkBottle();
                 break;
 
             case "Treasure":
@@ -271,6 +281,28 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
 
     [PunRPC]
     private void RPC_PlayScissorsSound()
+    {
+        //audioSource.PlayOneShot(springSound);
+    }
+
+    private void UseInkBottle()
+    {
+        inkBottleScript?.UseInkBottle();
+        inkBottleUIImage.SetActive(false);
+
+        PlayInkBottleSound();
+
+        currentItem = null;
+    }
+
+    private void PlayInkBottleSound()
+    {
+        //audioSource.PlayOneShot(springSound);
+        //photonView.RPC(nameof(RPC_PlayInkBottleSound), RpcTarget.Others);
+    }
+
+    [PunRPC]
+    private void RPC_PlayInkBottleSound()
     {
         //audioSource.PlayOneShot(springSound);
     }
