@@ -30,7 +30,7 @@ public class SPCheckInJar : MonoBehaviour
 
     private IEnumerator TeleportAfterDelay()
     {
-        yield return new WaitForSeconds(resetDelay); // Wait for the specified delay
+        yield return new WaitForSeconds(resetDelay);
 
         CharacterController controller = smallPlayer.GetComponent<CharacterController>();
         if (controller != null)

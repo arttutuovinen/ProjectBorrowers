@@ -5060,6 +5060,7 @@ GameObject:
   - component: {fileID: 8688724790149147744}
   - component: {fileID: 414432666989003418}
   - component: {fileID: 7047059007317789385}
+  - component: {fileID: 450153887554114077}
   - component: {fileID: 1297298460316706185}
   - component: {fileID: 3470725793712673339}
   - component: {fileID: 3058240866664964705}
@@ -5152,6 +5153,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SPAnimController
   jumpDuration: 0.5
+--- !u!114 &450153887554114077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dba7512787943241a2f769817849b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SPRescueHandler
 --- !u!114 &1297298460316706185
 MonoBehaviour:
   m_ObjectHideFlags: 0

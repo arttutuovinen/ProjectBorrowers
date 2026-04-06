@@ -3,6 +3,7 @@ using Photon.Pun;
 using System.Linq;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class SPCaptureHandler : MonoBehaviourPun
 {
@@ -24,7 +25,7 @@ public class SPCaptureHandler : MonoBehaviourPun
     private float escapeDecreaseSpeed = 0.92f;
     private float escapeIncreaseAmount = 0.15f;
 
-    
+    public static List<SPCaptureHandler> JailedSPs = new List<SPCaptureHandler>();
 
     void Awake()
     {
@@ -132,7 +133,10 @@ public class SPCaptureHandler : MonoBehaviourPun
         spFollowTarget = null;
         isCaptured = false;
         isJailed = true;
-        
+
+        if (!JailedSPs.Contains(this))
+            JailedSPs.Add(this);
+
         if (photonView.IsMine)
         {
             SPWinManager.Instance.photonView.RPC(
@@ -263,6 +267,29 @@ public class SPCaptureHandler : MonoBehaviourPun
         foreach (var bpController in bpControllers)
         {
             bpController.photonView.RPC("RPC_ResetCaughtReactionSP", RpcTarget.All);
+        }
+    }
+
+    public void FreeFromJail(Vector3 freePosition)
+    {
+        isJailed = false;
+        isCaptured = false;
+        spFollowTarget = null; // ✅ IMPORTANT
+
+        if (JailedSPs.Contains(this))
+            JailedSPs.Remove(this);
+
+        controller.enabled = false;
+        transform.position = freePosition;
+        controller.enabled = true;
+
+        // ✅ Ensure player is fully visible & normal
+        SetRenderers(true);
+
+        // ✅ Re-enable movement
+        if (photonView.IsMine && movementScript != null)
+        {
+            movementScript.EnableMovement();
         }
     }
 }
