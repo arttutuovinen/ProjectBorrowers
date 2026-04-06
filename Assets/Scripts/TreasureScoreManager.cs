@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class TreasureScoreManager : MonoBehaviourPun
@@ -19,10 +19,31 @@ public class TreasureScoreManager : MonoBehaviourPun
     {
         treasuresDelivered = value;
 
-        foreach (var sp in FindObjectsOfType<SmallPlayerItemCollector>())
+        Canvas canvas = FindObjectOfType<Canvas>();
+
+        if (canvas == null)
         {
-            sp.SetTreasureCount(value, RequiredPlayeramount.TotalTreasures);
-            sp.SetEscapeActive(value >= RequiredPlayeramount.TotalTreasures);
+            Debug.LogWarning("Canvas not found!");
+            return;
+        }
+
+        // ✅ Update treasure text directly
+        var treasureText = canvas.transform.Find("Divider/Treasures")?.GetComponent<TMPro.TextMeshProUGUI>();
+
+        if (treasureText != null)
+        {
+            treasureText.text = $"Treasures: {value}/{RequiredPlayeramount.TotalTreasures}";
+        }
+        else
+        {
+            Debug.LogWarning("Treasures text not found!");
+        }
+
+        // ✅ Update escape UI if it exists
+        var escape = canvas.transform.Find("SmallPlayerUI/Escape")?.gameObject;
+        if (escape != null)
+        {
+            escape.SetActive(value >= RequiredPlayeramount.TotalTreasures);
         }
     }
 

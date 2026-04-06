@@ -27,7 +27,7 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
 
         Canvas canvas = FindFirstObjectByType<Canvas>();
 
-        captureText = canvas.transform.Find("BigPlayerUI/Capture")
+        captureText = canvas.transform.Find("Divider/Capture")
     ?.GetComponent<TMP_Text>();
 
         if (captureText == null)

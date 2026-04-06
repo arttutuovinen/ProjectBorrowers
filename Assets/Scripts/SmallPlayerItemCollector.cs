@@ -39,7 +39,6 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
 
     private void Awake()
     {
-        // Cache item scripts if attached
         boppyPinScript = GetComponent<SPBoppyPin>();
         flashBangScript = GetComponent<SPFlashbang>();
         springScript = GetComponent<SPSpring>();
@@ -49,18 +48,18 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
 
     private void Start()
     {
-        if (!photonView.IsMine) return;
-
-        // Cache UI
         Canvas canvas = FindObjectOfType<Canvas>();
+        treasureText = canvas.transform.Find("Divider/Treasures").GetComponent<TextMeshProUGUI>();
+
+        if (!photonView.IsMine) return;
         boppyPinUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/BoppyPin")?.gameObject;
         flashbangUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Flashbang")?.gameObject;
         springUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Spring")?.gameObject;
         scissorsUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Scissors")?.gameObject;
         inkBottleUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/InkBottle")?.gameObject;
         treasureUIImage = canvas.transform.Find("SmallPlayerUI/ItemHolder/Treasure")?.gameObject;
-        treasureText = canvas.transform.Find("SmallPlayerUI/Treasures").GetComponent<TextMeshProUGUI>();
         escapeText = canvas.transform.Find("SmallPlayerUI/Escape")?.gameObject;
+        
         if (escapeText != null) escapeText.SetActive(false);
 
         interactionUI = FindObjectOfType<SPInteractionUI>();
