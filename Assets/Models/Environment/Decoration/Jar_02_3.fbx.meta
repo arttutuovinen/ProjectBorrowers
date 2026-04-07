@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: adcae94918f5d6b4c95f52e774110448
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -17,14 +17,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: gradientBack
+    second: {fileID: 2100000, guid: 1b04a515b65973a4f82cbf1ab8e96e40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: m_edgeLine
     second: {fileID: 2100000, guid: 688d5d25dbdd9be45bd257c541c3ec5d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: m_glass
-    second: {fileID: -876546973899608171, guid: c87b59c47c316c24eb864e04a4c54a0b,
-      type: 3}
+    second: {fileID: 2100000, guid: 3a5b615d9d588f348b0bf17fb2587c90, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -42,8 +46,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -84,6 +86,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
