@@ -270,11 +270,12 @@ public class SPCaptureHandler : MonoBehaviourPun
         }
     }
 
-    public void FreeFromJail(Vector3 freePosition)
+    [PunRPC]
+    public void RPC_FreeFromJail(Vector3 freePosition)
     {
         isJailed = false;
         isCaptured = false;
-        spFollowTarget = null; // ✅ IMPORTANT
+        spFollowTarget = null;
 
         if (JailedSPs.Contains(this))
             JailedSPs.Remove(this);
@@ -283,13 +284,18 @@ public class SPCaptureHandler : MonoBehaviourPun
         transform.position = freePosition;
         controller.enabled = true;
 
-        // ✅ Ensure player is fully visible & normal
         SetRenderers(true);
 
-        // ✅ Re-enable movement
         if (photonView.IsMine && movementScript != null)
-        {
             movementScript.EnableMovement();
+
+        if (photonView.IsMine)
+        {
+            if (escapeBar != null)
+                escapeBar.SetActive(false);
+
+            if (escapePanel != null)
+                escapePanel.fillAmount = 0f;
         }
     }
 }

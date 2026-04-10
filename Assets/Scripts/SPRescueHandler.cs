@@ -9,7 +9,8 @@ public class SPRescueHandler : MonoBehaviourPun
 
     private float rescueValue = 0f;
     private float decreaseSpeed = 0.5f;
-    private float increaseAmount = 0.1f;
+    private float increaseAmount = 0.65f;
+    private float syncTimer = 0f;
 
     private bool isActive = false;
     private bool canRescue = false;
@@ -47,17 +48,32 @@ public class SPRescueHandler : MonoBehaviourPun
         rescueValue -= Time.deltaTime * decreaseSpeed;
         rescueValue = Mathf.Clamp01(rescueValue);
 
-        photonView.RPC(nameof(RPC_UpdateBar), RpcTarget.Others, rescueValue);
+        if (escapePanel != null)
+            escapePanel.fillAmount = rescueValue;
 
-        // Increase on press
-        if (Input.GetButtonDown("P1Interact"))
+        // HOLD to increase
+        if (Input.GetButton("P1Interact"))
         {
-            photonView.RPC(nameof(RPC_AddProgress), RpcTarget.All);
+            rescueValue += increaseAmount * Time.deltaTime;
+            rescueValue = Mathf.Clamp01(rescueValue);
+
+            // update UI locally
+            if (escapePanel != null)
+                escapePanel.fillAmount = rescueValue;
+        }
+
+        syncTimer += Time.deltaTime;
+
+        if (syncTimer > 0.2f) // send 5 times/sec
+        {
+            syncTimer = 0f;
+            photonView.RPC(nameof(RPC_UpdateBar), RpcTarget.Others, rescueValue);
         }
 
         // Complete
-        if (rescueValue >= 1f)
+        if (rescueValue >= 1f && isActive)
         {
+            isActive = false; // STOP immediately
             photonView.RPC(nameof(RPC_CompleteRescue), RpcTarget.All);
         }
     }
@@ -103,17 +119,6 @@ public class SPRescueHandler : MonoBehaviourPun
         if (escapePanel != null)
             escapePanel.fillAmount = 0f;
     }
-
-    [PunRPC]
-    void RPC_AddProgress()
-    {
-        rescueValue += increaseAmount;
-        rescueValue = Mathf.Clamp01(rescueValue);
-
-        // ✅ UPDATE UI FOR ALL CLIENTS
-        if (escapePanel != null)
-            escapePanel.fillAmount = rescueValue;
-    }
     
     [PunRPC]
     void RPC_UpdateBar(float value)
@@ -131,7 +136,9 @@ public class SPRescueHandler : MonoBehaviourPun
             foreach (var sp in SPCaptureHandler.JailedSPs)
             {
                 if (sp != null)
-                    sp.FreeFromJail(freePoint.position);
+                {
+                    sp.photonView.RPC(nameof(SPCaptureHandler.RPC_FreeFromJail), RpcTarget.All, freePoint.position);
+                }
             }
 
             SPCaptureHandler.JailedSPs.Clear();
@@ -147,6 +154,7 @@ public class SPRescueHandler : MonoBehaviourPun
         if (escapePanel != null)
             escapePanel.fillAmount = 0f;
     }
+
     [PunRPC]
     void RPC_StopRescue()
     {
