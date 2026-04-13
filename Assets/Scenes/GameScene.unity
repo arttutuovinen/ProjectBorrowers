@@ -11358,6 +11358,7 @@ RectTransform:
   - {fileID: 297550817}
   - {fileID: 455276360}
   - {fileID: 1880495146}
+  - {fileID: 1471395307}
   - {fileID: 1123016755}
   - {fileID: 305422982}
   - {fileID: 1997513569}
@@ -11797,7 +11798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2e45e5b9722dc3d4490a857e0c5d3f35, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a46e4849d8b1cd644a023d4021e303be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -35049,7 +35050,7 @@ MonoBehaviour:
   - {fileID: 1895231137}
   - {fileID: 1375147843}
   - {fileID: 1446479364}
-  spawnChances: 190000000c0000000e0000000e0000000e0000001b0000000e0000001900000017000000
+  spawnChances: 0c0000000900000009000000090000000900000012000000090000001000000009000000
 --- !u!114 &978981000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40262,7 +40263,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3b7873a69f1d1ef40a36bebefd626abf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a928f40f948b9cc4781e8c855df66ea5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -52519,6 +52520,81 @@ Transform:
   - {fileID: 361489895}
   m_Father: {fileID: 145002709}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1471395306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1471395307}
+  - component: {fileID: 1471395309}
+  - component: {fileID: 1471395308}
+  m_Layer: 5
+  m_Name: GardenCutters
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1471395307
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471395306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 292222313}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 159.308, y: 159.308}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1471395308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471395306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 13c6d8621738f884c906ae4e3adda7c8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1471395309
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471395306}
+  m_CullTransparentMesh: 1
 --- !u!1 &1473174324
 GameObject:
   m_ObjectHideFlags: 0
@@ -69560,7 +69636,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2e45e5b9722dc3d4490a857e0c5d3f35, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7dbbf5d8209a8af4c98d0cd87b7f2c61, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

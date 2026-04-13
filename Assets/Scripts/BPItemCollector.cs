@@ -17,7 +17,8 @@ public class BPItemCollector : MonoBehaviourPun
         VacuumCleaner,
         Tape,
         Medicine,
-        Camera
+        Camera,
+        GardenCutters
     }
 
     public float rayDistance = 10f;
@@ -39,6 +40,7 @@ public class BPItemCollector : MonoBehaviourPun
     private BPMedicine bpMedicine;
     private BPTapeUIManager tapeUIManager;
     private BPCameraSpawner bpCamera;
+    //private BPGardenCutters bpGardenCutters;
 
     //Images
     private GameObject medicineUIImage;
@@ -46,8 +48,11 @@ public class BPItemCollector : MonoBehaviourPun
     private GameObject mouseTrapUIImage;
     private GameObject tapeUIImage;
     private GameObject throwingItem1UIImage;
+    private GameObject throwingItem2UIImage;
+    private GameObject throwingItem3UIImage;
     private GameObject compassImage;
     private GameObject cameraUIImage;
+    private GameObject gardenCuttersUIImage;
 
     //Audio
     [SerializeField] private AudioSource audioSource;
@@ -71,7 +76,8 @@ public class BPItemCollector : MonoBehaviourPun
         "BPVacuumCleaner",
         "BPTape",
         "BPMedicine",
-        "BPCameraCollectible"
+        "BPCameraCollectible",
+        "BPGardenCutters"
     };
 
     void Start()
@@ -95,7 +101,10 @@ public class BPItemCollector : MonoBehaviourPun
         tapeUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Tape")?.gameObject;
         vacuumUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Vacuum")?.gameObject;
         throwingItem1UIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/ThrowingItem1")?.gameObject;
+        throwingItem2UIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/ThrowingItem2")?.gameObject;
+        throwingItem3UIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/ThrowingItem3")?.gameObject;
         compassImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Compass")?.gameObject;
+        gardenCuttersUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/GardenCutters")?.gameObject;
         cameraUIImage = canvas.transform.Find("BigPlayerUI/BPItemHolder/Camera")?.gameObject;
     }
 
@@ -178,10 +187,12 @@ public class BPItemCollector : MonoBehaviourPun
 
             case "BPThrowItem2":
                 currentItem = ItemType.ThrowingItem_02;
+                throwingItem2UIImage.SetActive(true);
                 break;
 
             case "BPThrowItem3":
                 currentItem = ItemType.ThrowingItem_03;
+                throwingItem3UIImage.SetActive(true);
                 break;
 
             case "BPFlySwatter":
@@ -222,6 +233,11 @@ public class BPItemCollector : MonoBehaviourPun
                 currentItem = ItemType.Camera;
                 cameraUIImage.SetActive(true);
                 break;
+
+            case "BPGardenCutters":
+                currentItem = ItemType.GardenCutters;
+                gardenCuttersUIImage.SetActive(true);
+                break;
         }
         if (lastHighlightedItem != null)
         {
@@ -260,11 +276,13 @@ public class BPItemCollector : MonoBehaviourPun
             case ItemType.ThrowingItem_02:
                 if (bpThrowItem != null) 
                     bpThrowItem.SpawnThrowItem2();
+                throwingItem2UIImage.SetActive(false);
                 break;
 
             case ItemType.ThrowingItem_03:
                 if (bpThrowItem != null) 
                     bpThrowItem.SpawnThrowItem3();
+                throwingItem3UIImage.SetActive(false);
                 break;
 
             case ItemType.FlySwatter:
@@ -319,11 +337,19 @@ public class BPItemCollector : MonoBehaviourPun
                 break;
 
             case ItemType.Camera:
-                if (bpMedicine != null)
+                if (bpCamera != null)
                 {  
                     bpCamera.SpawnCamera(); 
                 }
                 cameraUIImage.SetActive(false);
+                break;
+
+            case ItemType.GardenCutters:
+                //if (bpGardenCutters != null)
+                {
+                    //bpGardenCutters.UseGardenCutters();
+                }
+                gardenCuttersUIImage.SetActive(false);
                 break;
 
             default:

@@ -13,7 +13,7 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
 
     [Header("Spawn Chances (%) - Match Prefabs Order")]
     [Range(0, 100)]
-    public int[] spawnChances = { 35, 35, 20, 10 };
+    public int[] spawnChances = { 12, 9, 9, 9, 9, 18, 9, 16, 9 };
 
     private List<GameObject> spawnList = new List<GameObject>();
     private bool itemsSpawned = false; // Track if items have been spawned
@@ -97,8 +97,12 @@ public class BPItemSpawner : MonoBehaviourPunCallbacks
     private void CreateSpawnList()
     {
         spawnList.Clear();
-
-        int totalSpawnPoints = spawnPoints.Length;
+        
+        foreach (var prefab in itemPrefabs)
+        {
+            spawnList.Add(prefab);
+        }
+        int totalSpawnPoints = spawnPoints.Length - itemPrefabs.Length;
         int totalChance = spawnChances.Sum();
 
         int[] prefabCounts = new int[itemPrefabs.Length];
