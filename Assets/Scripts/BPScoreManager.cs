@@ -146,4 +146,13 @@ public class BPScoreManager : MonoBehaviourPunCallbacks
             Debug.Log("Score trigger enabled via RPC!");
         }
     }
+
+    [PunRPC]
+    public void RPC_ForceRemovePlayer(int viewID)
+    {
+        if (playersInJail.Remove(viewID))
+        {
+            UpdateCapturedFromTrigger();
+        }
+    }
 }

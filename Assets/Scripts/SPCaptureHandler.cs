@@ -297,5 +297,15 @@ public class SPCaptureHandler : MonoBehaviourPun
             if (escapePanel != null)
                 escapePanel.fillAmount = 0f;
         }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            BPScoreManager score = FindFirstObjectByType<BPScoreManager>();
+            if (score != null)
+            {
+                PhotonView scorePV = score.GetComponent<PhotonView>();
+                scorePV.RPC("RPC_ForceRemovePlayer", RpcTarget.All, photonView.ViewID);
+            }
+        }
     }
 }
