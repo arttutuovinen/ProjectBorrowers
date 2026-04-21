@@ -167,7 +167,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 19906039
+    m_Bits: 53460471
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 75894307465078509}
   - component: {fileID: 1348583416710600094}
   - component: {fileID: 5879710395569219410}
+  - component: {fileID: 3314581779633448493}
   - component: {fileID: 3348664134161292876}
   - component: {fileID: 1680146458477775708}
   - component: {fileID: 6652726991771543743}
@@ -467,6 +468,24 @@ MonoBehaviour:
   bpArrow: {fileID: 6569251477337727579}
   arrow: {fileID: 6397003396314465662}
   compassDuration: 5
+--- !u!114 &3314581779633448493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84e0ce4871a1d04d823ad772c31e2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BPGardenCutters
+  playerCamera: {fileID: 2004338299970110419}
+  rayDistance: 11
+  activationDistance: 11
+  ladderLayer:
+    serializedVersion: 2
+    m_Bits: 33554432
 --- !u!114 &3348664134161292876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1766250525
+  GlobalObjectIdHash: 3261869827
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1

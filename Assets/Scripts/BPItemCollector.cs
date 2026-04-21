@@ -40,7 +40,7 @@ public class BPItemCollector : MonoBehaviourPun
     private BPMedicine bpMedicine;
     private BPTapeUIManager tapeUIManager;
     private BPCameraSpawner bpCamera;
-    //private BPGardenCutters bpGardenCutters;
+    private BPGardenCutters bpGardenCutters;
 
     //Images
     private GameObject medicineUIImage;
@@ -90,6 +90,7 @@ public class BPItemCollector : MonoBehaviourPun
         bpTapeManager = GetComponent<BPTapeManager>();
         bpMedicine = GetComponent<BPMedicine>();
         bpCamera = GetComponent<BPCameraSpawner>();
+        bpGardenCutters = GetComponent<BPGardenCutters>();
 
         interactionUI = FindObjectOfType<BPInteractionUI>();
         tapeUIManager = FindObjectOfType<BPTapeUIManager>();
@@ -237,6 +238,10 @@ public class BPItemCollector : MonoBehaviourPun
             case "BPGardenCutters":
                 currentItem = ItemType.GardenCutters;
                 gardenCuttersUIImage.SetActive(true);
+
+                if (bpGardenCutters != null)
+                    bpGardenCutters.SetGardenCuttersActive(true);
+
                 break;
         }
         if (lastHighlightedItem != null)
@@ -345,10 +350,16 @@ public class BPItemCollector : MonoBehaviourPun
                 break;
 
             case ItemType.GardenCutters:
-                //if (bpGardenCutters != null)
+                if (bpGardenCutters != null)
                 {
-                    //bpGardenCutters.UseGardenCutters();
+                    if (!bpGardenCutters.TryUseGardenCutters())
+                    {
+                        return;
+                    }
+
+                    bpGardenCutters.SetGardenCuttersActive(false);
                 }
+
                 gardenCuttersUIImage.SetActive(false);
                 break;
 
