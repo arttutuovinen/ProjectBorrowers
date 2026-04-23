@@ -22,8 +22,8 @@ public class SPCaptureHandler : MonoBehaviourPun
     private GameObject escapeBar;
     private Image escapePanel;
     private float escapeValue = 0f;
-    private float escapeDecreaseSpeed = 0.92f;
-    private float escapeIncreaseAmount = 0.15f;
+    private float escapeDecreaseSpeed = 0.90f;
+    private float escapeIncreaseAmount = 0.14f;
 
     public static List<SPCaptureHandler> JailedSPs = new List<SPCaptureHandler>();
 
@@ -259,7 +259,7 @@ public class SPCaptureHandler : MonoBehaviourPun
         BigPlayerStun bp = FindFirstObjectByType<BigPlayerStun>();
         if (bp != null)
         {
-            bp.photonView.RPC("StunRPC", RpcTarget.All);
+            bp.photonView.RPC("StunnedfromCaptureRPC", RpcTarget.All);
         }
 
         BPCatchController[] bpControllers = FindObjectsByType<BPCatchController>(FindObjectsSortMode.None);

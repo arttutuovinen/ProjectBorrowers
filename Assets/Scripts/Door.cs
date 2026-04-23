@@ -21,6 +21,10 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
     private Color originalEdgeColor;
     private static readonly Color highlightColor = Color.white;
 
+    [Header("Auto Close Settings")]
+    public float autoCloseDelay = 20f;
+    private Coroutine autoCloseCoroutine;
+
     //Audio
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip doorOpenSound;
@@ -75,11 +79,44 @@ public class Door : MonoBehaviourPunCallbacks // <- small change to get callback
 
         isAnimating = true;
 
-        if (open) OpenDoor();
-        else CloseDoor();
+        if (open)
+        {
+            OpenDoor();
+
+            // Only MasterClient starts auto-close timer
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if (autoCloseCoroutine != null)
+                    StopCoroutine(autoCloseCoroutine);
+
+                autoCloseCoroutine = StartCoroutine(AutoCloseAfterDelay());
+            }
+        }
+        else
+        {
+            CloseDoor();
+
+            // Stop any running auto-close if manually closed
+            if (autoCloseCoroutine != null)
+            {
+                StopCoroutine(autoCloseCoroutine);
+                autoCloseCoroutine = null;
+            }
+        }
 
         isDoorOpen = open;
         StartCoroutine(ResetAnimating());
+    }
+
+    private IEnumerator AutoCloseAfterDelay()
+    {
+        yield return new WaitForSeconds(autoCloseDelay);
+
+        // Make sure door is still open before closing
+        if (isDoorOpen && PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC(nameof(RPC_SetDoorState), RpcTarget.AllBuffered, false);
+        }
     }
 
     private IEnumerator ResetAnimating()

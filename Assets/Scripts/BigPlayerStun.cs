@@ -4,7 +4,8 @@ using Photon.Pun;
 
 public class BigPlayerStun : MonoBehaviourPun
 {
-    public float stunDuration = 5f;
+    public float stunDuration = 4f;
+    public float stunDurationSPCapture = 7f;
     private bool isStunned = false;
     private BigPlayerMovement bigPlayerMovement;
 
@@ -34,6 +35,13 @@ public class BigPlayerStun : MonoBehaviourPun
         StartCoroutine(StunPlayer());
     }
 
+    [PunRPC]
+    public void StunnedfromCaptureRPC()
+    {
+        if (isStunned) return;
+        StartCoroutine(StunPlayerLong());
+    }
+
     IEnumerator StunPlayer()
     {
         isStunned = true;
@@ -42,6 +50,21 @@ public class BigPlayerStun : MonoBehaviourPun
             bigPlayerMovement.enabled = false;
 
         yield return new WaitForSeconds(stunDuration);
+
+        if (bigPlayerMovement != null)
+            bigPlayerMovement.enabled = true;
+
+        isStunned = false;
+    }
+
+    IEnumerator StunPlayerLong()
+    {
+        isStunned = true;
+
+        if (bigPlayerMovement != null)
+            bigPlayerMovement.enabled = false;
+
+        yield return new WaitForSeconds(stunDurationSPCapture);
 
         if (bigPlayerMovement != null)
             bigPlayerMovement.enabled = true;
