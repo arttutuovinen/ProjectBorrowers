@@ -267,6 +267,14 @@ public class SPMovementNET : MonoBehaviour
             interactionUI?.HideAll();
         }
     }
+    public void ForceExitLadder()
+    {
+        nearLadder = false;
+        ladder = null;
+        isClimbing = false;
+
+        interactionUI?.HideAll();
+    }
     void PlayJumpSound()
     {
         if (audioSource != null && jumpSound != null)

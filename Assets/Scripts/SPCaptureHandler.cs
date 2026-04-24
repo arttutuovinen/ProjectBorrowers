@@ -111,6 +111,7 @@ public class SPCaptureHandler : MonoBehaviourPun
         {
             movementScript.DisableMovement();
             SetRenderers(false); // hide real SP
+            movementScript.ForceExitLadder();
             spProxy_SP.SetActive(true); // show SP proxy following SPClientTeleportLocation
             
             if (escapeBar != null)
@@ -133,6 +134,11 @@ public class SPCaptureHandler : MonoBehaviourPun
         spFollowTarget = null;
         isCaptured = false;
         isJailed = true;
+
+        if (photonView.IsMine && movementScript != null)
+        {
+            movementScript.ForceExitLadder();
+        }
 
         if (!JailedSPs.Contains(this))
             JailedSPs.Add(this);
@@ -235,6 +241,8 @@ public class SPCaptureHandler : MonoBehaviourPun
     {
         isCaptured = false;
         spFollowTarget = null;
+
+        movementScript.ForceExitLadder();
 
         if (escapeBar != null)
             escapeBar.SetActive(false);
