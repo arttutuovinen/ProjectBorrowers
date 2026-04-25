@@ -23,7 +23,13 @@ public class SPCaptureHandler : MonoBehaviourPun
     private Image escapePanel;
     private float escapeValue = 0f;
     private float escapeDecreaseSpeed = 0.90f;
-    private float escapeIncreaseAmount = 0.14f;
+    private float escapeIncreaseAmount = 1.1f;
+
+    private int captureCount = 0;
+
+    [SerializeField] private float firstEscapeRate = 1.1f;
+    [SerializeField] private float secondEscapeRate = 0.1f;
+    [SerializeField] private float thirdEscapeRate = 0.95f;
 
     public static List<SPCaptureHandler> JailedSPs = new List<SPCaptureHandler>();
 
@@ -58,6 +64,18 @@ public class SPCaptureHandler : MonoBehaviourPun
         controller.enabled = true;
 
         HandleEscape();
+    }
+
+    void UpdateEscapeDifficulty()
+    {
+        captureCount++;
+
+        if (captureCount == 1)
+            escapeIncreaseAmount = firstEscapeRate;
+        else if (captureCount == 2)
+            escapeIncreaseAmount = secondEscapeRate;
+        else
+            escapeIncreaseAmount = thirdEscapeRate;
     }
 
     void CreateInvisibleProxies()
@@ -109,6 +127,7 @@ public class SPCaptureHandler : MonoBehaviourPun
 
         if (photonView.IsMine)
         {
+            UpdateEscapeDifficulty();
             movementScript.DisableMovement();
             SetRenderers(false); // hide real SP
             movementScript.ForceExitLadder();
@@ -209,19 +228,20 @@ public class SPCaptureHandler : MonoBehaviourPun
     {
         if (escapePanel == null) return;
 
-        // decrease bar
+        // Decrease over time (same as before)
         escapeValue -= Time.deltaTime * escapeDecreaseSpeed;
         escapeValue = Mathf.Clamp01(escapeValue);
 
-        // press interact to increase
-        if (Input.GetButtonDown("P1Interact"))
+        if (Input.GetButton("P1Interact"))
         {
-            escapeValue += escapeIncreaseAmount;
+            escapeValue += escapeIncreaseAmount * Time.deltaTime;
+            escapeValue = Mathf.Clamp01(escapeValue);
         }
 
+        // Update UI
         escapePanel.fillAmount = escapeValue;
 
-        // escape success
+        // Escape success
         if (escapeValue >= 1f)
         {
             Escape();
