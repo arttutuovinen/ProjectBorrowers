@@ -65,6 +65,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -124,11 +128,13 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _normalStrenght: 2
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _LightColor: {r: 0.7207546, g: 0.52618223, b: 0.34133846, a: 0}
+    - _LineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ScaleBrushStr: {r: 1, g: 1, b: 0, a: 0}
     - _ScaleLineTex: {r: 1, g: 1, b: 0, a: 0}
     - _ShadowColor: {r: 0.6830188, g: 0.39894322, b: 0.04510492, a: 0}
