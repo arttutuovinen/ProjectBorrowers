@@ -64,6 +64,8 @@ public class BPItemCollector : MonoBehaviourPun
     //ItemHighlight
     private BPItemHighlight lastHighlightedItem;
 
+    public ItemType CurrentItem => currentItem;
+
     // ✔ All valid item tags
     private readonly HashSet<string> itemTags = new HashSet<string>
     {

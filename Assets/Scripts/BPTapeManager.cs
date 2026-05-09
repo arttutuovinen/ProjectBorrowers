@@ -7,9 +7,20 @@ public class BPTapeManager : MonoBehaviourPun
     public float rayDistance = 10f;
     public float activationDistance = 3f;
     public LayerMask tapeAreaLayer;
-
+    private GameObject placeUIText;
     private GameObject currentTapeArea;
+    private BPItemCollector itemCollector;
 
+    void Start()
+    {
+        itemCollector = GetComponent<BPItemCollector>();
+
+        if (!photonView.IsMine) return;
+        Canvas canvas = Object.FindFirstObjectByType<Canvas>();
+        placeUIText = canvas.transform.Find("BigPlayerUI/Place")?.gameObject;
+        placeUIText.SetActive(false);
+
+    }
 
     void Update()
     {
@@ -25,10 +36,19 @@ public class BPTapeManager : MonoBehaviourPun
         if (Physics.Raycast(ray, out hit, rayDistance, tapeAreaLayer))
         {
             currentTapeArea = hit.collider.gameObject;
+            if (itemCollector.CurrentItem == BPItemCollector.ItemType.Tape)
+            {
+                placeUIText.SetActive(true);
+            }
+            else
+            {
+                placeUIText.SetActive(false);
+            }
         }
         else
         {
             currentTapeArea = null;
+            placeUIText.SetActive(false);
         }
     }
 
@@ -44,7 +64,7 @@ public class BPTapeManager : MonoBehaviourPun
         {
             return false;
         }
-
+        placeUIText.SetActive(false);
         // Check distance
         float distance = Vector3.Distance(
             playerCamera.transform.position,
