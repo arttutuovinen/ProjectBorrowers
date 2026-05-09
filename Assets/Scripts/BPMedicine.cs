@@ -11,6 +11,9 @@ public class BPMedicine : MonoBehaviourPun
     private float originalSpeed;
     private Coroutine boostCoroutine;
 
+    // Assign this in Inspector
+    public GameObject speedLines;
+
     public void ActivateSpeedBoost()
     {
         if (!photonView.IsMine) return;   // ✔ Only local player can trigger
@@ -27,9 +30,16 @@ public class BPMedicine : MonoBehaviourPun
         originalSpeed = playerMovement.currentSpeed;
         playerMovement.currentSpeed = boostedSpeed;
 
+        // Activate VFX
+        if (speedLines != null)
+            speedLines.SetActive(true);
+
         yield return new WaitForSeconds(boostDuration);
 
         playerMovement.currentSpeed = originalSpeed;
+        // Deactivate VFX
+        if (speedLines != null)
+            speedLines.SetActive(false);
         boostCoroutine = null;
     }
 

@@ -621,6 +621,7 @@ MonoBehaviour:
   playerMovement: {fileID: 7549007834672380184}
   boostDuration: 3
   boostedSpeed: 20
+  speedLines: {fileID: 7659159348391595254}
 --- !u!114 &207734190393102806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1766250525
+  GlobalObjectIdHash: 3261869827
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1008,13 +1009,13 @@ GameObject:
   - component: {fileID: 8963642323935609614}
   - component: {fileID: 9207323156631748946}
   - component: {fileID: 3853155833244435394}
-  m_Layer: 0
-  m_Name: Medicine
+  m_Layer: 17
+  m_Name: SpeedLines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8963642323935609614
 Transform:
   m_ObjectHideFlags: 0
