@@ -2908,6 +2908,66 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4694786568640371165, guid: 93ad247561c5a2944a09735b265c589c, type: 3}
+--- !u!1 &43317616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43317617}
+  - component: {fileID: 43317618}
+  m_Layer: 0
+  m_Name: Scratch (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &43317617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43317616}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000012, y: -0.49999884, z: 0.4999974, w: -0.5000027}
+  m_LocalPosition: {x: -45.78, y: 0.016, z: -45.542}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &43317618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43317616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 3, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &45249958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2982,6 +3042,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 45249958}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &46108935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 46108936}
+  - component: {fileID: 46108937}
+  m_Layer: 0
+  m_Name: 3scratch (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &46108936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46108935}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.50000083, y: -0.49999914, z: 0.49999765, w: -0.5000024}
+  m_LocalPosition: {x: -58.695, y: 11.759, z: -14.983}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &46108937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46108935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 3.07, y: 2.12, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &48695041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,6 +3511,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 54594627}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &55459901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 55459902}
+  - component: {fileID: 55459903}
+  m_Layer: 0
+  m_Name: 3scratch (43)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &55459902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55459901}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -51.7, y: 17.101, z: -47.666}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &55459903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55459901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 3, y: 1.98, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &58735955
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,7 +3837,7 @@ PrefabInstance:
     - target: {fileID: 5564723544770640878, guid: 6a7006e270f44c94585d9a5d33fc8e46,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.925495
+      value: 18.956
       objectReference: {fileID: 0}
     - target: {fileID: 5564723544770640878, guid: 6a7006e270f44c94585d9a5d33fc8e46,
         type: 3}
@@ -3822,6 +4002,66 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62782378}
   m_Mesh: {fileID: 1690838757993945290, guid: ed1b499855d1a2940b91f3e647f9e49c, type: 3}
+--- !u!1 &64562681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64562682}
+  - component: {fileID: 64562683}
+  m_Layer: 0
+  m_Name: 3scratch (45)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &64562682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64562681}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -41.295, y: 17.296, z: -47.176}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &64562683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64562681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 2.26, y: 1.98, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &65883015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1764355966490975336, guid: 7c45afc033873bc4c97267952b39d2a4,
@@ -4342,7 +4582,7 @@ PrefabInstance:
     - target: {fileID: 4754557434581692284, guid: 64bb38e4538453e48b718042fd5b5216,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.36
+      value: 6.392
       objectReference: {fileID: 0}
     - target: {fileID: 4754557434581692284, guid: 64bb38e4538453e48b718042fd5b5216,
         type: 3}
@@ -6330,6 +6570,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1362125237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &135649322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 135649323}
+  - component: {fileID: 135649324}
+  m_Layer: 0
+  m_Name: Scratch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &135649323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135649322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49999624, y: -0.5000038, z: 0.5000023, w: 0.49999762}
+  m_LocalPosition: {x: -59.05, y: 0.01, z: -6.17}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90.001}
+--- !u!114 &135649324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135649322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &136253835
 GameObject:
   m_ObjectHideFlags: 0
@@ -6880,7 +7180,7 @@ PrefabInstance:
     - target: {fileID: 1716574412298193527, guid: 5023e1eabff891a4499090cda6dc2efe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.751
+      value: 1.785
       objectReference: {fileID: 0}
     - target: {fileID: 1716574412298193527, guid: 5023e1eabff891a4499090cda6dc2efe,
         type: 3}
@@ -10165,6 +10465,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e6edd7b054cfd45849dca3ccaa9440, type: 3}
+--- !u!1 &213396055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 213396056}
+  - component: {fileID: 213396057}
+  m_Layer: 0
+  m_Name: 3scratch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &213396056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213396055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49999624, y: -0.5000038, z: 0.5000023, w: 0.49999762}
+  m_LocalPosition: {x: -59.774, y: 6.401, z: -17.094}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90.001}
+--- !u!114 &213396057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213396055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 13f7eeae23ab4f44193bc2d3328a5d4a, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.23, y: 2.8, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &217632536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10280,7 +10640,7 @@ PrefabInstance:
     - target: {fileID: 3738512176854295490, guid: da4d9e55e11f4db44bf9120aa082fa9c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -82.65678
+      value: -82.528
       objectReference: {fileID: 0}
     - target: {fileID: 3738512176854295490, guid: da4d9e55e11f4db44bf9120aa082fa9c,
         type: 3}
@@ -11713,6 +12073,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 242525944}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &242700468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 242700469}
+  - component: {fileID: 242700470}
+  m_Layer: 0
+  m_Name: 3scratch (49)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &242700469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242700468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5000007, y: -0.49999955, z: 0.4999976, w: 0.50000226}
+  m_LocalPosition: {x: -56.41, y: 5.862, z: -43.259}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &242700470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242700468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 3, y: 2.79, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &244541722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4c7ef9e81f584644691f637fb7bbdf17,
@@ -12195,6 +12615,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 261063388}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &270842140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 270842141}
+  - component: {fileID: 270842142}
+  m_Layer: 0
+  m_Name: 3scratch (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &270842141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270842140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.292, y: 16.029, z: -17.728}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &270842142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270842140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.28, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &271991569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12216,7 +12696,7 @@ PrefabInstance:
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.736
+      value: 1.7699999
       objectReference: {fileID: 0}
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
@@ -14237,6 +14717,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2581148867098e141b0d264b718ecdc7, type: 3}
+--- !u!1 &331590560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 331590561}
+  - component: {fileID: 331590562}
+  m_Layer: 0
+  m_Name: 3scratch (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &331590561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331590560}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.50000083, y: -0.49999914, z: 0.49999765, w: -0.5000024}
+  m_LocalPosition: {x: -58.776, y: 16.412, z: -42.28}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &331590562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331590560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 3.07, y: 2.12, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &332478524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a428b9417fee16c48b035ab4b8d51d06,
@@ -14416,6 +14956,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a7006e270f44c94585d9a5d33fc8e46, type: 3}
+--- !u!1 &341302565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 341302566}
+  - component: {fileID: 341302567}
+  m_Layer: 0
+  m_Name: 3scratch (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &341302566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341302565}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000032633538, y: -0.70710796, z: 0.70710564, w: -0.000003315508}
+  m_LocalPosition: {x: -74.433, y: 9.365, z: -46.67}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &341302567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341302565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &341559895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14630,7 +15230,7 @@ PrefabInstance:
     - target: {fileID: 5564723544770640878, guid: 6a7006e270f44c94585d9a5d33fc8e46,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.925495
+      value: 18.938
       objectReference: {fileID: 0}
     - target: {fileID: 5564723544770640878, guid: 6a7006e270f44c94585d9a5d33fc8e46,
         type: 3}
@@ -15063,6 +15663,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 355993673}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &356369973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 356369974}
+  - component: {fileID: 356369975}
+  m_Layer: 0
+  m_Name: 3scratch (50)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &356369974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356369973}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5000007, y: -0.49999955, z: 0.4999976, w: 0.50000226}
+  m_LocalPosition: {x: -56.41, y: 2.047, z: -45.19}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &356369975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356369973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 3, y: 2.79, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &356954088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16306,6 +16966,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 382222247}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &382918237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 382918238}
+  - component: {fileID: 382918239}
+  m_Layer: 0
+  m_Name: Scratch (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &382918238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382918237}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000036135316, y: -0.7071078, z: 0.7071059, w: -0.000003784895}
+  m_LocalPosition: {x: -56.68, y: 0.013, z: -37.17}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &382918239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382918237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 3, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &383304294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16406,7 +17126,7 @@ PrefabInstance:
     - target: {fileID: 6693553430790012726, guid: 772140f5ae22e4a4f9144d941dd8fca4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.422156
+      value: 13.439
       objectReference: {fileID: 0}
     - target: {fileID: 6693553430790012726, guid: 772140f5ae22e4a4f9144d941dd8fca4,
         type: 3}
@@ -16969,6 +17689,66 @@ MonoBehaviour:
   sceneViewId: 144
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1 &398896686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 398896687}
+  - component: {fileID: 398896688}
+  m_Layer: 0
+  m_Name: 3scratch (40)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &398896687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398896686}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -35.264, y: 5.777, z: -45.689}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &398896688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398896686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 2.36, y: 2.55, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &399253828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18569,6 +19349,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 426217028}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &426678808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426678809}
+  - component: {fileID: 426678810}
+  m_Layer: 0
+  m_Name: 3scratch (54)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &426678809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426678808}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.70710534, y: -0.0000039562583, z: 0.0000040605664, w: 0.7071083}
+  m_LocalPosition: {x: -60.04, y: 2.229, z: -9.602}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0.001}
+--- !u!114 &426678810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426678808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.21, y: 2.12, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &427170840
 GameObject:
   m_ObjectHideFlags: 0
@@ -19168,6 +20008,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &449556796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449556797}
+  - component: {fileID: 449556798}
+  m_Layer: 0
+  m_Name: 3scratch (46)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &449556797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449556796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -44.25, y: 14.855, z: -47.194}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &449556798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449556796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 2.26, y: 1.98, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &455172982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19585,6 +20485,88 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 587530333}
+  - {fileID: 135649323}
+  - {fileID: 213396056}
+  - {fileID: 46108936}
+  - {fileID: 930765517}
+  - {fileID: 426678809}
+  - {fileID: 1809476652}
+  - {fileID: 2054016880}
+  - {fileID: 494303617}
+  - {fileID: 510498166}
+  - {fileID: 557191684}
+  - {fileID: 1733019848}
+  - {fileID: 1190681137}
+  - {fileID: 1859918518}
+  - {fileID: 1358343406}
+  - {fileID: 970131489}
+  - {fileID: 767601040}
+  - {fileID: 609437951}
+  - {fileID: 1286913801}
+  - {fileID: 1083872165}
+  - {fileID: 1072091029}
+  - {fileID: 1405577474}
+  - {fileID: 920084138}
+  - {fileID: 1664125321}
+  - {fileID: 929468368}
+  - {fileID: 1682143253}
+  - {fileID: 1078296845}
+  - {fileID: 1657857191}
+  - {fileID: 1465955530}
+  - {fileID: 1727548228}
+  - {fileID: 398896687}
+  - {fileID: 1283407709}
+  - {fileID: 2025398800}
+  - {fileID: 55459902}
+  - {fileID: 1240617496}
+  - {fileID: 1604779833}
+  - {fileID: 242700469}
+  - {fileID: 356369974}
+  - {fileID: 64562682}
+  - {fileID: 449556797}
+  - {fileID: 1228561764}
+  - {fileID: 1341862199}
+  - {fileID: 1097534481}
+  - {fileID: 719273920}
+  - {fileID: 970449417}
+  - {fileID: 331590561}
+  - {fileID: 1406599454}
+  - {fileID: 1041609181}
+  - {fileID: 341302566}
+  - {fileID: 1261534372}
+  - {fileID: 925581468}
+  - {fileID: 1998302838}
+  - {fileID: 1341266290}
+  - {fileID: 1321616402}
+  - {fileID: 1731520654}
+  - {fileID: 1382897542}
+  - {fileID: 1492859338}
+  - {fileID: 918807314}
+  - {fileID: 270842141}
+  - {fileID: 1388566122}
+  - {fileID: 668318011}
+  - {fileID: 1543920139}
+  - {fileID: 1846085889}
+  - {fileID: 584233631}
+  - {fileID: 632016993}
+  - {fileID: 933278649}
+  - {fileID: 1783941229}
+  - {fileID: 1131974852}
+  - {fileID: 1769962705}
+  - {fileID: 1125373762}
+  - {fileID: 1726610838}
+  - {fileID: 2018135281}
+  - {fileID: 2028619143}
+  - {fileID: 43317617}
+  - {fileID: 761690992}
+  - {fileID: 382918238}
+  - {fileID: 2084624541}
+  - {fileID: 2135560938}
+  - {fileID: 1925785793}
+  - {fileID: 1668358441}
+  - {fileID: 2112867537}
+  - {fileID: 1255729867}
+  - {fileID: 1447623723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &460173826 stripped
@@ -20545,7 +21527,7 @@ PrefabInstance:
     - target: {fileID: 3738512176854295490, guid: da4d9e55e11f4db44bf9120aa082fa9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.282
+      value: 6.3190002
       objectReference: {fileID: 0}
     - target: {fileID: 3738512176854295490, guid: da4d9e55e11f4db44bf9120aa082fa9c,
         type: 3}
@@ -21314,6 +22296,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 875693610}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &494303616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 494303617}
+  - component: {fileID: 494303618}
+  m_Layer: 0
+  m_Name: 3scratch (57)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494303617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494303616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071052, y: -0.0000041648746, z: 0.00000410527, w: 0.70710844}
+  m_LocalPosition: {x: -46.595, y: 6.07, z: -4.817}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0.001}
+--- !u!114 &494303618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494303616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.33, y: 2.71, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &500460062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21661,6 +22703,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 875693610}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!1 &510498165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 510498166}
+  - component: {fileID: 510498167}
+  m_Layer: 0
+  m_Name: 3scratch (59)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &510498166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510498165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071052, y: -0.0000041648746, z: 0.00000410527, w: 0.70710844}
+  m_LocalPosition: {x: -46.502, y: 9.449, z: -4.686}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0.001}
+--- !u!114 &510498167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510498165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.33, y: 2.26, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &513963097
 GameObject:
   m_ObjectHideFlags: 0
@@ -23216,6 +24318,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 557096388}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &557191683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 557191684}
+  - component: {fileID: 557191685}
+  m_Layer: 0
+  m_Name: 3scratch (58)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &557191684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557191683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071052, y: -0.0000041648746, z: 0.00000410527, w: 0.70710844}
+  m_LocalPosition: {x: -49.578, y: 6.07, z: -4.817}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0.001}
+--- !u!114 &557191685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557191683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.33, y: 2.71, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &557904925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24336,6 +25498,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 148363993}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &584233630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584233631}
+  - component: {fileID: 584233632}
+  m_Layer: 0
+  m_Name: 3scratch (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &584233631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584233630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.267, y: 10, z: -17.18}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &584233632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584233630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: d9beb35410c42504f897f3d526c18935, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.38, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &584914751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25499,6 +26721,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d1a2b10d4e7a744f9af1def8ab924b4, type: 3}
+--- !u!1 &609437950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 609437951}
+  - component: {fileID: 609437952}
+  m_Layer: 0
+  m_Name: 3scratch (30)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &609437951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609437950}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -27.42, y: 9.72, z: -4.611}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &609437952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609437950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 3.02, y: 2.87, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &611466768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26138,6 +27420,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 625673537}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &632016992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 632016993}
+  - component: {fileID: 632016994}
+  m_Layer: 0
+  m_Name: Scratch (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &632016993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632016992}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49999624, y: -0.5000038, z: 0.5000023, w: 0.49999762}
+  m_LocalPosition: {x: -57.036, y: 4.595, z: 24.634}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90.001}
+--- !u!114 &632016994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632016992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &632654321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27732,6 +29074,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 667942914}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &668318010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 668318011}
+  - component: {fileID: 668318012}
+  m_Layer: 0
+  m_Name: 3scratch (19)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &668318011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668318010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.292, y: 16.029, z: -33.437}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &668318012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668318010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.28, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &668989681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27958,7 +29360,7 @@ PrefabInstance:
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.719
+      value: 7.765001
       objectReference: {fileID: 0}
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
@@ -29525,7 +30927,7 @@ PrefabInstance:
     - target: {fileID: 1716574412298193527, guid: 5023e1eabff891a4499090cda6dc2efe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.48
+      value: 13.503
       objectReference: {fileID: 0}
     - target: {fileID: 1716574412298193527, guid: 5023e1eabff891a4499090cda6dc2efe,
         type: 3}
@@ -29584,6 +30986,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 723532853}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &719273919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 719273920}
+  - component: {fileID: 719273921}
+  m_Layer: 0
+  m_Name: 3scratch (28)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &719273920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719273919}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -43.28, y: 19.85, z: -4.262}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &719273921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719273919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: d9beb35410c42504f897f3d526c18935, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.54, y: 2.33, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &722100350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30257,7 +31719,7 @@ PrefabInstance:
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -83.16
+      value: -83.03123
       objectReference: {fileID: 0}
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
@@ -30352,6 +31814,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -61.553
+      objectReference: {fileID: 0}
+    - target: {fileID: 387933035903895014, guid: e5a9f10215244e2449d58742819cbe77,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 387933035903895014, guid: e5a9f10215244e2449d58742819cbe77,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 387933035903895014, guid: e5a9f10215244e2449d58742819cbe77,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 387933035903895014, guid: e5a9f10215244e2449d58742819cbe77,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.731
+      objectReference: {fileID: 0}
+    - target: {fileID: 387933035903895014, guid: e5a9f10215244e2449d58742819cbe77,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.98
       objectReference: {fileID: 0}
     - target: {fileID: 518028763918539514, guid: e5a9f10215244e2449d58742819cbe77,
         type: 3}
@@ -31609,7 +33096,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f168945939611fb4cac3c5c6b4541e76,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.3142085
+      value: 6.365
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f168945939611fb4cac3c5c6b4541e76,
         type: 3}
@@ -32319,6 +33806,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1362125237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &761690991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 761690992}
+  - component: {fileID: 761690993}
+  m_Layer: 0
+  m_Name: Scratch (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &761690992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761690991}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000012, y: -0.49999884, z: 0.4999974, w: -0.5000027}
+  m_LocalPosition: {x: -56.96, y: 0.016, z: -39.55}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &761690993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761690991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 3, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &763842425
 GameObject:
   m_ObjectHideFlags: 0
@@ -32555,6 +34102,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1580887858}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &767601039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 767601040}
+  - component: {fileID: 767601041}
+  m_Layer: 0
+  m_Name: 3scratch (29)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &767601040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767601039}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -24.5, y: 13.278, z: -3.686}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &767601041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767601039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 3.02, y: 2.18, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &767934386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1d1a2b10d4e7a744f9af1def8ab924b4,
@@ -36255,7 +37862,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9293e5420f074c5458e837a3901f4de8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3279998
+      value: -1.3030002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9293e5420f074c5458e837a3901f4de8,
         type: 3}
@@ -37645,7 +39252,7 @@ PrefabInstance:
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.532999
+      value: 6.579
       objectReference: {fileID: 0}
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
@@ -38589,6 +40196,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 912685678}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &918807313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 918807314}
+  - component: {fileID: 918807315}
+  m_Layer: 0
+  m_Name: 3scratch (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &918807314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918807313}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.279, y: 13.539, z: -20.84}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &918807315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918807313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.28, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &918932441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38677,6 +40344,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d1a2b10d4e7a744f9af1def8ab924b4, type: 3}
+--- !u!1 &920084137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920084138}
+  - component: {fileID: 920084139}
+  m_Layer: 0
+  m_Name: 3scratch (34)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &920084138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920084137}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.49999884, y: 0.50000125, z: -0.49999973, w: -0.5000003}
+  m_LocalPosition: {x: -40.986, y: 1.789, z: -26.638}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 450}
+--- !u!114 &920084139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920084137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.05}
+  m_Size: {x: 2.4, y: 2.55, z: 0.1}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &920828805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38786,6 +40513,186 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 920828805}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &925581467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 925581468}
+  - component: {fileID: 925581469}
+  m_Layer: 0
+  m_Name: 3scratch (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &925581468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925581467}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000008, y: -0.4999992, z: 0.49999756, w: -0.50000244}
+  m_LocalPosition: {x: -73.936, y: 2.2, z: -46.365}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &925581469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925581467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
+--- !u!1 &929468367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929468368}
+  - component: {fileID: 929468369}
+  m_Layer: 0
+  m_Name: 3scratch (61)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &929468368
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929468367}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0.0000028386712, z: -0.7071068, w: -0.0000014677644}
+  m_LocalPosition: {x: -30.055, y: 0.681, z: -26.742}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 540}
+--- !u!114 &929468369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929468367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.05}
+  m_Size: {x: 2.4, y: 2.55, z: 0.1}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
+--- !u!1 &930765516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 930765517}
+  - component: {fileID: 930765518}
+  m_Layer: 0
+  m_Name: 3scratch (53)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &930765517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930765516}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000035092235, y: -0.7071082, z: 0.70710546, w: -0.0000034943223}
+  m_LocalPosition: {x: -59.996, y: 2.235, z: -18.543}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &930765518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930765516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.29, y: 2.12, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &931540789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39014,6 +40921,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 931639228}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &933278648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 933278649}
+  - component: {fileID: 933278650}
+  m_Layer: 0
+  m_Name: Scratch (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &933278649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933278648}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000036805864, y: -0.70710784, z: 0.70710576, w: -0.0000037699933}
+  m_LocalPosition: {x: -19.46, y: 0.04, z: -2.09}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &933278650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933278648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &934637942 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5564723544770640878, guid: 6a7006e270f44c94585d9a5d33fc8e46,
@@ -40680,6 +42647,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 968031926}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &970131488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970131489}
+  - component: {fileID: 970131490}
+  m_Layer: 0
+  m_Name: 3scratch (25)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970131489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970131488}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -46.546, y: 16.378, z: -4.262}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &970131490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970131488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.32, y: 2.33, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &970190072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40701,7 +42728,7 @@ PrefabInstance:
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.695484
+      value: 5.728
       objectReference: {fileID: 0}
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
@@ -40754,6 +42781,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 970190072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &970449416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970449417}
+  - component: {fileID: 970449418}
+  m_Layer: 0
+  m_Name: 3scratch (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970449417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970449416}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.50000083, y: -0.49999914, z: 0.49999765, w: -0.5000024}
+  m_LocalPosition: {x: -58.695, y: 16.13, z: -7.663}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &970449418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970449416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 3.07, y: 2.12, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &975266926
 GameObject:
   m_ObjectHideFlags: 0
@@ -44080,6 +46167,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1445001131}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1041609180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1041609181}
+  - component: {fileID: 1041609182}
+  m_Layer: 0
+  m_Name: 3scratch (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1041609181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041609180}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000032633538, y: -0.70710796, z: 0.70710564, w: -0.000003315508}
+  m_LocalPosition: {x: -83.44, y: 12.986, z: -46.67}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &1041609182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041609180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &1041734784
 GameObject:
   m_ObjectHideFlags: 0
@@ -45481,6 +47628,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1362125237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1072091028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1072091029}
+  - component: {fileID: 1072091030}
+  m_Layer: 0
+  m_Name: 3scratch (32)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1072091029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072091028}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.49999884, y: 0.50000125, z: -0.49999973, w: -0.5000003}
+  m_LocalPosition: {x: -34.634, y: 6.2, z: -25.425}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 450}
+--- !u!114 &1072091030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072091028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.4, y: 2.55, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &1072845705
 GameObject:
   m_ObjectHideFlags: 0
@@ -45805,6 +48012,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1077637432}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1078296844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1078296845}
+  - component: {fileID: 1078296846}
+  m_Layer: 0
+  m_Name: 3scratch (36)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1078296845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078296844}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.4999983, y: 0.50000167, z: -0.5000003, w: 0.4999998}
+  m_LocalPosition: {x: -31.722, y: 1.855, z: -45.554}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 630}
+--- !u!114 &1078296846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078296844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.05}
+  m_Size: {x: 2.28, y: 2.55, z: 0.1}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &1081503429
 GameObject:
   m_ObjectHideFlags: 0
@@ -45995,6 +48262,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1081925926}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1083872164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1083872165}
+  - component: {fileID: 1083872166}
+  m_Layer: 0
+  m_Name: 3scratch (44)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1083872165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083872164}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -27.432, y: 2.127, z: -4.611}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &1083872166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083872164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 3.02, y: 2.87, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1084524293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46161,7 +48488,7 @@ PrefabInstance:
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.88
+      value: 15.899
       objectReference: {fileID: 0}
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
@@ -46579,6 +48906,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094510436}
   m_CullTransparentMesh: 1
+--- !u!1 &1097534480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1097534481}
+  - component: {fileID: 1097534482}
+  m_Layer: 0
+  m_Name: 3scratch (27)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1097534481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097534480}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -49.567, y: 19.85, z: -4.262}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &1097534482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097534480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: d9beb35410c42504f897f3d526c18935, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.54, y: 2.33, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1097779485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47141,7 +49528,7 @@ PrefabInstance:
     - target: {fileID: 1716574412298193527, guid: 5023e1eabff891a4499090cda6dc2efe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.783
+      value: 1.817
       objectReference: {fileID: 0}
     - target: {fileID: 1716574412298193527, guid: 5023e1eabff891a4499090cda6dc2efe,
         type: 3}
@@ -48000,6 +50387,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be3e53be65024fe45a29c324a83f4570, type: 3}
+--- !u!1 &1125373761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1125373762}
+  - component: {fileID: 1125373763}
+  m_Layer: 0
+  m_Name: Scratch (19)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1125373762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125373761}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000012, y: -0.49999884, z: 0.4999974, w: -0.5000027}
+  m_LocalPosition: {x: -56.924, y: 0.009, z: -6.225}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &1125373763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125373761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1128513667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48227,6 +50674,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 905364186}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1131974851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131974852}
+  - component: {fileID: 1131974853}
+  m_Layer: 0
+  m_Name: Scratch (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1131974852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131974851}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000012, y: -0.49999884, z: 0.4999974, w: -0.5000027}
+  m_LocalPosition: {x: -42.12, y: 0.03, z: -5.15}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &1131974853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131974851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 3, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1139649475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49285,7 +51792,7 @@ PrefabInstance:
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.695484
+      value: 5.728
       objectReference: {fileID: 0}
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
@@ -50377,6 +52884,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1362125237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1190681136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1190681137}
+  - component: {fileID: 1190681138}
+  m_Layer: 0
+  m_Name: 3scratch (22)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1190681137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190681136}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -61.603, y: 13.18, z: 24.896}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &1190681138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190681136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.76, y: 2.69, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &1191122977 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a0b2285a7cf94c7458c69f208082dbfe,
@@ -52380,6 +54947,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1390361418}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1228561763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1228561764}
+  - component: {fileID: 1228561765}
+  m_Layer: 0
+  m_Name: 3scratch (47)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1228561764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228561763}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -44.497, y: 19.722, z: -47.194}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &1228561765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228561763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 2.58, y: 1.98, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1228970780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53426,6 +56053,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1044779386}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1240617495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1240617496}
+  - component: {fileID: 1240617497}
+  m_Layer: 0
+  m_Name: 3scratch (48)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1240617496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240617495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5000007, y: -0.49999955, z: 0.4999976, w: 0.50000226}
+  m_LocalPosition: {x: -56.41, y: 9.386, z: -45.17}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &1240617497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240617495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 3, y: 2.79, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &1246675234
 GameObject:
   m_ObjectHideFlags: 0
@@ -53698,6 +56385,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 733386855}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1255729866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1255729867}
+  - component: {fileID: 1255729868}
+  m_Layer: 0
+  m_Name: Scratch (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1255729867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255729866}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000035837293, y: -0.7071079, z: 0.70710576, w: -0.0000038444996}
+  m_LocalPosition: {x: -98.828, y: 0.01, z: -34.961}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &1255729868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255729866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2.84, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1256665386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54102,6 +56849,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2051808177}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1261534371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1261534372}
+  - component: {fileID: 1261534373}
+  m_Layer: 0
+  m_Name: 3scratch (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1261534372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261534371}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000032633538, y: -0.70710796, z: 0.70710564, w: -0.000003315508}
+  m_LocalPosition: {x: -77.467, y: 5.9, z: -46.67}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &1261534373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261534371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &1262715168
 GameObject:
   m_ObjectHideFlags: 0
@@ -54290,7 +57097,7 @@ PrefabInstance:
     - target: {fileID: 3738512176854295490, guid: da4d9e55e11f4db44bf9120aa082fa9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.9629993
+      value: 7.0090003
       objectReference: {fileID: 0}
     - target: {fileID: 3738512176854295490, guid: da4d9e55e11f4db44bf9120aa082fa9c,
         type: 3}
@@ -54775,6 +57582,66 @@ MonoBehaviour:
   sceneViewId: 145
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1 &1283407708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283407709}
+  - component: {fileID: 1283407710}
+  m_Layer: 0
+  m_Name: 3scratch (41)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1283407709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283407708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -40.776, y: 12.581, z: -47.719}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &1283407710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283407708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 3.16, y: 2.18, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1283611099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55052,6 +57919,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d1a2b10d4e7a744f9af1def8ab924b4, type: 3}
+--- !u!1 &1286913800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1286913801}
+  - component: {fileID: 1286913802}
+  m_Layer: 0
+  m_Name: 3scratch (31)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1286913801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286913800}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -25.49, y: 6.2, z: -4.611}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &1286913802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286913800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 3.02, y: 2.87, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &1288344821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a428b9417fee16c48b035ab4b8d51d06,
@@ -55726,7 +58653,7 @@ PrefabInstance:
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.320999
+      value: 7.367
       objectReference: {fileID: 0}
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
@@ -56775,6 +59702,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 722100350}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1321616401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1321616402}
+  - component: {fileID: 1321616403}
+  m_Layer: 0
+  m_Name: 3scratch (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1321616402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321616401}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071052, y: 0.0000015199184, z: -0.000001527369, w: 0.7071084}
+  m_LocalPosition: {x: -98.98, y: 2.2, z: -16.586}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 720}
+--- !u!114 &1321616403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321616401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1325166826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57620,7 +60607,7 @@ PrefabInstance:
     - target: {fileID: 3738512176854295490, guid: da4d9e55e11f4db44bf9120aa082fa9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.898
+      value: 5.935
       objectReference: {fileID: 0}
     - target: {fileID: 3738512176854295490, guid: da4d9e55e11f4db44bf9120aa082fa9c,
         type: 3}
@@ -57757,6 +60744,126 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1339722335}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1341266289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1341266290}
+  - component: {fileID: 1341266291}
+  m_Layer: 0
+  m_Name: 3scratch (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1341266290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341266289}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000055879354, y: 0.7071082, z: -0.7071054, w: -0.00000046938658}
+  m_LocalPosition: {x: -98.93, y: 2.2, z: -33.988}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 540}
+--- !u!114 &1341266291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341266289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
+--- !u!1 &1341862198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1341862199}
+  - component: {fileID: 1341862200}
+  m_Layer: 0
+  m_Name: 3scratch (26)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1341862199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341862198}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -52.643, y: 16.378, z: -4.262}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &1341862200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341862198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.32, y: 2.33, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &1342467724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64d7e60688df56b4d9a41b65f76aebd9,
@@ -57784,7 +60891,7 @@ PrefabInstance:
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.736
+      value: 1.7699999
       objectReference: {fileID: 0}
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
@@ -58240,6 +61347,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d1a2b10d4e7a744f9af1def8ab924b4, type: 3}
+--- !u!1 &1358343405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1358343406}
+  - component: {fileID: 1358343407}
+  m_Layer: 0
+  m_Name: 3scratch (24)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1358343406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358343405}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -43.57, y: 13.711, z: -4.262}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &1358343407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358343405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.32, y: 2.33, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1358448213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59455,6 +62622,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1381151562}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382897541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1382897542}
+  - component: {fileID: 1382897543}
+  m_Layer: 0
+  m_Name: 3scratch (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1382897542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382897541}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.169, y: 6.13, z: -20.805}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &1382897543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382897541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1383685592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59653,6 +62880,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5284076871968839187}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1388566121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1388566122}
+  - component: {fileID: 1388566123}
+  m_Layer: 0
+  m_Name: 3scratch (52)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1388566122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388566121}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.849, y: 14.699, z: 10.118}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &1388566123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388566121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.88, y: 2.28, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1390361418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59798,7 +63085,7 @@ PrefabInstance:
     - target: {fileID: 5564723544770640878, guid: 6a7006e270f44c94585d9a5d33fc8e46,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.931166
+      value: 9.95
       objectReference: {fileID: 0}
     - target: {fileID: 5564723544770640878, guid: 6a7006e270f44c94585d9a5d33fc8e46,
         type: 3}
@@ -60713,6 +64000,126 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1404278021}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1405577473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405577474}
+  - component: {fileID: 1405577475}
+  m_Layer: 0
+  m_Name: 3scratch (33)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1405577474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405577473}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.49999884, y: 0.50000125, z: -0.49999973, w: -0.5000003}
+  m_LocalPosition: {x: -40.642, y: 6.2, z: -25.41}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 450}
+--- !u!114 &1405577475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405577473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.4, y: 2.55, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
+--- !u!1 &1406599453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1406599454}
+  - component: {fileID: 1406599455}
+  m_Layer: 0
+  m_Name: 3scratch (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1406599454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406599453}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.50000083, y: -0.49999914, z: 0.49999765, w: -0.5000024}
+  m_LocalPosition: {x: -58.81, y: 12.17, z: -37.98}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &1406599455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406599453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.98, y: 2.12, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1408032278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62290,6 +65697,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 325980471}
   m_LocalEulerAnglesHint: {x: 0, y: -1169.06, z: 0}
+--- !u!1 &1447623722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1447623723}
+  - component: {fileID: 1447623724}
+  m_Layer: 0
+  m_Name: Scratch (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1447623723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447623722}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000035837293, y: -0.7071079, z: 0.70710576, w: -0.0000038444996}
+  m_LocalPosition: {x: -98.828, y: 0.01, z: -15.96}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &1447623724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447623722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2.84, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1448714583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63284,6 +66751,66 @@ Transform:
   - {fileID: 361489895}
   m_Father: {fileID: 145002709}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1465955529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1465955530}
+  - component: {fileID: 1465955531}
+  m_Layer: 0
+  m_Name: 3scratch (38)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1465955530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465955529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -44.869, y: 5.777, z: -45.777}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &1465955531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465955529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 2.36, y: 2.55, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &1471395306
 GameObject:
   m_ObjectHideFlags: 0
@@ -64332,6 +67859,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1491583032}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1492859337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492859338}
+  - component: {fileID: 1492859339}
+  m_Layer: 0
+  m_Name: 3scratch (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1492859338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492859337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.169, y: 6.13, z: -32.867}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &1492859339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492859337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &1493520075
 GameObject:
   m_ObjectHideFlags: 0
@@ -66520,6 +70107,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1542334317}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1543920138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1543920139}
+  - component: {fileID: 1543920140}
+  m_Layer: 0
+  m_Name: 3scratch (20)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1543920139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543920138}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.287, y: 19.456, z: -26.66}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &1543920140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543920138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: d9beb35410c42504f897f3d526c18935, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.6, y: 2.78, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1548172773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68962,6 +72609,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1602903147}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1604779832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1604779833}
+  - component: {fileID: 1604779834}
+  m_Layer: 0
+  m_Name: 3scratch (51)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1604779833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604779832}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5000007, y: -0.49999955, z: 0.4999976, w: 0.50000226}
+  m_LocalPosition: {x: -57.122, y: 16.203, z: -14.906}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &1604779834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604779832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 3.64, y: 2.09, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1612802438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70606,6 +74313,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BPInkSplatUI
   oilSplat: {fileID: 1432808710}
+--- !u!1 &1657857190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1657857191}
+  - component: {fileID: 1657857192}
+  m_Layer: 0
+  m_Name: 3scratch (37)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1657857191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657857190}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000083, y: -0.4999994, z: 0.49999776, w: 0.50000215}
+  m_LocalPosition: {x: -45.423, y: 1.855, z: -45.554}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 810}
+--- !u!114 &1657857192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657857190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.05}
+  m_Size: {x: 2.28, y: 2.55, z: 0.1}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1658456441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71570,6 +75337,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1663516263}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1664125320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664125321}
+  - component: {fileID: 1664125322}
+  m_Layer: 0
+  m_Name: 3scratch (60)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1664125321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664125320}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0.0000028386712, z: -0.7071068, w: -0.0000014677644}
+  m_LocalPosition: {x: -41.966, y: 0.681, z: -26.742}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 540}
+--- !u!114 &1664125322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664125320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.05}
+  m_Size: {x: 2.4, y: 2.55, z: 0.1}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1665840813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71707,6 +75534,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1390659995}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1668358440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668358441}
+  - component: {fileID: 1668358442}
+  m_Layer: 0
+  m_Name: Scratch (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1668358441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668358440}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49999598, y: -0.5000042, z: 0.5000025, w: 0.49999738}
+  m_LocalPosition: {x: -73.51, y: 0.01, z: -46.34}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90.001}
+--- !u!114 &1668358442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668358440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2.61, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1668680259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72679,6 +76566,66 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681606366}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1682143252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1682143253}
+  - component: {fileID: 1682143254}
+  m_Layer: 0
+  m_Name: 3scratch (35)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1682143253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682143252}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.4999983, y: 0.50000167, z: -0.5000003, w: 0.4999998}
+  m_LocalPosition: {x: -30.926, y: 1.789, z: -26.576}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 630}
+--- !u!114 &1682143254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682143252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.05}
+  m_Size: {x: 2.4, y: 2.55, z: 0.1}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1682651316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74553,7 +78500,7 @@ PrefabInstance:
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.855
+      value: 15.874
       objectReference: {fileID: 0}
     - target: {fileID: 7423153508958520229, guid: 83ff69cff68a9ae4fa8b8a1e3d1dd57f,
         type: 3}
@@ -74799,6 +78746,126 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1720325303}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1726610837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726610838}
+  - component: {fileID: 1726610839}
+  m_Layer: 0
+  m_Name: Scratch (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1726610838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726610837}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000012, y: -0.49999884, z: 0.4999974, w: -0.5000027}
+  m_LocalPosition: {x: -41.37, y: 0.016, z: -26.662}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &1726610839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726610837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 3, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
+--- !u!1 &1727548227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1727548228}
+  - component: {fileID: 1727548229}
+  m_Layer: 0
+  m_Name: 3scratch (39)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1727548228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727548227}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -40.236, y: 5.777, z: -45.689}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &1727548229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727548227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 2.36, y: 2.55, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1730094042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75122,6 +79189,126 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1730457952}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1731520653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1731520654}
+  - component: {fileID: 1731520655}
+  m_Layer: 0
+  m_Name: 3scratch (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1731520654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731520653}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.169, y: 6.13, z: -17.151}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &1731520655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731520653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
+--- !u!1 &1733019847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1733019848}
+  - component: {fileID: 1733019849}
+  m_Layer: 0
+  m_Name: 3scratch (21)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1733019848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733019847}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.50000083, y: -0.49999914, z: 0.49999765, w: -0.5000024}
+  m_LocalPosition: {x: -61.553, y: 16.576, z: 24.896}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &1733019849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733019847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 13f7eeae23ab4f44193bc2d3328a5d4a, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.59, y: 2.69, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1734700121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76481,6 +80668,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1579100867}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1769962704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1769962705}
+  - component: {fileID: 1769962706}
+  m_Layer: 0
+  m_Name: Scratch (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1769962705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769962704}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000012, y: -0.49999884, z: 0.4999974, w: -0.5000027}
+  m_LocalPosition: {x: -53.71, y: 0.034, z: -5.064}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &1769962706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769962704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 1.66, y: 3, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1771214214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77175,6 +81422,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d1a2b10d4e7a744f9af1def8ab924b4, type: 3}
+--- !u!1 &1783941228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1783941229}
+  - component: {fileID: 1783941230}
+  m_Layer: 0
+  m_Name: Scratch (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1783941229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783941228}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000036805864, y: -0.70710784, z: 0.70710576, w: -0.0000037699933}
+  m_LocalPosition: {x: -19.46, y: 0.03, z: -4.12}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180.001}
+--- !u!114 &1783941230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783941228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &1784135003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1d1a2b10d4e7a744f9af1def8ab924b4,
@@ -78299,6 +82606,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1807678540}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1809476651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809476652}
+  - component: {fileID: 1809476653}
+  m_Layer: 0
+  m_Name: 3scratch (55)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1809476652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809476651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.4999967, y: -0.5000032, z: 0.50000125, w: 0.49999884}
+  m_LocalPosition: {x: -53.115, y: 2.229, z: -5.045}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+--- !u!114 &1809476653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809476651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.21, y: 2.71, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &1812803715
 GameObject:
   m_ObjectHideFlags: 0
@@ -79524,6 +83891,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1843172213}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1846085888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1846085889}
+  - component: {fileID: 1846085890}
+  m_Layer: 0
+  m_Name: 3scratch (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1846085889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846085888}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.50000024, y: -0.4999998, z: 0.49999744, w: 0.50000256}
+  m_LocalPosition: {x: -99.337, y: 10, z: -29.845}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 809.999}
+--- !u!114 &1846085890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846085888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: d9beb35410c42504f897f3d526c18935, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.38, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &1851801262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2dffec8b6c90a3948af24dccf2294529,
@@ -79817,6 +84244,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1855243365}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1859918517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859918518}
+  - component: {fileID: 1859918519}
+  m_Layer: 0
+  m_Name: 3scratch (23)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1859918518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859918517}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: 0.0000013113022, z: -0.0000012516975, w: -0.70710784}
+  m_LocalPosition: {x: -49.678, y: 13.844, z: -4.262}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 360}
+--- !u!114 &1859918519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859918517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.485}
+  m_Size: {x: 2.4, y: 2.33, z: 0.97}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1864949986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81143,6 +85630,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1918463764}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1925785792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1925785793}
+  - component: {fileID: 1925785794}
+  m_Layer: 0
+  m_Name: Scratch (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1925785793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925785792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49999598, y: -0.5000042, z: 0.5000025, w: 0.49999738}
+  m_LocalPosition: {x: -59.399, y: 0.01, z: -39.59}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90.001}
+--- !u!114 &1925785794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925785792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2.25, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &1928064006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82107,7 +86654,7 @@ PrefabInstance:
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.695484
+      value: 5.728
       objectReference: {fileID: 0}
     - target: {fileID: 4071689662535952035, guid: 07f1412e8d54743449d248ed054da677,
         type: 3}
@@ -84218,6 +88765,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 539268480}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1998302837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1998302838}
+  - component: {fileID: 1998302839}
+  m_Layer: 0
+  m_Name: 3scratch (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1998302838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998302837}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.49999893, y: 0.50000113, z: -0.49999928, w: -0.5000007}
+  m_LocalPosition: {x: -84.011, y: 2.2, z: -46.426}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 450}
+--- !u!114 &1998302839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998302837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.285}
+  m_Size: {x: 2.34, y: 2.58, z: 0.57}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &2004168829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84239,7 +88846,7 @@ PrefabInstance:
     - target: {fileID: 1716574412298193527, guid: 5023e1eabff891a4499090cda6dc2efe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.751
+      value: 1.785
       objectReference: {fileID: 0}
     - target: {fileID: 1716574412298193527, guid: 5023e1eabff891a4499090cda6dc2efe,
         type: 3}
@@ -85050,6 +89657,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2017674747}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2018135280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2018135281}
+  - component: {fileID: 2018135282}
+  m_Layer: 0
+  m_Name: Scratch (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2018135281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018135280}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000012, y: -0.49999884, z: 0.4999974, w: -0.5000027}
+  m_LocalPosition: {x: -30.038, y: 0.016, z: -26.672}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &2018135282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018135280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 3, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &2018324928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85481,6 +90148,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 534703511}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2025398799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2025398800}
+  - component: {fileID: 2025398801}
+  m_Layer: 0
+  m_Name: 3scratch (42)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2025398800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025398799}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000032186504, y: -0.7071079, z: 0.7071057, w: 0.000002905726}
+  m_LocalPosition: {x: -47.449, y: 14.13, z: -47.646}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 900}
+--- !u!114 &2025398801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025398799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.21}
+  m_Size: {x: 3, y: 2.18, z: 0.42}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!4 &2027964699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4c7ef9e81f584644691f637fb7bbdf17,
@@ -85493,6 +90220,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 764112044}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2028619142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2028619143}
+  - component: {fileID: 2028619144}
+  m_Layer: 0
+  m_Name: Scratch (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2028619143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028619142}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5000012, y: -0.49999884, z: 0.4999974, w: -0.5000027}
+  m_LocalPosition: {x: -30.785, y: 0.016, z: -45.542}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 270.001}
+--- !u!114 &2028619144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028619142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 8a19ce1290e452642aa8226ab59b8843, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 3, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &2031230005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86598,6 +91385,66 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053438698}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2054016879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2054016880}
+  - component: {fileID: 2054016881}
+  m_Layer: 0
+  m_Name: 3scratch (56)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2054016880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054016879}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5000026, y: 0.49999744, z: -0.4999953, w: 0.5000047}
+  m_LocalPosition: {x: -43.016, y: 2.229, z: -5.014}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -89.999}
+--- !u!114 &2054016881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054016879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: ea4b9b1f91b4a364fa6dfcc233fcdf69, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2.21, y: 2.71, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &2055666991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87493,7 +92340,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 83728fafe65ba934f8a52123526cd66c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3650002
+      value: 2.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 83728fafe65ba934f8a52123526cd66c,
         type: 3}
@@ -89117,6 +93964,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dffec8b6c90a3948af24dccf2294529, type: 3}
+--- !u!1 &2084624540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2084624541}
+  - component: {fileID: 2084624542}
+  m_Layer: 0
+  m_Name: Scratch (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2084624541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084624540}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.70710576, y: -0.0000054165716, z: 0.0000052973623, w: 0.70710784}
+  m_LocalPosition: {x: -60.12, y: 0.01, z: -8.9}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0.001}
+--- !u!114 &2084624542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084624540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &2087908622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90095,6 +95002,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2107456184}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2112867536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2112867537}
+  - component: {fileID: 2112867538}
+  m_Layer: 0
+  m_Name: Scratch (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2112867537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112867536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49999598, y: -0.5000042, z: 0.5000025, w: 0.49999738}
+  m_LocalPosition: {x: -84.79, y: 0.01, z: -46.34}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90.001}
+--- !u!114 &2112867538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112867536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2.84, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &2113964061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91467,6 +96434,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1362125237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2135560937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135560938}
+  - component: {fileID: 2135560939}
+  m_Layer: 0
+  m_Name: Scratch (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2135560938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135560937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.70710576, y: -0.0000054165716, z: 0.0000052973623, w: 0.70710784}
+  m_LocalPosition: {x: -60.12, y: 0.01, z: -18.84}
+  m_LocalScale: {x: 1.5757, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 460128575}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0.001}
+--- !u!114 &2135560939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135560937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 277c81526b8995749b46386b900b0489, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 2
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.345}
+  m_Size: {x: 2, y: 2.71, z: 0.69}
+  m_FadeFactor: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1001 &2138766996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92723,6 +97750,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 121
       objectReference: {fileID: 0}
+    - target: {fileID: 251567806204459497, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 370171744318094022, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -92732,6 +97764,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 46.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 389943551502496661, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.631
       objectReference: {fileID: 0}
     - target: {fileID: 436807044611447448, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
@@ -92808,6 +97845,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.03
       objectReference: {fileID: 0}
+    - target: {fileID: 2340200083458878964, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 2388120664000299711, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
       propertyPath: sceneViewId
@@ -92828,6 +97870,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.56
       objectReference: {fileID: 0}
+    - target: {fileID: 2658177542430041584, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.967
+      objectReference: {fileID: 0}
     - target: {fileID: 2666825733233324378, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -92837,6 +97884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneViewId
       value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920670078167421423, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 19.147
       objectReference: {fileID: 0}
     - target: {fileID: 2998951844007633514, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
@@ -92888,6 +97940,11 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: dba5d9a8b42904c40a21b9594bca3bb9, type: 2}
+    - target: {fileID: 3295291904911622933, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 19.157
+      objectReference: {fileID: 0}
     - target: {fileID: 3417056702798263380, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -92993,6 +98050,16 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 4096491510923723775, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096491510923723775, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.262
+      objectReference: {fileID: 0}
     - target: {fileID: 4116211182541543242, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
       propertyPath: sceneViewId
@@ -93032,6 +98099,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400331717770719382, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 19.221
       objectReference: {fileID: 0}
     - target: {fileID: 4570925358065516332, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
@@ -93188,6 +98260,16 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 111
       objectReference: {fileID: 0}
+    - target: {fileID: 5561285081944530326, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 19.218
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561285081944530326, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.468
+      objectReference: {fileID: 0}
     - target: {fileID: 5600799422544454312, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
       propertyPath: sceneViewId
@@ -93197,6 +98279,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 11.704198
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649211616742679424, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.93
       objectReference: {fileID: 0}
     - target: {fileID: 5747710305614143056, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
@@ -93212,6 +98299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneViewId
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871278237843871298, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.98
       objectReference: {fileID: 0}
     - target: {fileID: 5877986355502538591, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
@@ -93233,10 +98325,20 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 53.71
       objectReference: {fileID: 0}
+    - target: {fileID: 5971186317774800439, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.01
+      objectReference: {fileID: 0}
     - target: {fileID: 6017661157453723560, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
       propertyPath: sceneViewId
       value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044239539218162772, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.032
       objectReference: {fileID: 0}
     - target: {fileID: 6263928683155566401, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
@@ -93350,6 +98452,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7572318623743184734, guid: 7c45afc033873bc4c97267952b39d2a4,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.862
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572318623743184734, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 12.61
       objectReference: {fileID: 0}
@@ -93417,6 +98524,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 22.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138823565008133491, guid: 7c45afc033873bc4c97267952b39d2a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 19.225
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7366387869545818055, guid: 7c45afc033873bc4c97267952b39d2a4, type: 3}
