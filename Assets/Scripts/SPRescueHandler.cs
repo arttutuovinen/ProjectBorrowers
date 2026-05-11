@@ -140,7 +140,11 @@ public class SPRescueHandler : MonoBehaviourPun
                     sp.photonView.RPC(nameof(SPCaptureHandler.RPC_FreeFromJail), RpcTarget.All, freePoint.position);
                 }
             }
-
+            SPWinManager.Instance.photonView.RPC(
+    "RPC_RemoveCaptured",
+    RpcTarget.MasterClient,
+    SPCaptureHandler.JailedSPs.Count
+);
             SPCaptureHandler.JailedSPs.Clear();
         }
 

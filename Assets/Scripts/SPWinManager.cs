@@ -48,11 +48,29 @@ public class SPWinManager : MonoBehaviourPunCallbacks
         CheckWinCondition();
     }
 
+    [PunRPC]
+    public void RPC_RemoveCaptured(int amount)
+    {
+        if (!PhotonNetwork.IsMasterClient || matchEnded) return;
+
+        capturedAmount = Mathf.Max(0, capturedAmount - amount);
+
+        // IMPORTANT
+        CheckWinCondition();
+    }
+
     private void CheckWinCondition()
     {
-        int totalDone = escapedAmount + capturedAmount;
+        int totalSPs = RequiredPlayeramount.RequiredSmallPlayers;
 
-        if (escapedAmount > 0 && totalDone >= RequiredPlayeramount.RequiredSmallPlayers)
+        // Currently jailed players
+        int jailedCount = capturedAmount;
+
+        // Active/free players
+        int freePlayers = totalSPs - jailedCount;
+
+        // SPs win ONLY if all free players escaped
+        if (freePlayers > 0 && escapedAmount >= freePlayers)
         {
             matchEnded = true;
             photonView.RPC(nameof(RPC_SPWins), RpcTarget.All);
