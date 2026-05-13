@@ -162,14 +162,6 @@ public class SPCaptureHandler : MonoBehaviourPun
         if (!JailedSPs.Contains(this))
             JailedSPs.Add(this);
 
-        if (photonView.IsMine)
-        {
-            SPWinManager.Instance.photonView.RPC(
-                nameof(SPWinManager.RPC_ReportCaptured),
-                RpcTarget.MasterClient
-            );
-        }
-
         controller.enabled = false;
         transform.position = jailPos;
         controller.enabled = true;
