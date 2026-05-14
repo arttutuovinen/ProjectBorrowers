@@ -12,7 +12,6 @@ public class SPWinManager : MonoBehaviourPunCallbacks
     public float endDelay = 5f;
 
     private int escapedAmount;
-    private int capturedAmount;
     private bool matchEnded;
 
     private GameObject spWinsUI;
@@ -36,26 +35,8 @@ public class SPWinManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient || matchEnded) return;
 
         escapedAmount++;
-        CheckWinCondition();
-    }
-
-    [PunRPC]
-    public void RPC_ReportCaptured()
-    {
-        if (!PhotonNetwork.IsMasterClient || matchEnded) return;
-
-        capturedAmount++;
-        CheckWinCondition();
-    }
-
-    [PunRPC]
-    public void RPC_RemoveCaptured(int amount)
-    {
-        if (!PhotonNetwork.IsMasterClient || matchEnded) return;
-
-        capturedAmount = Mathf.Max(0, capturedAmount - amount);
-
-        // IMPORTANT
+        Debug.Log("ESCAPED = " + escapedAmount);
+        Debug.Log("JAILED = " + SPCaptureHandler.JailedSPs.Count);
         CheckWinCondition();
     }
 
@@ -63,17 +44,32 @@ public class SPWinManager : MonoBehaviourPunCallbacks
     {
         int totalSPs = RequiredPlayeramount.RequiredSmallPlayers;
 
-        // Currently jailed players
-        int jailedCount = capturedAmount;
+        // TRUE current jailed count
+        int jailedCount = SPCaptureHandler.JailedSPs.Count;
+        Debug.Log("=== WIN CHECK ===");
+        Debug.Log("Total SPs: " + totalSPs);
+        Debug.Log("Escaped: " + escapedAmount);
+        Debug.Log("Jailed: " + jailedCount);
 
-        // Active/free players
-        int freePlayers = totalSPs - jailedCount;
-
-        // SPs win ONLY if all free players escaped
-        if (freePlayers > 0 && escapedAmount >= freePlayers)
+        // If anyone currently jailed → only free players must escape
+        if (jailedCount > 0)
         {
-            matchEnded = true;
-            photonView.RPC(nameof(RPC_SPWins), RpcTarget.All);
+            int freePlayers = totalSPs - jailedCount;
+
+            if (freePlayers > 0 && escapedAmount >= freePlayers)
+            {
+                matchEnded = true;
+                photonView.RPC(nameof(RPC_SPWins), RpcTarget.All);
+            }
+        }
+        else
+        {
+            // Nobody jailed → ALL players must escape
+            if (escapedAmount >= totalSPs)
+            {
+                matchEnded = true;
+                photonView.RPC(nameof(RPC_SPWins), RpcTarget.All);
+            }
         }
     }
 

@@ -11,6 +11,7 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
 
     private bool doorClosed;
     private bool doorUsed;
+    private bool escapeUsed = false;
 
     private void OnTriggerStay(Collider other)
     {
@@ -36,14 +37,19 @@ public class FinishTrigger : MonoBehaviourPun, IPunObservable
         }
 
         // 2️⃣ Escape
-        if (!doorUsed &&
+        if (!escapeUsed &&
             TreasureScoreManager.Instance.GetTreasureCount() >=
             RequiredPlayeramount.TotalTreasures)
-        {
+        
+            {
             sp.GetInteractionUI()?.ShowEnter();
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                escapeUsed = true;
+
+                Debug.Log("ESCAPE TRIGGERED BY " + other.name);
+
                 sp.photonView.RPC(
                     nameof(SmallPlayerItemCollector.RPC_Escape),
                     RpcTarget.All

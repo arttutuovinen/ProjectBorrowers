@@ -359,15 +359,12 @@ public class SmallPlayerItemCollector : MonoBehaviourPun
     {
         gameObject.SetActive(false);
 
-        if (photonView.IsMine)
-        {
-            interactionUI?.HideAll();
+        interactionUI?.HideAll();
 
-            // REPORT ESCAPE
-            SPWinManager.Instance.photonView.RPC(
-                nameof(SPWinManager.RPC_ReportEscaped),
-                RpcTarget.MasterClient
-            );
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("Master counted escape: " + gameObject.name);
+            SPWinManager.Instance.RPC_ReportEscaped();
         }
     }
     [PunRPC]
