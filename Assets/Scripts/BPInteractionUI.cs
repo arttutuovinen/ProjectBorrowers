@@ -4,7 +4,7 @@ using System.Linq;
 
 public class BPInteractionUI : MonoBehaviourPun
 {
-    GameObject openText, closeText, takeText, captureSPText;
+    GameObject openText, closeText, takeText, captureSPText, stunnedText;
     public bool captureModeActive;
 
     void Awake()
@@ -14,7 +14,8 @@ public class BPInteractionUI : MonoBehaviourPun
         closeText = canvas.transform.Find("BigPlayerUI/Close")?.gameObject;
         takeText = canvas.transform.Find("BigPlayerUI/Take")?.gameObject;
         captureSPText = canvas.transform.Find("BigPlayerUI/CaptureSP")?.gameObject;
-                      
+        stunnedText = canvas.transform.Find("BigPlayerUI/BPStunned")?.gameObject;
+
         HideAll();
     }
 
@@ -50,6 +51,12 @@ public class BPInteractionUI : MonoBehaviourPun
         captureSPText.SetActive(true);
     }
 
+    public void ShowStunned()
+    {
+        HideAll();
+        stunnedText.SetActive(true);
+    }
+
     public void HideAll()
     {
         if (captureModeActive) return;   // <---- THIS IS THE FIX
@@ -58,6 +65,7 @@ public class BPInteractionUI : MonoBehaviourPun
         closeText.SetActive(false);
         takeText.SetActive(false);
         captureSPText.SetActive(false);
+        stunnedText.SetActive(false);
     }
 
     public void HideTakeOnly()

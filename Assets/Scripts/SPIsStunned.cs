@@ -8,12 +8,13 @@ public class SPIsStunned : MonoBehaviourPun
 {
     public float stunDuration = 5f;    // Duration for which the player is stunned
     private bool isStunned = false;    // Tracks if the player is stunned
-    public SPMovementNET smallPlayerMovement; // Reference to the player's movement script (assuming a separate movement script exists)
+    private SPMovementNET smallPlayerMovement; // Reference to the player's movement script (assuming a separate movement script exists)
+    private SPInteractionUI spInteraction;
 
     void Start()
     {
-        // Assuming the player has a movement script called "PlayerMovement"
         smallPlayerMovement = GetComponent<SPMovementNET>();
+        spInteraction = GetComponent<SPInteractionUI>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,7 +38,7 @@ public class SPIsStunned : MonoBehaviourPun
     {
         // Set the player to stunned
         isStunned = true;
-        //spIsStunnedText.enabled = true;
+        spInteraction.ShowStunned();
 
         // Disable the player's movement
         if (smallPlayerMovement != null)
@@ -53,7 +54,7 @@ public class SPIsStunned : MonoBehaviourPun
         {
             smallPlayerMovement.enabled = true;
         }
-        //spIsStunnedText.enabled = false;
+        spInteraction.HideAll();
         // Reset the stun state
         isStunned = false;
     }

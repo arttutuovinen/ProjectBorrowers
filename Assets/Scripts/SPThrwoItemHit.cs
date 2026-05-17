@@ -11,6 +11,7 @@ public class SPThrowItemHit : MonoBehaviourPun
     private bool isKnockedBack = false;
     private SmallPlayerMovement playerMovement;
 
+
     void Start()
     {
         playerMovement = GetComponent<SmallPlayerMovement>();
@@ -74,6 +75,7 @@ public class SPThrowItemHit : MonoBehaviourPun
         }
 
         isKnockedBack = false;
+
     }
 
     private void ReEnableMovement()

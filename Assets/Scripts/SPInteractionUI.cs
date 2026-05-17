@@ -3,7 +3,7 @@ using Photon.Pun;
 
 public class SPInteractionUI : MonoBehaviourPun
 {
-    GameObject climbText, releaseText, takeText, returnText, enterText, cutText;
+    GameObject climbText, releaseText, takeText, returnText, enterText, cutText, stunnedText;
 
     void Awake()
     {
@@ -14,6 +14,7 @@ public class SPInteractionUI : MonoBehaviourPun
         returnText = canvas.transform.Find("SmallPlayerUI/Return")?.gameObject;
         enterText = canvas.transform.Find("SmallPlayerUI/Enter")?.gameObject;
         cutText = canvas.transform.Find("SmallPlayerUI/Cut")?.gameObject;
+        stunnedText = canvas.transform.Find("SmallPlayerUI/SPStunned")?.gameObject;
 
         HideAll();
     }
@@ -54,6 +55,12 @@ public class SPInteractionUI : MonoBehaviourPun
         cutText.SetActive(true);
     }
 
+    public void ShowStunned()
+    {
+        HideAll();
+        stunnedText.SetActive(true);
+    }
+
     public void HideAll()
     {
         climbText.SetActive(false);
@@ -62,5 +69,6 @@ public class SPInteractionUI : MonoBehaviourPun
         returnText.SetActive(false);
         enterText.SetActive(false);
         cutText.SetActive(false);
+        stunnedText.SetActive(false);
     }
 }

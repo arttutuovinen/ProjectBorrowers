@@ -8,10 +8,12 @@ public class BigPlayerStun : MonoBehaviourPun
     public float stunDurationSPCapture = 7f;
     private bool isStunned = false;
     private BigPlayerMovement bigPlayerMovement;
+    private BPInteractionUI bpInteraction;
 
     void Start()
     {
         bigPlayerMovement = GetComponent<BigPlayerMovement>();
+        bpInteraction = GetComponent<BPInteractionUI>();
     }
 
     void OnTriggerEnter(Collider collider)
@@ -45,7 +47,7 @@ public class BigPlayerStun : MonoBehaviourPun
     IEnumerator StunPlayer()
     {
         isStunned = true;
-
+        bpInteraction.ShowStunned();
         if (bigPlayerMovement != null)
             bigPlayerMovement.enabled = false;
 
@@ -55,12 +57,13 @@ public class BigPlayerStun : MonoBehaviourPun
             bigPlayerMovement.enabled = true;
 
         isStunned = false;
+        bpInteraction.HideAll();
     }
 
     IEnumerator StunPlayerLong()
     {
         isStunned = true;
-
+        bpInteraction.ShowStunned();
         if (bigPlayerMovement != null)
             bigPlayerMovement.enabled = false;
 
@@ -70,6 +73,7 @@ public class BigPlayerStun : MonoBehaviourPun
             bigPlayerMovement.enabled = true;
 
         isStunned = false;
+        bpInteraction.HideAll();
     }
 }
 
