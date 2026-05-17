@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 6759395729989228288}
   - component: {fileID: 5266493116249135532}
   - component: {fileID: 6597793729881182503}
+  - component: {fileID: 5531790730357716583}
   - component: {fileID: 3447934495327288878}
   - component: {fileID: 5307150729043974029}
   - component: {fileID: 5096710206657678708}
@@ -804,6 +805,18 @@ MonoBehaviour:
   nameTagPrefab: {fileID: 0}
   verticalOffset: 2
   tryFindCameraInterval: 0.25
+--- !u!114 &5531790730357716583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745515364123179349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59e9db134628a344a51dc9140dc10d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRole
 --- !u!114 &3447934495327288878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3261869827
+  GlobalObjectIdHash: 1766250525
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
