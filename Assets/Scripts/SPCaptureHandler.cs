@@ -25,12 +25,6 @@ public class SPCaptureHandler : MonoBehaviourPun
     private float escapeDecreaseSpeed = 0.90f;
     private float escapeIncreaseAmount = 1.1f;
 
-    private int captureCount = 0;
-
-    [SerializeField] private float firstEscapeRate = 1.1f;
-    [SerializeField] private float secondEscapeRate = 0.1f;
-    [SerializeField] private float thirdEscapeRate = 0.95f;
-
     public static List<SPCaptureHandler> JailedSPs = new List<SPCaptureHandler>();
 
     void Awake()
@@ -64,18 +58,6 @@ public class SPCaptureHandler : MonoBehaviourPun
         controller.enabled = true;
 
         HandleEscape();
-    }
-
-    void UpdateEscapeDifficulty()
-    {
-        captureCount++;
-
-        if (captureCount == 1)
-            escapeIncreaseAmount = firstEscapeRate;
-        else if (captureCount == 2)
-            escapeIncreaseAmount = secondEscapeRate;
-        else
-            escapeIncreaseAmount = thirdEscapeRate;
     }
 
     void CreateInvisibleProxies()
@@ -127,7 +109,6 @@ public class SPCaptureHandler : MonoBehaviourPun
 
         if (photonView.IsMine)
         {
-            UpdateEscapeDifficulty();
             movementScript.DisableMovement();
             SetRenderers(false); // hide real SP
             movementScript.ForceExitLadder();
