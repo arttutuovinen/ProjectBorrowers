@@ -4973,6 +4973,37 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &2454946713487607832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3415802474703640440}
+  m_Layer: 0
+  m_Name: TopProbe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3415802474703640440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2454946713487607832}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8688724790149147744}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2655924781333285241
 GameObject:
   m_ObjectHideFlags: 0
@@ -5071,6 +5102,7 @@ GameObject:
   - component: {fileID: 7213267609248557840}
   - component: {fileID: 457389529722468420}
   - component: {fileID: 5644917193308100841}
+  - component: {fileID: 3930999680396611248}
   - component: {fileID: 6352348488652347470}
   - component: {fileID: 2698806620285314437}
   - component: {fileID: 860750907698966064}
@@ -5114,6 +5146,9 @@ Transform:
   - {fileID: 8256599044429523524}
   - {fileID: 8297555670875580252}
   - {fileID: 2938659436614592664}
+  - {fileID: 483303473198189380}
+  - {fileID: 1944241857641404251}
+  - {fileID: 3415802474703640440}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &414432666989003418
@@ -5368,6 +5403,28 @@ MonoBehaviour:
   emissionChangeSpeed: 10
   audioSource: {fileID: 4511945943439870236}
   jumpSound: {fileID: 8300000, guid: 14a462675a203d249ba85f330b7197fc, type: 3}
+--- !u!114 &3930999680396611248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150109236876745808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd46e2541edfa5458206455bcf19efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SPLedgeGrab
+  frontProbe: {fileID: 483303473198189380}
+  topProbe: {fileID: 3415802474703640440}
+  edgeProbe: {fileID: 1944241857641404251}
+  frontDistance: 0.6
+  topDistance: 0.6
+  edgeDistanceDown: 1.8
+  ledgeForwardOffset: 0.3
+  ledgeUpOffset: 0.1
+  grabSpeed: 0.2
+  ledgeStickTime: 0.15
 --- !u!114 &6352348488652347470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5804,6 +5861,68 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8688724790149147744}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7981673880901911990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483303473198189380}
+  m_Layer: 0
+  m_Name: FrontProbe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &483303473198189380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7981673880901911990}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8688724790149147744}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8389795761196314693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1944241857641404251}
+  m_Layer: 0
+  m_Name: EdgeProbe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1944241857641404251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8389795761196314693}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 1.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
