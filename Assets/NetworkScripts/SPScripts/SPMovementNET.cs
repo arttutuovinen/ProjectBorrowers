@@ -1,8 +1,18 @@
 using UnityEngine;
 
+public enum PlayerState
+{
+    Grounded,
+    Jumping,
+    Climbing,
+    LedgeGrab
+}
 
 public class SPMovementNET : MonoBehaviour
 {
+    
+    public PlayerState CurrentState { get; private set; } = PlayerState.Grounded;
+
     public float moveSpeed = 5f; // Speed of movement
     public float climbSpeed = 3f; // Speed for climbing ladders
     public float gravity = -9.81f; // Gravity applied to the player
@@ -32,7 +42,6 @@ public class SPMovementNET : MonoBehaviour
     private float pitch; // Vertical rotation
 
     // Ladder climbing variables
-    private bool isClimbing = false; // Is the player currently climbing a ladder?
     private bool nearLadder = false; // Is the player near a ladder?
     private Collider ladder; // Reference to the ladder the player is interacting with
 
@@ -87,15 +96,60 @@ public class SPMovementNET : MonoBehaviour
             return;
         }
 
-        if (isClimbing)
+        UpdateState();
+
+        switch (CurrentState)
         {
-            ClimbLadder();
+            case PlayerState.Grounded:
+                Move();
+                ApplyGravity();
+                break;
+
+            case PlayerState.Jumping:
+                Move();
+                ApplyGravity();
+                break;
+
+            case PlayerState.Climbing:
+                ClimbLadder();
+                break;
+
+            case PlayerState.LedgeGrab:
+                break;
         }
-        else
+    }
+
+    private void UpdateState()
+    {
+        isGrounded = controller.isGrounded;
+
+        switch (CurrentState)
         {
-            Move();
-            ApplyGravity();
+            case PlayerState.Grounded:
+
+                if (!isGrounded)
+                    CurrentState = PlayerState.Jumping;
+
+                break;
+
+            case PlayerState.Jumping:
+
+                if (isGrounded)
+                    CurrentState = PlayerState.Grounded;
+
+                break;
+
+            case PlayerState.Climbing:
+                break;
+
+            case PlayerState.LedgeGrab:
+                break;
         }
+    }
+
+    public void SetState(PlayerState newState)
+    {
+        CurrentState = newState;
     }
 
     // Method that allows disabling movement from other scripts
@@ -158,14 +212,15 @@ public class SPMovementNET : MonoBehaviour
             if ((Input.GetButtonDown("Jump") || Input.GetButtonDown("P1Jump")) && isGrounded)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                CurrentState = PlayerState.Jumping;
                 PlayJumpSound();
             }
 
             // Ladder interaction: press E to start climbing if near a ladder
             if (nearLadder && Input.GetKeyDown(KeyCode.E) || nearLadder && Input.GetButtonDown("P1Interact"))
             {
-                isClimbing = true;
-                velocity.y = 0f; // Reset vertical velocity
+                CurrentState = PlayerState.Climbing;
+                velocity.y = 0f;
                 interactionUI?.ShowRelease();
             }
         }
@@ -203,7 +258,7 @@ public class SPMovementNET : MonoBehaviour
         // Exit climbing mode when the player presses E again
         if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("P1Interact"))
         {
-            isClimbing = false;
+            CurrentState = PlayerState.Grounded;
             interactionUI?.ShowClimb();
         }
     }
@@ -262,7 +317,10 @@ public class SPMovementNET : MonoBehaviour
         {
             nearLadder = false;
             ladder = null;
-            isClimbing = false; // Stop climbing when leaving the ladder
+            if (CurrentState == PlayerState.Climbing)
+            {
+                CurrentState = PlayerState.Grounded;
+            }
 
             interactionUI?.HideAll();
         }
@@ -271,7 +329,10 @@ public class SPMovementNET : MonoBehaviour
     {
         nearLadder = false;
         ladder = null;
-        isClimbing = false;
+        if (CurrentState == PlayerState.Climbing)
+        {
+            CurrentState = PlayerState.Grounded;
+        }
 
         interactionUI?.HideAll();
     }
@@ -282,5 +343,7 @@ public class SPMovementNET : MonoBehaviour
             audioSource.PlayOneShot(jumpSound);
         }
     }
+
+    
 
 }

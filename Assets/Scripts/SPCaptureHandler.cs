@@ -60,6 +60,7 @@ public class SPCaptureHandler : MonoBehaviourPun
         HandleEscape();
     }
 
+
     void CreateInvisibleProxies()
     {
         GameObject prefab = Resources.Load<GameObject>("SmallPlayerProxy");
@@ -112,6 +113,7 @@ public class SPCaptureHandler : MonoBehaviourPun
             movementScript.DisableMovement();
             SetRenderers(false); // hide real SP
             movementScript.ForceExitLadder();
+            movementScript.SetState(PlayerState.Grounded);
             spProxy_SP.SetActive(true); // show SP proxy following SPClientTeleportLocation
             
             if (escapeBar != null)
@@ -234,7 +236,7 @@ public class SPCaptureHandler : MonoBehaviourPun
     {
         isCaptured = false;
         spFollowTarget = null;
-
+        movementScript.SetState(PlayerState.Grounded);
         movementScript.ForceExitLadder();
 
         if (escapeBar != null)
@@ -277,7 +279,7 @@ public class SPCaptureHandler : MonoBehaviourPun
         isJailed = false;
         isCaptured = false;
         spFollowTarget = null;
-
+        movementScript.SetState(PlayerState.Grounded);
         if (JailedSPs.Contains(this))
             JailedSPs.Remove(this);
 
