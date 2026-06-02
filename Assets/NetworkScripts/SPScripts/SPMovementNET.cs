@@ -343,7 +343,4 @@ public class SPMovementNET : MonoBehaviour
             audioSource.PlayOneShot(jumpSound);
         }
     }
-
-    
-
 }

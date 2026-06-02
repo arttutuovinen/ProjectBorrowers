@@ -4998,7 +4998,7 @@ Transform:
   m_GameObject: {fileID: 2454946713487607832}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.32, z: 0}
+  m_LocalPosition: {x: 0, y: 1.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5410,20 +5410,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150109236876745808}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edd46e2541edfa5458206455bcf19efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SPLedgeGrab
   frontProbe: {fileID: 483303473198189380}
-  topProbe: {fileID: 3415802474703640440}
   edgeProbe: {fileID: 1944241857641404251}
-  frontDistance: 0.6
-  topDistance: 0.6
-  edgeDistanceDown: 1.8
-  ledgeForwardOffset: 0.3
-  ledgeUpOffset: 0.1
-  grabSpeed: 0.2
+  topProbe: {fileID: 3415802474703640440}
+  frontCheckDistance: 0.5
+  topCheckDistance: 0.73
+  edgeCheckDistance: 2
+  groundCheck: {fileID: 849331249188711111}
 --- !u!114 &6352348488652347470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5583,7 +5581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2283113866
+  GlobalObjectIdHash: 4088710418
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -5890,7 +5888,7 @@ Transform:
   m_GameObject: {fileID: 7981673880901911990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.9}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

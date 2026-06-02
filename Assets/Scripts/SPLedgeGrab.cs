@@ -2,82 +2,90 @@
 
 public class SPLedgeGrab : MonoBehaviour
 {
-    [Header("Probes")]
+    [Header("References")]
     public Transform frontProbe;
-    public Transform topProbe;
     public Transform edgeProbe;
+    public Transform topProbe;
 
-    [Header("Detection Ranges")]
-    public float frontDistance = 0.6f;
-    public float topDistance = 0.2f;
-    public float edgeDistanceDown = 1.4f;
+    [Header("Ray Distances")]
+    public float frontCheckDistance = 0.5f;
+    public float topCheckDistance = 0.5f;
+    public float edgeCheckDistance = 2f;
 
-    [Header("Ledge Settings")]
-    public float ledgeForwardOffset = 0.3f;
-    public float ledgeUpOffset = 0.1f;
-    public float grabSpeed = 0.05f;
+    public Transform groundCheck;
 
-    private CharacterController controller;
     private SPMovementNET movement;
+    private CharacterController controller;
 
-    private bool isGrabbing = false;
-
-    void Start()
+    private void Start()
     {
-        controller = GetComponent<CharacterController>();
         movement = GetComponent<SPMovementNET>();
+        controller = GetComponent<CharacterController>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (isGrabbing) return;
+        if (movement == null)
+            return;
 
-        TryLedgeGrab();
+        // Only allow ledge grabbing while in the air
+        if (movement.CurrentState != PlayerState.Jumping)
+            return;
+
+        CheckForLedge();
     }
 
-    void TryLedgeGrab()
+    private void CheckForLedge()
     {
-        if (controller.isGrounded) return;
-
-        if (movement == null) return;
-
-        // FRONT wall check
-        if (!Physics.Raycast(frontProbe.position, transform.forward, frontDistance))
+        // Must hit a wall in front
+        if (!Physics.Raycast(frontProbe.position, transform.forward, out RaycastHit frontHit, frontCheckDistance))
             return;
 
-        // TOP clearance check
-        if (Physics.Raycast(topProbe.position, Vector3.up, topDistance))
+        // Must have empty space above
+        if (Physics.Raycast(topProbe.position, transform.forward, topCheckDistance))
             return;
 
-        // EDGE find ledge surface
-        RaycastHit hit;
-        if (!Physics.Raycast(edgeProbe.position, Vector3.down, out hit, edgeDistanceDown))
+        // Must find a top surface
+        if (!Physics.Raycast(edgeProbe.position, Vector3.down, out RaycastHit edgeHit, edgeCheckDistance))
             return;
 
-        StartCoroutine(GrabLedge(hit));
+        GrabLedge(edgeHit.point);
     }
 
-    System.Collections.IEnumerator GrabLedge(RaycastHit hit)
+    private void GrabLedge(Vector3 ledgePoint)
     {
-        isGrabbing = true;
+        movement.SetState(PlayerState.LedgeGrab);
 
-        // IMPORTANT: stop movement + gravity system
-        movement.DisableMovement();
-
-        Vector3 ledgePosition =
-            hit.point +
-            (-transform.forward * ledgeForwardOffset) +
-            (Vector3.up * ledgeUpOffset);
-
-        // move instantly
         controller.enabled = false;
-        transform.position = ledgePosition;
+
+        Vector3 offset = transform.position - groundCheck.position;
+        transform.position = ledgePoint + offset;
+
         controller.enabled = true;
 
-        yield return new WaitForSeconds(grabSpeed);
-
-        movement.EnableMovement();
-
-        isGrabbing = false;
+        movement.SetState(PlayerState.Grounded);
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (frontProbe != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(frontProbe.position, transform.forward * frontCheckDistance);
+        }
+
+        if (topProbe != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(topProbe.position, transform.forward * topCheckDistance);
+        }
+
+        if (edgeProbe != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(edgeProbe.position, Vector3.down * edgeCheckDistance);
+        }
+    }
+#endif
 }
